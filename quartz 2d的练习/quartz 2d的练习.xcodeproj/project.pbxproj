@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1838787D203E507400E48C55 /* UIImage+image.m in Sources */ = {isa = PBXBuildFile; fileRef = 1838787C203E507400E48C55 /* UIImage+image.m */; };
+		188274EE203FE15500A3EFB1 /* GestureView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188274ED203FE15500A3EFB1 /* GestureView.m */; };
 		2C25C45D2026ACEE00223223 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C25C45C2026ACEE00223223 /* AppDelegate.m */; };
 		2C25C4602026ACEE00223223 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C25C45F2026ACEE00223223 /* ViewController.m */; };
 		2C25C4632026ACEE00223223 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C25C4612026ACEE00223223 /* Main.storyboard */; };
@@ -21,6 +22,8 @@
 /* Begin PBXFileReference section */
 		1838787B203E507400E48C55 /* UIImage+image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+image.h"; sourceTree = "<group>"; };
 		1838787C203E507400E48C55 /* UIImage+image.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+image.m"; sourceTree = "<group>"; };
+		188274EC203FE15500A3EFB1 /* GestureView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GestureView.h; sourceTree = "<group>"; };
+		188274ED203FE15500A3EFB1 /* GestureView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GestureView.m; sourceTree = "<group>"; };
 		2C25C4582026ACEE00223223 /* quartz 2d的练习.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "quartz 2d的练习.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C25C45B2026ACEE00223223 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2C25C45C2026ACEE00223223 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -73,6 +76,8 @@
 				2C25C45F2026ACEE00223223 /* ViewController.m */,
 				1838787B203E507400E48C55 /* UIImage+image.h */,
 				1838787C203E507400E48C55 /* UIImage+image.m */,
+				188274EC203FE15500A3EFB1 /* GestureView.h */,
+				188274ED203FE15500A3EFB1 /* GestureView.m */,
 				2CDA58E2202AA51E0022CFD8 /* LDGImageView.h */,
 				2CDA58E3202AA51E0022CFD8 /* LDGImageView.m */,
 				2C25C4712026AF8100223223 /* RedView.h */,
@@ -162,6 +167,7 @@
 				2C25C4732026AF8100223223 /* RedView.m in Sources */,
 				2C25C45D2026ACEE00223223 /* AppDelegate.m in Sources */,
 				2CDA58E4202AA51E0022CFD8 /* LDGImageView.m in Sources */,
+				188274EE203FE15500A3EFB1 /* GestureView.m in Sources */,
 				1838787D203E507400E48C55 /* UIImage+image.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
