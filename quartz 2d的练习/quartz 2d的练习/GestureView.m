@@ -80,9 +80,8 @@
     }
     NSLog(@"你想要的结果是 ： %@",str);
     [self.buttonArray removeAllObjects];
+    self.currentP = CGPointMake(0, 0);
     [self setNeedsDisplay];
-    
-    
     
 }
 

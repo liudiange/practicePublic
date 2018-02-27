@@ -9,11 +9,14 @@
 #import "ViewController.h"
 #import "LDGImageView.h"
 #import "UIImage+image.h"
-
-@interface ViewController ()
+#import "DrawView.h"
+@interface ViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *displayImageView;
 @property (strong, nonatomic) UIView *corverView;
 @property (assign, nonatomic) CGPoint startP;
+@property (weak, nonatomic) IBOutlet DrawView *drawView;
+
+
 
 @end
 
@@ -36,7 +39,117 @@
     
     
 }
+#pragma mark - 涂鸦的相关的绘制
 
+/**
+ 撤销的方法
+
+ @param sender 对象本身
+ */
+- (IBAction)clearAction:(UIBarButtonItem *)sender {
+    
+    [self.drawView clearAction];
+}
+
+/**
+ 撤销的操作
+
+ @param sender 对象本身
+ */
+- (IBAction)undoAction:(UIBarButtonItem *)sender {
+    
+    [self.drawView undoAction];
+}
+
+/**
+ 橡皮擦的功能
+
+ @param sender 对象本身
+ */
+- (IBAction)eraserAction:(UIBarButtonItem *)sender {
+    [self.drawView eraserAction];
+}
+
+/**
+ 照片的功能
+
+ @param sender 对象本身
+ */
+- (IBAction)photoAction:(UIBarButtonItem *)sender {
+    UIImagePickerController *pickerVc = [[UIImagePickerController alloc] init];
+    pickerVc.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    pickerVc.delegate = self;
+    [self presentViewController:pickerVc animated:YES completion:nil];
+
+}
+/**
+ 选取图片完成的方法
+
+ @param picker 控制器
+ @param info 信息
+ */
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
+    self.drawView.displayImageView.image = info[UIImagePickerControllerOriginalImage];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+/**
+ 保存的事件
+
+ @param sender 对象本身
+ */
+- (IBAction)saveAction:(UIBarButtonItem *)sender {
+    
+    // 创建图片上下文
+    UIGraphicsBeginImageContextWithOptions(self.drawView.bounds.size, NO, 0.0);
+    // 获取当前的上下文
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    [self.drawView.layer renderInContext:ctx];
+    UIImage *getImage = UIGraphicsGetImageFromCurrentImageContext();
+    // 结束上下文
+    UIGraphicsEndImageContext();
+    // 写入相册
+    UIImageWriteToSavedPhotosAlbum(getImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+  
+}
+
+/**
+ 图片保存方法回调
+
+ @param image 图片
+ @param error 错误
+ @param contextInfo 上下文
+ */
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (!error) {
+        NSLog(@"保存成功了");
+        
+    }
+}
+/**
+ 进度条改变的事件
+
+ @param sender 进度条
+ */
+- (IBAction)sliderChangeAction:(UISlider *)sender {
+    
+    self.drawView.width = sender.value;
+    
+}
+
+/**
+ 按钮点击的事件
+
+ @param sender 按钮
+ */
+- (IBAction)buttonAction:(UIButton *)sender {
+    
+    self.drawView.color = sender.backgroundColor;
+}
+
+
+
+#pragma mark -  其他事件的响应
 /**
  拖拽事件
 
