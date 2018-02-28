@@ -28,7 +28,8 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKK-I1-HFc">
-                                <rect key="frame" x="153" y="293" width="147" height="34"/>
+                                <rect key="frame" x="50" y="293" width="147" height="34"/>
+                                <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="主动发给中心设备">
                                     <color key="titleColor" red="1" green="0.38844254080000001" blue="0.4111402683" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -43,7 +44,7 @@
                             <constraint firstItem="kki-r2-Jzb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="182" id="MeJ-t7-tt3"/>
                             <constraint firstItem="kki-r2-Jzb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="58" id="PcK-Yx-RgR"/>
                             <constraint firstItem="mKK-I1-HFc" firstAttribute="top" secondItem="kki-r2-Jzb" secondAttribute="bottom" constant="61" id="dHl-gS-xba"/>
-                            <constraint firstItem="mKK-I1-HFc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="153" id="kkz-85-fLY"/>
+                            <constraint firstItem="mKK-I1-HFc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="kkz-85-fLY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

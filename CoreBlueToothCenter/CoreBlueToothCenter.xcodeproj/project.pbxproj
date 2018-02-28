@@ -13,6 +13,7 @@
 		185B4D8320463E5700898AB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 185B4D8220463E5700898AB7 /* Assets.xcassets */; };
 		185B4D8620463E5700898AB7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185B4D8420463E5700898AB7 /* LaunchScreen.storyboard */; };
 		185B4D8920463E5700898AB7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 185B4D8820463E5700898AB7 /* main.m */; };
+		185B4D91204643F300898AB7 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 185B4D90204643F300898AB7 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		185B4D8520463E5700898AB7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		185B4D8720463E5700898AB7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		185B4D8820463E5700898AB7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		185B4D90204643F300898AB7 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185B4D91204643F300898AB7 /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +47,7 @@
 			children = (
 				185B4D7820463E5700898AB7 /* CoreBlueToothCenter */,
 				185B4D7720463E5700898AB7 /* Products */,
+				185B4D8F204643F200898AB7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,6 +73,14 @@
 				185B4D8820463E5700898AB7 /* main.m */,
 			);
 			path = CoreBlueToothCenter;
+			sourceTree = "<group>";
+		};
+		185B4D8F204643F200898AB7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				185B4D90204643F300898AB7 /* CoreBluetooth.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,7 +291,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 328H572F92;
 				INFOPLIST_FILE = CoreBlueToothCenter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.my.computer.ABC.CoreBlueToothCenter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -292,7 +306,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 328H572F92;
 				INFOPLIST_FILE = CoreBlueToothCenter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.my.computer.ABC.CoreBlueToothCenter;
 				PRODUCT_NAME = "$(TARGET_NAME)";

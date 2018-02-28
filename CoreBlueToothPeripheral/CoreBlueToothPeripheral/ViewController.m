@@ -27,8 +27,8 @@
 @end
 
 @implementation ViewController
-static NSString *SERVER_ID = @"serverId";
-static NSString *CHARACTERISTICS_ID = @"characteristicsId";
+static NSString *SERVER_ID = @"CDD1";
+static NSString *CHARACTERISTICS_ID = @"CDD2";
 
 
 - (void)viewDidLoad {
@@ -43,11 +43,14 @@ static NSString *CHARACTERISTICS_ID = @"characteristicsId";
  @param peripheral 外设管理器
  */
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral{
-    if (peripheral.state == CBPeripheralManagerStatePoweredOff) {
+    if (peripheral.state == CBManagerStatePoweredOff) {
         [self showAlertTitle:@"蓝牙关闭了"];
-    }else if(peripheral.state == CBPeripheralManagerStatePoweredOn){
+    }else if(peripheral.state == CBManagerStatePoweredOn){
+        [self showAlertTitle:@"蓝牙打开了"];
         // 创建服务和特征
         [self creatServerAndChacteristics];
+        // 开始广播
+        [self.periphalManager startAdvertising:@{CBAdvertisementDataServiceUUIDsKey:@[[CBUUID UUIDWithString:SERVER_ID]]}];
     }
 }
 
@@ -121,6 +124,8 @@ static NSString *CHARACTERISTICS_ID = @"characteristicsId";
  */
 - (void)showAlertTitle:(NSString *)alertTitle {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:alertTitle preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+    [alertController addAction:okAction];
     [self presentViewController:alertController animated:YES completion:nil];
 
 }
@@ -139,7 +144,9 @@ static NSString *CHARACTERISTICS_ID = @"characteristicsId";
         [self showAlertTitle:@"发送失败"];
     }
 }
-
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 
 
 
