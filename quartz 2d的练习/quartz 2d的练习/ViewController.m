@@ -35,12 +35,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+   
+    
     
     
     
 }
-#pragma mark - 涂鸦的相关的绘制
 
+#pragma mark - 涂层的相关的变化
+
+
+
+#pragma mark - 涂鸦的相关的绘制
 /**
  撤销的方法
 
