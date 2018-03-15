@@ -120,7 +120,7 @@
     for (NSInteger index = 0; index < self.animation_count; index ++) {
         CALayer *layer = [CALayer layer];
         if (self.perConstaton > 0) {
-            layer.frame = CGRectMake(self.perConstaton + index*(self.animation_PerWith + self.perConstaton), 0, self.animation_PerWith, self.bounds.size.height);
+            layer.frame = CGRectMake(self.perConstaton + index*(self.animation_PerWith + self.perConstaton), self.bounds.size.height, self.animation_PerWith, self.bounds.size.height);
             layer.backgroundColor = self.animation_Color.CGColor;
         }else{
             isConstatonIsTooSamll = YES;
