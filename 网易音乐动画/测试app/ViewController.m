@@ -21,9 +21,9 @@
     
     MGSCXPlayAnimationView *playView = [[MGSCXPlayAnimationView alloc] initWithFrame:CGRectMake(100, 100, 30, 30)];
     playView.backgroundColor = [UIColor clearColor];
-    playView.animation_Color = [UIColor redColor];
-    playView.animation_Speed = 0.9;
-    playView.animation_PerWith = 5;
+    playView.animation_Color = [UIColor greenColor];
+    playView.animation_Speed = 0.7;
+    playView.animation_PerWith = 3;
     playView.animation_count = 4;
     [playView startAnimation];
     [self.view addSubview:playView];

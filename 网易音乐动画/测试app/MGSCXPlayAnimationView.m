@@ -9,13 +9,10 @@
 #import "MGSCXPlayAnimationView.h"
 
 @interface MGSCXPlayAnimationView ()
-
 /**
  每一个条之间的距离
  */
 @property (assign, nonatomic) CGFloat perConstaton;
-
-
 
 @end
 
@@ -32,14 +29,6 @@
     [super awakeFromNib];
     // 配置默认的数据
     [self configDefaultData];
-}
-/**
- frame 改变的时候设置
- */
--(void)layoutSubviews{
-    [super layoutSubviews];
-    
-    
 }
 #pragma mark - 一些方法的调用
 /**
@@ -67,9 +56,6 @@
     if (self.animation_Speed == 0) {
         self.animation_Speed = 0.75;
     }
-    if (self.animation_count == 0) {
-        self.animation_count = 4;
-    }
 }
 /**
  创建layer
@@ -77,73 +63,66 @@
 - (void)creatLayer{
     
     self.perConstaton = 1.0*(self.bounds.size.width - (self.animation_PerWith*self.animation_count))/self.animation_count;
-    BOOL isConstatonSmall = [self setUpLayer];
-    if (isConstatonSmall) {
-        self.perConstaton = [self calculatorConstaton:self.animation_PerWith];
-        [self setUpLayer];
+    if (self.perConstaton < 0) {
+       self.perConstaton = [self calculatorConstaton];
     }
-    // 便利layer进行动画开始
-    for (CALayer *layer in self.layer.sublayers) {
-        [self updateFrameLayer:layer];
-    }
-}
-
-/**
- 更改layer的frame
-
- @param layer layer
- */
-- (void)updateFrameLayer:(CALayer *)layer{
-    
-    CGFloat updateY = 1.0 * arc4random_uniform(10)/10 *self.bounds.size.height;
-    CGRect frame = layer.frame;
-    frame.origin.y = updateY;
-    frame.size.height = self.bounds.size.height - updateY;
-    layer.frame = frame;
+    // 程序走到这是 一切值应该都是对的
+    // 创建layer
+    CALayer *layer = [CALayer layer];
+    layer.frame = CGRectMake(0, 0, self.animation_PerWith, self.bounds.size.height);
+    layer.anchorPoint = CGPointMake(0.5, 1);
+    layer.backgroundColor = self.animation_Color.CGColor;
+    layer.position = CGPointMake(0, self.bounds.size.height);
+    // 添加一个动画
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale.y"];
     if (self.animation_Speed >= 1) {
+        self.animation_Speed = 0.95;
+    }else if (self.animation_Speed <= 0){
         self.animation_Speed = 0.05;
     }
-    if (self.animation_Speed <= 0) {
-        self.animation_Speed = 1;
-    }
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((1-self.animation_Speed) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self updateFrameLayer:layer];
-    });
+    animation.duration = 1- self.animation_Speed;
+    animation.fromValue = @(0.3);
+    animation.toValue = @(1);
+    animation.repeatCount = NSIntegerMax;
+    // 自动反弹
+    animation.autoreverses = YES;
+    // 动画结束后停在最后位置的解决办法
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    [layer addAnimation:animation forKey:nil];
+    // 创建复制层
+    CAReplicatorLayer *replicatorLayer = [CAReplicatorLayer layer];
+    replicatorLayer.backgroundColor = [UIColor clearColor].CGColor;
+    replicatorLayer.frame = self.bounds;
+    replicatorLayer.instanceCount = self.animation_count;
+    replicatorLayer.instanceDelay = 1 - self.animation_Speed;
+    replicatorLayer.instanceTransform = CATransform3DMakeTranslation((self.animation_PerWith +self.perConstaton), 0, 0);
+    [replicatorLayer addSublayer:layer];
+    [self.layer addSublayer:replicatorLayer];
 }
-/**
- 设置layer的frame的相关的问题
-
- @return layer
- */
-- (BOOL)setUpLayer{
-    BOOL isConstatonIsTooSamll = NO;
-    for (NSInteger index = 0; index < self.animation_count; index ++) {
-        CALayer *layer = [CALayer layer];
-        if (self.perConstaton > 0) {
-            layer.frame = CGRectMake(self.perConstaton + index*(self.animation_PerWith + self.perConstaton), self.bounds.size.height, self.animation_PerWith, self.bounds.size.height);
-            layer.backgroundColor = self.animation_Color.CGColor;
-        }else{
-            isConstatonIsTooSamll = YES;
-            break;
-        }
-        [self.layer addSublayer:layer];
-    }
-    return isConstatonIsTooSamll;
-}
-
 /**
  计算每一个条之间的间距
-
- @param width 每一个条的宽度
  */
-- (CGFloat)calculatorConstaton:(CGFloat)width{
+- (CGFloat)calculatorConstaton{
     CGFloat constation = 0.0;
     self.animation_count -= 1;
      constation = 1.0*(self.bounds.size.width - (self.animation_PerWith*self.animation_count))/self.animation_count;
-    if (constation <= 0) {
-       constation = [self calculatorConstaton:self.animation_PerWith];
+    if (constation < 0) {
+       constation = [self calculatorConstaton];
     }
     return constation;
+}
+
+/**
+ 当大于最大宽度的时候 做限制
+
+ @param animation_PerWith 宽度
+ */
+-(void)setAnimation_PerWith:(CGFloat)animation_PerWith {
+    if (animation_PerWith >= self.bounds.size.width) {
+        animation_PerWith = self.bounds.size.width;
+    }
+    _animation_PerWith = animation_PerWith;
 }
 #pragma mark - 动画的基本的
 /**
