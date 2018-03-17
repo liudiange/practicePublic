@@ -15,9 +15,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) UIView *frontView;
 @property (strong, nonatomic) UIImageView *backView;
-
-
+@property (weak, nonatomic) IBOutlet UIImageView *bottomImageView;
+@property (nonatomic, assign) CGFloat opit;
 @property (nonatomic, strong) UIView *view2;
+@property (nonatomic, strong) CAGradientLayer *grandientLayer;
+
+
+
 
 
 @end
@@ -28,10 +32,64 @@ static int index_ = 1;
 -(void)viewDidLoad {
     [super viewDidLoad];
     
+    self.heartimageView.layer.contentsRect = CGRectMake(0, 0, 1, 0.5);
+    self.bottomImageView.layer.contentsRect = CGRectMake(0, 0.5, 1, 0.5);
+    
+    self.heartimageView.layer.anchorPoint = CGPointMake(0.5, 1);
+    self.bottomImageView.layer.anchorPoint = CGPointMake(0.5, 0);
+    // 添加拖拽的手势
+    UIPanGestureRecognizer *panGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
+    [self.view addGestureRecognizer:panGes];
+    // 添加隐影的操作(梯度的layer )
+    CAGradientLayer *grandientLayer = [CAGradientLayer layer];
+    grandientLayer.frame = self.bottomImageView.bounds;
+    grandientLayer.colors = @[(id)[UIColor blackColor].CGColor,(id)[UIColor clearColor].CGColor];
+    // 确定颜色的渐变方向
+    grandientLayer.startPoint = CGPointMake(0, 0);
+    grandientLayer.endPoint = CGPointMake(1.0, 1.0);
+    // 一个颜色到下一个颜色开始渐变的位置
+    grandientLayer.locations = @[@(0.2),@(0.8)];
+    // 暗影
+    grandientLayer.shadowOpacity = 0.0;
+    // 不透明度
+    grandientLayer.opacity = 0.0;
+    self.grandientLayer = grandientLayer;
+    [self.bottomImageView.layer addSublayer:grandientLayer];
     
     
 }
+/**
+ 添加拖拽的手势
 
+ @param panGes 手势的点击
+ */
+- (void)panAction:(UIPanGestureRecognizer *)panGes {
+    
+    CGPoint point = [panGes locationInView:self.view];
+    CGFloat angle =  M_PI * 1.0 * point.y /self.view.bounds.size.height;
+    
+    CATransform3D transform = CATransform3DIdentity;
+    // 立体效果 离你眼睛越近 看的越清楚 离你眼睛越远 看的越小
+    transform.m34 = -1.0/500.0;
+    self.heartimageView.layer.transform = CATransform3DRotate(transform, -angle, 1.0, 0, 0);
+    // 改变透明度
+    self.grandientLayer.opacity = 1.0 * point.y /self.view.bounds.size.height;
+    
+    
+    // 结束了进行反弹回去
+    if (panGes.state == UIGestureRecognizerStateEnded) {
+        // 一个动画
+        // delay:动画开始时的等待时间，默认为0
+        // usingSpringWithDamping: 反弹系数
+        // initialSpringVelocity:动画的速度
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.5 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            // 去掉所有的动画 回去
+            self.heartimageView.layer.transform = CATransform3DIdentity;
+            self.grandientLayer.opacity = 0.0;
+        } completion:nil];
+        
+    }
+}
 -(void)animationGroup {
     
     CAAnimationGroup *group = [CAAnimationGroup animation];
