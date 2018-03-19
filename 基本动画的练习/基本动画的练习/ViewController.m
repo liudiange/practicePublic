@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "DrewView.h"
 
 #define angele(x) (x/180.0*M_PI)
 
@@ -19,8 +20,7 @@
 @property (nonatomic, assign) CGFloat opit;
 @property (nonatomic, strong) UIView *view2;
 @property (nonatomic, strong) CAGradientLayer *grandientLayer;
-
-
+@property (weak, nonatomic) IBOutlet DrewView *drawView;
 
 
 
@@ -31,6 +31,35 @@ static int index_ = 1;
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    
+    
+
+}
+
+/**
+ 开始的方法
+
+ @param sender 按钮
+ */
+- (IBAction)beginAction:(UIButton *)sender {
+    [self.drawView startAction];
+}
+
+/**
+ 重绘的方法
+
+ @param sender 按钮
+ */
+- (IBAction)redrewAction:(id)sender {
+    [self.drawView redrewAction];
+    
+}
+/**
+ 折叠的动画
+ */
+- (void)zhediePicture {
     
     self.heartimageView.layer.contentsRect = CGRectMake(0, 0, 1, 0.5);
     self.bottomImageView.layer.contentsRect = CGRectMake(0, 0.5, 1, 0.5);
@@ -55,9 +84,8 @@ static int index_ = 1;
     grandientLayer.opacity = 0.0;
     self.grandientLayer = grandientLayer;
     [self.bottomImageView.layer addSublayer:grandientLayer];
-    
-    
 }
+
 /**
  添加拖拽的手势
 

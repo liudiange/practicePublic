@@ -21,40 +21,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="Wds-M6-aAe">
-                                <rect key="frame" x="71" y="266" width="233" height="135"/>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="233" id="DhY-1w-j7x"/>
-                                    <constraint firstAttribute="height" constant="135" id="qlo-Uk-Z8g"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="fxp-P1-ZHu">
-                                <rect key="frame" x="71" y="266" width="233" height="135"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3q-Ow-fz7" customClass="bagdeButton">
+                                <rect key="frame" x="164" y="200" width="22" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="22">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="Wds-M6-aAe" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6RH-Uv-adP"/>
-                            <constraint firstItem="Wds-M6-aAe" firstAttribute="top" secondItem="fxp-P1-ZHu" secondAttribute="top" id="CZU-oy-Y2V"/>
-                            <constraint firstItem="Wds-M6-aAe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IMb-hd-XlN"/>
-                            <constraint firstItem="Wds-M6-aAe" firstAttribute="leading" secondItem="fxp-P1-ZHu" secondAttribute="leading" id="SOK-Go-2ul"/>
-                            <constraint firstItem="Wds-M6-aAe" firstAttribute="trailing" secondItem="fxp-P1-ZHu" secondAttribute="trailing" id="iXn-h8-Xvv"/>
-                            <constraint firstItem="Wds-M6-aAe" firstAttribute="bottom" secondItem="fxp-P1-ZHu" secondAttribute="bottom" id="ywM-K5-HyZ"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="bottomImageView" destination="Wds-M6-aAe" id="11i-Gv-C1n"/>
-                        <outlet property="heartimageView" destination="fxp-P1-ZHu" id="bNK-bI-0eZ"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="116" y="117.39130434782609"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="1" width="900" height="900"/>
-    </resources>
 </document>
