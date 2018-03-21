@@ -13,6 +13,9 @@
 		184A3C892061F115002932D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C872061F115002932D5 /* LaunchScreen.storyboard */; };
 		1874189D2061FBB80030C6EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418882061FBB80030C6EA /* main.m */; };
 		1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418892061FBB80030C6EA /* AppDelegate.m */; };
+		187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418A0206232930030C6EA /* LDGHomeViewController.m */; };
+		187418A4206233D70030C6EA /* LDGTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418A3206233D70030C6EA /* LDGTabBarController.m */; };
+		187418A7206233F30030C6EA /* LDGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418A6206233F30030C6EA /* LDGNavigationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,12 @@
 		187418872061FBB80030C6EA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		187418882061FBB80030C6EA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		187418892061FBB80030C6EA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1874189F206232930030C6EA /* LDGHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGHomeViewController.h; sourceTree = "<group>"; };
+		187418A0206232930030C6EA /* LDGHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGHomeViewController.m; sourceTree = "<group>"; };
+		187418A2206233D70030C6EA /* LDGTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGTabBarController.h; sourceTree = "<group>"; };
+		187418A3206233D70030C6EA /* LDGTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGTabBarController.m; sourceTree = "<group>"; };
+		187418A5206233F30030C6EA /* LDGNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGNavigationController.h; sourceTree = "<group>"; };
+		187418A6206233F30030C6EA /* LDGNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGNavigationController.m; sourceTree = "<group>"; };
 		6FCF16B2D845360574013553 /* Pods_ZhiBo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZhiBo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D156199E0D9AD1E0DF9BF89B /* Pods-ZhiBo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiBo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiBo/Pods-ZhiBo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,10 +120,10 @@
 		1874188A2061FBB80030C6EA /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				1874188B2061FBB80030C6EA /* SecondPart */,
-				1874188F2061FBB80030C6EA /* FourthPart */,
 				187418932061FBB80030C6EA /* firstPart */,
+				1874188B2061FBB80030C6EA /* SecondPart */,
 				187418972061FBB80030C6EA /* ThridPart */,
+				1874188F2061FBB80030C6EA /* FourthPart */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -194,6 +203,8 @@
 		187418942061FBB80030C6EA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1874189F206232930030C6EA /* LDGHomeViewController.h */,
+				187418A0206232930030C6EA /* LDGHomeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -246,6 +257,10 @@
 		1874189B2061FBB80030C6EA /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				187418A2206233D70030C6EA /* LDGTabBarController.h */,
+				187418A3206233D70030C6EA /* LDGTabBarController.m */,
+				187418A5206233F30030C6EA /* LDGNavigationController.h */,
+				187418A6206233F30030C6EA /* LDGNavigationController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -295,6 +310,7 @@
 		184A3C712061F115002932D5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = LDG;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = apple;
 				TargetAttributes = {
@@ -408,6 +424,9 @@
 			files = (
 				1874189D2061FBB80030C6EA /* main.m in Sources */,
 				1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */,
+				187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */,
+				187418A4206233D70030C6EA /* LDGTabBarController.m in Sources */,
+				187418A7206233F30030C6EA /* LDGNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
