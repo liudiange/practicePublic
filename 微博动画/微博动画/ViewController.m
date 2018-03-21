@@ -35,9 +35,6 @@
     animation.repeatCount = NSIntegerMax;
     [shapeLayer addAnimation:animation forKey:nil];
     
-    
-    
-    
 }
 - (IBAction)startAction {
     

@@ -1,0 +1,12 @@
+use_frameworks!
+platform:ios,'9.0'
+target 'ZhiBo' do
+    pod 'AFNetworking', '~> 3.1.0'
+    pod 'ReactiveObjC', '~> 2.1.2'
+    pod 'Masonry'
+    pod 'SDWebImage' 
+    pod 'MJExtension'
+    pod 'MJRefresh'
+    pod 'SVProgressHUD'
+end
+
