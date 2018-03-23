@@ -8,7 +8,7 @@
 
 #import "LDGHomeViewController.h"
 
-@interface LDGHomeViewController ()
+@interface LDGHomeViewController ()<UITextFieldDelegate>
 
 @end
 
@@ -16,16 +16,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNav];
-    
+    // 初始化
+    [self setUp];
 }
-
 /**
- 导航栏初始化
+ 初始化
  */
-- (void)setNav{
-    self.navigationItem.title = @"首页";
+- (void)setUp{
+    
+    // 创建一个搜索的框
+    UITextField *textField = [[UITextField alloc] init];
+    textField.frame = CGRectMake(0, 0, 300, 30);
+    textField.borderStyle = UITextBorderStyleNone;
+    textField.delegate = self;
+    self.navigationItem.titleView = textField;
+    textField.layer.cornerRadius = 15;
+    textField.layer.masksToBounds = YES;
+    textField.backgroundColor = [UIColor lightGrayColor];
+    textField.tintColor = [UIColor greenColor];
+    
+    UIImageView *searchImageView = [[UIImageView alloc] init];
+    searchImageView.frame = CGRectMake(0, 0, 22, 22);
+    searchImageView.image = [UIImage imageNamed:@"CXCo_ic_search"];
+    textField.leftView = searchImageView;
+    textField.leftViewMode = UITextFieldViewModeAlways;
 
 }
-
 @end

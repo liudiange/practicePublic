@@ -14,8 +14,9 @@
 		1874189D2061FBB80030C6EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418882061FBB80030C6EA /* main.m */; };
 		1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418892061FBB80030C6EA /* AppDelegate.m */; };
 		187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418A0206232930030C6EA /* LDGHomeViewController.m */; };
-		187418A4206233D70030C6EA /* LDGTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418A3206233D70030C6EA /* LDGTabBarController.m */; };
-		187418A7206233F30030C6EA /* LDGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418A6206233F30030C6EA /* LDGNavigationController.m */; };
+		187F1C9D2064AAFF000671A4 /* LDGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F1C992064AAFE000671A4 /* LDGNavigationController.m */; };
+		187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F1C9A2064AAFE000671A4 /* LDGTabBarController.m */; };
+		187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F1CA62064D2CE000671A4 /* UIColor+LDGColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,10 +31,14 @@
 		187418892061FBB80030C6EA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1874189F206232930030C6EA /* LDGHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGHomeViewController.h; sourceTree = "<group>"; };
 		187418A0206232930030C6EA /* LDGHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGHomeViewController.m; sourceTree = "<group>"; };
-		187418A2206233D70030C6EA /* LDGTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGTabBarController.h; sourceTree = "<group>"; };
-		187418A3206233D70030C6EA /* LDGTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGTabBarController.m; sourceTree = "<group>"; };
-		187418A5206233F30030C6EA /* LDGNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGNavigationController.h; sourceTree = "<group>"; };
-		187418A6206233F30030C6EA /* LDGNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGNavigationController.m; sourceTree = "<group>"; };
+		187F1C992064AAFE000671A4 /* LDGNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGNavigationController.m; sourceTree = "<group>"; };
+		187F1C9A2064AAFE000671A4 /* LDGTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGTabBarController.m; sourceTree = "<group>"; };
+		187F1C9B2064AAFE000671A4 /* LDGNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGNavigationController.h; sourceTree = "<group>"; };
+		187F1C9C2064AAFE000671A4 /* LDGTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGTabBarController.h; sourceTree = "<group>"; };
+		187F1CA32064AC2D000671A4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		187F1CA42064CF13000671A4 /* LDGCommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGCommonHeader.h; sourceTree = "<group>"; };
+		187F1CA52064D2CE000671A4 /* UIColor+LDGColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+LDGColor.h"; sourceTree = "<group>"; };
+		187F1CA62064D2CE000671A4 /* UIColor+LDGColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LDGColor.m"; sourceTree = "<group>"; };
 		6FCF16B2D845360574013553 /* Pods_ZhiBo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZhiBo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D156199E0D9AD1E0DF9BF89B /* Pods-ZhiBo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiBo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiBo/Pods-ZhiBo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -257,10 +262,11 @@
 		1874189B2061FBB80030C6EA /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				187418A2206233D70030C6EA /* LDGTabBarController.h */,
-				187418A3206233D70030C6EA /* LDGTabBarController.m */,
-				187418A5206233F30030C6EA /* LDGNavigationController.h */,
-				187418A6206233F30030C6EA /* LDGNavigationController.m */,
+				187F1CA12064AB4B000671A4 /* Category */,
+				187F1CA22064AB4B000671A4 /* HeaerFile */,
+				187F1CA02064AB4A000671A4 /* Tool */,
+				187F1C9F2064AB4A000671A4 /* View */,
+				187F1C982064AAFE000671A4 /* Controller */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -270,6 +276,49 @@
 			children = (
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		187F1C982064AAFE000671A4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				187F1C992064AAFE000671A4 /* LDGNavigationController.m */,
+				187F1C9A2064AAFE000671A4 /* LDGTabBarController.m */,
+				187F1C9B2064AAFE000671A4 /* LDGNavigationController.h */,
+				187F1C9C2064AAFE000671A4 /* LDGTabBarController.h */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		187F1C9F2064AB4A000671A4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		187F1CA02064AB4A000671A4 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		187F1CA12064AB4B000671A4 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				187F1CA52064D2CE000671A4 /* UIColor+LDGColor.h */,
+				187F1CA62064D2CE000671A4 /* UIColor+LDGColor.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		187F1CA22064AB4B000671A4 /* HeaerFile */ = {
+			isa = PBXGroup;
+			children = (
+				187F1CA32064AC2D000671A4 /* PrefixHeader.pch */,
+				187F1CA42064CF13000671A4 /* LDGCommonHeader.h */,
+			);
+			path = HeaerFile;
 			sourceTree = "<group>";
 		};
 		291F097D63F1B733E636DFAB /* Pods */ = {
@@ -425,8 +474,9 @@
 				1874189D2061FBB80030C6EA /* main.m in Sources */,
 				1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */,
 				187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */,
-				187418A4206233D70030C6EA /* LDGTabBarController.m in Sources */,
-				187418A7206233F30030C6EA /* LDGNavigationController.m in Sources */,
+				187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */,
+				187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */,
+				187F1C9D2064AAFF000671A4 /* LDGNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +613,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 328H572F92;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PRODUCTNAME)ZhiBo/Classes/Base/HeaerFile/PrefixHeader.pch";
 				INFOPLIST_FILE = ZhiBo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -579,6 +631,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 328H572F92;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PRODUCTNAME)ZhiBo/Classes/Base/HeaerFile/PrefixHeader.pch";
 				INFOPLIST_FILE = ZhiBo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
