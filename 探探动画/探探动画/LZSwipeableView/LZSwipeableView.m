@@ -22,11 +22,13 @@
 - (void)swipeableViewCellDidRemoveFromSuperView:(LZSwipeableViewCell *)cell withDirection:(LZSwipeableViewCellSwipeDirection)direction;
 /**
  添加一个cell
-
+ 
  @param currentCell 当前的cell 在当前的基础上进行添加cell
+ @param centerX x的坐标
+ @param centerY y的坐标
  @param direction 方向
  */
-- (void)swipeableViewCellDidAddFromSuperView:(LZSwipeableViewCell *)currentCell withDirection:(LZSwipeableViewCellSwipeDirection)direction;
+- (void)swipeableViewCellDidAddFromSuperView:(LZSwipeableViewCell *)currentCell withCenterX:(CGFloat)centerX withCenterY:(CGFloat)centerY withDirection:(LZSwipeableViewCellSwipeDirection)direction;
 
 
 @end
@@ -110,7 +112,14 @@
             break;
         };
         case UIGestureRecognizerStateChanged:{
-            self.transform = CGAffineTransformMakeTranslation(xFromCenter, 0);
+            if (xFromCenter <= 0) {
+               self.transform = CGAffineTransformMakeTranslation(xFromCenter, 0);
+            }else{
+                if ([self.LZPrivateDelegate respondsToSelector:@selector(swipeableViewCellDidAddFromSuperView:withCenterX:withCenterY:withDirection:)]) {
+                    [self.LZPrivateDelegate swipeableViewCellDidAddFromSuperView:self withCenterX:xFromCenter withCenterY:yFromCenter withDirection:LZSwipeableViewCellSwipeDirectionRight];
+                }
+            }
+            
             break;
         };
         case UIGestureRecognizerStateEnded: {
@@ -145,11 +154,6 @@
             } completion:^(BOOL finished) {
             }];
         }
-//        else if (yFromCenter > ACTION_MARGIN) { // 底部飞走
-//            [self bottomAction];
-//        } else if (yFromCenter < -ACTION_MARGIN) { // 上边飞走
-//            [self topAction];
-//        }
     }
     else { // 最后一张卡片不飞走
         [UIView animateWithDuration:0.5f delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:1.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -162,18 +166,16 @@
 
 -(void)rightAction
 {
-    CGFloat pointY = _originalPoint.y + (SCREEN_WIDTH + self.width) / 2 * yFromCenter / xFromCenter;
-    CGFloat pointX = _originalPoint.x + (SCREEN_WIDTH + self.width) / 2;
-    CGPoint finishPoint = CGPointMake(pointX,pointY);
-    [UIView animateWithDuration:0.25 animations:^{
-        self.transform = CGAffineTransformIdentity;
-        self.center = finishPoint;
-    } completion:^(BOOL finished) {
-        [self didCellRemoveFromSuperview:LZSwipeableViewCellSwipeDirectionLeft];
-    }];
+//    CGFloat pointY = _originalPoint.y + (SCREEN_WIDTH + self.width) / 2 * yFromCenter / xFromCenter;
+//    CGFloat pointX = _originalPoint.x + (SCREEN_WIDTH + self.width) / 2;
+//    CGPoint finishPoint = CGPointMake(pointX,pointY);
+//    [UIView animateWithDuration:0.25 animations:^{
+//        self.transform = CGAffineTransformIdentity;
+//        self.center = finishPoint;
+//    } completion:^(BOOL finished) {
+//        [self didCellRemoveFromSuperview:LZSwipeableViewCellSwipeDirectionLeft];
+//    }];
     
-    // 增加一个卡片
-    [self addCellFromSuperview:LZSwipeableViewCellSwipeDirectionRight];
 }
 
 -(void)leftAction
@@ -244,16 +246,6 @@
         [self.LZPrivateDelegate swipeableViewCellDidRemoveFromSuperView:self withDirection:direction];
     }
 }
-/**
- 添加一个卡片
- */
--(void)addCellFromSuperview:(LZSwipeableViewCellSwipeDirection)direction{
-    
-    if ([self.LZPrivateDelegate respondsToSelector:@selector(swipeableViewCellDidAddFromSuperView: withDirection:)]) {
-        [self.LZPrivateDelegate swipeableViewCellDidAddFromSuperView:self withDirection:direction];
-    }
-}
-
 
 @end
 
@@ -297,6 +289,8 @@
 @property (nonatomic, assign) CGFloat cardRightMargin;
 @property (nonatomic, assign) CGFloat cardTopMargin;
 @property (nonatomic, assign) CGFloat cardBottomMargin;
+/** 前一个cell  */
+@property (strong, nonatomic) LZSwipeableViewCell *currentPreviousCell;
 
 @end
 
@@ -421,6 +415,7 @@
 #pragma mark - 位置处理
 // 获取顶部卡片位置
 - (CGRect)getTopCardFrame{
+    
     CGFloat cardLeftMargin = self.cardLeftMargin;
     CGFloat cardRightMargin = self.cardRightMargin;
     CGFloat cardTopMargin = self.cardTopMargin;
@@ -429,10 +424,6 @@
     CGSize normalTopCardSize = CGSizeMake(self.containerView.width - cardLeftMargin - cardRightMargin, self.containerView.height - cardTopMargin - cardBottomMargin - (self.maxCardsShowNumber - 1) * bottomCardVerticalInsetMargin);
     return CGRectMake(cardLeftMargin, cardTopMargin + (self.maxCardsShowNumber - 1) * bottomCardVerticalInsetMargin, normalTopCardSize.width, normalTopCardSize.height);
 }
-
-
-
-
 // 获取当前的显示卡片数组
 - (NSArray *)cardViewArray{
     NSMutableArray *cellArray = [NSMutableArray array];
@@ -447,6 +438,7 @@
 
 // 强制刷新界面
 - (void)setLayoutSubViews{
+    
     [self setNeedsLayout];
     [self layoutIfNeeded];
     [self layoutCardViews];
@@ -454,6 +446,7 @@
 
 // 刷新位置(用于父控件位置改变时调用)
 - (void)layoutCardViews{
+    
     CGSize size = [self getTopCardFrame].size;
     CGPoint point = [self getTopCardFrame].origin;
     
@@ -750,52 +743,49 @@
 
 /**
  添加一个cell
-
- @param currentCell 当前的cell
+ 
+ @param currentCell 当前的cell 在当前的基础上进行添加cell
+ @param centerX x的坐标
+ @param centerY y的坐标
+ @param direction 方向
  */
-- (void)swipeableViewCellDidAddFromSuperView:(LZSwipeableViewCell *)currentCell withDirection:(LZSwipeableViewCellSwipeDirection)direction{
+- (void)swipeableViewCellDidAddFromSuperView:(LZSwipeableViewCell *)currentCell withCenterX:(CGFloat)centerX withCenterY:(CGFloat)centerY withDirection:(LZSwipeableViewCellSwipeDirection)direction{
     
-    // 删除追后一个
-    NSInteger showNumber = self.datasourceCount < self.maxCardsShowNumber ? self.datasourceCount : self.maxCardsShowNumber;
-    NSInteger index = showNumber -1;
-    LZSwipeableViewCell *cell = self.cardViewArray[index];
-    [cell removeFromSuperview];
-    self.totalCardViewArrayCount -= 1;
-    
-    // 当cell被移除时重新刷新视图
-    [self.reuseCardViewArray addObject:cell];
-    
-    // 发送通知
-    NSInteger previouIndex = currentCell.tag - 1;
-    if ( previouIndex >= 0) {
-        // 通知代理 移除了当前cell
-        if ([self.delegate respondsToSelector:@selector(swipeableView:didCardRemovedAtIndex:withDirection:)]) {
-            [self.delegate swipeableView:self didCardRemovedAtIndex:currentCell.tag -1 withDirection:direction];
-        }
-        // 当前数据源还有数据 继续创建cell
-        if (self.datasourceCount > self.totalCardViewArrayCount) { // 当显示总数
-            [self createSwipeableCardCellWithIndex:previouIndex];
-        }
-        
+    if (!self.currentPreviousCell) {
+        LZSwipeableViewCell *previousCell = [self.deleteCardArray lastObject];
+        self.currentPreviousCell = previousCell;
+        self.currentPreviousCell.backgroundColor = [UIColor redColor];
+        [self.deleteCardArray removeObject:previousCell];
+        [self.containerView addSubview:self.currentPreviousCell];
+        self.currentPreviousCell.frame = CGRectMake(0, currentCell.origin.y, currentCell.frame.size.width, currentCell.frame.size.height);
+        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(-M_PI_4);
     }
-    // 更新位置
-    [self addViewupdateSubViews];
-    
-    // 移除最后一个cell的代理方法
-    if (self.cardViewArray.count == 0) { // 当前移除的cell是最后一个
-        if ([self.delegate respondsToSelector:@selector(swipeableViewDidLastCardRemoved:)]) {
-            [self.delegate swipeableViewDidLastCardRemoved:self];
-        }
+    NSLog(@"centerX -- %f",centerX);
+    if (centerX < 50) {
+//        self.currentPreviousCell.transform = CGAffineTransformIdentity;
+//        self.currentPreviousCell.transform = CGAffineTransformMakeRotation((centerX/50.0)*M_PI_4);
+    }else{
+//        self.currentPreviousCell.transform = CGAffineTransformTranslate(self.currentPreviousCell.transform, centerX, 0);
+        [self.deleteCardArray removeLastObject];
+        self.currentPreviousCell = nil;
     }
+
+  
     
-    // 移除后的卡片是最后一张时调用代理方法
-    if(self.cardViewArray.count == 1){ // 只有最后一张卡片的时候
-        if ([self.delegate respondsToSelector:@selector(swipeableView:didLastCardShow:)]) {
-            LZSwipeableViewCell *cell = [self.cardViewArray lastObject];
-            cell.isLast = YES;
-            [self.delegate swipeableView:self didLastCardShow:cell];
-        }
-    }
+    
+//    [UIView animateWithDuration:1.0 animations:^{
+//        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(M_PI_4);
+//        self.currentPreviousCell.center = currentCell.center;
+//    } completion:^(BOOL finished) {
+//
+//
+//    }];
+    
+    
+    
+    
+    
+    
 }
 /**
  从哪个方向上删除一个cell
@@ -804,29 +794,30 @@
  @param direction 方向
  */
 - (void)swipeableViewCellDidRemoveFromSuperView:(LZSwipeableViewCell *)cell withDirection:(LZSwipeableViewCellSwipeDirection)direction{
+    
+    
+    [self.deleteCardArray addObject:cell];
+    
+    
+    
     // 当cell被移除时重新刷新视图
     [self.reuseCardViewArray addObject:cell];
-    
     // 通知代理 移除了当前cell
     if ([self.delegate respondsToSelector:@selector(swipeableView:didCardRemovedAtIndex:withDirection:)]) {
         [self.delegate swipeableView:self didCardRemovedAtIndex:cell.tag withDirection:direction];
     }
-    
     // 当前数据源还有数据 继续创建cell
     if (self.datasourceCount > self.totalCardViewArrayCount) { // 当显示总数
         [self createSwipeableCardCellWithIndex:self.totalCardViewArrayCount];
     }
-    
     // 更新位置
     [self updateSubViews];
-    
     // 移除最后一个cell的代理方法
     if (self.cardViewArray.count == 0) { // 当前移除的cell是最后一个
         if ([self.delegate respondsToSelector:@selector(swipeableViewDidLastCardRemoved:)]) {
             [self.delegate swipeableViewDidLastCardRemoved:self];
         }
     }
-    
     // 移除后的卡片是最后一张时调用代理方法
     if(self.cardViewArray.count == 1){ // 只有最后一张卡片的时候
         if ([self.delegate respondsToSelector:@selector(swipeableView:didLastCardShow:)]) {
