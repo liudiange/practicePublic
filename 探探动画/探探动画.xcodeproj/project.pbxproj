@@ -106,10 +106,10 @@
 			isa = PBXGroup;
 			children = (
 				18470CFF206B8096008B636F /* LZSwipeCostantDefine.h */,
+				18470D03206B8096008B636F /* NSObject+LZSwipeCategory.h */,
 				18470D00206B8096008B636F /* NSObject+LZSwipeCategory.m */,
 				18470D01206B8096008B636F /* LZSwipeableView.h */,
 				18470D02206B8096008B636F /* LZSwipeableView.m */,
-				18470D03206B8096008B636F /* NSObject+LZSwipeCategory.h */,
 			);
 			path = LZSwipeableView;
 			sourceTree = "<group>";

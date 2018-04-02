@@ -29,11 +29,21 @@
  @param direction 方向
  */
 - (void)swipeableViewCellDidAddFromSuperView:(LZSwipeableViewCell *)currentCell withCenterX:(CGFloat)centerX withCenterY:(CGFloat)centerY withDirection:(LZSwipeableViewCellSwipeDirection)direction;
+/**
+ 向右滑动结束但是没有达到标准的
+
+ @param currentCell 当前的cell 在当前的基础上进行添加cell
+ */
+- (void)swipeableViewDealWithRightAction:(LZSwipeableViewCell *)currentCell;
+/**
+ 向右滑动的动画结束
+
+ @param currentCell currentCell
+ */
+- (void)swipeableViewRightActionFinish:(LZSwipeableViewCell *)currentCell;
 
 
 @end
-
-
 
 @interface LZSwipeableViewCell ()
 @property (nonatomic, assign) CGPoint originalPoint;
@@ -112,14 +122,15 @@
             break;
         };
         case UIGestureRecognizerStateChanged:{
-            if (xFromCenter <= 0) {
+            if (xFromCenter <= 0) { // 左滑动
                self.transform = CGAffineTransformMakeTranslation(xFromCenter, 0);
-            }else{
-                if ([self.LZPrivateDelegate respondsToSelector:@selector(swipeableViewCellDidAddFromSuperView:withCenterX:withCenterY:withDirection:)]) {
-                    [self.LZPrivateDelegate swipeableViewCellDidAddFromSuperView:self withCenterX:xFromCenter withCenterY:yFromCenter withDirection:LZSwipeableViewCellSwipeDirectionRight];
+            }else{ // 右滑动
+                if (!self.isFirst) {
+                    if ([self.LZPrivateDelegate respondsToSelector:@selector(swipeableViewCellDidAddFromSuperView:withCenterX:withCenterY:withDirection:)]) {
+                        [self.LZPrivateDelegate swipeableViewCellDidAddFromSuperView:self withCenterX:xFromCenter withCenterY:yFromCenter withDirection:LZSwipeableViewCellSwipeDirectionRight];
+                    }
                 }
             }
-            
             break;
         };
         case UIGestureRecognizerStateEnded: {
@@ -138,46 +149,52 @@
         };
     }
 }
-
 // 拖拽手势结束时 处理当前卡片的位置
 - (void)afterSwipeAction
 {
-    if(!self.isLast){ // 非最后一张卡片
-        if (xFromCenter > ACTION_MARGIN) { // 右边飞走
-            [self rightAction];
-        } else if (xFromCenter < -ACTION_MARGIN) { // 左边飞走
-            [self leftAction];
-        }else { // 不飞走 回复原来位置
+    if (self.isFirst) { // 第一个
+        if (xFromCenter < -ACTION_MARGIN) {
+           [self leftAction];
+        }else {//不飞走 回复原来位置
             [UIView animateWithDuration:0.5f delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:1.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 self.transform = CGAffineTransformIdentity;
                 self.center = self.originalPoint;
-            } completion:^(BOOL finished) {
-            }];
+            }completion:nil];
+        }
+    }else if(self.isLast){// 最后一个
+        if (xFromCenter > ACTION_MARGIN) {
+            if ([self.LZPrivateDelegate respondsToSelector:@selector(swipeableViewRightActionFinish:)]) {
+                [self.LZPrivateDelegate swipeableViewRightActionFinish:self];
+            }
+        }else if(xFromCenter > 0){
+            if ([self.LZPrivateDelegate respondsToSelector:@selector(swipeableViewDealWithRightAction:)]) {
+                [self.LZPrivateDelegate swipeableViewDealWithRightAction:self];
+            }
+        }else{// 不飞走 回复原来位置
+            [UIView animateWithDuration:0.5f delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:1.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                self.transform = CGAffineTransformIdentity;
+                self.center = self.originalPoint;
+            }completion:nil];
+        }
+    }else{ // 中间的
+        if (xFromCenter < -ACTION_MARGIN) {
+            [self leftAction];
+        }else if(xFromCenter <= 0){// 不飞走 回复原来位置
+            [UIView animateWithDuration:0.5f delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:1.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                self.transform = CGAffineTransformIdentity;
+                self.center = self.originalPoint;
+            }completion:nil];
+        }else if(xFromCenter > ACTION_MARGIN){ // 右边飞走
+            if ([self.LZPrivateDelegate respondsToSelector:@selector(swipeableViewRightActionFinish:)]) {
+                [self.LZPrivateDelegate swipeableViewRightActionFinish:self];
+            }
+        }else{
+            if ([self.LZPrivateDelegate respondsToSelector:@selector(swipeableViewDealWithRightAction:)]) {
+                [self.LZPrivateDelegate swipeableViewDealWithRightAction:self];
+            }
         }
     }
-    else { // 最后一张卡片不飞走
-        [UIView animateWithDuration:0.5f delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:1.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            self.transform = CGAffineTransformIdentity;
-            self.center = self.originalPoint;
-        } completion:^(BOOL finished) {
-        }];
-    }
 }
-
--(void)rightAction
-{
-//    CGFloat pointY = _originalPoint.y + (SCREEN_WIDTH + self.width) / 2 * yFromCenter / xFromCenter;
-//    CGFloat pointX = _originalPoint.x + (SCREEN_WIDTH + self.width) / 2;
-//    CGPoint finishPoint = CGPointMake(pointX,pointY);
-//    [UIView animateWithDuration:0.25 animations:^{
-//        self.transform = CGAffineTransformIdentity;
-//        self.center = finishPoint;
-//    } completion:^(BOOL finished) {
-//        [self didCellRemoveFromSuperview:LZSwipeableViewCellSwipeDirectionLeft];
-//    }];
-    
-}
-
 -(void)leftAction
 {
     CGFloat pointY = _originalPoint.y - (SCREEN_WIDTH + self.width) / 2 * yFromCenter / xFromCenter;
@@ -757,35 +774,13 @@
         self.currentPreviousCell.backgroundColor = [UIColor redColor];
         [self.deleteCardArray removeObject:previousCell];
         [self.containerView addSubview:self.currentPreviousCell];
-        self.currentPreviousCell.frame = CGRectMake(0, currentCell.origin.y, currentCell.frame.size.width, currentCell.frame.size.height);
+        self.currentPreviousCell.frame = CGRectMake(-200, currentCell.origin.y, currentCell.frame.size.width*0.7, currentCell.frame.size.height*0.7);
         self.currentPreviousCell.transform = CGAffineTransformMakeRotation(-M_PI_4);
     }
     NSLog(@"centerX -- %f",centerX);
-    if (centerX < 50) {
-//        self.currentPreviousCell.transform = CGAffineTransformIdentity;
-//        self.currentPreviousCell.transform = CGAffineTransformMakeRotation((centerX/50.0)*M_PI_4);
-    }else{
-//        self.currentPreviousCell.transform = CGAffineTransformTranslate(self.currentPreviousCell.transform, centerX, 0);
-        [self.deleteCardArray removeLastObject];
-        self.currentPreviousCell = nil;
+    if(centerX <= ACTION_MARGIN){
+        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(-(1- centerX/ACTION_MARGIN)*M_PI_4);
     }
-
-  
-    
-    
-//    [UIView animateWithDuration:1.0 animations:^{
-//        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(M_PI_4);
-//        self.currentPreviousCell.center = currentCell.center;
-//    } completion:^(BOOL finished) {
-//
-//
-//    }];
-    
-    
-    
-    
-    
-    
 }
 /**
  从哪个方向上删除一个cell
@@ -794,11 +789,11 @@
  @param direction 方向
  */
 - (void)swipeableViewCellDidRemoveFromSuperView:(LZSwipeableViewCell *)cell withDirection:(LZSwipeableViewCellSwipeDirection)direction{
-    
+    // 防止右边的动画在
+    [self.currentPreviousCell removeFromSuperview];
+    self.currentPreviousCell = nil;
     
     [self.deleteCardArray addObject:cell];
-    
-    
     
     // 当cell被移除时重新刷新视图
     [self.reuseCardViewArray addObject:cell];
@@ -826,6 +821,30 @@
             [self.delegate swipeableView:self didLastCardShow:cell];
         }
     }
+}
+/**
+ 向右滑动结束但是没有达到标准的
+ 
+ @param currentCell 当前的cell 在当前的基础上进行添加cell
+ */
+- (void)swipeableViewDealWithRightAction:(LZSwipeableViewCell *)currentCell{
+    
+    [self.currentPreviousCell removeFromSuperview];
+    self.currentPreviousCell = nil;
+}
+/**
+ 向右滑动的动画结束
+ 
+ @param currentCell currentCell
+ */
+- (void)swipeableViewRightActionFinish:(LZSwipeableViewCell *)currentCell{
+    [UIView animateWithDuration:1.0 animations:^{
+        self.currentPreviousCell.frame = currentCell.frame;
+    }completion:^(BOOL finished) {
+        self.currentPreviousCell.transform = CGAffineTransformIdentity;
+        [self.deleteCardArray removeLastObject];
+        self.currentPreviousCell = nil;
+    }];
 }
 
 - (void)removeTopCardViewFromSwipe:(LZSwipeableViewCellSwipeDirection)direction{

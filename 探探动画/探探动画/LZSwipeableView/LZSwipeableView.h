@@ -22,6 +22,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIView *contentView;
 /** 最后一张  */
 @property (nonatomic, assign) BOOL isLast;
+/** 第一张  */
+@property (nonatomic, assign) BOOL isFirst;
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 // 添加屏幕截图(此方法可用于动画过程中的cell内容视觉效果不变)
