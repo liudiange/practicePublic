@@ -240,19 +240,14 @@
 
 - (void)removeFromSuperviewWithDirection:(LZSwipeableViewCellSwipeDirection)direction{
     if (direction == LZSwipeableViewCellSwipeDirectionLeft) {
-        xFromCenter = -100;
+        xFromCenter = -110;
         yFromCenter = -1;
+        self.transform = CGAffineTransformMakeTranslation(xFromCenter, yFromCenter);
     }else if (direction == LZSwipeableViewCellSwipeDirectionRight){
-        xFromCenter = 100;
+        xFromCenter = 110;
         yFromCenter = -1;
-    }else if (direction == LZSwipeableViewCellSwipeDirectionTop){
-        xFromCenter = -1;
-        yFromCenter = -100;
-    }else if (direction == LZSwipeableViewCellSwipeDirectionBottom){
-        xFromCenter = 1;
-        yFromCenter = 100;
     }
-    self.transform = CGAffineTransformMakeTranslation(xFromCenter, yFromCenter);
+   
     [self afterSwipeAction];
 }
 
@@ -545,7 +540,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [cell addGestureRecognizer:tap];
     [self.containerView insertSubview:cell atIndex:0];
-    self.totalCardViewArrayCount += 1;
+   // self.totalCardViewArrayCount += 1;
     self.isCreating = NO;
 }
 
@@ -679,11 +674,8 @@
     if (!self.currentPreviousCell) {
         
         LZSwipeableViewCell *previousCell = [self.deleteCardArray lastObject];
-        NSLog(@"deleteCardArray -- %zd",previousCell.tag);
-        
         self.deleteCardArray.count > 0?(previousCell.tag = self.deleteCardArray.count - 1):(previousCell.tag = 0);
         self.currentPreviousCell = previousCell;
-        self.currentPreviousCell.backgroundColor = [UIColor redColor];
         [self.containerView addSubview:self.currentPreviousCell];
         self.currentPreviousCell.frame = CGRectMake(-200, currentCell.origin.y, currentCell.frame.size.width, currentCell.frame.size.height);
         self.currentPreviousCell.transform = CGAffineTransformMakeRotation(-M_PI_4);
@@ -714,11 +706,10 @@
     if ([self.delegate respondsToSelector:@selector(swipeableView:didCardRemovedOrAddtIndex:withDirection:)]) {
         [self.delegate swipeableView:self didCardRemovedOrAddtIndex:cell.tag withDirection:direction];
     }
-     NSInteger shouldNumber = self.datasourceCount - (self.deleteCardArray.count-1) < self.maxCardsShowNumber ? self.datasourceCount - (self.deleteCardArray.count-1) : self.maxCardsShowNumber;
-    
+     NSInteger shouldNumber = (self.datasourceCount - self.deleteCardArray.count) < self.maxCardsShowNumber ? self.datasourceCount - self.deleteCardArray.count : self.maxCardsShowNumber;
     // 当前数据源还有数据 继续创建cell
-    if (self.datasourceCount >(self.totalCardViewArrayCount + self.deleteCardArray.count)) { // 当显示总数
-        [self createSwipeableCardCellWithIndex:(self.totalCardViewArrayCount + self.deleteCardArray.count)];
+    if (self.cardViewArray.count < shouldNumber) { // 当显示总数
+        [self createSwipeableCardCellWithIndex:(self.deleteCardArray.count + self.cardViewArray.count)];
     }
     // 更新位置
     [self updateSubViews];
@@ -741,7 +732,17 @@
  @param currentCell currentCell
  */
 - (void)swipeableViewRightActionFinish:(LZSwipeableViewCell *)currentCell{
+    // 如果点击按钮可能会没有
+    if (!self.currentPreviousCell) {
+        LZSwipeableViewCell *previousCell = [self.deleteCardArray lastObject];
+        self.deleteCardArray.count > 0?(previousCell.tag = self.deleteCardArray.count - 1):(previousCell.tag = 0);
+        self.currentPreviousCell = previousCell;
+        [self.containerView addSubview:self.currentPreviousCell];
+        self.currentPreviousCell.frame = CGRectMake(-200, currentCell.origin.y, currentCell.frame.size.width, currentCell.frame.size.height);
+        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(-M_PI_4);
+    }
     [UIView animateWithDuration:1.0 animations:^{
+        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(0);
         self.currentPreviousCell.center = currentCell.center;
     }completion:^(BOOL finished) {
         self.currentPreviousCell.transform = CGAffineTransformIdentity;
@@ -761,7 +762,8 @@
         [self.delegate swipeableView:self didCardRemovedOrAddtIndex:previousCell.tag withDirection:direction];
     }
     // 当前数据源还有数据 继续创建cell
-    self.totalCardViewArrayCount --;
+    //self.totalCardViewArrayCount --;
+    
     NSInteger shouldNumber = self.datasourceCount - (self.deleteCardArray.count-1) < self.maxCardsShowNumber ? self.datasourceCount - (self.deleteCardArray.count-1) : self.maxCardsShowNumber;
     if (self.cardViewArray.count > shouldNumber) {
         LZSwipeableViewCell *firstCell = (LZSwipeableViewCell *)[self.containerView.subviews firstObject];
@@ -799,15 +801,21 @@
         cell.tag == 0 ?(cell.isFirst = YES):( cell.isFirst = NO);
     }
 }
-#pragma mark 没有用到的方法（可能用不到）
 
-
+#pragma mark 其他的方法
 - (void)removeTopCardViewFromSwipe:(LZSwipeableViewCellSwipeDirection)direction{
-    if(self.cardViewArray.count <= 1)return;
+    if (self.cardViewArray.count == 0) {
+        return;
+    }
     LZSwipeableViewCell *topcell = self.cardViewArray[0];
+    if (topcell.isFirst && direction ==LZSwipeableViewCellSwipeDirectionRight) {
+        return;
+    }
+    if (topcell.isLast && direction ==LZSwipeableViewCellSwipeDirectionLeft) {
+        return;
+    }
     [topcell removeFromSuperviewWithDirection:direction];
 }
-
 #pragma mark - 刷新数据源  这个方法我没有验证（目前也用不到）
 - (void)refreshDataSource{
     

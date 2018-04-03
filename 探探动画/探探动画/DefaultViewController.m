@@ -75,7 +75,36 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     self.swipeableView.frame = CGRectMake(10, 100, 355, 355);
+    // 创建两个button
+    UIButton *previousButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:previousButton];
+    [previousButton setTitle:@"上一首" forState:UIControlStateNormal];
+    [previousButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    previousButton.frame = CGRectMake(10, 500, 100, 30);
+    [previousButton addTarget:self action:@selector(previousAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    // 创建两个button
+    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:nextButton];
+    [nextButton setTitle:@"下一首" forState:UIControlStateNormal];
+    [nextButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    nextButton.frame = CGRectMake(250, 500, 100, 30);
+    [nextButton addTarget:self action:@selector(nextAction) forControlEvents:UIControlEventTouchUpInside];
 }
+/**
+ 上一首
+ */
+- (void)previousAction{
+     [self.swipeableView removeTopCardViewFromSwipe:LZSwipeableViewCellSwipeDirectionRight];
+}
+/**
+ 下一首
+ */
+- (void)nextAction{
+     [self.swipeableView removeTopCardViewFromSwipe:LZSwipeableViewCellSwipeDirectionLeft];
+}
+
 
 #pragma mark LZSwipeableViewDataSource
 - (NSInteger)swipeableViewNumberOfRowsInSection:(LZSwipeableView *)swipeableView{
