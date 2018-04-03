@@ -39,13 +39,6 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
     }
     return _swipeableView;
 }
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
-//    [self.swipeableView reloadData];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController.navigationBar setBackgroundColor:[UIColor whiteColor]];
@@ -58,6 +51,7 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
     
     self.swipeableView.bottomCardInsetHorizontalMargin = 5;
     self.swipeableView.bottomCardInsetVerticalMargin = 10;
+    self.swipeableView.beginIndex = 2;
     
     // 使用xib时请使用以下方法
 //    [self.swipeableView registerNibName:NSStringFromClass([AVSwipeCardCell class]) forCellReuseIdentifier:NSStringFromClass([AVSwipeCardCell class])];
@@ -65,13 +59,12 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
     for (int i = 0; i < 5; i++) {
         AVCardInfo *info = [[AVCardInfo alloc] init];
         info.feed_id = 123145;
-        info.title = [NSString stringWithFormat:@"测试%zd",i];
-        info.summary = [NSString stringWithFormat:@"测试desc%zd",i];
+        info.title = [NSString stringWithFormat:@"测试% ----  zd",i];
+        info.summary = [NSString stringWithFormat:@"测试---desc---%zd",i];
         info.fav_count = arc4random_uniform(100);
         info.is_fav = arc4random_uniform(1);
         [self.cardInfoList addObject:info];
     }
-    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.swipeableView.hidden = NO;
         [self.swipeableView reloadData];
@@ -93,12 +86,14 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
     AVSwipeCardCell *cell = [swipeableView dequeueReusableCellWithIdentifier:NSStringFromClass([AVSwipeCardCell class])];
     cell.cardInfo = self.cardInfoList[index];
     cell.backgroundColor = [UIColor orangeColor];
+    NSLog(@"cellForIndex -- %@",cell.cardInfo.title);
     return cell;
 }
 
 - (LZSwipeableViewCell *)swipeableView:(LZSwipeableView *)swipeableView substituteCellForIndex:(NSInteger)index{
     AVSwipeCardCell *cell = [[AVSwipeCardCell alloc] initWithReuseIdentifier:@""];
     cell.cardInfo = self.cardInfoList[index];
+    NSLog(@"substituteCellForIndex -- %@",cell.cardInfo.title);
     cell.backgroundColor = [UIColor orangeColor];
     return cell;
 }
@@ -109,7 +104,7 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
 }
 - (void)swipeableView:(LZSwipeableView *)swipeableView didTapCellAtIndex:(NSInteger)index{
     
-    NSLog(@"点击了哪一个 -- %zd",index);
+//    NSLog(@"点击了哪一个 -- %zd",index);
 }
 #pragma mark - 头部和脚的处理事件
 - (UIView *)footerViewForSwipeableView:(LZSwipeableView *)swipeableView{
@@ -150,7 +145,7 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
 // 拉到最后一个
 - (void)swipeableViewDidLastCardRemoved:(LZSwipeableView *)swipeableView{
     
-    NSLog(@"已经是最后一个了");
+//    NSLog(@"已经是最后一个了");
 }
 
 /**
@@ -160,18 +155,8 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
  @param index index
  @param direction 方向
  */
-- (void)swipeableView:(LZSwipeableView *)swipeableView didCardRemovedAtIndex:(NSInteger)index withDirection:(LZSwipeableViewCellSwipeDirection)direction{
-    NSLog(@"移除哪一个 %zd",direction);
-}
-/**
- 添加了哪一个卡片
-
- @param swipeableView swipeableView
- @param index index
- @param direction 方向
- */
-- (void)swipeableView:(LZSwipeableView *)swipeableView didCardAddAtIndex:(NSInteger)index withDirection:(LZSwipeableViewCellSwipeDirection)direction{
-    NSLog(@"添加了哪一个 %zd",direction);
+- (void)swipeableView:(LZSwipeableView *)swipeableView didCardRemovedOrAddtIndex:(NSInteger)index withDirection:(LZSwipeableViewCellSwipeDirection)direction{
+//    NSLog(@"移除或者添加 %zd  --  direction --%zd",index,direction);
 }
 /**
  点击了最上边的一个
@@ -180,7 +165,7 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
  @param topCell 方向
  */
 - (void)swipeableView:(LZSwipeableView *)swipeableView didTopCardShow:(LZSwipeableViewCell *)topCell{
-    NSLog(@"点击了最上边的一个");
+//    NSLog(@"点击了最上边的一个");
 }
 /**
  点击了最下边的一个
@@ -189,7 +174,7 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
  @param cell 方向
  */
 - (void)swipeableView:(LZSwipeableView *)swipeableView didLastCardShow:(LZSwipeableViewCell *)cell{
-    NSLog(@"点击了最下边的一个");
+//    NSLog(@"点击了最下边的一个");
 }
 #pragma mark - AVKnackBottomToolViewDelegate
 - (void)knackBottomToolViewDidCheckDetailBtnClick:(AVCardInfo *)idInfo{

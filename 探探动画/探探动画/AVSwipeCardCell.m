@@ -9,7 +9,7 @@
 #import "AVSwipeCardCell.h"
 
 @interface AVSwipeCardCell ()
-/**<#desc#>*/
+
 @property (nonatomic, strong) UILabel *label;
 @end
 
@@ -29,7 +29,11 @@
     self.label.text = @"实打实大花洒霎时刻的黄金卡仕达好卡萨丁阿萨德和大家说卡号多少按就好撒多撒谎的爱上换手机达到撒娇和手动加号时间的痕迹是谁都会尽快大厦的喀什";
     [self addSubview:self.label];
 }
-
+-(void)setCardInfo:(AVCardInfo *)cardInfo {
+    _cardInfo = cardInfo;
+    self.label.text = cardInfo.title;
+    
+}
 
 - (void)layoutSubviews{
     [super layoutSubviews];

@@ -10,9 +10,9 @@
 
 typedef enum : NSUInteger {
     LZSwipeableViewCellSwipeDirectionLeft = 0,
-    LZSwipeableViewCellSwipeDirectionRight,
-    LZSwipeableViewCellSwipeDirectionTop,
-    LZSwipeableViewCellSwipeDirectionBottom,
+    LZSwipeableViewCellSwipeDirectionRight = 1,
+    LZSwipeableViewCellSwipeDirectionTop = 2,
+    LZSwipeableViewCellSwipeDirectionBottom = 3
 } LZSwipeableViewCellSwipeDirection;
 
 
@@ -76,9 +76,9 @@ typedef enum : NSUInteger {
  */
 - (void)swipeableViewDidLastCardRemoved:(LZSwipeableView *)swipeableView;
 /**
- *  当前移除的是哪一个卡片
+ *  当前移除/添加的是哪一个卡片
  */
-- (void)swipeableView:(LZSwipeableView *)swipeableView didCardRemovedAtIndex:(NSInteger)index withDirection:(LZSwipeableViewCellSwipeDirection)direction;
+- (void)swipeableView:(LZSwipeableView *)swipeableView didCardRemovedOrAddtIndex:(NSInteger)index withDirection:(LZSwipeableViewCellSwipeDirection)direction;
 /**
  *  添加一个卡片
  */
@@ -126,6 +126,8 @@ typedef enum : NSUInteger {
 // 卡片之间的水平和垂直间距 默认10
 @property (nonatomic, assign) CGFloat bottomCardInsetVerticalMargin;
 @property (nonatomic, assign) CGFloat bottomCardInsetHorizontalMargin;
+// 开始在哪个位置
+@property (assign, nonatomic) NSInteger beginIndex;
 
 /** 
  *  若是注册过cell，请在注册cell之后调用reloadData（第一次加载数据时调用）
