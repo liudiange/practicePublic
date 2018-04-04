@@ -56,7 +56,7 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
     // 使用xib时请使用以下方法
 //    [self.swipeableView registerNibName:NSStringFromClass([AVSwipeCardCell class]) forCellReuseIdentifier:NSStringFromClass([AVSwipeCardCell class])];
     
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 10; i++) {
         AVCardInfo *info = [[AVCardInfo alloc] init];
         info.feed_id = 123145;
         info.title = [NSString stringWithFormat:@"测试% ----  zd",i];

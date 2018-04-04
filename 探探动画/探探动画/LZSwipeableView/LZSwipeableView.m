@@ -679,7 +679,6 @@
     if (!self.currentPreviousCell) {
         
         LZSwipeableViewCell *previousCell = [self.deleteCardArray lastObject];
-        NSLog(@"deleteCardArray -- %zd",previousCell.tag);
         
         self.deleteCardArray.count > 0?(previousCell.tag = self.deleteCardArray.count - 1):(previousCell.tag = 0);
         self.currentPreviousCell = previousCell;
