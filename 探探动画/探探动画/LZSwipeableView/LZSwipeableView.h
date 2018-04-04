@@ -41,12 +41,12 @@ typedef enum : NSUInteger {
  */
 @protocol LZSwipeableViewDataSource<NSObject>
 @required
-/** 
+/**
  * 总卡片数
  */
 - (NSInteger)swipeableViewNumberOfRowsInSection:(LZSwipeableView *)swipeableView;
 
-/** 
+/**
  * 每张卡片内容
  */
 - (LZSwipeableViewCell *)swipeableView:(LZSwipeableView *)swipeableView cellForIndex:(NSInteger)index;
@@ -63,7 +63,7 @@ typedef enum : NSUInteger {
  */
 @protocol LZSwipeableViewDelegate <NSObject>
 @optional
-/** 
+/**
  * 顶部卡片尺寸 (更换为设置顶部卡片四边距确定卡片位置尺寸)
  */
 //- (CGSize)swipeableViewSizeForTopCard:(LZSwipeableView *)swipeableView;
@@ -119,17 +119,16 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong,readonly) UIView *headerView;
 /** 底部视图  */
 @property (nonatomic, strong,readonly) UIView *footerView;
-
 /** 顶部卡片位置 默认都是20 */
 @property (nonatomic, assign) UIEdgeInsets topCardInset;
-
 // 卡片之间的水平和垂直间距 默认10
 @property (nonatomic, assign) CGFloat bottomCardInsetVerticalMargin;
 @property (nonatomic, assign) CGFloat bottomCardInsetHorizontalMargin;
 // 开始在哪个位置
 @property (assign, nonatomic) NSInteger beginIndex;
-
-/** 
+// LZSwipeableView的背景颜色
+@property (strong, nonatomic) UIColor *containViewColor;
+/**
  *  若是注册过cell，请在注册cell之后调用reloadData（第一次加载数据时调用）
  */
 - (void)reloadData;

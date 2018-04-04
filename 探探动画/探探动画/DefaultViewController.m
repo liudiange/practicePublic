@@ -49,16 +49,14 @@ static NSString *cell_id = @"cellid";
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.swipeableView];
     self.swipeableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
- //   [self.swipeableView registerClass:[AVSwipeCardCell class] forCellReuseIdentifier:NSStringFromClass([AVSwipeCardCell class])];
-    
     self.swipeableView.bottomCardInsetHorizontalMargin = 5;
     self.swipeableView.bottomCardInsetVerticalMargin = 10;
-    self.swipeableView.beginIndex = 3;
+    self.swipeableView.beginIndex = 4;
     
     // 使用xib时请使用以下方法
     [self.swipeableView registerNibName:@"LDGSwipeableViewCell" forCellReuseIdentifier:cell_id];
     
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 30; i++) {
         AVCardInfo *info = [[AVCardInfo alloc] init];
         info.feed_id = 123145;
         info.title = [NSString stringWithFormat:@"测试% ----  zd",i];

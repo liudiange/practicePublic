@@ -15,7 +15,7 @@
 @optional
 /**
  从哪个方向移除一个卡片
-
+ 
  @param cell cell
  @param direction 方向
  */
@@ -31,13 +31,13 @@
 - (void)swipeableViewCellDidAddFromSuperView:(LZSwipeableViewCell *)currentCell withCenterX:(CGFloat)centerX withCenterY:(CGFloat)centerY withDirection:(LZSwipeableViewCellSwipeDirection)direction;
 /**
  向右滑动结束但是没有达到标准的
-
+ 
  @param currentCell 当前的cell 在当前的基础上进行添加cell
  */
 - (void)swipeableViewDealWithRightAction:(LZSwipeableViewCell *)currentCell;
 /**
  向右滑动的动画结束
-
+ 
  @param currentCell currentCell
  */
 - (void)swipeableViewRightActionFinish:(LZSwipeableViewCell *)currentCell;
@@ -123,7 +123,7 @@
         };
         case UIGestureRecognizerStateChanged:{
             if (xFromCenter <= 0) { // 左滑动
-               self.transform = CGAffineTransformMakeTranslation(xFromCenter, 0);
+                self.transform = CGAffineTransformMakeTranslation(xFromCenter, 0);
             }else{ // 右滑动
                 if (!self.isFirst) {
                     if ([self.LZPrivateDelegate respondsToSelector:@selector(swipeableViewCellDidAddFromSuperView:withCenterX:withCenterY:withDirection:)]) {
@@ -154,7 +154,7 @@
 {
     if (self.isFirst) { // 第一个
         if (xFromCenter < -ACTION_MARGIN) {
-           [self leftAction];
+            [self leftAction];
         }else {//不飞走 回复原来位置
             [UIView animateWithDuration:0.5f delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:1.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 self.transform = CGAffineTransformIdentity;
@@ -200,9 +200,9 @@
     CGFloat pointY = self.center.y;
     CGFloat pointX = self.center.x  - (SCREEN_WIDTH + self.width*0.7) / 2;
     [UIView animateWithDuration:0.5 animations:^{
-       self.transform = CGAffineTransformIdentity;
-       self.transform = CGAffineTransformMakeScale(0.8, 0.8);
-       self.center = CGPointMake(pointX, pointY);
+        self.transform = CGAffineTransformIdentity;
+        self.transform = CGAffineTransformMakeScale(0.8, 0.8);
+        self.center = CGPointMake(pointX, pointY);
     }completion:^(BOOL finished) {
         [UIView animateWithDuration:0.5 animations:^{
             self.transform = CGAffineTransformRotate(self.transform, -M_PI_4);
@@ -248,7 +248,7 @@
         xFromCenter = 110;
         yFromCenter = -1;
     }
-   
+    
     [self afterSwipeAction];
 }
 
@@ -352,15 +352,29 @@
     }
     return self;
 }
-
+-(void)awakeFromNib {
+    [super awakeFromNib];
+    [self setupSubViews];
+}
 
 - (void)setupSubViews{
     // 初始化容器视图
     self.containerView = [UIView new];
     self.containerView.backgroundColor = [UIColor greenColor];
+    if (self.containViewColor) {
+        self.containerView.backgroundColor = self.containViewColor;
+    }
     [self addSubview:self.containerView];
 }
-
+/**
+ 设置颜色
+ 
+ @param containViewColor 颜色
+ */
+-(void)setContainViewColor:(UIColor *)containViewColor {
+    _containViewColor = containViewColor;
+    self.containerView.backgroundColor = containViewColor;
+}
 #pragma mark - 注册方法
 - (void)registerNibName:(NSString *)nibName forCellReuseIdentifier:(NSString *)identifier{
     self.hasRegisterNib = YES;
@@ -377,13 +391,13 @@
 - (__kindof LZSwipeableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier{
     if (_hasRegisterNib) { // 注册nib
         BOOL hasNibCell = NO;
-//        for (LZSwipeableViewCell *cell in self.reuseCardViewArray) {
-//            if ([cell.reuseIdentifier isEqualToString:identifier]) {
-//                hasNibCell = YES;
-//                [self.reuseCardViewArray removeObject:cell];
-//                return cell;
-//            }
-//        }
+        //        for (LZSwipeableViewCell *cell in self.reuseCardViewArray) {
+        //            if ([cell.reuseIdentifier isEqualToString:identifier]) {
+        //                hasNibCell = YES;
+        //                [self.reuseCardViewArray removeObject:cell];
+        //                return cell;
+        //            }
+        //        }
         if (!hasNibCell) {
             LZSwipeableViewCell *cell = [[NSBundle mainBundle] loadNibNamed:self.nibName owner:nil options:nil].lastObject;
             cell.reuseIdentifier = identifier;
@@ -391,13 +405,13 @@
         }
     }else if(_hasRegisterClass){ // 注册class
         BOOL hasCellClass = NO;//  这个带我以后研究
-//        for (LZSwipeableViewCell *cell in self.reuseCardViewArray) {
-//            if ([cell.reuseIdentifier isEqualToString:identifier]) {
-//                hasCellClass = YES;
-//                [self.reuseCardViewArray removeObject:cell];
-//                return cell;
-//            }
-//        }
+        //        for (LZSwipeableViewCell *cell in self.reuseCardViewArray) {
+        //            if ([cell.reuseIdentifier isEqualToString:identifier]) {
+        //                hasCellClass = YES;
+        //                [self.reuseCardViewArray removeObject:cell];
+        //                return cell;
+        //            }
+        //        }
         if (!hasCellClass) {
             LZSwipeableViewCell *cell = [[self.cellClass alloc] initWithReuseIdentifier:identifier];
             cell.reuseIdentifier = identifier;
@@ -507,7 +521,7 @@
             break;
         }
     }
-
+    
     [self layoutHeaderFooterContainerViewFrame];
     [self layoutCardViews];
     
@@ -538,7 +552,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [cell addGestureRecognizer:tap];
     [self.containerView insertSubview:cell atIndex:0];
-   // self.totalCardViewArrayCount += 1;
+    // self.totalCardViewArrayCount += 1;
     self.isCreating = NO;
 }
 
@@ -691,7 +705,7 @@
 }
 /**
  从哪个方向上删除一个cell
-
+ 
  @param cell cell
  @param direction 方向
  */
@@ -709,7 +723,7 @@
     if ([self.delegate respondsToSelector:@selector(swipeableView:didCardRemovedOrAddtIndex:withDirection:)]) {
         [self.delegate swipeableView:self didCardRemovedOrAddtIndex:cell.tag withDirection:direction];
     }
-     NSInteger shouldNumber = (self.datasourceCount - self.deleteCardArray.count) < self.maxCardsShowNumber ? self.datasourceCount - self.deleteCardArray.count : self.maxCardsShowNumber;
+    NSInteger shouldNumber = (self.datasourceCount - self.deleteCardArray.count) < self.maxCardsShowNumber ? self.datasourceCount - self.deleteCardArray.count : self.maxCardsShowNumber;
     // 当前数据源还有数据 继续创建cell
     if (self.cardViewArray.count < shouldNumber) { // 当显示总数
         [self createSwipeableCardCellWithIndex:(self.deleteCardArray.count + self.cardViewArray.count)];
@@ -754,13 +768,13 @@
         [self updateUIAndSendDelegate:self.currentPreviousCell withDirection:LZSwipeableViewCellSwipeDirectionRight];
         [self.deleteCardArray removeLastObject];
         self.currentPreviousCell = nil;
-       
+        
     }];
 }
 - (void)updateUIAndSendDelegate:(LZSwipeableViewCell *)previousCell withDirection:(LZSwipeableViewCellSwipeDirection)direction{
     
     // 当cell被移除时重新刷新视图
-//    [self.reuseCardViewArray addObject:previousCell];
+    //    [self.reuseCardViewArray addObject:previousCell];
     // 通知代理 移除了当前cell
     if ([self.delegate respondsToSelector:@selector(swipeableView:didCardRemovedOrAddtIndex:withDirection:)]) {
         [self.delegate swipeableView:self didCardRemovedOrAddtIndex:previousCell.tag withDirection:direction];
@@ -852,3 +866,4 @@
 
 
 @end
+
