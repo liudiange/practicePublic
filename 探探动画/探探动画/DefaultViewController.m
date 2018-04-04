@@ -11,16 +11,18 @@
 #import "AVCardInfo.h"
 #import "AVSwipeCardCell.h"
 #import "AVKnackBottomToolView.h"
+#import "LDGSwipeableViewCell.h"
+
 @interface DefaultViewController ()<LZSwipeableViewDataSource,
 LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
 @property (nonatomic, strong) NSMutableArray *cardInfoList;
 @property (nonatomic, strong) LZSwipeableView *swipeableView;
-// cell
-@property (nonatomic, strong) LZSwipeableViewCell *topCell;
+
+
 @end
 
 @implementation DefaultViewController
-
+static NSString *cell_id = @"cellid";
 - (NSMutableArray *)cardInfoList{
     if (!_cardInfoList) {
         _cardInfoList = [NSMutableArray array];
@@ -47,14 +49,14 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.swipeableView];
     self.swipeableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.swipeableView registerClass:[AVSwipeCardCell class] forCellReuseIdentifier:NSStringFromClass([AVSwipeCardCell class])];
+ //   [self.swipeableView registerClass:[AVSwipeCardCell class] forCellReuseIdentifier:NSStringFromClass([AVSwipeCardCell class])];
     
     self.swipeableView.bottomCardInsetHorizontalMargin = 5;
     self.swipeableView.bottomCardInsetVerticalMargin = 10;
-    self.swipeableView.beginIndex = 2;
+    self.swipeableView.beginIndex = 3;
     
     // 使用xib时请使用以下方法
-//    [self.swipeableView registerNibName:NSStringFromClass([AVSwipeCardCell class]) forCellReuseIdentifier:NSStringFromClass([AVSwipeCardCell class])];
+    [self.swipeableView registerNibName:@"LDGSwipeableViewCell" forCellReuseIdentifier:cell_id];
     
     for (int i = 0; i < 10; i++) {
         AVCardInfo *info = [[AVCardInfo alloc] init];
@@ -75,7 +77,36 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
 - (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     self.swipeableView.frame = CGRectMake(10, 100, 355, 355);
+    // 创建两个button
+    UIButton *previousButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:previousButton];
+    [previousButton setTitle:@"上一首" forState:UIControlStateNormal];
+    [previousButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    previousButton.frame = CGRectMake(10, 500, 100, 30);
+    [previousButton addTarget:self action:@selector(previousAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    // 创建两个button
+    UIButton *nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.view addSubview:nextButton];
+    [nextButton setTitle:@"下一首" forState:UIControlStateNormal];
+    [nextButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    nextButton.frame = CGRectMake(250, 500, 100, 30);
+    [nextButton addTarget:self action:@selector(nextAction) forControlEvents:UIControlEventTouchUpInside];
 }
+/**
+ 上一首
+ */
+- (void)previousAction{
+     [self.swipeableView removeTopCardViewFromSwipe:LZSwipeableViewCellSwipeDirectionRight];
+}
+/**
+ 下一首
+ */
+- (void)nextAction{
+     [self.swipeableView removeTopCardViewFromSwipe:LZSwipeableViewCellSwipeDirectionLeft];
+}
+
 
 #pragma mark LZSwipeableViewDataSource
 - (NSInteger)swipeableViewNumberOfRowsInSection:(LZSwipeableView *)swipeableView{
@@ -83,17 +114,16 @@ LZSwipeableViewDelegate,AVKnackBottomToolViewDelegate>
 }
 
 - (LZSwipeableViewCell *)swipeableView:(LZSwipeableView *)swipeableView cellForIndex:(NSInteger)index{
-    AVSwipeCardCell *cell = [swipeableView dequeueReusableCellWithIdentifier:NSStringFromClass([AVSwipeCardCell class])];
-    cell.cardInfo = self.cardInfoList[index];
+    LDGSwipeableViewCell *cell = [swipeableView dequeueReusableCellWithIdentifier:cell_id];
+    cell.info = self.cardInfoList[index];
     cell.backgroundColor = [UIColor orangeColor];
-    NSLog(@"cellForIndex -- %@",cell.cardInfo.title);
+   // NSLog(@"cellForIndex -- %@",cell.cardInfo.title);
     return cell;
 }
 
 - (LZSwipeableViewCell *)swipeableView:(LZSwipeableView *)swipeableView substituteCellForIndex:(NSInteger)index{
-    AVSwipeCardCell *cell = [[AVSwipeCardCell alloc] initWithReuseIdentifier:@""];
-    cell.cardInfo = self.cardInfoList[index];
-    NSLog(@"substituteCellForIndex -- %@",cell.cardInfo.title);
+    LDGSwipeableViewCell *cell = [[LDGSwipeableViewCell alloc] initWithReuseIdentifier:cell_id];
+    cell.info = self.cardInfoList[index];
     cell.backgroundColor = [UIColor orangeColor];
     return cell;
 }

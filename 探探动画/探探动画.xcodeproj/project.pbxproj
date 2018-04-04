@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18430E4F2074721700BCA674 /* LDGSwipeableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18430E4E2074721700BCA674 /* LDGSwipeableViewCell.m */; };
+		18430E512074722C00BCA674 /* LDGSwipeableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18430E502074722C00BCA674 /* LDGSwipeableViewCell.xib */; };
 		18470CDB206B7F4C008B636F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18470CDA206B7F4C008B636F /* Assets.xcassets */; };
 		18470CDE206B7F4C008B636F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18470CDC206B7F4C008B636F /* LaunchScreen.storyboard */; };
 		18470CE1206B7F4C008B636F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18470CE0206B7F4C008B636F /* main.m */; };
@@ -23,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18430E4D2074721700BCA674 /* LDGSwipeableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGSwipeableViewCell.h; sourceTree = "<group>"; };
+		18430E4E2074721700BCA674 /* LDGSwipeableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGSwipeableViewCell.m; sourceTree = "<group>"; };
+		18430E502074722C00BCA674 /* LDGSwipeableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LDGSwipeableViewCell.xib; sourceTree = "<group>"; };
 		18470CCE206B7F4C008B636F /* 探探动画.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "探探动画.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18470CDA206B7F4C008B636F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18470CDD206B7F4C008B636F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -91,6 +96,9 @@
 				18470CF3206B8084008B636F /* AVKnackBottomToolView.xib */,
 				18470CF4206B8084008B636F /* AVSwipeCardCell.h */,
 				18470CF5206B8084008B636F /* AVSwipeCardCell.m */,
+				18430E4D2074721700BCA674 /* LDGSwipeableViewCell.h */,
+				18430E4E2074721700BCA674 /* LDGSwipeableViewCell.m */,
+				18430E502074722C00BCA674 /* LDGSwipeableViewCell.xib */,
 				18470CFB206B808E008B636F /* DefaultViewController.h */,
 				18470CFC206B808E008B636F /* DefaultViewController.m */,
 				18470CDA206B7F4C008B636F /* Assets.xcassets */,
@@ -173,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18470CE9206B8065008B636F /* Main.storyboard in Resources */,
+				18430E512074722C00BCA674 /* LDGSwipeableViewCell.xib in Resources */,
 				18470CDE206B7F4C008B636F /* LaunchScreen.storyboard in Resources */,
 				18470CDB206B7F4C008B636F /* Assets.xcassets in Resources */,
 				18470CF9206B8085008B636F /* AVKnackBottomToolView.xib in Resources */,
@@ -191,6 +200,7 @@
 				18470CEF206B8076008B636F /* ViewController.m in Sources */,
 				18470CFA206B8085008B636F /* AVSwipeCardCell.m in Sources */,
 				18470D04206B8097008B636F /* NSObject+LZSwipeCategory.m in Sources */,
+				18430E4F2074721700BCA674 /* LDGSwipeableViewCell.m in Sources */,
 				18470CFD206B808E008B636F /* DefaultViewController.m in Sources */,
 				18470CEE206B8076008B636F /* AppDelegate.m in Sources */,
 				18470D05206B8097008B636F /* LZSwipeableView.m in Sources */,
