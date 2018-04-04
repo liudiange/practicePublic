@@ -123,7 +123,7 @@
         };
         case UIGestureRecognizerStateChanged:{
             if (xFromCenter <= 0) { // 左滑动
-                self.transform = CGAffineTransformMakeTranslation(xFromCenter, 0);
+                self.transform = CGAffineTransformMakeTranslation(xFromCenter*1.4, 0);
             }else{ // 右滑动
                 if (!self.isFirst) {
                     if ([self.LZPrivateDelegate respondsToSelector:@selector(swipeableViewCellDidAddFromSuperView:withCenterX:withCenterY:withDirection:)]) {
@@ -197,20 +197,17 @@
 }
 -(void)leftAction
 {
-    CGFloat pointY = self.center.y;
-    CGFloat pointX = self.center.x  - (SCREEN_WIDTH + self.width*0.7) / 2;
-    [UIView animateWithDuration:0.5 animations:^{
-        self.transform = CGAffineTransformIdentity;
-        self.transform = CGAffineTransformMakeScale(0.8, 0.8);
-        self.center = CGPointMake(pointX, pointY);
-    }completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.transform = CGAffineTransformRotate(self.transform, -M_PI_4);
-        } completion:^(BOOL finished) {
-            self.transform = CGAffineTransformIdentity;
+    
+        self.layer.anchorPoint = CGPointMake(1, 1);
+        self.layer.position = CGPointMake(self.frame.size.width, self.frame.size.height);
+        self.center = CGPointMake(self.frame.size.width, self.frame.size.height+20);
+        self.transform = CGAffineTransformMakeTranslation(xFromCenter*1.4, 0);
+        [UIView animateWithDuration:0.7 animations:^{
+            self.transform = CGAffineTransformRotate(self.transform, -M_PI_4/2.0);
+            self.transform = CGAffineTransformScale(self.transform, 0.8, 0.8);
+        }completion:^(BOOL finished) {
             [self didCellRemoveFromSuperview:LZSwipeableViewCellSwipeDirectionLeft];
         }];
-    }];
 }
 
 -(void)topAction
@@ -241,11 +238,11 @@
 
 - (void)removeFromSuperviewWithDirection:(LZSwipeableViewCellSwipeDirection)direction{
     if (direction == LZSwipeableViewCellSwipeDirectionLeft) {
-        xFromCenter = -110;
+        xFromCenter = -200;
         yFromCenter = -1;
         self.transform = CGAffineTransformMakeTranslation(xFromCenter, yFromCenter);
     }else if (direction == LZSwipeableViewCellSwipeDirectionRight){
-        xFromCenter = 110;
+        xFromCenter = 200;
         yFromCenter = -1;
     }
     
@@ -685,15 +682,18 @@
     
     if (!self.currentPreviousCell) {
         LZSwipeableViewCell *previousCell = [self.deleteCardArray lastObject];
+        previousCell.transform = CGAffineTransformIdentity;
         self.deleteCardArray.count > 0?(previousCell.tag = self.deleteCardArray.count - 1):(previousCell.tag = 0);
         self.currentPreviousCell = previousCell;
+        self.currentPreviousCell.layer.anchorPoint = CGPointMake(1, 1);
+        self.currentPreviousCell.layer.position = CGPointMake(currentCell.frame.size.width, currentCell.frame.size.height);
         [self.containerView addSubview:self.currentPreviousCell];
-        self.currentPreviousCell.frame = CGRectMake(currentCell.origin.x - currentCell.frame.size.width *0.6, currentCell.origin.y, currentCell.frame.size.width, currentCell.frame.size.height);
-        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(-M_PI_4);
+        self.currentPreviousCell.frame = CGRectMake(currentCell.origin.x - currentCell.frame.size.width *0.9, currentCell.origin.y, currentCell.frame.size.width, currentCell.frame.size.height);
+        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(-M_PI_4/2.0);
         self.currentPreviousCell.transform = CGAffineTransformScale(self.currentPreviousCell.transform, 0.5 ,0.5);
     }
     if(centerX <= ACTION_MARGIN){
-        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(-(1- centerX/ACTION_MARGIN)*M_PI_4);
+        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(-(1- centerX/ACTION_MARGIN)*M_PI_4/2.0);
         CGFloat scale = centerX/2.0/ACTION_MARGIN+0.5;
         if (scale >= 1.0) {
             scale = 1.0;
@@ -752,23 +752,26 @@
     // 如果点击按钮可能会没有
     if (!self.currentPreviousCell) {
         LZSwipeableViewCell *previousCell = [self.deleteCardArray lastObject];
+        previousCell.transform = CGAffineTransformIdentity;
         self.deleteCardArray.count > 0?(previousCell.tag = self.deleteCardArray.count - 1):(previousCell.tag = 0);
         self.currentPreviousCell = previousCell;
+        self.currentPreviousCell.layer.anchorPoint = CGPointMake(1, 1);
+        self.currentPreviousCell.layer.position = CGPointMake(currentCell.frame.size.width, currentCell.frame.size.height);
         [self.containerView addSubview:self.currentPreviousCell];
-        self.currentPreviousCell.frame = CGRectMake(currentCell.origin.x - currentCell.frame.size.width *0.6, currentCell.origin.y, currentCell.frame.size.width, currentCell.frame.size.height);
-        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(-M_PI_4);
+        self.currentPreviousCell.frame = CGRectMake(currentCell.origin.x - currentCell.frame.size.width *0.9, currentCell.origin.y, currentCell.frame.size.width, currentCell.frame.size.height);
+        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(-M_PI_4/2.0);
         self.currentPreviousCell.transform = CGAffineTransformScale(self.currentPreviousCell.transform, 0.5 ,0.5);
     }
     [UIView animateWithDuration:1.0 animations:^{
-        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(0);
+        self.currentPreviousCell.transform = CGAffineTransformIdentity;
+        self.currentPreviousCell.layer.anchorPoint = CGPointMake(0.5, 0.5);
         self.currentPreviousCell.center = currentCell.center;
     }completion:^(BOOL finished) {
-        self.currentPreviousCell.transform = CGAffineTransformIdentity;
         // 开始进行重新布局以及相关
         [self updateUIAndSendDelegate:self.currentPreviousCell withDirection:LZSwipeableViewCellSwipeDirectionRight];
         [self.deleteCardArray removeLastObject];
         self.currentPreviousCell = nil;
-        
+
     }];
 }
 - (void)updateUIAndSendDelegate:(LZSwipeableViewCell *)previousCell withDirection:(LZSwipeableViewCellSwipeDirection)direction{
