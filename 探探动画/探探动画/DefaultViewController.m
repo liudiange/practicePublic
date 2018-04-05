@@ -56,7 +56,7 @@ static NSString *cell_id = @"cellid";
     // 使用xib时请使用以下方法
     [self.swipeableView registerNibName:@"LDGSwipeableViewCell" forCellReuseIdentifier:cell_id];
     
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < 10; i++) {
         AVCardInfo *info = [[AVCardInfo alloc] init];
         info.feed_id = 123145;
         info.title = [NSString stringWithFormat:@"测试% ----  zd",i];

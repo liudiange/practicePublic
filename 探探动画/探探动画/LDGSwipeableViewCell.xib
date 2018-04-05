@@ -45,8 +45,12 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="heightLableConstaton" destination="4CJ-U1-qAF" id="jvH-9c-Y2j"/>
+                <outlet property="leftLableConstaton" destination="bnU-rg-hh7" id="Law-cb-Qpg"/>
+                <outlet property="rightLableConstaton" destination="vpZ-Pi-6nz" id="RvO-CU-lfP"/>
                 <outlet property="subTitle" destination="WI1-JK-BbD" id="vw8-ql-fRa"/>
                 <outlet property="titleLable" destination="khy-UX-KJV" id="iLt-iT-900"/>
+                <outlet property="topLableConstaton" destination="2co-7g-Paz" id="Jzu-7p-H9G"/>
             </connections>
             <point key="canvasLocation" x="16.5" y="-193.5"/>
         </view>

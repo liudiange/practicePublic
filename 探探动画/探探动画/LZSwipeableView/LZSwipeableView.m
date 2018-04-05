@@ -123,12 +123,18 @@
         };
         case UIGestureRecognizerStateChanged:{
             if (xFromCenter <= 0) { // 左滑动
-                self.transform = CGAffineTransformMakeTranslation(xFromCenter*1.4, 0);
+                CGFloat translateX = xFromCenter*1.4;
+                if (translateX <= -self.frame.size.width) {
+                    translateX = -self.frame.size.width;
+                }
+                self.transform = CGAffineTransformMakeTranslation(translateX, 0);
             }else{ // 右滑动
                 if (!self.isFirst) {
                     if ([self.LZPrivateDelegate respondsToSelector:@selector(swipeableViewCellDidAddFromSuperView:withCenterX:withCenterY:withDirection:)]) {
                         [self.LZPrivateDelegate swipeableViewCellDidAddFromSuperView:self withCenterX:xFromCenter withCenterY:yFromCenter withDirection:LZSwipeableViewCellSwipeDirectionRight];
                     }
+                }else{
+                    self.transform = CGAffineTransformMakeTranslation(xFromCenter, 0);
                 }
             }
             break;
@@ -197,17 +203,43 @@
 }
 -(void)leftAction
 {
+
+    self.layer.anchorPoint = CGPointMake(1, 1);
+    self.layer.position = CGPointMake(self.frame.size.width, (self.center.y - self.frame.size.height/2.0+self.frame.size.height));
+    CGFloat translateX = xFromCenter*1.4;
+    if (translateX <= -self.frame.size.width) {
+        translateX = -self.frame.size.width;
+    }
+    self.transform = CGAffineTransformMakeTranslation(translateX, 0);
+    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    scaleAnimation.fromValue = @(1.0);
+    scaleAnimation.toValue = @(0.8);
     
-        self.layer.anchorPoint = CGPointMake(1, 1);
-        self.layer.position = CGPointMake(self.frame.size.width, self.frame.size.height);
-        self.center = CGPointMake(self.frame.size.width, self.frame.size.height+20);
-        self.transform = CGAffineTransformMakeTranslation(xFromCenter*1.4, 0);
-        [UIView animateWithDuration:0.7 animations:^{
-            self.transform = CGAffineTransformRotate(self.transform, -M_PI_4/2.0);
-            self.transform = CGAffineTransformScale(self.transform, 0.8, 0.8);
-        }completion:^(BOOL finished) {
-            [self didCellRemoveFromSuperview:LZSwipeableViewCellSwipeDirectionLeft];
-        }];
+    CABasicAnimation *rotationamation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotationamation.fromValue = [NSNumber numberWithFloat:0];
+    rotationamation.toValue = [NSNumber numberWithFloat:-M_PI_4/2.0];
+    animationGroup.duration = 1.0;
+    
+    animationGroup.removedOnCompletion = NO;
+    animationGroup.fillMode = kCAFillModeForwards;
+    animationGroup.animations = @[scaleAnimation,rotationamation];
+    [self.layer addAnimation:animationGroup forKey:nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+         [self didCellRemoveFromSuperview:LZSwipeableViewCellSwipeDirectionLeft];
+    });
+    
+    
+    
+    
+    
+//   // self.center = CGPointMake(self.frame.size.width*0.5, self.frame.size.height *0.5);
+//    [UIView animateWithDuration:0.7 animations:^{
+//        self.transform = CGAffineTransformRotate(self.transform, -M_PI_4/2.0);
+//        self.transform = CGAffineTransformScale(self.transform, 0.8, 0.8);
+//    }completion:^(BOOL finished) {
+//        [self didCellRemoveFromSuperview:LZSwipeableViewCellSwipeDirectionLeft];
+//    }];
 }
 
 -(void)topAction
@@ -533,7 +565,11 @@
                 subCell.frame = CGRectMake(0, 0, size.width, size.height);
                 [subCell setNeedsLayout];
                 [subCell layoutIfNeeded];
-                [cell addSnapshotView:subCell.snapshotView];
+
+//                UIImageView *imageView = [self creatSnapImageView:cell];
+//                [cell addSnapshotView:imageView];
+                
+               // [cell addSnapshotView:subCell.snapshotView];
             }
         }
     }
@@ -610,9 +646,12 @@
             subCell.frame = CGRectMake(0, 0, size.width, size.height);
             [subCell setNeedsLayout];
             [subCell layoutIfNeeded];
-            [cell addSnapshotView:subCell.snapshotView];
+
+//            UIImageView *imageView = [self creatSnapImageView:cell];
+//            [cell addSnapshotView:imageView];
         }
     }
+    
     if (self.cardViewArray.count == self.maxCardsShowNumber) {
         // 位置重排 为动画前位置调整
         for (int i = 0; i < self.cardViewArray.count; i++) {
@@ -645,7 +684,7 @@
                                  if ([self.delegate respondsToSelector:@selector(swipeableView:didTopCardShow:)]) {
                                      [self.delegate swipeableView:self didTopCardShow:cell];
                                  }
-                                 [cell removeSnapshotView];
+                                // [cell removeSnapshotView];
                                  cell.userInteractionEnabled = YES;
                              }
                          }
@@ -682,6 +721,7 @@
     
     if (!self.currentPreviousCell) {
         LZSwipeableViewCell *previousCell = [self.deleteCardArray lastObject];
+        [previousCell.layer removeAllAnimations];
         previousCell.transform = CGAffineTransformIdentity;
         self.deleteCardArray.count > 0?(previousCell.tag = self.deleteCardArray.count - 1):(previousCell.tag = 0);
         self.currentPreviousCell = previousCell;
@@ -752,6 +792,7 @@
     // 如果点击按钮可能会没有
     if (!self.currentPreviousCell) {
         LZSwipeableViewCell *previousCell = [self.deleteCardArray lastObject];
+        [previousCell.layer removeAllAnimations];
         previousCell.transform = CGAffineTransformIdentity;
         self.deleteCardArray.count > 0?(previousCell.tag = self.deleteCardArray.count - 1):(previousCell.tag = 0);
         self.currentPreviousCell = previousCell;
@@ -807,11 +848,11 @@
     }
     // 移除后的卡片是最后一张时调用代理方法
     if(self.cardViewArray.count == 1){ // 只有最后一张卡片的时候
+         LZSwipeableViewCell *cell = [self.cardViewArray lastObject];
         if ([self.delegate respondsToSelector:@selector(swipeableView:didLastCardShow:)]) {
-            LZSwipeableViewCell *cell = [self.cardViewArray lastObject];
-            cell.isLast = YES;
             [self.delegate swipeableView:self didLastCardShow:cell];
         }
+         cell.isLast = YES;
     }else{
         LZSwipeableViewCell *cell = [self.cardViewArray lastObject];
         cell.isLast = NO;
@@ -822,8 +863,38 @@
         cell.tag == 0 ?(cell.isFirst = YES):( cell.isFirst = NO);
     }
 }
+#pragma mark - 一般的方法响应
+/**
+ 生成一个imageview
 
-#pragma mark 其他的方法
+ @param view view
+ @return imageview
+ */
+-(UIImageView *)creatSnapImageView:(UIView *)view{
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.frame = view.bounds;
+    imageView.image = [self convertViewToImage:view];
+    //imageView.contentMode = UIViewContentModeScaleAspectFit;
+    return imageView;
+}
+/**
+ 传递一个view来进行生成图片的方法
+
+ @param view 传递的view
+ @return 图片
+ */
+- (UIImage *)convertViewToImage:(UIView *)view
+{
+    // 第二个参数表示是否非透明。如果需要显示半透明效果，需传NO，否则YES。第三个参数就是屏幕密度了
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size,YES,[UIScreen mainScreen].scale);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+
+#pragma mark 其他的方法 手动点击移除的方法
 - (void)removeTopCardViewFromSwipe:(LZSwipeableViewCellSwipeDirection)direction{
     if (self.cardViewArray.count == 0) {
         return;
@@ -863,10 +934,5 @@
         [self updateSubViews];
     }
 }
-
-
-
-
-
 @end
 

@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "&#x63a2;&#x63a2;&#x52a8;&#x753b;/LZSwipeableView/LZSwipeableView.m"
-            timestampString = "544456876.781496"
+            timestampString = "544604518.674764"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
-            landmarkName = "-removeFromSuperviewWithDirection:"
+            startingLineNumber = "569"
+            endingLineNumber = "569"
+            landmarkName = "-reloadData"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
