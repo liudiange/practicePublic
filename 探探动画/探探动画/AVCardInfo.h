@@ -15,4 +15,5 @@
 @property (nonatomic, copy  ) NSString  *webview_url;
 @property (nonatomic, assign) NSInteger fav_count;
 @property (nonatomic, assign) BOOL      is_fav;
+@property (nonatomic, copy) NSString *picUrl;
 @end

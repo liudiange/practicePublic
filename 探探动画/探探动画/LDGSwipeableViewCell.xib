@@ -15,42 +15,20 @@
             <rect key="frame" x="0.0" y="0.0" width="349" height="83"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khy-UX-KJV">
-                    <rect key="frame" x="0.0" y="0.0" width="349" height="21"/>
-                    <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="4CJ-U1-qAF"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WI1-JK-BbD">
-                    <rect key="frame" x="0.0" y="21" width="349" height="62"/>
-                    <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LDR-6W-SeS">
+                    <rect key="frame" x="0.0" y="0.0" width="349" height="83"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="khy-UX-KJV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2co-7g-Paz"/>
-                <constraint firstItem="WI1-JK-BbD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="LsH-Fc-dx9"/>
-                <constraint firstAttribute="trailing" secondItem="WI1-JK-BbD" secondAttribute="trailing" id="MzX-vK-AuK"/>
-                <constraint firstAttribute="bottom" secondItem="WI1-JK-BbD" secondAttribute="bottom" id="PiQ-8N-3v4"/>
-                <constraint firstItem="WI1-JK-BbD" firstAttribute="top" secondItem="khy-UX-KJV" secondAttribute="bottom" id="QZ3-K2-mDQ"/>
-                <constraint firstItem="khy-UX-KJV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="bnU-rg-hh7"/>
-                <constraint firstAttribute="trailing" secondItem="khy-UX-KJV" secondAttribute="trailing" id="vpZ-Pi-6nz"/>
+                <constraint firstAttribute="trailing" secondItem="LDR-6W-SeS" secondAttribute="trailing" id="Lps-uR-NeM"/>
+                <constraint firstItem="LDR-6W-SeS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Mx1-fL-sJQ"/>
+                <constraint firstItem="LDR-6W-SeS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OYt-40-zmN"/>
+                <constraint firstAttribute="bottom" secondItem="LDR-6W-SeS" secondAttribute="bottom" id="iQp-6j-xDx"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="heightLableConstaton" destination="4CJ-U1-qAF" id="jvH-9c-Y2j"/>
-                <outlet property="leftLableConstaton" destination="bnU-rg-hh7" id="Law-cb-Qpg"/>
-                <outlet property="rightLableConstaton" destination="vpZ-Pi-6nz" id="RvO-CU-lfP"/>
-                <outlet property="subTitle" destination="WI1-JK-BbD" id="vw8-ql-fRa"/>
-                <outlet property="titleLable" destination="khy-UX-KJV" id="iLt-iT-900"/>
-                <outlet property="topLableConstaton" destination="2co-7g-Paz" id="Jzu-7p-H9G"/>
+                <outlet property="backImageView" destination="LDR-6W-SeS" id="3BG-9S-SM1"/>
             </connections>
             <point key="canvasLocation" x="16.5" y="-193.5"/>
         </view>

@@ -203,14 +203,9 @@
 }
 -(void)leftAction
 {
-
     self.layer.anchorPoint = CGPointMake(1, 1);
     self.layer.position = CGPointMake(self.frame.size.width, (self.center.y - self.frame.size.height/2.0+self.frame.size.height));
-    CGFloat translateX = xFromCenter*1.4;
-    if (translateX <= -self.frame.size.width) {
-        translateX = -self.frame.size.width;
-    }
-    self.transform = CGAffineTransformMakeTranslation(translateX, 0);
+    self.transform = CGAffineTransformMakeTranslation(-self.frame.size.width, 0);
     CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     scaleAnimation.fromValue = @(1.0);
@@ -226,20 +221,8 @@
     animationGroup.animations = @[scaleAnimation,rotationamation];
     [self.layer addAnimation:animationGroup forKey:nil];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-         [self didCellRemoveFromSuperview:LZSwipeableViewCellSwipeDirectionLeft];
+        [self didCellRemoveFromSuperview:LZSwipeableViewCellSwipeDirectionLeft];
     });
-    
-    
-    
-    
-    
-//   // self.center = CGPointMake(self.frame.size.width*0.5, self.frame.size.height *0.5);
-//    [UIView animateWithDuration:0.7 animations:^{
-//        self.transform = CGAffineTransformRotate(self.transform, -M_PI_4/2.0);
-//        self.transform = CGAffineTransformScale(self.transform, 0.8, 0.8);
-//    }completion:^(BOOL finished) {
-//        [self didCellRemoveFromSuperview:LZSwipeableViewCellSwipeDirectionLeft];
-//    }];
 }
 
 -(void)topAction

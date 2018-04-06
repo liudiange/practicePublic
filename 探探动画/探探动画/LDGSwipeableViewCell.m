@@ -7,6 +7,7 @@
 //
 
 #import "LDGSwipeableViewCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface LDGSwipeableViewCell ()
 
@@ -17,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topLableConstaton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftLableConstaton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightLableConstaton;
+// imageview
+@property (weak, nonatomic) IBOutlet UIImageView *backImageView;
 
 @end
 
@@ -25,15 +28,11 @@
     _info = info;
     self.titleLable.text = info.title;
     self.subTitle.text = info.summary;
-    
+    [self.backImageView sd_setImageWithURL:[NSURL URLWithString:info.picUrl]];
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
-//    self.leftLableConstaton.constant = 0;
-//    self.rightLableConstaton.constant = 0;
-//    self.topLableConstaton.constant = 0;
-//    self.heightLableConstaton.constant = 21;
-    
+
 }
 
 @end

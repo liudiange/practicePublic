@@ -63,6 +63,12 @@ static NSString *cell_id = @"cellid";
         info.summary = [NSString stringWithFormat:@"测试---desc---%zd",i];
         info.fav_count = arc4random_uniform(100);
         info.is_fav = arc4random_uniform(1);
+        info.picUrl = @"http://img.taopic.com/uploads/allimg/120727/201995-120HG1030762.jpg";
+        if (i==2) {
+            info.picUrl = @"http://img.zcool.cn/community/018d4e554967920000019ae9df1533.jpg@900w_1l_2o_100sh.jpg";
+        }else if (i == 3){
+            info.picUrl = @"http://img.zcool.cn/community/013f5958c53a47a801219c772a5335.jpg@900w_1l_2o_100sh.jpg";
+        }
         [self.cardInfoList addObject:info];
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5* NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
