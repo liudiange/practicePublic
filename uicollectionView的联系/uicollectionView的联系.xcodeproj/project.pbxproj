@@ -18,6 +18,8 @@
 		2C10F32C20787BE300EB1E22 /* LDGlineFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C10F32B20787BE300EB1E22 /* LDGlineFlowLayout.m */; };
 		2C10F32F2078990600EB1E22 /* LDGStaticLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C10F32E2078990600EB1E22 /* LDGStaticLayout.m */; };
 		2C10F3322078A1B200EB1E22 /* LDGCircleLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C10F3312078A1B200EB1E22 /* LDGCircleLayout.m */; };
+		2C10F335207A4B5600EB1E22 /* LDGPullViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C10F334207A4B5600EB1E22 /* LDGPullViewLayout.m */; };
+		2C10F337207A4CA100EB1E22 /* 1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C10F336207A4CA100EB1E22 /* 1.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,9 @@
 		2C10F32E2078990600EB1E22 /* LDGStaticLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGStaticLayout.m; sourceTree = "<group>"; };
 		2C10F3302078A1B200EB1E22 /* LDGCircleLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGCircleLayout.h; sourceTree = "<group>"; };
 		2C10F3312078A1B200EB1E22 /* LDGCircleLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGCircleLayout.m; sourceTree = "<group>"; };
+		2C10F333207A4B5600EB1E22 /* LDGPullViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGPullViewLayout.h; sourceTree = "<group>"; };
+		2C10F334207A4B5600EB1E22 /* LDGPullViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGPullViewLayout.m; sourceTree = "<group>"; };
+		2C10F336207A4CA100EB1E22 /* 1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 1.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +81,8 @@
 				2C10F3102078716B00EB1E22 /* AppDelegate.m */,
 				2C10F3122078716B00EB1E22 /* ViewController.h */,
 				2C10F3132078716B00EB1E22 /* ViewController.m */,
+				2C10F333207A4B5600EB1E22 /* LDGPullViewLayout.h */,
+				2C10F334207A4B5600EB1E22 /* LDGPullViewLayout.m */,
 				2C10F3302078A1B200EB1E22 /* LDGCircleLayout.h */,
 				2C10F3312078A1B200EB1E22 /* LDGCircleLayout.m */,
 				2C10F32D2078990600EB1E22 /* LDGStaticLayout.h */,
@@ -88,6 +95,7 @@
 				2C10F3152078716C00EB1E22 /* Main.storyboard */,
 				2C10F3182078716C00EB1E22 /* Assets.xcassets */,
 				2C10F31A2078716C00EB1E22 /* LaunchScreen.storyboard */,
+				2C10F336207A4CA100EB1E22 /* 1.plist */,
 				2C10F31D2078716C00EB1E22 /* Info.plist */,
 				2C10F31E2078716C00EB1E22 /* main.m */,
 			);
@@ -152,6 +160,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C10F337207A4CA100EB1E22 /* 1.plist in Resources */,
 				2C10F31C2078716C00EB1E22 /* LaunchScreen.storyboard in Resources */,
 				2C10F3192078716C00EB1E22 /* Assets.xcassets in Resources */,
 				2C10F3292078795900EB1E22 /* LDGItemCell.xib in Resources */,
@@ -169,6 +178,7 @@
 				2C10F3142078716B00EB1E22 /* ViewController.m in Sources */,
 				2C10F32F2078990600EB1E22 /* LDGStaticLayout.m in Sources */,
 				2C10F31F2078716C00EB1E22 /* main.m in Sources */,
+				2C10F335207A4B5600EB1E22 /* LDGPullViewLayout.m in Sources */,
 				2C10F3282078795900EB1E22 /* LDGItemCell.m in Sources */,
 				2C10F32C20787BE300EB1E22 /* LDGlineFlowLayout.m in Sources */,
 				2C10F3322078A1B200EB1E22 /* LDGCircleLayout.m in Sources */,
