@@ -42,6 +42,14 @@
  */
 - (void)swipeableViewRightActionFinish:(LZSwipeableViewCell *)currentCell;
 
+/**
+ 当cell变化时候改变coverview的透明度
+ 
+ @param currentCell 当前的cell
+ @param offsetX 偏移量
+ */
+- (void)changeNextCellCoverViewAlpha:(LZSwipeableViewCell *)currentCell withOffsetX:(CGFloat)offsetX;
+
 
 @end
 
@@ -123,11 +131,15 @@
         };
         case UIGestureRecognizerStateChanged:{
             if (xFromCenter <= 0) { // 左滑动
-                CGFloat translateX = xFromCenter*1.4;
-                if (translateX <= -self.frame.size.width) {
-                    translateX = -self.frame.size.width;
+                [self.layer removeAllAnimations];
+                CGFloat translateX = xFromCenter*1.3;
+                if (translateX <= -self.frame.size.width*0.9) {
+                    translateX = -self.frame.size.width*0.9;
                 }
                 self.transform = CGAffineTransformMakeTranslation(translateX, 0);
+                if ([self.LZPrivateDelegate respondsToSelector:@selector(changeNextCellCoverViewAlpha:withOffsetX:)]) {
+                    [self.LZPrivateDelegate changeNextCellCoverViewAlpha:self withOffsetX:xFromCenter];
+                }
             }else{ // 右滑动
                 if (!self.isFirst) {
                     if ([self.LZPrivateDelegate respondsToSelector:@selector(swipeableViewCellDidAddFromSuperView:withCenterX:withCenterY:withDirection:)]) {
@@ -203,26 +215,34 @@
 }
 -(void)leftAction
 {
+    [self.layer removeAllAnimations];
+    
     self.layer.anchorPoint = CGPointMake(1, 1);
     self.layer.position = CGPointMake(self.frame.size.width, (self.center.y - self.frame.size.height/2.0+self.frame.size.height));
-    self.transform = CGAffineTransformMakeTranslation(-self.frame.size.width, 0);
-    CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
-    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
-    scaleAnimation.fromValue = @(1.0);
-    scaleAnimation.toValue = @(0.8);
-    
-    CABasicAnimation *rotationamation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
-    rotationamation.fromValue = [NSNumber numberWithFloat:0];
-    rotationamation.toValue = [NSNumber numberWithFloat:-M_PI_4/2.0];
-    animationGroup.duration = 1.0;
-    
-    animationGroup.removedOnCompletion = NO;
-    animationGroup.fillMode = kCAFillModeForwards;
-    animationGroup.animations = @[scaleAnimation,rotationamation];
-    [self.layer addAnimation:animationGroup forKey:nil];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self didCellRemoveFromSuperview:LZSwipeableViewCellSwipeDirectionLeft];
-    });
+    [UIView animateWithDuration:0.25 animations:^{
+        self.transform = CGAffineTransformMakeTranslation(-self.frame.size.width*0.9, 0);
+        if ([self.LZPrivateDelegate respondsToSelector:@selector(changeNextCellCoverViewAlpha:withOffsetX:)]) {
+            [self.LZPrivateDelegate changeNextCellCoverViewAlpha:self withOffsetX:-self.frame.size.width*0.9];
+        }
+    }completion:^(BOOL finished) {
+        CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+        CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+        scaleAnimation.fromValue = @(1.0);
+        scaleAnimation.toValue = @(0.8);
+        
+        CABasicAnimation *rotationamation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        rotationamation.fromValue = [NSNumber numberWithFloat:0];
+        rotationamation.toValue = [NSNumber numberWithFloat:-M_PI_4/2.0];
+        animationGroup.duration = 0.5;
+        
+        animationGroup.removedOnCompletion = NO;
+        animationGroup.fillMode = kCAFillModeForwards;
+        animationGroup.animations = @[scaleAnimation,rotationamation];
+        [self.layer addAnimation:animationGroup forKey:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self didCellRemoveFromSuperview:LZSwipeableViewCellSwipeDirectionLeft];
+        });
+    }];
 }
 
 -(void)topAction
@@ -548,11 +568,10 @@
                 subCell.frame = CGRectMake(0, 0, size.width, size.height);
                 [subCell setNeedsLayout];
                 [subCell layoutIfNeeded];
-
-//                UIImageView *imageView = [self creatSnapImageView:cell];
-//                [cell addSnapshotView:imageView];
                 
-               // [cell addSnapshotView:subCell.snapshotView];
+                UIView *coverView = [[UIView alloc] initWithFrame:subCell.bounds];
+                coverView.backgroundColor = [UIColor whiteColor];
+                [cell addSnapshotView:coverView];
             }
         }
     }
@@ -629,9 +648,10 @@
             subCell.frame = CGRectMake(0, 0, size.width, size.height);
             [subCell setNeedsLayout];
             [subCell layoutIfNeeded];
-
-//            UIImageView *imageView = [self creatSnapImageView:cell];
-//            [cell addSnapshotView:imageView];
+            
+            UIView *coverView = [[UIView alloc] initWithFrame:subCell.bounds];
+            coverView.backgroundColor = [UIColor whiteColor];
+            [cell addSnapshotView:coverView];
         }
     }
     
@@ -667,7 +687,7 @@
                                  if ([self.delegate respondsToSelector:@selector(swipeableView:didTopCardShow:)]) {
                                      [self.delegate swipeableView:self didTopCardShow:cell];
                                  }
-                                // [cell removeSnapshotView];
+                                 [cell removeSnapshotView];
                                  cell.userInteractionEnabled = YES;
                              }
                          }
@@ -786,17 +806,33 @@
         self.currentPreviousCell.transform = CGAffineTransformMakeRotation(-M_PI_4/2.0);
         self.currentPreviousCell.transform = CGAffineTransformScale(self.currentPreviousCell.transform, 0.5 ,0.5);
     }
-    [UIView animateWithDuration:1.0 animations:^{
-        self.currentPreviousCell.transform = CGAffineTransformIdentity;
-        self.currentPreviousCell.layer.anchorPoint = CGPointMake(0.5, 0.5);
-        self.currentPreviousCell.center = currentCell.center;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.currentPreviousCell.transform = CGAffineTransformMakeRotation(0);
+        self.currentPreviousCell.transform = CGAffineTransformScale(self.currentPreviousCell.transform, 1.0, 1.0);
+        
     }completion:^(BOOL finished) {
-        // 开始进行重新布局以及相关
-        [self updateUIAndSendDelegate:self.currentPreviousCell withDirection:LZSwipeableViewCellSwipeDirectionRight];
-        [self.deleteCardArray removeLastObject];
-        self.currentPreviousCell = nil;
-
+        self.currentPreviousCell.layer.anchorPoint = CGPointMake(0.5, 0.5);
+        self.currentPreviousCell.layer.position = currentCell.layer.position;
+        // 添加一个平移的动画
+        CABasicAnimation *translateAnimation = [CABasicAnimation animationWithKeyPath:@"position.x"];
+        translateAnimation.fromValue = @(currentCell.center.x - currentCell.frame.size.width *0.9);
+        translateAnimation.toValue = @(currentCell.center.x);
+        translateAnimation.duration = 0.5;
+        translateAnimation.removedOnCompletion = NO;
+        translateAnimation.fillMode = kCAFillModeForwards;
+        translateAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        [self.currentPreviousCell.layer addAnimation:translateAnimation forKey:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.currentPreviousCell.center = currentCell.center;
+            // 开始进行重新布局以及相关
+            [self updateUIAndSendDelegate:self.currentPreviousCell withDirection:LZSwipeableViewCellSwipeDirectionRight];
+            [self.deleteCardArray removeLastObject];
+            self.currentPreviousCell = nil;
+        });
     }];
+    
+    
+    
 }
 - (void)updateUIAndSendDelegate:(LZSwipeableViewCell *)previousCell withDirection:(LZSwipeableViewCellSwipeDirection)direction{
     
@@ -831,11 +867,11 @@
     }
     // 移除后的卡片是最后一张时调用代理方法
     if(self.cardViewArray.count == 1){ // 只有最后一张卡片的时候
-         LZSwipeableViewCell *cell = [self.cardViewArray lastObject];
+        LZSwipeableViewCell *cell = [self.cardViewArray lastObject];
         if ([self.delegate respondsToSelector:@selector(swipeableView:didLastCardShow:)]) {
             [self.delegate swipeableView:self didLastCardShow:cell];
         }
-         cell.isLast = YES;
+        cell.isLast = YES;
     }else{
         LZSwipeableViewCell *cell = [self.cardViewArray lastObject];
         cell.isLast = NO;
@@ -849,7 +885,7 @@
 #pragma mark - 一般的方法响应
 /**
  生成一个imageview
-
+ 
  @param view view
  @return imageview
  */
@@ -862,7 +898,7 @@
 }
 /**
  传递一个view来进行生成图片的方法
-
+ 
  @param view 传递的view
  @return 图片
  */
@@ -875,8 +911,24 @@
     UIGraphicsEndImageContext();
     return image;
 }
-
-
+/**
+ 当cell变化时候改变coverview的透明度
+ 
+ @param currentCell 当前的cell
+ @param offsetX 偏移量
+ */
+- (void)changeNextCellCoverViewAlpha:(LZSwipeableViewCell *)currentCell withOffsetX:(CGFloat)offsetX{
+    if (self.cardViewArray.count > 1) {
+        LZSwipeableViewCell *secondCell = self.cardViewArray[1];
+        UIView *coverView = [secondCell.subviews lastObject];
+        CGFloat shouldAplah = 1 - ABS(offsetX)/(self.frame.size.width *0.7);
+        
+        if (shouldAplah <= 0) {
+            shouldAplah = 0;
+        }
+        coverView.alpha = shouldAplah;
+    }
+}
 #pragma mark 其他的方法 手动点击移除的方法
 - (void)removeTopCardViewFromSwipe:(LZSwipeableViewCellSwipeDirection)direction{
     if (self.cardViewArray.count == 0) {
