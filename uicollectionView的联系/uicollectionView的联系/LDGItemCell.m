@@ -7,11 +7,24 @@
 //
 
 #import "LDGItemCell.h"
+#import "UIImageView+WebCache.h"
 
+@interface LDGItemCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *priceLable;
+
+
+@end
 @implementation LDGItemCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+}
+-(void)setShopModel:(LDGShopModel *)shopModel{
+    _shopModel = shopModel;
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:shopModel.img]];
+    self.priceLable.text = shopModel.price;
     
 }
 

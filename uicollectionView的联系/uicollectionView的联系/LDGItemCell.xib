@@ -22,17 +22,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="110" height="133"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEZ-k3-eV9">
+                        <rect key="frame" x="0.0" y="113" width="110" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="DGN-xq-atx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="uEZ-k3-eV9" secondAttribute="trailing" id="4WJ-va-fBy"/>
                 <constraint firstItem="qo6-7N-qze" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="8na-AN-cJO"/>
+                <constraint firstAttribute="bottom" secondItem="uEZ-k3-eV9" secondAttribute="bottom" id="9GJ-fP-jjR"/>
                 <constraint firstAttribute="bottom" secondItem="qo6-7N-qze" secondAttribute="bottom" id="Ah6-1m-Y0A"/>
                 <constraint firstAttribute="trailing" secondItem="qo6-7N-qze" secondAttribute="trailing" id="HuW-3c-eWO"/>
+                <constraint firstItem="uEZ-k3-eV9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="cDY-Nh-lR9"/>
                 <constraint firstItem="qo6-7N-qze" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vZZ-9x-1CJ"/>
             </constraints>
             <size key="customSize" width="110" height="133"/>
             <connections>
                 <outlet property="imageView" destination="qo6-7N-qze" id="p4P-g9-WQs"/>
+                <outlet property="priceLable" destination="uEZ-k3-eV9" id="O1M-cr-MM0"/>
             </connections>
             <point key="canvasLocation" x="33" y="-75.5"/>
         </collectionViewCell>

@@ -11,6 +11,7 @@
 #import "LDGlineFlowLayout.h"
 #import "LDGStaticLayout.h"
 #import "LDGCircleLayout.h"
+#import "LDGPullViewLayout.h"
 
 
 @interface ViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -32,18 +33,24 @@ static NSString * const ID = @"cellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width, 200) collectionViewLayout:[[LDGStaticLayout alloc]init]];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height) collectionViewLayout:[[LDGPullViewLayout alloc] init]];
     collectionView.delegate = self;
     collectionView.dataSource = self;
     [collectionView registerNib:[UINib nibWithNibName:@"LDGItemCell" bundle:nil] forCellWithReuseIdentifier:ID];
     [self.view addSubview:collectionView];
-    // 创建数据
-    for (NSInteger index = 1; index <= 20; index ++) {
-        NSString *str = [NSString stringWithFormat:@"%zd",index];
-        [self.dataArray addObject:str];
+    self.collectionView = collectionView;
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"1.plist" ofType:nil];
+    NSArray *array = [NSArray arrayWithContentsOfFile:path];
+    for (NSDictionary *dic in array) {
+        LDGShopModel *shopModel = [[LDGShopModel alloc] init];
+        shopModel.w = [dic[@"w"] intValue];
+        shopModel.h = [dic[@"h"] intValue];
+        shopModel.price = dic[@"price"];
+        shopModel.img = dic[@"img"];
+        [self.dataArray addObject:shopModel];
     }
     self.collectionView.backgroundColor = [UIColor redColor];
-    self.collectionView = collectionView;
     [self.collectionView reloadData];
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -53,19 +60,19 @@ static NSString * const ID = @"cellID";
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     LDGItemCell *itemCell = [collectionView dequeueReusableCellWithReuseIdentifier:ID forIndexPath:indexPath];
-    itemCell.imageView.image = [UIImage imageNamed:self.dataArray[indexPath.item]];
+    itemCell.shopModel = self.dataArray[indexPath.item];
     return itemCell;
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    if ([self.collectionView.collectionViewLayout isKindOfClass:[LDGlineFlowLayout class]]) {
-        [self.collectionView setCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init] animated:YES];
-    }else if([self.collectionView.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
-        [self.collectionView setCollectionViewLayout:[[LDGStaticLayout alloc] init] animated:YES];
-    }else if ([self.collectionView.collectionViewLayout isKindOfClass:[LDGStaticLayout class]]){
-         [self.collectionView setCollectionViewLayout:[[LDGCircleLayout alloc] init] animated:YES];
-    }else if ([self.collectionView.collectionViewLayout isKindOfClass:[LDGCircleLayout class]]){
-        [self.collectionView setCollectionViewLayout:[[LDGlineFlowLayout alloc] init] animated:YES];
-    }
+//    if ([self.collectionView.collectionViewLayout isKindOfClass:[LDGlineFlowLayout class]]) {
+//        [self.collectionView setCollectionViewLayout:[[UICollectionViewFlowLayout alloc] init] animated:YES];
+//    }else if([self.collectionView.collectionViewLayout isKindOfClass:[UICollectionViewFlowLayout class]]) {
+//        [self.collectionView setCollectionViewLayout:[[LDGStaticLayout alloc] init] animated:YES];
+//    }else if ([self.collectionView.collectionViewLayout isKindOfClass:[LDGStaticLayout class]]){
+//         [self.collectionView setCollectionViewLayout:[[LDGCircleLayout alloc] init] animated:YES];
+//    }else if ([self.collectionView.collectionViewLayout isKindOfClass:[LDGCircleLayout class]]){
+//        [self.collectionView setCollectionViewLayout:[[LDGlineFlowLayout alloc] init] animated:YES];
+//    }
 }
 
 

@@ -55,7 +55,13 @@
  */
 -(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    return nil;
+    UICollectionViewLayoutAttributes *attrs = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+    CGFloat attrX = 0.0;
+    CGFloat attrY = 0.0;
+    CGFloat attrW = 100;
+    CGFloat attrH = 100;
+    attrs.frame = CGRectMake(attrX, attrY, attrW, attrH);
+    return attrs;
 }
 
 /**
@@ -65,6 +71,12 @@
  @return 数组
  */
 - (nullable NSArray<__kindof UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect{
+    [self.attrArray removeAllObjects];
+    NSInteger count = [self.collectionView numberOfItemsInSection:0];
+    for (NSInteger index = 0; index < count; index++) {
+        UICollectionViewLayoutAttributes *attrs = [self layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+        [self.attrArray addObject:attrs];
+    }
     return self.attrArray;
 }
 

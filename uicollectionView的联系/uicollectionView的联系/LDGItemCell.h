@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LDGShopModel.h"
 
 @interface LDGItemCell : UICollectionViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) LDGShopModel *shopModel;
+
 
 @end
