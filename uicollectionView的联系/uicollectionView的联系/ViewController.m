@@ -14,7 +14,7 @@
 #import "LDGPullViewLayout.h"
 
 
-@interface ViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface ViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,LDGPullViewLayoutDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -33,7 +33,12 @@ static NSString * const ID = @"cellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height) collectionViewLayout:[[LDGPullViewLayout alloc] init]];
+    LDGPullViewLayout *pullLayout = [[LDGPullViewLayout alloc] init];
+    pullLayout.layoutInset = UIEdgeInsetsMake(50, 10, 100, 10);
+    pullLayout.columnCounts = 3;
+    
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height) collectionViewLayout:pullLayout];
+    pullLayout.layoutDelegate = self;
     collectionView.delegate = self;
     collectionView.dataSource = self;
     [collectionView registerNib:[UINib nibWithNibName:@"LDGItemCell" bundle:nil] forCellWithReuseIdentifier:ID];
@@ -74,6 +79,18 @@ static NSString * const ID = @"cellID";
 //        [self.collectionView setCollectionViewLayout:[[LDGlineFlowLayout alloc] init] animated:YES];
 //    }
 }
+#pragma mark - layout的delegate
+/**
+ 通过体格宽度来计算宽高比
+ 
+ @param indexPath indexPath
+ @return 返回宽高比
+ */
+- (CGFloat)receicewidthAndHeightScale:(NSIndexPath*)indexPath{
+    LDGShopModel *shopModel = self.dataArray[indexPath.item];
+    return shopModel.h * 1.0 /shopModel.w;
+}
+
 
 
 

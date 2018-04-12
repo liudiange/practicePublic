@@ -22,6 +22,8 @@
 		18470CFD206B808E008B636F /* DefaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18470CFC206B808E008B636F /* DefaultViewController.m */; };
 		18470D04206B8097008B636F /* NSObject+LZSwipeCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 18470D00206B8096008B636F /* NSObject+LZSwipeCategory.m */; };
 		18470D05206B8097008B636F /* LZSwipeableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18470D02206B8096008B636F /* LZSwipeableView.m */; };
+		1851A194207EEA85005D4C85 /* MGSCXMusicSwipableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851A193207EEA85005D4C85 /* MGSCXMusicSwipableView.m */; };
+		1851A198207EEBDD005D4C85 /* UIView+MGSCXMusicSwipCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851A197207EEBDD005D4C85 /* UIView+MGSCXMusicSwipCategory.m */; };
 		2C3A184C207604ED00E5B2B4 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A1811207604ED00E5B2B4 /* MKAnnotationView+WebCache.m */; };
 		2C3A184D207604ED00E5B2B4 /* NSButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A1813207604ED00E5B2B4 /* NSButton+WebCache.m */; };
 		2C3A184E207604ED00E5B2B4 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C3A1815207604ED00E5B2B4 /* NSData+ImageContentType.m */; };
@@ -81,6 +83,11 @@
 		18470D01206B8096008B636F /* LZSwipeableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZSwipeableView.h; sourceTree = "<group>"; };
 		18470D02206B8096008B636F /* LZSwipeableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZSwipeableView.m; sourceTree = "<group>"; };
 		18470D03206B8096008B636F /* NSObject+LZSwipeCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LZSwipeCategory.h"; sourceTree = "<group>"; };
+		1851A192207EEA85005D4C85 /* MGSCXMusicSwipableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSCXMusicSwipableView.h; sourceTree = "<group>"; };
+		1851A193207EEA85005D4C85 /* MGSCXMusicSwipableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MGSCXMusicSwipableView.m; sourceTree = "<group>"; };
+		1851A195207EEB35005D4C85 /* MGSCXMusicSwipCostantDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGSCXMusicSwipCostantDefine.h; sourceTree = "<group>"; };
+		1851A196207EEBDD005D4C85 /* UIView+MGSCXMusicSwipCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+MGSCXMusicSwipCategory.h"; sourceTree = "<group>"; };
+		1851A197207EEBDD005D4C85 /* UIView+MGSCXMusicSwipCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+MGSCXMusicSwipCategory.m"; sourceTree = "<group>"; };
 		2C3A1810207604ED00E5B2B4 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		2C3A1811207604ED00E5B2B4 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		2C3A1812207604ED00E5B2B4 /* NSButton+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSButton+WebCache.h"; sourceTree = "<group>"; };
@@ -172,6 +179,7 @@
 		18470CD0206B7F4C008B636F /* 探探动画 */ = {
 			isa = PBXGroup;
 			children = (
+				1851A18A207EE9E9005D4C85 /* MGSCXMusicSwipView */,
 				2C3A180C207604ED00E5B2B4 /* SDWebImage */,
 				18470CFE206B8096008B636F /* LZSwipeableView */,
 				18470CEB206B8076008B636F /* AppDelegate.h */,
@@ -209,6 +217,18 @@
 				18470D02206B8096008B636F /* LZSwipeableView.m */,
 			);
 			path = LZSwipeableView;
+			sourceTree = "<group>";
+		};
+		1851A18A207EE9E9005D4C85 /* MGSCXMusicSwipView */ = {
+			isa = PBXGroup;
+			children = (
+				1851A192207EEA85005D4C85 /* MGSCXMusicSwipableView.h */,
+				1851A193207EEA85005D4C85 /* MGSCXMusicSwipableView.m */,
+				1851A195207EEB35005D4C85 /* MGSCXMusicSwipCostantDefine.h */,
+				1851A196207EEBDD005D4C85 /* UIView+MGSCXMusicSwipCategory.h */,
+				1851A197207EEBDD005D4C85 /* UIView+MGSCXMusicSwipCategory.m */,
+			);
+			path = MGSCXMusicSwipView;
 			sourceTree = "<group>";
 		};
 		2C3A180C207604ED00E5B2B4 /* SDWebImage */ = {
@@ -370,6 +390,7 @@
 				18470CFA206B8085008B636F /* AVSwipeCardCell.m in Sources */,
 				2C3A1853207604ED00E5B2B4 /* SDWebImageCoder.m in Sources */,
 				2C3A1862207604ED00E5B2B4 /* UIImage+GIF.m in Sources */,
+				1851A198207EEBDD005D4C85 /* UIView+MGSCXMusicSwipCategory.m in Sources */,
 				2C3A1863207604ED00E5B2B4 /* UIImage+MultiFormat.m in Sources */,
 				2C3A1864207604ED00E5B2B4 /* UIImage+WebP.m in Sources */,
 				2C3A1856207604ED00E5B2B4 /* SDWebImageCompat.m in Sources */,
@@ -386,6 +407,7 @@
 				18470CEE206B8076008B636F /* AppDelegate.m in Sources */,
 				18470D05206B8097008B636F /* LZSwipeableView.m in Sources */,
 				2C3A1855207604ED00E5B2B4 /* SDWebImageCodersManager.m in Sources */,
+				1851A194207EEA85005D4C85 /* MGSCXMusicSwipableView.m in Sources */,
 				18470CE1206B7F4C008B636F /* main.m in Sources */,
 				2C3A185F207604ED00E5B2B4 /* SDWebImageWebPCoder.m in Sources */,
 				2C3A184F207604ED00E5B2B4 /* NSImage+WebCache.m in Sources */,
