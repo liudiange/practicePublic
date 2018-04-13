@@ -21,7 +21,7 @@
 /**
  title文字的字体
  */
-@property (strong, nonatomic) UIColor *titleTextFont;
+@property (strong, nonatomic) UIFont *titleTextFont;
 /**
  TITLEview的y坐标，默认为0
  */
