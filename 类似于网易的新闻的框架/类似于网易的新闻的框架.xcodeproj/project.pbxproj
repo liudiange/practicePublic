@@ -7,17 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1808FDEF20849F0B009BF387 /* UIView+XMGVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FDE920849F0A009BF387 /* UIView+XMGVIew.m */; };
+		1808FDF020849F0B009BF387 /* LDGCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FDEA20849F0A009BF387 /* LDGCommonModel.m */; };
+		1808FDF120849F0B009BF387 /* LDGTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FDEB20849F0A009BF387 /* LDGTitleView.m */; };
 		1851A1B7207F0607005D4C85 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851A1B6207F0607005D4C85 /* AppDelegate.m */; };
 		1851A1BA207F0607005D4C85 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851A1B9207F0607005D4C85 /* ViewController.m */; };
 		1851A1BD207F0607005D4C85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1851A1BB207F0607005D4C85 /* Main.storyboard */; };
 		1851A1BF207F0607005D4C85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1851A1BE207F0607005D4C85 /* Assets.xcassets */; };
 		1851A1C2207F0607005D4C85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1851A1C0207F0607005D4C85 /* LaunchScreen.storyboard */; };
 		1851A1C5207F0607005D4C85 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851A1C4207F0607005D4C85 /* main.m */; };
-		1851A1CD207F3206005D4C85 /* LDGTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851A1CC207F3206005D4C85 /* LDGTitleView.m */; };
-		1851A1D0207F3392005D4C85 /* LDGCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1851A1CF207F3391005D4C85 /* LDGCommonModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1808FDE920849F0A009BF387 /* UIView+XMGVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XMGVIew.m"; sourceTree = "<group>"; };
+		1808FDEA20849F0A009BF387 /* LDGCommonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGCommonModel.m; sourceTree = "<group>"; };
+		1808FDEB20849F0A009BF387 /* LDGTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGTitleView.m; sourceTree = "<group>"; };
+		1808FDEC20849F0A009BF387 /* UIView+XMGVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XMGVIew.h"; sourceTree = "<group>"; };
+		1808FDED20849F0A009BF387 /* LDGCommonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGCommonModel.h; sourceTree = "<group>"; };
+		1808FDEE20849F0A009BF387 /* LDGTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGTitleView.h; sourceTree = "<group>"; };
 		1851A1B2207F0607005D4C85 /* 类似于网易的新闻的框架.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "类似于网易的新闻的框架.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1851A1B5207F0607005D4C85 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1851A1B6207F0607005D4C85 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -28,10 +35,6 @@
 		1851A1C1207F0607005D4C85 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1851A1C3207F0607005D4C85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1851A1C4207F0607005D4C85 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1851A1CB207F3206005D4C85 /* LDGTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGTitleView.h; sourceTree = "<group>"; };
-		1851A1CC207F3206005D4C85 /* LDGTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGTitleView.m; sourceTree = "<group>"; };
-		1851A1CE207F3391005D4C85 /* LDGCommonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGCommonModel.h; sourceTree = "<group>"; };
-		1851A1CF207F3391005D4C85 /* LDGCommonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGCommonModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +48,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1808FDE820849F0A009BF387 /* LDGTitleView */ = {
+			isa = PBXGroup;
+			children = (
+				1808FDE920849F0A009BF387 /* UIView+XMGVIew.m */,
+				1808FDEA20849F0A009BF387 /* LDGCommonModel.m */,
+				1808FDEB20849F0A009BF387 /* LDGTitleView.m */,
+				1808FDEC20849F0A009BF387 /* UIView+XMGVIew.h */,
+				1808FDED20849F0A009BF387 /* LDGCommonModel.h */,
+				1808FDEE20849F0A009BF387 /* LDGTitleView.h */,
+			);
+			path = LDGTitleView;
+			sourceTree = "<group>";
+		};
 		1851A1A9207F0607005D4C85 = {
 			isa = PBXGroup;
 			children = (
@@ -64,14 +80,11 @@
 		1851A1B4207F0607005D4C85 /* 类似于网易的新闻的框架 */ = {
 			isa = PBXGroup;
 			children = (
+				1808FDE820849F0A009BF387 /* LDGTitleView */,
 				1851A1B5207F0607005D4C85 /* AppDelegate.h */,
 				1851A1B6207F0607005D4C85 /* AppDelegate.m */,
 				1851A1B8207F0607005D4C85 /* ViewController.h */,
 				1851A1B9207F0607005D4C85 /* ViewController.m */,
-				1851A1CE207F3391005D4C85 /* LDGCommonModel.h */,
-				1851A1CF207F3391005D4C85 /* LDGCommonModel.m */,
-				1851A1CB207F3206005D4C85 /* LDGTitleView.h */,
-				1851A1CC207F3206005D4C85 /* LDGTitleView.m */,
 				1851A1BB207F0607005D4C85 /* Main.storyboard */,
 				1851A1BE207F0607005D4C85 /* Assets.xcassets */,
 				1851A1C0207F0607005D4C85 /* LaunchScreen.storyboard */,
@@ -153,10 +166,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1851A1BA207F0607005D4C85 /* ViewController.m in Sources */,
-				1851A1CD207F3206005D4C85 /* LDGTitleView.m in Sources */,
+				1808FDEF20849F0B009BF387 /* UIView+XMGVIew.m in Sources */,
+				1808FDF020849F0B009BF387 /* LDGCommonModel.m in Sources */,
 				1851A1C5207F0607005D4C85 /* main.m in Sources */,
-				1851A1D0207F3392005D4C85 /* LDGCommonModel.m in Sources */,
 				1851A1B7207F0607005D4C85 /* AppDelegate.m in Sources */,
+				1808FDF120849F0B009BF387 /* LDGTitleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

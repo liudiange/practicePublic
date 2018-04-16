@@ -45,7 +45,7 @@
 /**
  指示器的颜色
  */
-@property (assign, nonatomic) CGFloat indicatorColor;
+@property (assign, nonatomic) UIColor *indicatorColor;
 
 
 

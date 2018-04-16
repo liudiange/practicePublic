@@ -7,12 +7,13 @@
 //
 
 #import "LDGTitleView.h"
+#import "UIView+XMGVIew.h"
 
-
-@interface LDGTitleView ()
+@interface LDGTitleView ()<UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIScrollView *bottomScrollerView;
 @property (strong, nonatomic) UIScrollView *titleScrollerView;
+@property (strong, nonatomic) UIView *indicatorView;
 
 @end
 
@@ -85,12 +86,15 @@
  创建bottomview
  */
 - (void)creatBottomView{
+    
     NSUInteger controllerCount = self.currentController.childViewControllers.count;
     UIScrollView *scrollerView = [[UIScrollView alloc] initWithFrame:self.frame];
     scrollerView.pagingEnabled = YES;
     scrollerView.showsVerticalScrollIndicator = NO;
     scrollerView.showsHorizontalScrollIndicator = NO;
     scrollerView.bounces = NO;
+    scrollerView.backgroundColor = [UIColor whiteColor];
+    scrollerView.delegate = self;
     scrollerView.contentSize = CGSizeMake(self.frame.size.width * controllerCount, self.frame.size.height);
     [self addSubview:scrollerView];
     self.bottomScrollerView = scrollerView; 
@@ -105,7 +109,7 @@
     scrollerView.showsVerticalScrollIndicator = NO;
     scrollerView.showsHorizontalScrollIndicator = NO;
     scrollerView.bounces = NO;
-    scrollerView.backgroundColor = [UIColor greenColor];
+    scrollerView.backgroundColor = self.commonModel.titleViewColor ? (self.commonModel.titleViewColor):([UIColor whiteColor]);
     [self addSubview:scrollerView];
     self.titleScrollerView = scrollerView;
     // 创建lable
@@ -126,17 +130,31 @@
            rect.origin = CGPointMake(CGRectGetMaxX(previousLable.frame), 0);
         }
         UILabel *lable = [[UILabel alloc] initWithFrame:rect];
-        lable.backgroundColor = [UIColor whiteColor];
         lable.text = titleStr;
         self.commonModel.titleTextColor ? (lable.textColor = self.commonModel.titleTextColor) : (lable.textColor = [UIColor blackColor]);
         self.commonModel.titleTextFont ? (lable.font = self.commonModel.titleTextFont) : (lable.font = [UIFont systemFontOfSize:17.0]);
         lable.textAlignment = NSTextAlignmentCenter;
         [scrollerView addSubview:lable];
         UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGesAction:)];
+        lable.userInteractionEnabled = YES;
         [lable addGestureRecognizer:tapGes];
+        lable.tag = index;
     }
     UILabel *lastLable = [scrollerView.subviews lastObject];
     self.titleScrollerView.contentSize = CGSizeMake(CGRectGetMaxX(lastLable.frame), 0);
+    //  创建指示器view
+    UIView *indicatorView = [[UIView alloc] init];
+    indicatorView.backgroundColor = self.commonModel.indicatorColor ? (self.commonModel.indicatorColor):([UIColor greenColor]);
+    UILabel *firstLable = (UILabel *)[self.titleScrollerView.subviews firstObject];
+    indicatorView.xmg_width = self.commonModel.indicatorWith > 0 ? (self.commonModel.indicatorWith) : ( firstLable.frame.size.width + self.commonModel.indicatorAddWidth - 50);
+    indicatorView.xmg_height = self.commonModel.indicatorHeight > 0 ? (self.commonModel.indicatorHeight) : (3.0);
+    indicatorView.xmg_top = self.titleScrollerView.xmg_height - indicatorView.xmg_height;
+    indicatorView.xmg_centerX = firstLable.xmg_centerX;
+    [self.titleScrollerView addSubview:indicatorView];
+    self.indicatorView = indicatorView;
+    // 显示隐藏与否
+    self.commonModel.isNotNeedIndicatorView ? (self.indicatorView.hidden = YES) : (self.indicatorView.hidden = NO);
+    
     
 }
 /**
@@ -151,9 +169,8 @@
     NSDictionary *dic = @{
                           NSFontAttributeName : font
                           };
-   return [str boundingRectWithSize:CGSizeMake(NSIntegerMax, height) options:NSStringDrawingUsesFontLeading attributes:dic context:nil].size.width;
+   return [str boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, height) options:NSStringDrawingUsesFontLeading attributes:dic context:nil].size.width;
 }
-
 /**
  添加控制器到bottomscrollerview
 
@@ -161,7 +178,8 @@
  */
 - (void)addControllerInBottomView:(UIViewController *)viewController
 {
-    viewController.view.frame = self.bottomScrollerView.frame;
+    
+    viewController.view.frame = self.bottomScrollerView.bounds;
     [self.bottomScrollerView addSubview:viewController.view];
 }
 /**
@@ -170,7 +188,49 @@
  @param tapGes 点击手势
  */
 - (void)tapGesAction:(UITapGestureRecognizer *)tapGes{
-    
+    [self scrollerviewIndex:tapGes.view.tag];
+}
+- (void)scrollerviewIndex:(NSInteger)index {
+    // 底部的控制器
+    CGPoint offsetP = self.bottomScrollerView.contentOffset;
+    offsetP.x = index * self.frame.size.width;
+    [self.bottomScrollerView setContentOffset:offsetP animated:YES];
+    // 选中某一个条目滚动到屏幕的中间
+    UILabel *lable = (UILabel *)self.titleScrollerView.subviews[index];
+    CGFloat shouldOffsetx = lable.frame.origin.x + lable.frame.size.width * 0.5 - self.titleScrollerView.frame.size.width * 0.5;
+    if (shouldOffsetx <= 0) {
+        shouldOffsetx = 0;
+    }
+    [self.titleScrollerView setContentOffset:CGPointMake(shouldOffsetx, 0) animated:YES];
+    // 指示器
+    [UIView animateWithDuration:0.25 animations:^{
+        self.indicatorView.xmg_width = self.commonModel.indicatorWith > 0 ? (self.commonModel.indicatorWith) : ( lable.frame.size.width + self.commonModel.indicatorAddWidth - 50);
+        self.indicatorView.xmg_centerX = lable.xmg_centerX;
+    }];
+}
+#pragma mark - scrollerview 的 delegate
+
+/**
+ 手指拖动结束
+
+ @param scrollView scrollerview
+ */
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    CGFloat scrollerViewOffsetx = scrollView.contentOffset.x /scrollView.frame.size.width;
+    NSInteger scrollerViewOffsetInt = (int)scrollerViewOffsetx;
+    [self scrollerviewIndex:scrollerViewOffsetInt];
 }
 
+/**
+ 设置偏移量结束的调用
+
+ @param scrollView scrollerview
+ */
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    
+    CGFloat scrollerViewOffsetx = scrollView.contentOffset.x /scrollView.frame.size.width;
+    NSInteger scrollerViewOffsetInt = (int)scrollerViewOffsetx;
+    UIViewController *viewVc = self.currentController.childViewControllers[scrollerViewOffsetInt];
+    [self addControllerInBottomView:viewVc];
+}
 @end

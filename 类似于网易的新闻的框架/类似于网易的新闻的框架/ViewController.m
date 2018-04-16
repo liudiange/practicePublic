@@ -18,16 +18,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    NSArray *titleArray = @[@"好日子",@"天下",@"地",@"大草原美",@"阿时间大家圣诞节啊睡觉的"];
+    NSArray *titleArray = @[@"好日子",@"天下",@"地",@"大草原美哈哈",@"阿时间大家圣诞节啊睡觉的"];
     
     UIViewController *viewVc1 = [[UIViewController alloc] init];
-    viewVc1.view.backgroundColor = [UIColor redColor];
+    viewVc1.view.backgroundColor = [UIColor yellowColor];
     
     UIViewController *viewVc2 = [[UIViewController alloc] init];
-    viewVc2.view.backgroundColor = [UIColor whiteColor];
+    viewVc2.view.backgroundColor = [UIColor greenColor];
     
     UIViewController *viewVc3 = [[UIViewController alloc] init];
-    viewVc3.view.backgroundColor = [UIColor yellowColor];
+    viewVc3.view.backgroundColor = [UIColor purpleColor];
     
     UIViewController *viewVc4 = [[UIViewController alloc] init];
     viewVc4.view.backgroundColor = [UIColor greenColor];
@@ -38,6 +38,16 @@
     
     LDGCommonModel *commonModel = [[LDGCommonModel alloc] init];
     commonModel.titleViewY = 64;
+    commonModel.titleTextColor = [UIColor blackColor];
+    commonModel.titleTextFont = [UIFont systemFontOfSize:12.0];
+    commonModel.indicatorHeight = 3;
+    commonModel.indicatorColor = [UIColor redColor];
+    commonModel.titleViewColor = [UIColor greenColor];
+//    commonModel.indicatorAddWidth = -40;
+//    commonModel.indicatorColor = [UIColor greenColor];
+//    commonModel.isNotNeedIndicatorView = NO;
+//    commonModel.indicatorWith = 100;
+
     
     LDGTitleView *titleView = [[LDGTitleView alloc] initWithTitleViewFrame:self.view.bounds titleHeight:35 titles:titleArray bottomControllers:viewVcArray currentController:self commonModel:commonModel];
     [self.view addSubview:titleView];

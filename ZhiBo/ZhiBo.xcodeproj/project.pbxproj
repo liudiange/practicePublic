@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		06C298292E35C234D3FBCBC7 /* Pods_ZhiBo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCF16B2D845360574013553 /* Pods_ZhiBo.framework */; };
+		1808FE0420849F67009BF387 /* UIView+XMGVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FDFE20849F67009BF387 /* UIView+XMGVIew.m */; };
+		1808FE0520849F67009BF387 /* LDGCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FDFF20849F67009BF387 /* LDGCommonModel.m */; };
+		1808FE0620849F67009BF387 /* LDGTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FE0020849F67009BF387 /* LDGTitleView.m */; };
 		184A3C842061F115002932D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C822061F115002932D5 /* Main.storyboard */; };
 		184A3C862061F115002932D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C852061F115002932D5 /* Assets.xcassets */; };
 		184A3C892061F115002932D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C872061F115002932D5 /* LaunchScreen.storyboard */; };
@@ -21,6 +24,12 @@
 
 /* Begin PBXFileReference section */
 		004E1922D47F68155533DDC5 /* Pods-ZhiBo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiBo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiBo/Pods-ZhiBo.debug.xcconfig"; sourceTree = "<group>"; };
+		1808FDFE20849F67009BF387 /* UIView+XMGVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XMGVIew.m"; sourceTree = "<group>"; };
+		1808FDFF20849F67009BF387 /* LDGCommonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGCommonModel.m; sourceTree = "<group>"; };
+		1808FE0020849F67009BF387 /* LDGTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGTitleView.m; sourceTree = "<group>"; };
+		1808FE0120849F67009BF387 /* UIView+XMGVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XMGVIew.h"; sourceTree = "<group>"; };
+		1808FE0220849F67009BF387 /* LDGCommonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGCommonModel.h; sourceTree = "<group>"; };
+		1808FE0320849F67009BF387 /* LDGTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGTitleView.h; sourceTree = "<group>"; };
 		184A3C792061F115002932D5 /* ZhiBo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiBo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184A3C832061F115002932D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		184A3C852061F115002932D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -61,6 +70,19 @@
 				6FCF16B2D845360574013553 /* Pods_ZhiBo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1808FDFD20849F67009BF387 /* LDGTitleView */ = {
+			isa = PBXGroup;
+			children = (
+				1808FDFE20849F67009BF387 /* UIView+XMGVIew.m */,
+				1808FDFF20849F67009BF387 /* LDGCommonModel.m */,
+				1808FE0020849F67009BF387 /* LDGTitleView.m */,
+				1808FE0120849F67009BF387 /* UIView+XMGVIew.h */,
+				1808FE0220849F67009BF387 /* LDGCommonModel.h */,
+				1808FE0320849F67009BF387 /* LDGTitleView.h */,
+			);
+			path = LDGTitleView;
 			sourceTree = "<group>";
 		};
 		184A3C702061F115002932D5 = {
@@ -292,6 +314,7 @@
 		187F1C9F2064AB4A000671A4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1808FDFD20849F67009BF387 /* LDGTitleView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -472,11 +495,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1874189D2061FBB80030C6EA /* main.m in Sources */,
+				1808FE0420849F67009BF387 /* UIView+XMGVIew.m in Sources */,
 				1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */,
 				187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */,
+				1808FE0520849F67009BF387 /* LDGCommonModel.m in Sources */,
 				187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */,
 				187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */,
 				187F1C9D2064AAFF000671A4 /* LDGNavigationController.m in Sources */,
+				1808FE0620849F67009BF387 /* LDGTitleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
