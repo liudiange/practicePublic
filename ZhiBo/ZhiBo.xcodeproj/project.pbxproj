@@ -11,6 +11,11 @@
 		1808FE0420849F67009BF387 /* UIView+XMGVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FDFE20849F67009BF387 /* UIView+XMGVIew.m */; };
 		1808FE0520849F67009BF387 /* LDGCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FDFF20849F67009BF387 /* LDGCommonModel.m */; };
 		1808FE0620849F67009BF387 /* LDGTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FE0020849F67009BF387 /* LDGTitleView.m */; };
+		184924D02089E64000CEA031 /* LDGHomeBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924CF2089E64000CEA031 /* LDGHomeBaseController.m */; };
+		184924D32089E7CE00CEA031 /* LDGPullViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924D12089E7CD00CEA031 /* LDGPullViewLayout.m */; };
+		184924D72089E83500CEA031 /* LDGShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924D62089E83500CEA031 /* LDGShopModel.m */; };
+		184924DB2089E86800CEA031 /* LDGItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184924D82089E86800CEA031 /* LDGItemCell.xib */; };
+		184924DC2089E86800CEA031 /* LDGItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924D92089E86800CEA031 /* LDGItemCell.m */; };
 		184A3C842061F115002932D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C822061F115002932D5 /* Main.storyboard */; };
 		184A3C862061F115002932D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C852061F115002932D5 /* Assets.xcassets */; };
 		184A3C892061F115002932D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C872061F115002932D5 /* LaunchScreen.storyboard */; };
@@ -30,6 +35,15 @@
 		1808FE0120849F67009BF387 /* UIView+XMGVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XMGVIew.h"; sourceTree = "<group>"; };
 		1808FE0220849F67009BF387 /* LDGCommonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGCommonModel.h; sourceTree = "<group>"; };
 		1808FE0320849F67009BF387 /* LDGTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGTitleView.h; sourceTree = "<group>"; };
+		184924CE2089E64000CEA031 /* LDGHomeBaseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGHomeBaseController.h; sourceTree = "<group>"; };
+		184924CF2089E64000CEA031 /* LDGHomeBaseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGHomeBaseController.m; sourceTree = "<group>"; };
+		184924D12089E7CD00CEA031 /* LDGPullViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGPullViewLayout.m; sourceTree = "<group>"; };
+		184924D22089E7CE00CEA031 /* LDGPullViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGPullViewLayout.h; sourceTree = "<group>"; };
+		184924D52089E83500CEA031 /* LDGShopModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGShopModel.h; sourceTree = "<group>"; };
+		184924D62089E83500CEA031 /* LDGShopModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGShopModel.m; sourceTree = "<group>"; };
+		184924D82089E86800CEA031 /* LDGItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LDGItemCell.xib; sourceTree = "<group>"; };
+		184924D92089E86800CEA031 /* LDGItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGItemCell.m; sourceTree = "<group>"; };
+		184924DA2089E86800CEA031 /* LDGItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGItemCell.h; sourceTree = "<group>"; };
 		184A3C792061F115002932D5 /* ZhiBo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZhiBo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		184A3C832061F115002932D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		184A3C852061F115002932D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,6 +97,15 @@
 				1808FE0320849F67009BF387 /* LDGTitleView.h */,
 			);
 			path = LDGTitleView;
+			sourceTree = "<group>";
+		};
+		184924D42089E83500CEA031 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				184924D52089E83500CEA031 /* LDGShopModel.h */,
+				184924D62089E83500CEA031 /* LDGShopModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		184A3C702061F115002932D5 = {
@@ -284,6 +307,7 @@
 		1874189B2061FBB80030C6EA /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				184924D42089E83500CEA031 /* Model */,
 				187F1CA12064AB4B000671A4 /* Category */,
 				187F1CA22064AB4B000671A4 /* HeaerFile */,
 				187F1CA02064AB4A000671A4 /* Tool */,
@@ -307,6 +331,8 @@
 				187F1C9A2064AAFE000671A4 /* LDGTabBarController.m */,
 				187F1C9B2064AAFE000671A4 /* LDGNavigationController.h */,
 				187F1C9C2064AAFE000671A4 /* LDGTabBarController.h */,
+				184924CE2089E64000CEA031 /* LDGHomeBaseController.h */,
+				184924CF2089E64000CEA031 /* LDGHomeBaseController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -314,6 +340,11 @@
 		187F1C9F2064AB4A000671A4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				184924DA2089E86800CEA031 /* LDGItemCell.h */,
+				184924D92089E86800CEA031 /* LDGItemCell.m */,
+				184924D82089E86800CEA031 /* LDGItemCell.xib */,
+				184924D22089E7CE00CEA031 /* LDGPullViewLayout.h */,
+				184924D12089E7CD00CEA031 /* LDGPullViewLayout.m */,
 				1808FDFD20849F67009BF387 /* LDGTitleView */,
 			);
 			path = View;
@@ -417,6 +448,7 @@
 			files = (
 				184A3C892061F115002932D5 /* LaunchScreen.storyboard in Resources */,
 				184A3C862061F115002932D5 /* Assets.xcassets in Resources */,
+				184924DB2089E86800CEA031 /* LDGItemCell.xib in Resources */,
 				184A3C842061F115002932D5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,13 +527,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				1874189D2061FBB80030C6EA /* main.m in Sources */,
+				184924DC2089E86800CEA031 /* LDGItemCell.m in Sources */,
 				1808FE0420849F67009BF387 /* UIView+XMGVIew.m in Sources */,
 				1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */,
+				184924D72089E83500CEA031 /* LDGShopModel.m in Sources */,
 				187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */,
 				1808FE0520849F67009BF387 /* LDGCommonModel.m in Sources */,
 				187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */,
 				187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */,
+				184924D02089E64000CEA031 /* LDGHomeBaseController.m in Sources */,
 				187F1C9D2064AAFF000671A4 /* LDGNavigationController.m in Sources */,
+				184924D32089E7CE00CEA031 /* LDGPullViewLayout.m in Sources */,
 				1808FE0620849F67009BF387 /* LDGTitleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
