@@ -22,6 +22,9 @@
 		1874189D2061FBB80030C6EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418882061FBB80030C6EA /* main.m */; };
 		1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418892061FBB80030C6EA /* AppDelegate.m */; };
 		187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418A0206232930030C6EA /* LDGHomeViewController.m */; };
+		1875782A208EC43600327800 /* XMGHttpConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 18757820208EC43600327800 /* XMGHttpConfig.m */; };
+		1875782C208EC43600327800 /* XMGHttpBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18757826208EC43600327800 /* XMGHttpBaseManager.m */; };
+		18757832208EC8A700327800 /* LDGHomeServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 18757831208EC8A700327800 /* LDGHomeServer.m */; };
 		187F1C9D2064AAFF000671A4 /* LDGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F1C992064AAFE000671A4 /* LDGNavigationController.m */; };
 		187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F1C9A2064AAFE000671A4 /* LDGTabBarController.m */; };
 		187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F1CA62064D2CE000671A4 /* UIColor+LDGColor.m */; };
@@ -54,6 +57,12 @@
 		187418892061FBB80030C6EA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		1874189F206232930030C6EA /* LDGHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGHomeViewController.h; sourceTree = "<group>"; };
 		187418A0206232930030C6EA /* LDGHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGHomeViewController.m; sourceTree = "<group>"; };
+		18757820208EC43600327800 /* XMGHttpConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMGHttpConfig.m; sourceTree = "<group>"; };
+		18757821208EC43600327800 /* XMGHttpBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMGHttpBaseManager.h; sourceTree = "<group>"; };
+		18757825208EC43600327800 /* XMGHttpConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMGHttpConfig.h; sourceTree = "<group>"; };
+		18757826208EC43600327800 /* XMGHttpBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMGHttpBaseManager.m; sourceTree = "<group>"; };
+		18757830208EC8A700327800 /* LDGHomeServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGHomeServer.h; sourceTree = "<group>"; };
+		18757831208EC8A700327800 /* LDGHomeServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGHomeServer.m; sourceTree = "<group>"; };
 		187F1C992064AAFE000671A4 /* LDGNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGNavigationController.m; sourceTree = "<group>"; };
 		187F1C9A2064AAFE000671A4 /* LDGTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGTabBarController.m; sourceTree = "<group>"; };
 		187F1C9B2064AAFE000671A4 /* LDGNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGNavigationController.h; sourceTree = "<group>"; };
@@ -89,12 +98,12 @@
 		1808FDFD20849F67009BF387 /* LDGTitleView */ = {
 			isa = PBXGroup;
 			children = (
-				1808FDFE20849F67009BF387 /* UIView+XMGVIew.m */,
-				1808FDFF20849F67009BF387 /* LDGCommonModel.m */,
-				1808FE0020849F67009BF387 /* LDGTitleView.m */,
 				1808FE0120849F67009BF387 /* UIView+XMGVIew.h */,
+				1808FDFE20849F67009BF387 /* UIView+XMGVIew.m */,
 				1808FE0220849F67009BF387 /* LDGCommonModel.h */,
+				1808FDFF20849F67009BF387 /* LDGCommonModel.m */,
 				1808FE0320849F67009BF387 /* LDGTitleView.h */,
+				1808FE0020849F67009BF387 /* LDGTitleView.m */,
 			);
 			path = LDGTitleView;
 			sourceTree = "<group>";
@@ -160,6 +169,7 @@
 		187418862061FBB80030C6EA /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1875782E208EC6F900327800 /* Server */,
 				187418872061FBB80030C6EA /* AppDelegate.h */,
 				187418892061FBB80030C6EA /* AppDelegate.m */,
 				187418882061FBB80030C6EA /* main.m */,
@@ -307,10 +317,10 @@
 		1874189B2061FBB80030C6EA /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				1875782F208EC71100327800 /* Server */,
 				184924D42089E83500CEA031 /* Model */,
 				187F1CA12064AB4B000671A4 /* Category */,
 				187F1CA22064AB4B000671A4 /* HeaerFile */,
-				187F1CA02064AB4A000671A4 /* Tool */,
 				187F1C9F2064AB4A000671A4 /* View */,
 				187F1C982064AAFE000671A4 /* Controller */,
 			);
@@ -320,17 +330,46 @@
 		1874189C2061FBB80030C6EA /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				1875781E208EC43600327800 /* HttpManager */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		1875781E208EC43600327800 /* HttpManager */ = {
+			isa = PBXGroup;
+			children = (
+				18757825208EC43600327800 /* XMGHttpConfig.h */,
+				18757820208EC43600327800 /* XMGHttpConfig.m */,
+				18757821208EC43600327800 /* XMGHttpBaseManager.h */,
+				18757826208EC43600327800 /* XMGHttpBaseManager.m */,
+			);
+			path = HttpManager;
+			sourceTree = "<group>";
+		};
+		1875782E208EC6F900327800 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Server;
+			path = ZhiBo/Classes/Base/Server;
+			sourceTree = SOURCE_ROOT;
+		};
+		1875782F208EC71100327800 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				18757830208EC8A700327800 /* LDGHomeServer.h */,
+				18757831208EC8A700327800 /* LDGHomeServer.m */,
+			);
+			path = Server;
 			sourceTree = "<group>";
 		};
 		187F1C982064AAFE000671A4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				187F1C992064AAFE000671A4 /* LDGNavigationController.m */,
-				187F1C9A2064AAFE000671A4 /* LDGTabBarController.m */,
 				187F1C9B2064AAFE000671A4 /* LDGNavigationController.h */,
+				187F1C992064AAFE000671A4 /* LDGNavigationController.m */,
 				187F1C9C2064AAFE000671A4 /* LDGTabBarController.h */,
+				187F1C9A2064AAFE000671A4 /* LDGTabBarController.m */,
 				184924CE2089E64000CEA031 /* LDGHomeBaseController.h */,
 				184924CF2089E64000CEA031 /* LDGHomeBaseController.m */,
 			);
@@ -348,13 +387,6 @@
 				1808FDFD20849F67009BF387 /* LDGTitleView */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		187F1CA02064AB4A000671A4 /* Tool */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Tool;
 			sourceTree = "<group>";
 		};
 		187F1CA12064AB4B000671A4 /* Category */ = {
@@ -527,6 +559,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1874189D2061FBB80030C6EA /* main.m in Sources */,
+				18757832208EC8A700327800 /* LDGHomeServer.m in Sources */,
 				184924DC2089E86800CEA031 /* LDGItemCell.m in Sources */,
 				1808FE0420849F67009BF387 /* UIView+XMGVIew.m in Sources */,
 				1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */,
@@ -535,10 +568,12 @@
 				1808FE0520849F67009BF387 /* LDGCommonModel.m in Sources */,
 				187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */,
 				187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */,
+				1875782C208EC43600327800 /* XMGHttpBaseManager.m in Sources */,
 				184924D02089E64000CEA031 /* LDGHomeBaseController.m in Sources */,
 				187F1C9D2064AAFF000671A4 /* LDGNavigationController.m in Sources */,
 				184924D32089E7CE00CEA031 /* LDGPullViewLayout.m in Sources */,
 				1808FE0620849F67009BF387 /* LDGTitleView.m in Sources */,
+				1875782A208EC43600327800 /* XMGHttpConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

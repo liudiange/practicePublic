@@ -9,6 +9,8 @@
 #import "LDGHomeBaseController.h"
 #import "LDGPullViewLayout.h"
 #import "LDGItemCell.h"
+#import "LDGHomeServer.h"
+
 
 @interface LDGHomeBaseController ()<UICollectionViewDelegate,UICollectionViewDataSource,LDGPullViewLayoutDelegate>
 
@@ -24,14 +26,19 @@
     }
     return _dataArray;
 }
-
 static NSString * const ID = @"cellID";
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    // 初始化及其他
+    [self setUpCollection];
+    [self loadNetworkData];
+}
+/**
+ 初始化collectionview
+ */
+- (void)setUpCollection{
     LDGPullViewLayout *pullLayout = [[LDGPullViewLayout alloc] init];
-    pullLayout.layoutInset = UIEdgeInsetsMake(50, 10, 100, 10);
+    pullLayout.layoutInset = UIEdgeInsetsMake(10, 10, 10, 10);
     pullLayout.columnCounts = 3;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height) collectionViewLayout:pullLayout];
@@ -41,20 +48,24 @@ static NSString * const ID = @"cellID";
     [collectionView registerNib:[UINib nibWithNibName:@"LDGItemCell" bundle:nil] forCellWithReuseIdentifier:ID];
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"1.plist" ofType:nil];
-    NSArray *array = [NSArray arrayWithContentsOfFile:path];
-    for (NSDictionary *dic in array) {
-        LDGShopModel *shopModel = [[LDGShopModel alloc] init];
-        shopModel.w = [dic[@"w"] intValue];
-        shopModel.h = [dic[@"h"] intValue];
-        shopModel.price = dic[@"price"];
-        shopModel.img = dic[@"img"];
-        [self.dataArray addObject:shopModel];
-    }
-    self.collectionView.backgroundColor = [UIColor redColor];
-    [self.collectionView reloadData];
 }
+/**
+ 加载网络数据
+ */
+- (void)loadNetworkData{
+    LDGHomeServer *homeServer = [[LDGHomeServer alloc] init];
+    [homeServer startRequest:^(NSError * _Null_unspecified error) {
+        if (!error) {
+            
+        }else{
+            
+        }
+    }];
+    
+    
+    
+}
+#pragma mark - datasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
