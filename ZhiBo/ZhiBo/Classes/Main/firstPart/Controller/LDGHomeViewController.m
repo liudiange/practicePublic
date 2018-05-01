@@ -7,6 +7,10 @@
 //
 
 #import "LDGHomeViewController.h"
+#import <MJExtension/MJExtension.h>
+#import "LDGHomeModel.h"
+#import "LDGHomeBaseController.h"
+#import "LDGTitleView.h"
 
 @interface LDGHomeViewController ()<UITextFieldDelegate>
 
@@ -16,8 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // 初始化
+    
     [self setUp];
+    [self getNetWorkData];
 }
 /**
  初始化
@@ -40,6 +45,25 @@
     searchImageView.image = [UIImage imageNamed:@"CXCo_ic_search"];
     textField.leftView = searchImageView;
     textField.leftViewMode = UITextFieldViewModeAlways;
-
+}
+/**
+ 获取数据 封装网络
+ */
+- (void)getNetWorkData{
+    
+    NSString *path = [[NSBundle mainBundle]pathForResource:@"types.plist" ofType:nil];
+    NSMutableArray *controllerArray = [NSMutableArray array];
+    NSMutableArray *titleArray = [NSMutableArray array];
+    NSMutableArray *typeArray = [LDGHomeModel mj_objectArrayWithFile:path];
+    for (LDGHomeModel *model in typeArray) {
+        LDGHomeBaseController *baseController = [[LDGHomeBaseController alloc] init];
+        baseController.model = model;
+        [controllerArray addObject:baseController];
+        [titleArray addObject:model.title];
+    }
+    LDGCommonModel *commonModel = [[LDGCommonModel alloc] init];
+    commonModel.titleViewY = 64;
+    LDGTitleView *titleView = [[LDGTitleView alloc] initWithTitleViewFrame:self.view.bounds titleHeight:35 titles:titleArray bottomControllers:controllerArray currentController:self commonModel:commonModel];
+    [self.view addSubview:titleView];
 }
 @end

@@ -31,7 +31,6 @@ static NSString * const ID = @"cellID";
     [super viewDidLoad];
     // 初始化及其他
     [self setUpCollection];
-    [self loadNetworkData];
 }
 /**
  初始化collectionview
@@ -49,21 +48,22 @@ static NSString * const ID = @"cellID";
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
 }
-/**
- 加载网络数据
- */
-- (void)loadNetworkData{
-    LDGHomeServer *homeServer = [[LDGHomeServer alloc] init];
+-(void)setModel:(LDGHomeModel *)model {
+    _model = model;
+    LDGHomeServer *homeServer = [[LDGHomeServer alloc] initWithModel:model];
+    @weakify(self);
     [homeServer startRequest:^(NSError * _Null_unspecified error) {
+        @strongify(self);
         if (!error) {
-            
+            NSLog(@"加载成功");
+            self.dataArray = homeServer.dataArray;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.collectionView reloadData];
+            });
         }else{
-            
+            NSLog(@"加载失败");
         }
     }];
-    
-    
-    
 }
 #pragma mark - datasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

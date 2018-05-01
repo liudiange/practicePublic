@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LDGHomeModel.h"
 
 @interface LDGHomeBaseController : UIViewController
 
-@property (assign, nonatomic) NSInteger type;
+@property (assign, nonatomic) LDGHomeModel *model;
 
 
 @end

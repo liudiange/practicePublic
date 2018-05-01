@@ -12,15 +12,15 @@
 @interface XMGHttpBaseManager : NSObject
 
 /** 请求的管理者*/
-@property (nonatomic, strong) AFHTTPSessionManager *manager;
+@property (nonatomic, strong) AFHTTPSessionManager * _Nullable manager;
 /** 请求的任务*/
-@property (nonatomic, strong) NSURLSessionDataTask *task;
+@property (nonatomic, strong) NSURLSessionDataTask * _Nullable task;
 /** 请求的url*/
-@property (copy, nonatomic) NSString *requestUrl;
+@property (copy, nonatomic) NSString * _Nullable requestUrl;
 /** 请求的参数*/
-@property (nonatomic, strong) NSMutableDictionary *paramDic;
+@property (nonatomic, strong) NSMutableDictionary * _Nullable paramDic;
 /** 请求的方法*/
-@property (copy, nonatomic) NSString *requestMethod;
+@property (copy, nonatomic) NSString * _Nonnull requestMethod;
 /** 请求的下载的进度／上传的进度*/
 @property (assign, nonatomic) CGFloat progress;
 /** 超时时间*/
@@ -42,14 +42,14 @@
 
  @param complete 成功或者失败的block
  */
-- (void)startRequest:(void (^)(NSError * _Null_unspecified error))complete;
+- (void)startRequest:(void (^_Nullable)(NSError * _Null_unspecified error))complete;
 /**
  要解析的数据
 
  @param responseDic 要解析的字典
  @param complete 回调的blocl
  */
-- (void)parseData:(NSDictionary * __nonnull)responseDic complete:(void (^)(NSError *_Null_unspecified error))complete;
+- (void)parseData:(NSDictionary * __nonnull)responseDic complete:(void (^_Nonnull)(NSError *_Null_unspecified error))complete;
 /**
  取消任务
  */

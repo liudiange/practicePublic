@@ -13,7 +13,7 @@ NSString * const XMG_UA = @"ua";
 /** version*/
 NSString * const XMG_VERSION = @"version";
 /** 成功的code*/
-NSString * const XMG_SUCCESSCODE = @"00000";
+NSString * const XMG_SUCCESSCODE = @"000000";
 /** 重新登录*/
 NSInteger const XMG_ERRORCODE500 = 500;
 /** 服务器错误*/

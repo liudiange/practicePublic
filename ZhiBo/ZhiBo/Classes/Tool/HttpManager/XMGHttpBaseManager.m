@@ -30,15 +30,16 @@
  @param complete 成功或者失败的block
  */
 - (void)startRequest:(void (^)(NSError * _Null_unspecified error))complete {
-    if (self.requestUrl.length == 0 || self.requestMethod.length == 0) {
+     __weak typeof(self)weakSelf = self;
+    if (weakSelf.requestUrl.length == 0 || weakSelf.requestMethod.length == 0) {
         return;
     }
     // 请求开始需要做一些操作
-    [self startOption];
-    __weak typeof(self)weakSelf = self;
-    if(self.fileData.length > 0){ // 上传的文件不为空，
+    [weakSelf startOption];
+   
+    if(weakSelf.fileData.length > 0){ // 上传的文件不为空，
         
-        [self.manager POST:[self configUrl:self.requestUrl] parameters:self.paramDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [weakSelf.manager POST:[weakSelf configUrl:weakSelf.requestUrl] parameters:weakSelf.paramDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             [formData appendPartWithFileData:weakSelf.fileData name:weakSelf.name fileName:weakSelf.fileName mimeType:weakSelf.mimeType];
         } progress:^(NSProgress * _Nonnull uploadProgress) {
             CGFloat progress = 1.0 * uploadProgress.completedUnitCount/uploadProgress.totalUnitCount;
@@ -48,9 +49,9 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [weakSelf detailError:error complete:complete];
         }];
-    }else if ([[self.requestMethod uppercaseString] isEqualToString:@"GET"]) { // GET 请求
+    }else if ([[weakSelf.requestMethod uppercaseString] isEqualToString:@"GET"]) { // GET 请求
         
-       self.task = [self.manager GET:[self configUrl:self.requestUrl] parameters:self.paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
+       weakSelf.task = [weakSelf.manager GET:[weakSelf configUrl:weakSelf.requestUrl] parameters:weakSelf.paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
             CGFloat progress = 1.0 * uploadProgress.completedUnitCount/uploadProgress.totalUnitCount;
             weakSelf.progress = progress;
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -58,9 +59,9 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [weakSelf detailError:error complete:complete];
         }];
-    }else if ([[self.requestMethod uppercaseString] isEqualToString:@"POST"]){// POST 请求
+    }else if ([[weakSelf.requestMethod uppercaseString] isEqualToString:@"POST"]){// POST 请求
         
-        self.task = [self.manager POST:[weakSelf configUrl:weakSelf.requestUrl] parameters:weakSelf.paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
+        weakSelf.task = [weakSelf.manager POST:[weakSelf configUrl:weakSelf.requestUrl] parameters:weakSelf.paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
             CGFloat progress = 1.0 * uploadProgress.completedUnitCount/uploadProgress.totalUnitCount;
             weakSelf.progress = progress;
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -69,7 +70,7 @@
             [weakSelf detailError:error complete:complete];
         }];
     }
-    [self.task resume];
+    [weakSelf.task resume];
 }
 /**
  取消任务
@@ -109,10 +110,11 @@
  @param complete 回调的block
  */
 - (void)detailSuccess:(NSData *)responseObject complete:(void (^)(NSError *_Null_unspecified error))complete {
+     __weak typeof(self)weakSelf = self;
     if (responseObject.length) {
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         if (dic) {
-           [self parseData:dic complete:complete];
+           [weakSelf parseData:dic complete:complete];
         }else{
             NSError *errorM = [NSError errorWithDomain:@"服务器没有给我们数据" code:XMG_ERRORCODE600 userInfo:nil];
             complete(errorM);

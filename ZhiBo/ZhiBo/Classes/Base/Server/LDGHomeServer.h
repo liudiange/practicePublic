@@ -7,12 +7,22 @@
 //
 
 #import "XMGHttpBaseManager.h"
+#import "LDGHomeModel.h"
+#import "LDGShopModel.h"
 
 @interface LDGHomeServer : XMGHttpBaseManager
 /**
  数组
  */
-@property (strong, nonatomic) NSMutableArray *dataArray;
+@property (strong, nonatomic) NSMutableArray <LDGShopModel *>*dataArray;
+/**
+ 创建方法
+
+ @param model model
+ @return 对象本身
+ */
+- (instancetype)initWithModel:(LDGHomeModel *)model;
+
 
 
 
