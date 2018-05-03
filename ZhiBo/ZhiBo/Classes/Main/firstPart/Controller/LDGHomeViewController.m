@@ -56,8 +56,7 @@
     NSMutableArray *titleArray = [NSMutableArray array];
     NSMutableArray *typeArray = [LDGHomeModel mj_objectArrayWithFile:path];
     for (LDGHomeModel *model in typeArray) {
-        LDGHomeBaseController *baseController = [[LDGHomeBaseController alloc] init];
-        baseController.model = model;
+        LDGHomeBaseController *baseController = [[LDGHomeBaseController alloc] initWithModel:model];
         [controllerArray addObject:baseController];
         [titleArray addObject:model.title];
     }

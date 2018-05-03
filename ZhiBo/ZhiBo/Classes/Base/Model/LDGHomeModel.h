@@ -13,5 +13,4 @@
 @property (copy, nonatomic) NSString *title;
 @property (nonatomic, strong) NSNumber *type;
 
-
 @end

@@ -77,10 +77,10 @@
     }
     // 创建bottomview
     [self creatBottomView];
-    // 将第一个控制器添加到scrollerview
-    [self addControllerInBottomView:[self.bottomControllers firstObject]];
     // 创建titleview
     [self creatTitleView];
+    // 将第一个控制器添加到scrollerview
+    [self addControllerInBottomView:[self.bottomControllers firstObject]];
 }
 /**
  创建bottomview
@@ -154,8 +154,6 @@
     self.indicatorView = indicatorView;
     // 显示隐藏与否
     self.commonModel.isNotNeedIndicatorView ? (self.indicatorView.hidden = YES) : (self.indicatorView.hidden = NO);
-    
-    
 }
 /**
  计算字体的宽度
@@ -178,8 +176,10 @@
  */
 - (void)addControllerInBottomView:(UIViewController *)viewController
 {
-    
     viewController.view.frame = self.bottomScrollerView.bounds;
+    if ([viewController viewIfLoaded]) {
+        return;
+    }
     [self.bottomScrollerView addSubview:viewController.view];
 }
 /**
@@ -219,6 +219,8 @@
     CGFloat scrollerViewOffsetx = scrollView.contentOffset.x /scrollView.frame.size.width;
     NSInteger scrollerViewOffsetInt = (int)scrollerViewOffsetx;
     [self scrollerviewIndex:scrollerViewOffsetInt];
+    UIViewController *viewVc = self.currentController.childViewControllers[scrollerViewOffsetInt];
+    [self addControllerInBottomView:viewVc];
 }
 
 /**

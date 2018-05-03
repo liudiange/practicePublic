@@ -46,7 +46,10 @@
  指示器的颜色
  */
 @property (assign, nonatomic) UIColor *indicatorColor;
-
+/**
+ 存放模型数据的
+ */
+@property (strong, nonatomic) NSMutableArray *modelArray;
 
 
 

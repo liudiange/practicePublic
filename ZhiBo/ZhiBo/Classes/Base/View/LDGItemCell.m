@@ -12,6 +12,8 @@
 @interface LDGItemCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *priceLable;
+@property (weak, nonatomic) IBOutlet UIImageView *backImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *liveImageView;
 
 
 @end
@@ -21,11 +23,11 @@
     [super awakeFromNib];
     
 }
--(void)setShopModel:(LDGShopModel *)shopModel{
-    _shopModel = shopModel;
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:shopModel.img]];
-    self.priceLable.text = shopModel.price;
-    
+-(void)setAuthorModel:(LDGAuthorModel *)authorModel{
+    _authorModel = authorModel;
+    [self.backImageView sd_setImageWithURL:[NSURL URLWithString:authorModel.pic51] placeholderImage:[UIImage imageNamed:@"home_icon_people"]];
+    self.liveImageView.hidden = authorModel.live >= 1 ? NO : YES;
+    self.priceLable.text = authorModel.name;
 }
 
 @end

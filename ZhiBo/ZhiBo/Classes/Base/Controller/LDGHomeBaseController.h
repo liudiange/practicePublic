@@ -10,8 +10,12 @@
 #import "LDGHomeModel.h"
 
 @interface LDGHomeBaseController : UIViewController
+/**
+ 这种方式创建控制器
 
-@property (assign, nonatomic) LDGHomeModel *model;
-
+ @param model model
+ @return 返回对象本身
+ */
+- (instancetype)initWithModel:(LDGHomeModel *)model;
 
 @end

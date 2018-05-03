@@ -49,7 +49,7 @@
  @param responseDic 要解析的字典
  @param complete 回调的blocl
  */
-- (void)parseData:(NSDictionary * __nonnull)responseDic complete:(void (^_Nonnull)(NSError *_Null_unspecified error))complete;
+- (void)parseData:(NSDictionary * __nonnull)responseDic complete:(void (^)(NSError *_Null_unspecified error))complete;
 /**
  取消任务
  */

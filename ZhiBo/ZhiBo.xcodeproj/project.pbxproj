@@ -13,7 +13,6 @@
 		1808FE0620849F67009BF387 /* LDGTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FE0020849F67009BF387 /* LDGTitleView.m */; };
 		184924D02089E64000CEA031 /* LDGHomeBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924CF2089E64000CEA031 /* LDGHomeBaseController.m */; };
 		184924D32089E7CE00CEA031 /* LDGPullViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924D12089E7CD00CEA031 /* LDGPullViewLayout.m */; };
-		184924D72089E83500CEA031 /* LDGShopModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924D62089E83500CEA031 /* LDGShopModel.m */; };
 		184924DB2089E86800CEA031 /* LDGItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184924D82089E86800CEA031 /* LDGItemCell.xib */; };
 		184924DC2089E86800CEA031 /* LDGItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924D92089E86800CEA031 /* LDGItemCell.m */; };
 		184A3C842061F115002932D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C822061F115002932D5 /* Main.storyboard */; };
@@ -28,6 +27,7 @@
 		187F1C9D2064AAFF000671A4 /* LDGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F1C992064AAFE000671A4 /* LDGNavigationController.m */; };
 		187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F1C9A2064AAFE000671A4 /* LDGTabBarController.m */; };
 		187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F1CA62064D2CE000671A4 /* UIColor+LDGColor.m */; };
+		18D181C22099523900ED2358 /* LDGAuthorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D181C12099523900ED2358 /* LDGAuthorModel.m */; };
 		2C66442B209817AC007EAE0D /* LDGHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C66442A209817AC007EAE0D /* LDGHomeModel.m */; };
 		2C66442D20981F52007EAE0D /* types.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C66442C20981F52007EAE0D /* types.plist */; };
 /* End PBXBuildFile section */
@@ -44,8 +44,6 @@
 		184924CF2089E64000CEA031 /* LDGHomeBaseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGHomeBaseController.m; sourceTree = "<group>"; };
 		184924D12089E7CD00CEA031 /* LDGPullViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGPullViewLayout.m; sourceTree = "<group>"; };
 		184924D22089E7CE00CEA031 /* LDGPullViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGPullViewLayout.h; sourceTree = "<group>"; };
-		184924D52089E83500CEA031 /* LDGShopModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGShopModel.h; sourceTree = "<group>"; };
-		184924D62089E83500CEA031 /* LDGShopModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGShopModel.m; sourceTree = "<group>"; };
 		184924D82089E86800CEA031 /* LDGItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LDGItemCell.xib; sourceTree = "<group>"; };
 		184924D92089E86800CEA031 /* LDGItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGItemCell.m; sourceTree = "<group>"; };
 		184924DA2089E86800CEA031 /* LDGItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGItemCell.h; sourceTree = "<group>"; };
@@ -73,6 +71,8 @@
 		187F1CA42064CF13000671A4 /* LDGCommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGCommonHeader.h; sourceTree = "<group>"; };
 		187F1CA52064D2CE000671A4 /* UIColor+LDGColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+LDGColor.h"; sourceTree = "<group>"; };
 		187F1CA62064D2CE000671A4 /* UIColor+LDGColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LDGColor.m"; sourceTree = "<group>"; };
+		18D181C02099523900ED2358 /* LDGAuthorModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGAuthorModel.h; sourceTree = "<group>"; };
+		18D181C12099523900ED2358 /* LDGAuthorModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGAuthorModel.m; sourceTree = "<group>"; };
 		2C664429209817AC007EAE0D /* LDGHomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGHomeModel.h; sourceTree = "<group>"; };
 		2C66442A209817AC007EAE0D /* LDGHomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGHomeModel.m; sourceTree = "<group>"; };
 		2C66442C20981F52007EAE0D /* types.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = types.plist; sourceTree = "<group>"; };
@@ -116,8 +116,6 @@
 		184924D42089E83500CEA031 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				184924D52089E83500CEA031 /* LDGShopModel.h */,
-				184924D62089E83500CEA031 /* LDGShopModel.m */,
 				2C664429209817AC007EAE0D /* LDGHomeModel.h */,
 				2C66442A209817AC007EAE0D /* LDGHomeModel.m */,
 			);
@@ -177,7 +175,6 @@
 		187418862061FBB80030C6EA /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				1875782E208EC6F900327800 /* Server */,
 				187418872061FBB80030C6EA /* AppDelegate.h */,
 				187418892061FBB80030C6EA /* AppDelegate.m */,
 				187418882061FBB80030C6EA /* main.m */,
@@ -280,6 +277,8 @@
 		187418952061FBB80030C6EA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18D181C02099523900ED2358 /* LDGAuthorModel.h */,
+				18D181C12099523900ED2358 /* LDGAuthorModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -353,14 +352,6 @@
 			);
 			path = HttpManager;
 			sourceTree = "<group>";
-		};
-		1875782E208EC6F900327800 /* Server */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Server;
-			path = ZhiBo/Classes/Base/Server;
-			sourceTree = SOURCE_ROOT;
 		};
 		1875782F208EC71100327800 /* Server */ = {
 			isa = PBXGroup;
@@ -572,9 +563,9 @@
 				184924DC2089E86800CEA031 /* LDGItemCell.m in Sources */,
 				1808FE0420849F67009BF387 /* UIView+XMGVIew.m in Sources */,
 				1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */,
-				184924D72089E83500CEA031 /* LDGShopModel.m in Sources */,
 				187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */,
 				1808FE0520849F67009BF387 /* LDGCommonModel.m in Sources */,
+				18D181C22099523900ED2358 /* LDGAuthorModel.m in Sources */,
 				187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */,
 				187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */,
 				2C66442B209817AC007EAE0D /* LDGHomeModel.m in Sources */,
