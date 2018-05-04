@@ -20,7 +20,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qo6-7N-qze">
                         <rect key="frame" x="0.0" y="0.0" width="194" height="251"/>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uEZ-k3-eV9">
                         <rect key="frame" x="0.0" y="231" width="194" height="20"/>
@@ -31,7 +31,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fTt-lA-GBN">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_icon_live" translatesAutoresizingMaskIntoConstraints="NO" id="fTt-lA-GBN">
                         <rect key="frame" x="159" y="5" width="30" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="43v-JO-duE"/>
@@ -61,4 +61,7 @@
             <point key="canvasLocation" x="75" y="-16.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="home_icon_live" width="23" height="13"/>
+    </resources>
 </document>

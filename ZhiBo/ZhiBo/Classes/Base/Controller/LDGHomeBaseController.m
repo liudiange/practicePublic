@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (assign, nonatomic) LDGHomeModel *model;
+
 
 @end
 
@@ -30,22 +30,11 @@ static NSString * const ID = @"cellID";
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     // 初始化及其他
     [self setUpCollection];
     [self loadServerData];
-}
-/**
- 这种方式创建控制器
- 
- @param model model
- @return 返回对象本身
- */
--(instancetype)initWithModel:(LDGHomeModel *)model {
-    if (self = [super init]) {
-        self.model = model;
-    }
-    return self;
 }
 /**
  初始化collectionview
@@ -53,7 +42,9 @@ static NSString * const ID = @"cellID";
 - (void)setUpCollection{
     
     LDGPullViewLayout *pullLayout = [[LDGPullViewLayout alloc] init];
-    pullLayout.layoutInset = UIEdgeInsetsMake(35, 0, 0, 0);
+    pullLayout.layoutInset = UIEdgeInsetsMake(99, 0, 49, 0);
+    pullLayout.rowMargon = 10;
+    pullLayout.columnMargon = 5;
     pullLayout.columnCounts = 2;
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.frame.size.height) collectionViewLayout:pullLayout];
     pullLayout.layoutDelegate = self;
@@ -62,17 +53,15 @@ static NSString * const ID = @"cellID";
     [collectionView registerNib:[UINib nibWithNibName:@"LDGItemCell" bundle:nil] forCellWithReuseIdentifier:ID];
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    [self.collectionView reloadData];
 }
 /**
  加载网络数据
  */
 -(void)loadServerData {
-    
-    LDGHomeModel *homeModel = [[LDGHomeModel alloc] init];
-    homeModel.title = @"全部";
-    homeModel.type = @(0);
-    
-    LDGHomeServer *homeServer = [[LDGHomeServer alloc] initWithModel:homeModel];
+
+    LDGHomeServer *homeServer = [[LDGHomeServer alloc] initWithModel:self.model];
     @weakify(self);
     [homeServer startRequest:^(NSError * _Null_unspecified error) {
         @strongify(self);
@@ -107,7 +96,7 @@ static NSString * const ID = @"cellID";
  @return 返回宽高比
  */
 - (CGFloat)receicewidthAndHeightScale:(NSIndexPath*)indexPath{
-    return indexPath.item % 2 == 0 ? 1.0:1.25;
+    return indexPath.item % 2 == 0 ? 2.0 * 2.0/3.0 : 2.0 * 0.5;
 }
 
 

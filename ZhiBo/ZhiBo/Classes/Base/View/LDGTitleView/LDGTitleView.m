@@ -79,8 +79,10 @@
     [self creatBottomView];
     // 创建titleview
     [self creatTitleView];
-    // 将第一个控制器添加到scrollerview
-    [self addControllerInBottomView:[self.bottomControllers firstObject]];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 将第一个控制器添加到scrollerview
+        [self addControllerInBottomView:[self.bottomControllers firstObject]];
+    });
 }
 /**
  创建bottomview
@@ -176,10 +178,10 @@
  */
 - (void)addControllerInBottomView:(UIViewController *)viewController
 {
-    viewController.view.frame = self.bottomScrollerView.bounds;
-    if ([viewController viewIfLoaded]) {
+    if ([viewController isViewLoaded]) {
         return;
     }
+    viewController.view.frame = self.bottomScrollerView.bounds;
     [self.bottomScrollerView addSubview:viewController.view];
 }
 /**

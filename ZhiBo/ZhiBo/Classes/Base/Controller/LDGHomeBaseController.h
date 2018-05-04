@@ -11,11 +11,8 @@
 
 @interface LDGHomeBaseController : UIViewController
 /**
- 这种方式创建控制器
-
- @param model model
- @return 返回对象本身
+ 数据模型
  */
-- (instancetype)initWithModel:(LDGHomeModel *)model;
+@property (strong, nonatomic) LDGHomeModel *model;
 
 @end

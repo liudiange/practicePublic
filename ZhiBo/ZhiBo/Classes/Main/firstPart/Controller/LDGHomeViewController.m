@@ -14,10 +14,10 @@
 
 @interface LDGHomeViewController ()<UITextFieldDelegate>
 
+
 @end
 
 @implementation LDGHomeViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -52,17 +52,19 @@
 - (void)getNetWorkData{
     
     NSString *path = [[NSBundle mainBundle]pathForResource:@"types.plist" ofType:nil];
-    NSMutableArray *controllerArray = [NSMutableArray array];
     NSMutableArray *titleArray = [NSMutableArray array];
+    NSMutableArray *controllerArray = [NSMutableArray array];
     NSMutableArray *typeArray = [LDGHomeModel mj_objectArrayWithFile:path];
     for (LDGHomeModel *model in typeArray) {
-        LDGHomeBaseController *baseController = [[LDGHomeBaseController alloc] initWithModel:model];
-        [controllerArray addObject:baseController];
+        LDGHomeBaseController *baseController = [[LDGHomeBaseController alloc] init];
+        baseController.model = model;
         [titleArray addObject:model.title];
+        [controllerArray addObject:baseController];
     }
     LDGCommonModel *commonModel = [[LDGCommonModel alloc] init];
     commonModel.titleViewY = 64;
     LDGTitleView *titleView = [[LDGTitleView alloc] initWithTitleViewFrame:self.view.bounds titleHeight:35 titles:titleArray bottomControllers:controllerArray currentController:self commonModel:commonModel];
     [self.view addSubview:titleView];
+    
 }
 @end

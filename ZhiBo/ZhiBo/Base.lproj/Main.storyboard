@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cWh-ph-yes">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cWh-ph-yes">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -63,7 +63,7 @@
         <scene sceneID="ohk-P6-aMS">
             <objects>
                 <navigationController id="V0m-GS-gxY" customClass="LDGNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="哈哈" image="info.png" id="mRG-5W-ziF"/>
+                    <tabBarItem key="tabBarItem" title="哈哈" id="mRG-5W-ziF"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ctx-tB-Pgv">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -80,7 +80,7 @@
         <scene sceneID="t31-QL-Nsg">
             <objects>
                 <navigationController id="Scq-ba-YKR" customClass="LDGNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="真的" image="arrow.png" id="YkK-Yd-8J5"/>
+                    <tabBarItem key="tabBarItem" title="真的" id="YkK-Yd-8J5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dEj-uZ-mfw">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -189,8 +189,4 @@
             <point key="canvasLocation" x="809" y="-306"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="arrow.png" width="15" height="40"/>
-        <image name="info.png" width="28" height="28"/>
-    </resources>
 </document>

@@ -112,7 +112,6 @@
     self.minDic[minColumn] = @(CGRectGetMaxY(attrs.frame));
     return attrs;
 }
-
 /**
  间距发生变化就调用这个方法
 
