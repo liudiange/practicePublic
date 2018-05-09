@@ -18,6 +18,11 @@
 		184A3C842061F115002932D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C822061F115002932D5 /* Main.storyboard */; };
 		184A3C862061F115002932D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C852061F115002932D5 /* Assets.xcassets */; };
 		184A3C892061F115002932D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C872061F115002932D5 /* LaunchScreen.storyboard */; };
+		185965DB209FF06C00BEDE77 /* LDGZhiBoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185965DA209FF06C00BEDE77 /* LDGZhiBoViewController.m */; };
+		185965DD209FF1B300BEDE77 /* FirstPart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185965DC209FF1B300BEDE77 /* FirstPart.storyboard */; };
+		185965E020A027BD00BEDE77 /* LDGAuthorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185965DF20A027BD00BEDE77 /* LDGAuthorView.m */; };
+		185965E620A0300F00BEDE77 /* LDGZhiBoBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185965E520A0300F00BEDE77 /* LDGZhiBoBottomView.m */; };
+		185965E920A037D200BEDE77 /* LDGCommonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 185965E820A037D200BEDE77 /* LDGCommonTool.m */; };
 		1874189D2061FBB80030C6EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418882061FBB80030C6EA /* main.m */; };
 		1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418892061FBB80030C6EA /* AppDelegate.m */; };
 		187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418A0206232930030C6EA /* LDGHomeViewController.m */; };
@@ -52,6 +57,15 @@
 		184A3C852061F115002932D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		184A3C882061F115002932D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		184A3C8A2061F115002932D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		185965D9209FF06C00BEDE77 /* LDGZhiBoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGZhiBoViewController.h; sourceTree = "<group>"; };
+		185965DA209FF06C00BEDE77 /* LDGZhiBoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGZhiBoViewController.m; sourceTree = "<group>"; };
+		185965DC209FF1B300BEDE77 /* FirstPart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FirstPart.storyboard; sourceTree = "<group>"; };
+		185965DE20A027BD00BEDE77 /* LDGAuthorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGAuthorView.h; sourceTree = "<group>"; };
+		185965DF20A027BD00BEDE77 /* LDGAuthorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGAuthorView.m; sourceTree = "<group>"; };
+		185965E420A0300F00BEDE77 /* LDGZhiBoBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGZhiBoBottomView.h; sourceTree = "<group>"; };
+		185965E520A0300F00BEDE77 /* LDGZhiBoBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGZhiBoBottomView.m; sourceTree = "<group>"; };
+		185965E720A037D200BEDE77 /* LDGCommonTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGCommonTool.h; sourceTree = "<group>"; };
+		185965E820A037D200BEDE77 /* LDGCommonTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGCommonTool.m; sourceTree = "<group>"; };
 		187418872061FBB80030C6EA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		187418882061FBB80030C6EA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		187418892061FBB80030C6EA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -145,6 +159,7 @@
 			children = (
 				187418842061FBB80030C6EA /* Classes */,
 				184A3C822061F115002932D5 /* Main.storyboard */,
+				185965DC209FF1B300BEDE77 /* FirstPart.storyboard */,
 				184A3C852061F115002932D5 /* Assets.xcassets */,
 				184A3C872061F115002932D5 /* LaunchScreen.storyboard */,
 				2C66442C20981F52007EAE0D /* types.plist */,
@@ -270,6 +285,8 @@
 			children = (
 				1874189F206232930030C6EA /* LDGHomeViewController.h */,
 				187418A0206232930030C6EA /* LDGHomeViewController.m */,
+				185965D9209FF06C00BEDE77 /* LDGZhiBoViewController.h */,
+				185965DA209FF06C00BEDE77 /* LDGZhiBoViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -286,6 +303,10 @@
 		187418962061FBB80030C6EA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				185965DE20A027BD00BEDE77 /* LDGAuthorView.h */,
+				185965DF20A027BD00BEDE77 /* LDGAuthorView.m */,
+				185965E420A0300F00BEDE77 /* LDGZhiBoBottomView.h */,
+				185965E520A0300F00BEDE77 /* LDGZhiBoBottomView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -338,6 +359,8 @@
 			isa = PBXGroup;
 			children = (
 				1875781E208EC43600327800 /* HttpManager */,
+				185965E720A037D200BEDE77 /* LDGCommonTool.h */,
+				185965E820A037D200BEDE77 /* LDGCommonTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -481,6 +504,7 @@
 				184A3C862061F115002932D5 /* Assets.xcassets in Resources */,
 				2C66442D20981F52007EAE0D /* types.plist in Resources */,
 				184924DB2089E86800CEA031 /* LDGItemCell.xib in Resources */,
+				185965DD209FF1B300BEDE77 /* FirstPart.storyboard in Resources */,
 				184A3C842061F115002932D5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,15 +582,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185965E020A027BD00BEDE77 /* LDGAuthorView.m in Sources */,
 				1874189D2061FBB80030C6EA /* main.m in Sources */,
 				18757832208EC8A700327800 /* LDGHomeServer.m in Sources */,
 				184924DC2089E86800CEA031 /* LDGItemCell.m in Sources */,
 				1808FE0420849F67009BF387 /* UIView+XMGVIew.m in Sources */,
 				1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */,
+				185965E920A037D200BEDE77 /* LDGCommonTool.m in Sources */,
 				187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */,
 				1808FE0520849F67009BF387 /* LDGCommonModel.m in Sources */,
 				18D181C22099523900ED2358 /* LDGAuthorModel.m in Sources */,
 				187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */,
+				185965E620A0300F00BEDE77 /* LDGZhiBoBottomView.m in Sources */,
+				185965DB209FF06C00BEDE77 /* LDGZhiBoViewController.m in Sources */,
 				187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */,
 				2C66442B209817AC007EAE0D /* LDGHomeModel.m in Sources */,
 				1875782C208EC43600327800 /* XMGHttpBaseManager.m in Sources */,

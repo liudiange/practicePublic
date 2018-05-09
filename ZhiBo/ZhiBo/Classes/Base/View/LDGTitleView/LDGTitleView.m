@@ -89,15 +89,17 @@
  */
 - (void)creatBottomView{
     
+    
+    
     NSUInteger controllerCount = self.currentController.childViewControllers.count;
     UIScrollView *scrollerView = [[UIScrollView alloc] initWithFrame:self.frame];
     scrollerView.pagingEnabled = YES;
     scrollerView.showsVerticalScrollIndicator = NO;
     scrollerView.showsHorizontalScrollIndicator = NO;
-    scrollerView.bounces = NO;
+    scrollerView.bounces = YES;
     scrollerView.backgroundColor = [UIColor whiteColor];
     scrollerView.delegate = self;
-    scrollerView.contentSize = CGSizeMake(self.frame.size.width * controllerCount, self.frame.size.height);
+    scrollerView.contentSize = CGSizeMake(scrollerView.xmg_width * controllerCount, 0);
     [self addSubview:scrollerView];
     self.bottomScrollerView = scrollerView; 
 }

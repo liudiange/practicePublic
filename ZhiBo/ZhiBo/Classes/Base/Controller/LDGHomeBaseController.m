@@ -10,6 +10,7 @@
 #import "LDGPullViewLayout.h"
 #import "LDGItemCell.h"
 #import "LDGHomeServer.h"
+#import "LDGZhiBoViewController.h"
 
 
 @interface LDGHomeBaseController ()<UICollectionViewDelegate,UICollectionViewDataSource,LDGPullViewLayoutDelegate>
@@ -36,6 +37,10 @@ static NSString * const ID = @"cellID";
     [self setUpCollection];
     [self loadServerData];
 }
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = NO;
+}
 /**
  初始化collectionview
  */
@@ -54,6 +59,8 @@ static NSString * const ID = @"cellID";
     [self.view addSubview:collectionView];
     self.collectionView = collectionView;
     self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.showsVerticalScrollIndicator = NO;
+    self.collectionView.showsHorizontalScrollIndicator = NO;
     [self.collectionView reloadData];
 }
 /**
@@ -65,10 +72,11 @@ static NSString * const ID = @"cellID";
     @weakify(self);
     [homeServer startRequest:^(NSError * _Null_unspecified error) {
         @strongify(self);
+        __weak typeof(homeServer)weakHomeServer = homeServer;
         if (!error) {
             LDGLog(@"加载成功");
             [self.dataArray removeAllObjects];
-            self.dataArray = homeServer.dataArray;
+            self.dataArray = weakHomeServer.dataArray;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.collectionView reloadData];
             });
@@ -77,7 +85,16 @@ static NSString * const ID = @"cellID";
         }
     }];
 }
-#pragma mark - datasource
+#pragma mark - collection 的 delegate
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    LDGAuthorModel *authorModel = self.dataArray[indexPath.item];
+    LDGZhiBoViewController *zhiboVc = [[UIStoryboard storyboardWithName:@"FirstPart" bundle:nil] instantiateViewControllerWithIdentifier:@"LDGZhiBoViewController"];
+    zhiboVc.authorModel = authorModel;
+    [self.navigationController pushViewController:zhiboVc animated:YES];
+  
+}
+#pragma mark - collection 的 datasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.dataArray.count;
 }

@@ -13,10 +13,11 @@
 #pragma mark - lazy
 - (AFHTTPSessionManager *)manager {
     if (!_manager) {
+        __weak typeof(self)weakSelf = self;
         _manager = [AFHTTPSessionManager manager];
         _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        _manager.requestSerializer.timeoutInterval = self.timeout;
-        if (self.timeout == 0) {
+        _manager.requestSerializer.timeoutInterval = weakSelf.timeout;
+        if (weakSelf.timeout == 0) {
            _manager.requestSerializer.timeoutInterval = XMG_TimeOut;
         }
         _manager.responseSerializer.stringEncoding = NSUTF8StringEncoding;

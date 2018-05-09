@@ -12,5 +12,7 @@
 #import "LDGCommonHeader.h"
 #import "UIColor+LDGColor.h"
 #import <ReactiveObjC/ReactiveObjC.h>
+#import "LDGCommonTool.h"
+#import "UIView+XMGVIew.h"
 
 #endif

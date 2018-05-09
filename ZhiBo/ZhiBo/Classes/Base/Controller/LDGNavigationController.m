@@ -21,6 +21,26 @@
 }
 
 /**
+ 拦截系统的push方法
+
+ @param viewController 要推送的控制器
+ @param animated 动画
+ */
+-(void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    
+    if (self.childViewControllers.count) {
+        UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        backButton.frame = CGRectMake(0, 0, 44, 44);
+        [backButton setImage:[UIImage imageNamed:@"CXCo_ic_return"] forState:UIControlStateNormal];
+        [backButton setImage:[UIImage imageNamed:@"CXCo_ic_return"] forState:UIControlStateSelected];
+        backButton.imageEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
+        [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+        viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    [super pushViewController:viewController animated:YES];
+}
+/**
  根据颜色来生成图片
 
  @param frame 尺寸
@@ -38,6 +58,12 @@
     UIImage *theImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return theImage;
+}
+/**
+ 返回的事件
+ */
+- (void)backAction{
+    [self popViewControllerAnimated:YES];
 }
 /**
 改变状态栏的状态
