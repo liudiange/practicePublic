@@ -11,12 +11,16 @@
 
 @interface SecondViewController ()
 
+@property (strong, nonatomic) NSTimer *timer;
+@property (strong, nonatomic) UIPanGestureRecognizer *panGes;
 @end
 
 @implementation SecondViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(changge) userInfo:nil repeats:YES];
     unsigned int count = 0;
     Ivar *ivars = class_copyIvarList([UIGestureRecognizer class], &count);
     for (int i = 0; i < count; i++) {
@@ -31,7 +35,12 @@
     NSDictionary *dic = array[0];
     UIPanGestureRecognizer *panGes = [[UIPanGestureRecognizer alloc] initWithTarget:[dic valueForKey:@"target"] action:@selector(handleNavigationTransition:)];
     [self.view addGestureRecognizer:panGes];
-
+    self.panGes = panGes;
     
+}
+- (void)changge{
+    NSLog(@"000000");
+    CGPoint point = [self.panGes translationInView:self.view];
+    NSLog(@"point.x -- %f",point.x);
 }
 @end
