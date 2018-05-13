@@ -32,6 +32,7 @@
  */
 - (IBAction)messageButtonAction:(UIButton *)sender {
     LDGLog(@"点击了消息按钮");
+    [self.zhiboVc.messageView.messsageTextField becomeFirstResponder];
 }
 /**
  分享按钮的点击事件
@@ -40,6 +41,7 @@
  */
 - (IBAction)shareButtonAction:(UIButton *)sender {
     LDGLog(@"点击了分享按钮");
+    
 }
 /**
  礼物按钮的点击事件

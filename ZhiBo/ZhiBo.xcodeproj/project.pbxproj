@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		06C298292E35C234D3FBCBC7 /* Pods_ZhiBo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCF16B2D845360574013553 /* Pods_ZhiBo.framework */; };
-		1808FE0420849F67009BF387 /* UIView+XMGVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FDFE20849F67009BF387 /* UIView+XMGVIew.m */; };
-		1808FE0520849F67009BF387 /* LDGCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FDFF20849F67009BF387 /* LDGCommonModel.m */; };
-		1808FE0620849F67009BF387 /* LDGTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1808FE0020849F67009BF387 /* LDGTitleView.m */; };
 		184924D02089E64000CEA031 /* LDGHomeBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924CF2089E64000CEA031 /* LDGHomeBaseController.m */; };
 		184924D32089E7CE00CEA031 /* LDGPullViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924D12089E7CD00CEA031 /* LDGPullViewLayout.m */; };
 		184924DB2089E86800CEA031 /* LDGItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184924D82089E86800CEA031 /* LDGItemCell.xib */; };
@@ -35,16 +32,20 @@
 		18D181C22099523900ED2358 /* LDGAuthorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D181C12099523900ED2358 /* LDGAuthorModel.m */; };
 		2C66442B209817AC007EAE0D /* LDGHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C66442A209817AC007EAE0D /* LDGHomeModel.m */; };
 		2C66442D20981F52007EAE0D /* types.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C66442C20981F52007EAE0D /* types.plist */; };
+		2CDF0BD920A85007007F9C13 /* LDGContentCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF0BD220A85006007F9C13 /* LDGContentCollectionView.m */; };
+		2CDF0BDA20A85007007F9C13 /* UIView+XMGVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF0BD420A85006007F9C13 /* UIView+XMGVIew.m */; };
+		2CDF0BDB20A85007007F9C13 /* LDGCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF0BD620A85006007F9C13 /* LDGCommonModel.m */; };
+		2CDF0BDC20A85007007F9C13 /* LDGTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF0BD720A85007007F9C13 /* LDGTitleView.m */; };
+		2CDF0BDD20A85007007F9C13 /* LDGContentFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF0BD820A85007007F9C13 /* LDGContentFlowLayout.m */; };
+		2CDF0BE020A85084007F9C13 /* LDGMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF0BDF20A85084007F9C13 /* LDGMessageView.m */; };
+		2CDF0BE220A850A2007F9C13 /* LDGMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CDF0BE120A850A2007F9C13 /* LDGMessageView.xib */; };
+		2CDF0BE520A85524007F9C13 /* QHNormalEmotionSort.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CDF0BE320A85523007F9C13 /* QHNormalEmotionSort.plist */; };
+		2CDF0BE620A85524007F9C13 /* QHSohuGifSort.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CDF0BE420A85524007F9C13 /* QHSohuGifSort.plist */; };
+		2CDF0BE920A85687007F9C13 /* UIView+LDGXIBCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF0BE820A85687007F9C13 /* UIView+LDGXIBCategory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		004E1922D47F68155533DDC5 /* Pods-ZhiBo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiBo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiBo/Pods-ZhiBo.debug.xcconfig"; sourceTree = "<group>"; };
-		1808FDFE20849F67009BF387 /* UIView+XMGVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XMGVIew.m"; sourceTree = "<group>"; };
-		1808FDFF20849F67009BF387 /* LDGCommonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGCommonModel.m; sourceTree = "<group>"; };
-		1808FE0020849F67009BF387 /* LDGTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGTitleView.m; sourceTree = "<group>"; };
-		1808FE0120849F67009BF387 /* UIView+XMGVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XMGVIew.h"; sourceTree = "<group>"; };
-		1808FE0220849F67009BF387 /* LDGCommonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGCommonModel.h; sourceTree = "<group>"; };
-		1808FE0320849F67009BF387 /* LDGTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGTitleView.h; sourceTree = "<group>"; };
 		184924CE2089E64000CEA031 /* LDGHomeBaseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGHomeBaseController.h; sourceTree = "<group>"; };
 		184924CF2089E64000CEA031 /* LDGHomeBaseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGHomeBaseController.m; sourceTree = "<group>"; };
 		184924D12089E7CD00CEA031 /* LDGPullViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGPullViewLayout.m; sourceTree = "<group>"; };
@@ -90,6 +91,23 @@
 		2C664429209817AC007EAE0D /* LDGHomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGHomeModel.h; sourceTree = "<group>"; };
 		2C66442A209817AC007EAE0D /* LDGHomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGHomeModel.m; sourceTree = "<group>"; };
 		2C66442C20981F52007EAE0D /* types.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = types.plist; sourceTree = "<group>"; };
+		2CDF0BCF20A85006007F9C13 /* UIView+XMGVIew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+XMGVIew.h"; sourceTree = "<group>"; };
+		2CDF0BD020A85006007F9C13 /* LDGCommonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGCommonModel.h; sourceTree = "<group>"; };
+		2CDF0BD120A85006007F9C13 /* LDGContentCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGContentCollectionView.h; sourceTree = "<group>"; };
+		2CDF0BD220A85006007F9C13 /* LDGContentCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGContentCollectionView.m; sourceTree = "<group>"; };
+		2CDF0BD320A85006007F9C13 /* LDGContentFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGContentFlowLayout.h; sourceTree = "<group>"; };
+		2CDF0BD420A85006007F9C13 /* UIView+XMGVIew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+XMGVIew.m"; sourceTree = "<group>"; };
+		2CDF0BD520A85006007F9C13 /* LDGTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGTitleView.h; sourceTree = "<group>"; };
+		2CDF0BD620A85006007F9C13 /* LDGCommonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGCommonModel.m; sourceTree = "<group>"; };
+		2CDF0BD720A85007007F9C13 /* LDGTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGTitleView.m; sourceTree = "<group>"; };
+		2CDF0BD820A85007007F9C13 /* LDGContentFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGContentFlowLayout.m; sourceTree = "<group>"; };
+		2CDF0BDE20A85084007F9C13 /* LDGMessageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGMessageView.h; sourceTree = "<group>"; };
+		2CDF0BDF20A85084007F9C13 /* LDGMessageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGMessageView.m; sourceTree = "<group>"; };
+		2CDF0BE120A850A2007F9C13 /* LDGMessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LDGMessageView.xib; sourceTree = "<group>"; };
+		2CDF0BE320A85523007F9C13 /* QHNormalEmotionSort.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = QHNormalEmotionSort.plist; sourceTree = "<group>"; };
+		2CDF0BE420A85524007F9C13 /* QHSohuGifSort.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = QHSohuGifSort.plist; sourceTree = "<group>"; };
+		2CDF0BE720A85687007F9C13 /* UIView+LDGXIBCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+LDGXIBCategory.h"; sourceTree = "<group>"; };
+		2CDF0BE820A85687007F9C13 /* UIView+LDGXIBCategory.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+LDGXIBCategory.m"; sourceTree = "<group>"; };
 		6FCF16B2D845360574013553 /* Pods_ZhiBo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZhiBo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D156199E0D9AD1E0DF9BF89B /* Pods-ZhiBo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiBo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiBo/Pods-ZhiBo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,12 +135,16 @@
 		1808FDFD20849F67009BF387 /* LDGTitleView */ = {
 			isa = PBXGroup;
 			children = (
-				1808FE0120849F67009BF387 /* UIView+XMGVIew.h */,
-				1808FDFE20849F67009BF387 /* UIView+XMGVIew.m */,
-				1808FE0220849F67009BF387 /* LDGCommonModel.h */,
-				1808FDFF20849F67009BF387 /* LDGCommonModel.m */,
-				1808FE0320849F67009BF387 /* LDGTitleView.h */,
-				1808FE0020849F67009BF387 /* LDGTitleView.m */,
+				2CDF0BD020A85006007F9C13 /* LDGCommonModel.h */,
+				2CDF0BD620A85006007F9C13 /* LDGCommonModel.m */,
+				2CDF0BD120A85006007F9C13 /* LDGContentCollectionView.h */,
+				2CDF0BD220A85006007F9C13 /* LDGContentCollectionView.m */,
+				2CDF0BD320A85006007F9C13 /* LDGContentFlowLayout.h */,
+				2CDF0BD820A85007007F9C13 /* LDGContentFlowLayout.m */,
+				2CDF0BD520A85006007F9C13 /* LDGTitleView.h */,
+				2CDF0BD720A85007007F9C13 /* LDGTitleView.m */,
+				2CDF0BCF20A85006007F9C13 /* UIView+XMGVIew.h */,
+				2CDF0BD420A85006007F9C13 /* UIView+XMGVIew.m */,
 			);
 			path = LDGTitleView;
 			sourceTree = "<group>";
@@ -164,6 +186,8 @@
 				184A3C872061F115002932D5 /* LaunchScreen.storyboard */,
 				2C66442C20981F52007EAE0D /* types.plist */,
 				184A3C8A2061F115002932D5 /* Info.plist */,
+				2CDF0BE320A85523007F9C13 /* QHNormalEmotionSort.plist */,
+				2CDF0BE420A85524007F9C13 /* QHSohuGifSort.plist */,
 			);
 			path = ZhiBo;
 			sourceTree = "<group>";
@@ -307,6 +331,9 @@
 				185965DF20A027BD00BEDE77 /* LDGAuthorView.m */,
 				185965E420A0300F00BEDE77 /* LDGZhiBoBottomView.h */,
 				185965E520A0300F00BEDE77 /* LDGZhiBoBottomView.m */,
+				2CDF0BDE20A85084007F9C13 /* LDGMessageView.h */,
+				2CDF0BDF20A85084007F9C13 /* LDGMessageView.m */,
+				2CDF0BE120A850A2007F9C13 /* LDGMessageView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -416,6 +443,8 @@
 			children = (
 				187F1CA52064D2CE000671A4 /* UIColor+LDGColor.h */,
 				187F1CA62064D2CE000671A4 /* UIColor+LDGColor.m */,
+				2CDF0BE720A85687007F9C13 /* UIView+LDGXIBCategory.h */,
+				2CDF0BE820A85687007F9C13 /* UIView+LDGXIBCategory.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -500,8 +529,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CDF0BE520A85524007F9C13 /* QHNormalEmotionSort.plist in Resources */,
 				184A3C892061F115002932D5 /* LaunchScreen.storyboard in Resources */,
 				184A3C862061F115002932D5 /* Assets.xcassets in Resources */,
+				2CDF0BE620A85524007F9C13 /* QHSohuGifSort.plist in Resources */,
+				2CDF0BE220A850A2007F9C13 /* LDGMessageView.xib in Resources */,
 				2C66442D20981F52007EAE0D /* types.plist in Resources */,
 				184924DB2089E86800CEA031 /* LDGItemCell.xib in Resources */,
 				185965DD209FF1B300BEDE77 /* FirstPart.storyboard in Resources */,
@@ -583,25 +615,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				185965E020A027BD00BEDE77 /* LDGAuthorView.m in Sources */,
+				2CDF0BDC20A85007007F9C13 /* LDGTitleView.m in Sources */,
 				1874189D2061FBB80030C6EA /* main.m in Sources */,
 				18757832208EC8A700327800 /* LDGHomeServer.m in Sources */,
+				2CDF0BE920A85687007F9C13 /* UIView+LDGXIBCategory.m in Sources */,
 				184924DC2089E86800CEA031 /* LDGItemCell.m in Sources */,
-				1808FE0420849F67009BF387 /* UIView+XMGVIew.m in Sources */,
 				1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */,
+				2CDF0BDD20A85007007F9C13 /* LDGContentFlowLayout.m in Sources */,
 				185965E920A037D200BEDE77 /* LDGCommonTool.m in Sources */,
+				2CDF0BDA20A85007007F9C13 /* UIView+XMGVIew.m in Sources */,
 				187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */,
-				1808FE0520849F67009BF387 /* LDGCommonModel.m in Sources */,
+				2CDF0BE020A85084007F9C13 /* LDGMessageView.m in Sources */,
 				18D181C22099523900ED2358 /* LDGAuthorModel.m in Sources */,
 				187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */,
 				185965E620A0300F00BEDE77 /* LDGZhiBoBottomView.m in Sources */,
 				185965DB209FF06C00BEDE77 /* LDGZhiBoViewController.m in Sources */,
+				2CDF0BDB20A85007007F9C13 /* LDGCommonModel.m in Sources */,
 				187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */,
 				2C66442B209817AC007EAE0D /* LDGHomeModel.m in Sources */,
 				1875782C208EC43600327800 /* XMGHttpBaseManager.m in Sources */,
 				184924D02089E64000CEA031 /* LDGHomeBaseController.m in Sources */,
 				187F1C9D2064AAFF000671A4 /* LDGNavigationController.m in Sources */,
+				2CDF0BD920A85007007F9C13 /* LDGContentCollectionView.m in Sources */,
 				184924D32089E7CE00CEA031 /* LDGPullViewLayout.m in Sources */,
-				1808FE0620849F67009BF387 /* LDGTitleView.m in Sources */,
 				1875782A208EC43600327800 /* XMGHttpConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
