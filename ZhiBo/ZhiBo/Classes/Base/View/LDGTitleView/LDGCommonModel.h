@@ -45,13 +45,28 @@
 /**
  指示器的颜色
  */
-@property (assign, nonatomic) UIColor *indicatorColor;
+@property (strong, nonatomic) UIColor *indicatorColor;
 /**
  存放模型数据的
  */
 @property (strong, nonatomic) NSMutableArray *modelArray;
-
-
+#pragma mark - 表情引用到的
+/**
+ collectionView的背景颜色
+ */
+@property (strong, nonatomic) UIColor *collectionViewBackColor;
+/**
+ pagecontroll 的常规颜色
+ */
+@property (strong, nonatomic) UIColor *pageControllCommonColor;
+/**
+ pagecontroll 的当前选中颜色
+ */
+@property (strong, nonatomic) UIColor *pageControllSelectColor;
+/**
+ 指定的均分个数。需要大于或者等于标题的个数 ，才能实现均分
+ */
+@property (assign, nonatomic) NSInteger averageCount;
 
 
 @end
