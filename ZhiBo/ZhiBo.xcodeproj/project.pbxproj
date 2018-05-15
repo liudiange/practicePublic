@@ -20,6 +20,10 @@
 		185965E020A027BD00BEDE77 /* LDGAuthorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185965DF20A027BD00BEDE77 /* LDGAuthorView.m */; };
 		185965E620A0300F00BEDE77 /* LDGZhiBoBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185965E520A0300F00BEDE77 /* LDGZhiBoBottomView.m */; };
 		185965E920A037D200BEDE77 /* LDGCommonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 185965E820A037D200BEDE77 /* LDGCommonTool.m */; };
+		186BCC9220AA6FEA00DA34B5 /* LDGEmoticonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 186BCC9120AA6FEA00DA34B5 /* LDGEmoticonView.m */; };
+		186BCC9620AA736E00DA34B5 /* LDGEmoticonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186BCC9420AA736E00DA34B5 /* LDGEmoticonCell.m */; };
+		186BCC9720AA736E00DA34B5 /* LDGEmoticonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186BCC9520AA736E00DA34B5 /* LDGEmoticonCell.xib */; };
+		186BCC9A20AA755100DA34B5 /* LDGEmoticonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 186BCC9920AA755100DA34B5 /* LDGEmoticonModel.m */; };
 		1874189D2061FBB80030C6EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418882061FBB80030C6EA /* main.m */; };
 		1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418892061FBB80030C6EA /* AppDelegate.m */; };
 		187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418A0206232930030C6EA /* LDGHomeViewController.m */; };
@@ -67,6 +71,15 @@
 		185965E520A0300F00BEDE77 /* LDGZhiBoBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGZhiBoBottomView.m; sourceTree = "<group>"; };
 		185965E720A037D200BEDE77 /* LDGCommonTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGCommonTool.h; sourceTree = "<group>"; };
 		185965E820A037D200BEDE77 /* LDGCommonTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGCommonTool.m; sourceTree = "<group>"; };
+		186BCC9020AA6FEA00DA34B5 /* LDGEmoticonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGEmoticonView.h; sourceTree = "<group>"; };
+		186BCC9120AA6FEA00DA34B5 /* LDGEmoticonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGEmoticonView.m; sourceTree = "<group>"; };
+		186BCC9320AA736E00DA34B5 /* LDGEmoticonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGEmoticonCell.h; sourceTree = "<group>"; };
+		186BCC9420AA736E00DA34B5 /* LDGEmoticonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGEmoticonCell.m; sourceTree = "<group>"; };
+		186BCC9520AA736E00DA34B5 /* LDGEmoticonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LDGEmoticonCell.xib; sourceTree = "<group>"; };
+		186BCC9820AA755100DA34B5 /* LDGEmoticonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGEmoticonModel.h; sourceTree = "<group>"; };
+		186BCC9920AA755100DA34B5 /* LDGEmoticonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGEmoticonModel.m; sourceTree = "<group>"; };
+		186BCC9B20AAB8FA00DA34B5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		186BCC9C20AAB8FA00DA34B5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		187418872061FBB80030C6EA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		187418882061FBB80030C6EA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		187418892061FBB80030C6EA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -320,6 +333,8 @@
 			children = (
 				18D181C02099523900ED2358 /* LDGAuthorModel.h */,
 				18D181C12099523900ED2358 /* LDGAuthorModel.m */,
+				186BCC9820AA755100DA34B5 /* LDGEmoticonModel.h */,
+				186BCC9920AA755100DA34B5 /* LDGEmoticonModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -334,6 +349,11 @@
 				2CDF0BDE20A85084007F9C13 /* LDGMessageView.h */,
 				2CDF0BDF20A85084007F9C13 /* LDGMessageView.m */,
 				2CDF0BE120A850A2007F9C13 /* LDGMessageView.xib */,
+				186BCC9020AA6FEA00DA34B5 /* LDGEmoticonView.h */,
+				186BCC9120AA6FEA00DA34B5 /* LDGEmoticonView.m */,
+				186BCC9320AA736E00DA34B5 /* LDGEmoticonCell.h */,
+				186BCC9420AA736E00DA34B5 /* LDGEmoticonCell.m */,
+				186BCC9520AA736E00DA34B5 /* LDGEmoticonCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -532,6 +552,7 @@
 				2CDF0BE520A85524007F9C13 /* QHNormalEmotionSort.plist in Resources */,
 				184A3C892061F115002932D5 /* LaunchScreen.storyboard in Resources */,
 				184A3C862061F115002932D5 /* Assets.xcassets in Resources */,
+				186BCC9720AA736E00DA34B5 /* LDGEmoticonCell.xib in Resources */,
 				2CDF0BE620A85524007F9C13 /* QHSohuGifSort.plist in Resources */,
 				2CDF0BE220A850A2007F9C13 /* LDGMessageView.xib in Resources */,
 				2C66442D20981F52007EAE0D /* types.plist in Resources */,
@@ -616,6 +637,8 @@
 			files = (
 				185965E020A027BD00BEDE77 /* LDGAuthorView.m in Sources */,
 				2CDF0BDC20A85007007F9C13 /* LDGTitleView.m in Sources */,
+				186BCC9620AA736E00DA34B5 /* LDGEmoticonCell.m in Sources */,
+				186BCC9220AA6FEA00DA34B5 /* LDGEmoticonView.m in Sources */,
 				1874189D2061FBB80030C6EA /* main.m in Sources */,
 				18757832208EC8A700327800 /* LDGHomeServer.m in Sources */,
 				2CDF0BE920A85687007F9C13 /* UIView+LDGXIBCategory.m in Sources */,
@@ -623,6 +646,7 @@
 				1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */,
 				2CDF0BDD20A85007007F9C13 /* LDGContentFlowLayout.m in Sources */,
 				185965E920A037D200BEDE77 /* LDGCommonTool.m in Sources */,
+				186BCC9A20AA755100DA34B5 /* LDGEmoticonModel.m in Sources */,
 				2CDF0BDA20A85007007F9C13 /* UIView+XMGVIew.m in Sources */,
 				187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */,
 				2CDF0BE020A85084007F9C13 /* LDGMessageView.m in Sources */,
@@ -649,6 +673,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				184A3C832061F115002932D5 /* Base */,
+				186BCC9B20AAB8FA00DA34B5 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -657,6 +682,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				184A3C882061F115002932D5 /* Base */,
+				186BCC9C20AAB8FA00DA34B5 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -668,6 +694,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -723,6 +750,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

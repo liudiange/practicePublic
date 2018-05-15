@@ -206,7 +206,7 @@
     //  创建pagecontrol
     CGFloat pageControlY = self.isShouldBottom == YES ? (self.frame.size.height - self.titleViewHeight - 20) : (self.frame.size.height - 20);
     UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, pageControlY, self.frame.size.width, 20)];
-    pageControl.backgroundColor = [UIColor redColor];
+    pageControl.backgroundColor = collectionView.backgroundColor;
     pageControl.pageIndicatorTintColor = self.commonModel.pageControllCommonColor ? (self.commonModel.pageControllCommonColor) : ([UIColor whiteColor]);
     pageControl.currentPageIndicatorTintColor = self.commonModel.pageControllSelectColor ? (self.commonModel.pageControllSelectColor) : ([UIColor greenColor]);
     pageControl.currentPage = 0;
