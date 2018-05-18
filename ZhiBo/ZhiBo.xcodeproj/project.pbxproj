@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		06C298292E35C234D3FBCBC7 /* Pods_ZhiBo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FCF16B2D845360574013553 /* Pods_ZhiBo.framework */; };
+		183C0AF920AE7CB9000C4BBD /* LDGMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0AF420AE7CB8000C4BBD /* LDGMessageView.m */; };
+		183C0AFA20AE7CB9000C4BBD /* LDGMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183C0AF520AE7CB8000C4BBD /* LDGMessageView.xib */; };
+		183C0AFB20AE7CB9000C4BBD /* LDGEmoticonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0AF620AE7CB8000C4BBD /* LDGEmoticonCell.m */; };
+		183C0AFC20AE7CB9000C4BBD /* LDGEmoticonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183C0AF720AE7CB8000C4BBD /* LDGEmoticonCell.xib */; };
+		183C0AFD20AE7CB9000C4BBD /* LDGEmoticonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0AF820AE7CB8000C4BBD /* LDGEmoticonView.m */; };
+		183C0B0120AE7D36000C4BBD /* LDGGiftEmoticonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0B0020AE7D36000C4BBD /* LDGGiftEmoticonView.m */; };
+		183C0B0520AE7F46000C4BBD /* LDGGiftEmoticonViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0B0320AE7F46000C4BBD /* LDGGiftEmoticonViewCell.m */; };
+		183C0B0620AE7F46000C4BBD /* LDGGiftEmoticonViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183C0B0420AE7F46000C4BBD /* LDGGiftEmoticonViewCell.xib */; };
+		183C0B0920AE7F90000C4BBD /* LDGGiftEmoticonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0B0820AE7F90000C4BBD /* LDGGiftEmoticonModel.m */; };
+		183C0B0B20AEA7C3000C4BBD /* LDGGiftEmoticonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183C0B0A20AEA7C3000C4BBD /* LDGGiftEmoticonView.xib */; };
+		183C0B0F20AEB6D3000C4BBD /* LDGGiftEmoticonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0B0E20AEB6D3000C4BBD /* LDGGiftEmoticonManager.m */; };
 		184924D02089E64000CEA031 /* LDGHomeBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924CF2089E64000CEA031 /* LDGHomeBaseController.m */; };
 		184924D32089E7CE00CEA031 /* LDGPullViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924D12089E7CD00CEA031 /* LDGPullViewLayout.m */; };
 		184924DB2089E86800CEA031 /* LDGItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184924D82089E86800CEA031 /* LDGItemCell.xib */; };
@@ -20,9 +31,6 @@
 		185965E020A027BD00BEDE77 /* LDGAuthorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185965DF20A027BD00BEDE77 /* LDGAuthorView.m */; };
 		185965E620A0300F00BEDE77 /* LDGZhiBoBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185965E520A0300F00BEDE77 /* LDGZhiBoBottomView.m */; };
 		185965E920A037D200BEDE77 /* LDGCommonTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 185965E820A037D200BEDE77 /* LDGCommonTool.m */; };
-		186BCC9220AA6FEA00DA34B5 /* LDGEmoticonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 186BCC9120AA6FEA00DA34B5 /* LDGEmoticonView.m */; };
-		186BCC9620AA736E00DA34B5 /* LDGEmoticonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186BCC9420AA736E00DA34B5 /* LDGEmoticonCell.m */; };
-		186BCC9720AA736E00DA34B5 /* LDGEmoticonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186BCC9520AA736E00DA34B5 /* LDGEmoticonCell.xib */; };
 		186BCC9A20AA755100DA34B5 /* LDGEmoticonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 186BCC9920AA755100DA34B5 /* LDGEmoticonModel.m */; };
 		1874189D2061FBB80030C6EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418882061FBB80030C6EA /* main.m */; };
 		1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 187418892061FBB80030C6EA /* AppDelegate.m */; };
@@ -41,8 +49,6 @@
 		2CDF0BDB20A85007007F9C13 /* LDGCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF0BD620A85006007F9C13 /* LDGCommonModel.m */; };
 		2CDF0BDC20A85007007F9C13 /* LDGTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF0BD720A85007007F9C13 /* LDGTitleView.m */; };
 		2CDF0BDD20A85007007F9C13 /* LDGContentFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF0BD820A85007007F9C13 /* LDGContentFlowLayout.m */; };
-		2CDF0BE020A85084007F9C13 /* LDGMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF0BDF20A85084007F9C13 /* LDGMessageView.m */; };
-		2CDF0BE220A850A2007F9C13 /* LDGMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CDF0BE120A850A2007F9C13 /* LDGMessageView.xib */; };
 		2CDF0BE520A85524007F9C13 /* QHNormalEmotionSort.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CDF0BE320A85523007F9C13 /* QHNormalEmotionSort.plist */; };
 		2CDF0BE620A85524007F9C13 /* QHSohuGifSort.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2CDF0BE420A85524007F9C13 /* QHSohuGifSort.plist */; };
 		2CDF0BE920A85687007F9C13 /* UIView+LDGXIBCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CDF0BE820A85687007F9C13 /* UIView+LDGXIBCategory.m */; };
@@ -50,6 +56,24 @@
 
 /* Begin PBXFileReference section */
 		004E1922D47F68155533DDC5 /* Pods-ZhiBo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZhiBo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZhiBo/Pods-ZhiBo.debug.xcconfig"; sourceTree = "<group>"; };
+		183C0AF120AE7CB8000C4BBD /* LDGMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGMessageView.h; sourceTree = "<group>"; };
+		183C0AF220AE7CB8000C4BBD /* LDGEmoticonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGEmoticonCell.h; sourceTree = "<group>"; };
+		183C0AF320AE7CB8000C4BBD /* LDGEmoticonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDGEmoticonView.h; sourceTree = "<group>"; };
+		183C0AF420AE7CB8000C4BBD /* LDGMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGMessageView.m; sourceTree = "<group>"; };
+		183C0AF520AE7CB8000C4BBD /* LDGMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LDGMessageView.xib; sourceTree = "<group>"; };
+		183C0AF620AE7CB8000C4BBD /* LDGEmoticonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGEmoticonCell.m; sourceTree = "<group>"; };
+		183C0AF720AE7CB8000C4BBD /* LDGEmoticonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LDGEmoticonCell.xib; sourceTree = "<group>"; };
+		183C0AF820AE7CB8000C4BBD /* LDGEmoticonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGEmoticonView.m; sourceTree = "<group>"; };
+		183C0AFF20AE7D36000C4BBD /* LDGGiftEmoticonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGGiftEmoticonView.h; sourceTree = "<group>"; };
+		183C0B0020AE7D36000C4BBD /* LDGGiftEmoticonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGGiftEmoticonView.m; sourceTree = "<group>"; };
+		183C0B0220AE7F46000C4BBD /* LDGGiftEmoticonViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGGiftEmoticonViewCell.h; sourceTree = "<group>"; };
+		183C0B0320AE7F46000C4BBD /* LDGGiftEmoticonViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGGiftEmoticonViewCell.m; sourceTree = "<group>"; };
+		183C0B0420AE7F46000C4BBD /* LDGGiftEmoticonViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LDGGiftEmoticonViewCell.xib; sourceTree = "<group>"; };
+		183C0B0720AE7F90000C4BBD /* LDGGiftEmoticonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGGiftEmoticonModel.h; sourceTree = "<group>"; };
+		183C0B0820AE7F90000C4BBD /* LDGGiftEmoticonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGGiftEmoticonModel.m; sourceTree = "<group>"; };
+		183C0B0A20AEA7C3000C4BBD /* LDGGiftEmoticonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LDGGiftEmoticonView.xib; sourceTree = "<group>"; };
+		183C0B0D20AEB6D3000C4BBD /* LDGGiftEmoticonManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGGiftEmoticonManager.h; sourceTree = "<group>"; };
+		183C0B0E20AEB6D3000C4BBD /* LDGGiftEmoticonManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGGiftEmoticonManager.m; sourceTree = "<group>"; };
 		184924CE2089E64000CEA031 /* LDGHomeBaseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGHomeBaseController.h; sourceTree = "<group>"; };
 		184924CF2089E64000CEA031 /* LDGHomeBaseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGHomeBaseController.m; sourceTree = "<group>"; };
 		184924D12089E7CD00CEA031 /* LDGPullViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGPullViewLayout.m; sourceTree = "<group>"; };
@@ -71,11 +95,6 @@
 		185965E520A0300F00BEDE77 /* LDGZhiBoBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGZhiBoBottomView.m; sourceTree = "<group>"; };
 		185965E720A037D200BEDE77 /* LDGCommonTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGCommonTool.h; sourceTree = "<group>"; };
 		185965E820A037D200BEDE77 /* LDGCommonTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGCommonTool.m; sourceTree = "<group>"; };
-		186BCC9020AA6FEA00DA34B5 /* LDGEmoticonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGEmoticonView.h; sourceTree = "<group>"; };
-		186BCC9120AA6FEA00DA34B5 /* LDGEmoticonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGEmoticonView.m; sourceTree = "<group>"; };
-		186BCC9320AA736E00DA34B5 /* LDGEmoticonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGEmoticonCell.h; sourceTree = "<group>"; };
-		186BCC9420AA736E00DA34B5 /* LDGEmoticonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGEmoticonCell.m; sourceTree = "<group>"; };
-		186BCC9520AA736E00DA34B5 /* LDGEmoticonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LDGEmoticonCell.xib; sourceTree = "<group>"; };
 		186BCC9820AA755100DA34B5 /* LDGEmoticonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGEmoticonModel.h; sourceTree = "<group>"; };
 		186BCC9920AA755100DA34B5 /* LDGEmoticonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGEmoticonModel.m; sourceTree = "<group>"; };
 		186BCC9B20AAB8FA00DA34B5 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -114,9 +133,6 @@
 		2CDF0BD620A85006007F9C13 /* LDGCommonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGCommonModel.m; sourceTree = "<group>"; };
 		2CDF0BD720A85007007F9C13 /* LDGTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGTitleView.m; sourceTree = "<group>"; };
 		2CDF0BD820A85007007F9C13 /* LDGContentFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGContentFlowLayout.m; sourceTree = "<group>"; };
-		2CDF0BDE20A85084007F9C13 /* LDGMessageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGMessageView.h; sourceTree = "<group>"; };
-		2CDF0BDF20A85084007F9C13 /* LDGMessageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGMessageView.m; sourceTree = "<group>"; };
-		2CDF0BE120A850A2007F9C13 /* LDGMessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LDGMessageView.xib; sourceTree = "<group>"; };
 		2CDF0BE320A85523007F9C13 /* QHNormalEmotionSort.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = QHNormalEmotionSort.plist; sourceTree = "<group>"; };
 		2CDF0BE420A85524007F9C13 /* QHSohuGifSort.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = QHSohuGifSort.plist; sourceTree = "<group>"; };
 		2CDF0BE720A85687007F9C13 /* UIView+LDGXIBCategory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+LDGXIBCategory.h"; sourceTree = "<group>"; };
@@ -160,6 +176,43 @@
 				2CDF0BD420A85006007F9C13 /* UIView+XMGVIew.m */,
 			);
 			path = LDGTitleView;
+			sourceTree = "<group>";
+		};
+		183C0AF020AE7CB8000C4BBD /* chatView */ = {
+			isa = PBXGroup;
+			children = (
+				183C0AF120AE7CB8000C4BBD /* LDGMessageView.h */,
+				183C0AF420AE7CB8000C4BBD /* LDGMessageView.m */,
+				183C0AF320AE7CB8000C4BBD /* LDGEmoticonView.h */,
+				183C0AF820AE7CB8000C4BBD /* LDGEmoticonView.m */,
+				183C0AF520AE7CB8000C4BBD /* LDGMessageView.xib */,
+				183C0AF220AE7CB8000C4BBD /* LDGEmoticonCell.h */,
+				183C0AF620AE7CB8000C4BBD /* LDGEmoticonCell.m */,
+				183C0AF720AE7CB8000C4BBD /* LDGEmoticonCell.xib */,
+			);
+			path = chatView;
+			sourceTree = "<group>";
+		};
+		183C0AFE20AE7CE0000C4BBD /* GiftView */ = {
+			isa = PBXGroup;
+			children = (
+				183C0AFF20AE7D36000C4BBD /* LDGGiftEmoticonView.h */,
+				183C0B0020AE7D36000C4BBD /* LDGGiftEmoticonView.m */,
+				183C0B0A20AEA7C3000C4BBD /* LDGGiftEmoticonView.xib */,
+				183C0B0220AE7F46000C4BBD /* LDGGiftEmoticonViewCell.h */,
+				183C0B0320AE7F46000C4BBD /* LDGGiftEmoticonViewCell.m */,
+				183C0B0420AE7F46000C4BBD /* LDGGiftEmoticonViewCell.xib */,
+			);
+			path = GiftView;
+			sourceTree = "<group>";
+		};
+		183C0B0C20AEB67B000C4BBD /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				183C0B0D20AEB6D3000C4BBD /* LDGGiftEmoticonManager.h */,
+				183C0B0E20AEB6D3000C4BBD /* LDGGiftEmoticonManager.m */,
+			);
+			path = Server;
 			sourceTree = "<group>";
 		};
 		184924D42089E83500CEA031 /* Model */ = {
@@ -310,6 +363,7 @@
 		187418932061FBB80030C6EA /* firstPart */ = {
 			isa = PBXGroup;
 			children = (
+				183C0B0C20AEB67B000C4BBD /* Server */,
 				187418942061FBB80030C6EA /* Controller */,
 				187418952061FBB80030C6EA /* Model */,
 				187418962061FBB80030C6EA /* View */,
@@ -335,6 +389,8 @@
 				18D181C12099523900ED2358 /* LDGAuthorModel.m */,
 				186BCC9820AA755100DA34B5 /* LDGEmoticonModel.h */,
 				186BCC9920AA755100DA34B5 /* LDGEmoticonModel.m */,
+				183C0B0720AE7F90000C4BBD /* LDGGiftEmoticonModel.h */,
+				183C0B0820AE7F90000C4BBD /* LDGGiftEmoticonModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -342,18 +398,12 @@
 		187418962061FBB80030C6EA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				183C0AFE20AE7CE0000C4BBD /* GiftView */,
+				183C0AF020AE7CB8000C4BBD /* chatView */,
 				185965DE20A027BD00BEDE77 /* LDGAuthorView.h */,
 				185965DF20A027BD00BEDE77 /* LDGAuthorView.m */,
 				185965E420A0300F00BEDE77 /* LDGZhiBoBottomView.h */,
 				185965E520A0300F00BEDE77 /* LDGZhiBoBottomView.m */,
-				2CDF0BDE20A85084007F9C13 /* LDGMessageView.h */,
-				2CDF0BDF20A85084007F9C13 /* LDGMessageView.m */,
-				2CDF0BE120A850A2007F9C13 /* LDGMessageView.xib */,
-				186BCC9020AA6FEA00DA34B5 /* LDGEmoticonView.h */,
-				186BCC9120AA6FEA00DA34B5 /* LDGEmoticonView.m */,
-				186BCC9320AA736E00DA34B5 /* LDGEmoticonCell.h */,
-				186BCC9420AA736E00DA34B5 /* LDGEmoticonCell.m */,
-				186BCC9520AA736E00DA34B5 /* LDGEmoticonCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -552,12 +602,14 @@
 				2CDF0BE520A85524007F9C13 /* QHNormalEmotionSort.plist in Resources */,
 				184A3C892061F115002932D5 /* LaunchScreen.storyboard in Resources */,
 				184A3C862061F115002932D5 /* Assets.xcassets in Resources */,
-				186BCC9720AA736E00DA34B5 /* LDGEmoticonCell.xib in Resources */,
 				2CDF0BE620A85524007F9C13 /* QHSohuGifSort.plist in Resources */,
-				2CDF0BE220A850A2007F9C13 /* LDGMessageView.xib in Resources */,
+				183C0AFC20AE7CB9000C4BBD /* LDGEmoticonCell.xib in Resources */,
+				183C0AFA20AE7CB9000C4BBD /* LDGMessageView.xib in Resources */,
+				183C0B0B20AEA7C3000C4BBD /* LDGGiftEmoticonView.xib in Resources */,
 				2C66442D20981F52007EAE0D /* types.plist in Resources */,
 				184924DB2089E86800CEA031 /* LDGItemCell.xib in Resources */,
 				185965DD209FF1B300BEDE77 /* FirstPart.storyboard in Resources */,
+				183C0B0620AE7F46000C4BBD /* LDGGiftEmoticonViewCell.xib in Resources */,
 				184A3C842061F115002932D5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,19 +689,22 @@
 			files = (
 				185965E020A027BD00BEDE77 /* LDGAuthorView.m in Sources */,
 				2CDF0BDC20A85007007F9C13 /* LDGTitleView.m in Sources */,
-				186BCC9620AA736E00DA34B5 /* LDGEmoticonCell.m in Sources */,
-				186BCC9220AA6FEA00DA34B5 /* LDGEmoticonView.m in Sources */,
+				183C0B0520AE7F46000C4BBD /* LDGGiftEmoticonViewCell.m in Sources */,
+				183C0AFD20AE7CB9000C4BBD /* LDGEmoticonView.m in Sources */,
+				183C0B0920AE7F90000C4BBD /* LDGGiftEmoticonModel.m in Sources */,
 				1874189D2061FBB80030C6EA /* main.m in Sources */,
+				183C0B0120AE7D36000C4BBD /* LDGGiftEmoticonView.m in Sources */,
 				18757832208EC8A700327800 /* LDGHomeServer.m in Sources */,
 				2CDF0BE920A85687007F9C13 /* UIView+LDGXIBCategory.m in Sources */,
 				184924DC2089E86800CEA031 /* LDGItemCell.m in Sources */,
 				1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */,
 				2CDF0BDD20A85007007F9C13 /* LDGContentFlowLayout.m in Sources */,
 				185965E920A037D200BEDE77 /* LDGCommonTool.m in Sources */,
+				183C0B0F20AEB6D3000C4BBD /* LDGGiftEmoticonManager.m in Sources */,
+				183C0AFB20AE7CB9000C4BBD /* LDGEmoticonCell.m in Sources */,
 				186BCC9A20AA755100DA34B5 /* LDGEmoticonModel.m in Sources */,
 				2CDF0BDA20A85007007F9C13 /* UIView+XMGVIew.m in Sources */,
 				187418A1206232930030C6EA /* LDGHomeViewController.m in Sources */,
-				2CDF0BE020A85084007F9C13 /* LDGMessageView.m in Sources */,
 				18D181C22099523900ED2358 /* LDGAuthorModel.m in Sources */,
 				187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */,
 				185965E620A0300F00BEDE77 /* LDGZhiBoBottomView.m in Sources */,
@@ -658,6 +713,7 @@
 				187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */,
 				2C66442B209817AC007EAE0D /* LDGHomeModel.m in Sources */,
 				1875782C208EC43600327800 /* XMGHttpBaseManager.m in Sources */,
+				183C0AF920AE7CB9000C4BBD /* LDGMessageView.m in Sources */,
 				184924D02089E64000CEA031 /* LDGHomeBaseController.m in Sources */,
 				187F1C9D2064AAFF000671A4 /* LDGNavigationController.m in Sources */,
 				2CDF0BD920A85007007F9C13 /* LDGContentCollectionView.m in Sources */,

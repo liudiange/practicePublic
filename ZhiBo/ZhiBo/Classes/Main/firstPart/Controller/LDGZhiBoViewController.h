@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "LDGAuthorModel.h"
 #import "LDGMessageView.h"
+#import "LDGGiftEmoticonView.h"
+#import "LDGHomeModel.h"
 
+
+#define MESSAGEBAR 50
+#define GIFT_VIEW_HEIGHT 400
 @interface LDGZhiBoViewController : UIViewController
+
 
 @property (strong, nonatomic) LDGAuthorModel *authorModel;
 @property (nonatomic, strong) LDGMessageView *messageView;
+@property (strong, nonatomic) LDGGiftEmoticonView *giftEmoticomView;
 
 @end

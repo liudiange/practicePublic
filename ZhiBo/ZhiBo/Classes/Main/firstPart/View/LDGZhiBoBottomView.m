@@ -31,7 +31,6 @@
  @param sender 按钮
  */
 - (IBAction)messageButtonAction:(UIButton *)sender {
-    LDGLog(@"点击了消息按钮");
     [self.zhiboVc.messageView.messsageTextField becomeFirstResponder];
 }
 /**
@@ -49,7 +48,9 @@
  @param sender 按钮
  */
 - (IBAction)giftButtonAction:(id)sender {
-    LDGLog(@"点击了礼物按钮");
+    [UIView animateWithDuration:0.25 animations:^{
+        self.zhiboVc.giftEmoticomView.xmg_top = ScreenHeight - GIFT_VIEW_HEIGHT;
+    }];
 }
 /**
  更多按钮的点击事件

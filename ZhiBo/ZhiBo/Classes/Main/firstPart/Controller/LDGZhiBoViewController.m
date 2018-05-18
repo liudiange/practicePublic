@@ -9,13 +9,14 @@
 #import "LDGZhiBoViewController.h"
 #import "LDGAuthorView.h"
 #import "LDGZhiBoBottomView.h"
+#import "LDGGiftEmoticonManager.h"
+#import "LDGHomeServer.h"
 
-
-#define MESSAGEBAR 50
 @interface LDGZhiBoViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *followPeopleButton;
 @property (weak, nonatomic) IBOutlet LDGAuthorView *authorView;
 @property (weak, nonatomic) IBOutlet LDGZhiBoBottomView *bottomView;
+
 
 
 @end
@@ -27,6 +28,7 @@
     //初始化以及其他的相关的操作
     [self setUp];
     [self addNotification];
+    
 }
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
@@ -45,7 +47,10 @@
     messageView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, MESSAGEBAR);
     [self.view addSubview:messageView];
     self.messageView = messageView;
-    
+    // 添加礼物的键盘
+    self.giftEmoticomView = [LDGGiftEmoticonView loadViewXib];
+    self.giftEmoticomView.frame = CGRectMake(0, self.view.frame.size.height - GIFT_VIEW_HEIGHT, self.view.frame.size.width, GIFT_VIEW_HEIGHT);
+    [self.view addSubview:self.giftEmoticomView];
 }
 /**
  监听键盘的点击
@@ -76,6 +81,9 @@
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+    [UIView animateWithDuration:0.25 animations:^{
+        self.giftEmoticomView.xmg_top = ScreenHeight;
+    }];
 }
 
 #pragma mark - 一些常规的按钮的点击事件
