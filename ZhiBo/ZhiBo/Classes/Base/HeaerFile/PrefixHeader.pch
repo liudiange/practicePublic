@@ -15,5 +15,8 @@
 #import "LDGCommonTool.h"
 #import "UIView+XMGVIew.h"
 #import "UIView+LDGXIBCategory.h"
+#import "UIImageView+WebCache.h"
+#import "Zhibo.pbobjc.h"
+
 
 #endif

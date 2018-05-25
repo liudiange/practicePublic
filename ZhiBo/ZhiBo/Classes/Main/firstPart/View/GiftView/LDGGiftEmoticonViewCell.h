@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LDGGiftEmoticonModel.h"
 
 @interface LDGGiftEmoticonViewCell : UICollectionViewCell
+
+@property (strong, nonatomic) LDGGiftEmoticonModel *emoticonGiftModel;
 
 @end

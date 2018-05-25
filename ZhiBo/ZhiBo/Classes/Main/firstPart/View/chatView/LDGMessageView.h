@@ -11,5 +11,7 @@
 @interface LDGMessageView : UIView
 
 @property (weak, nonatomic) IBOutlet UITextField *messsageTextField;
+@property (strong, nonatomic) void (^sendTextBlock)(NSString *textStr);
+
 
 @end

@@ -11,6 +11,8 @@
 #import "LDGContentFlowLayout.h"
 #import "LDGContentCollectionView.h"
 #import "LDGGiftEmoticonManager.h"
+#import "LDGGiftEmoticonViewCell.h"
+
 
 @interface LDGGiftEmoticonView ()<LDGContentCollectionViewDelegate,LDGContentCollectionViewDatasource>
 
@@ -19,6 +21,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet LDGContentCollectionView *contentCollectionView;
 @property (weak, nonatomic) IBOutlet UIButton *rechargeButton;
+@property (strong, nonatomic) LDGGiftEmoticonManager *giftManager;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+
 
 @end
 
@@ -33,47 +39,66 @@ static NSString *emoticon_ID = @"emoticonID";
 -(void)awakeFromNib {
     [super awakeFromNib];
     [self obtainData];
-   // [self setUp];
 }
 /**
  从plist文件中拿到数据
  */
 - (void)obtainData{
+    
     LDGGiftEmoticonManager *giftManager = [[LDGGiftEmoticonManager alloc] init];
-     @weakify(giftManager)
+    @weakify(giftManager);
+    @weakify(self);
     [giftManager startRequest:^(NSError * _Null_unspecified error) {
-        __weak typeof(giftManager)weakHomeServer = giftManager;
-        giftManager.dataArray;
+        @strongify(giftManager);
+       @strongify(self);
         if (!error) {
-            
+            self.dataArray = giftManager.dataArray;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self setUp];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                   [self.contentCollectionView ldgContentReloadData];
+                });
+            });
         }else{
-            
+            LDGLog(@"网络加载错误");
         }
     }];
+    self.giftManager = giftManager;
 }
 /**
  初始化
  */
 - (void)setUp{
-    
     self.sendButton.layer.cornerRadius = 5;
     self.sendButton.layer.masksToBounds = YES;
     
-    NSArray *titlesArray = @[@"普通",@"粉丝专属"];
+    NSArray *titlesArray = @[@"热门",@"高级",@"豪华",@"专属"];
     LDGCommonModel *commonModel = [[LDGCommonModel alloc] init];
     commonModel.averageCount = 2;
+    commonModel.collectionViewBackColor = [UIColor blackColor];
+    commonModel.averageCount = 4;
     commonModel.pageControllCommonColor = [UIColor grayColor];
+    commonModel.titleViewColor = [UIColor blackColor];
+    commonModel.titleTextColor = [UIColor whiteColor];
+    
     LDGContentFlowLayout *contentLayout = [[LDGContentFlowLayout alloc] init];
-    contentLayout.minimumLineSpacing = 10;
-    contentLayout.minimumInteritemSpacing = 10;
-    contentLayout.layoutCows = 3;
-    contentLayout.layoutColumns = 7;
-    LDGContentCollectionView *contentCollection = [[LDGContentCollectionView alloc] initWithFrame:self.bounds titleH:44 isShouldBottom:YES titles:titlesArray layout:contentLayout withCommonModel:commonModel];
-    contentCollection.contnetViewDelegate = self;
-    contentCollection.contentViewDataSource = self;
-    [contentCollection ldgContentRegisterNib:[UINib nibWithNibName:@"LDGEmoticonCell" bundle:nil] forCellWithReuseIdentifier:emoticon_ID];
-    [self addSubview:contentCollection];
-    [contentCollection ldgContentReloadData];
+    contentLayout.minimumLineSpacing = 0;
+    contentLayout.minimumInteritemSpacing = 0;
+    contentLayout.layoutCows = 2;
+    contentLayout.layoutColumns = 4;
+    
+    self.contentCollectionView.titles = [titlesArray copy];
+    self.contentCollectionView.collectionLayout = contentLayout;
+    self.contentCollectionView.commonModel = commonModel;
+    self.contentCollectionView.titleViewHeight = 44;
+    self.contentCollectionView.isShouldBottom = NO;
+    [self.contentCollectionView startSetUp];
+    
+    self.contentCollectionView.contnetViewDelegate = self;
+    self.contentCollectionView.contentViewDataSource = self;
+    [self.contentCollectionView ldgContentRegisterNib:[UINib nibWithNibName:@"LDGGiftEmoticonViewCell" bundle:nil] forCellWithReuseIdentifier:emoticon_ID];
+    [self addSubview:self.contentCollectionView];
+    [self.contentCollectionView ldgContentReloadData];
 }
 #pragma mark - 按钮的点击事件
 /**
@@ -97,21 +122,28 @@ static NSString *emoticon_ID = @"emoticonID";
 #pragma mark - collectionView - datasource
 - (NSInteger)numberOfSectionsInldgContentCollectionView:(UICollectionView *)collectionView{
     
-    return self.dataArray.count;
+    return self.giftManager.dataArray.count;
 }
 - (NSInteger)ldgContentCollectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    NSArray *array = self.dataArray[section];
-    return array.count;
+    if (self.dataArray.count) {
+        NSArray *array = self.dataArray[section];
+        return array.count;
+    }else{
+        return 0;
+    }
 }
 - (__kindof UICollectionViewCell *)ldgContentCollectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-   
-    return nil;
+
+    LDGGiftEmoticonViewCell *emoticonCell = [collectionView dequeueReusableCellWithReuseIdentifier:emoticon_ID forIndexPath:indexPath];
+    emoticonCell.emoticonGiftModel = self.dataArray[indexPath.section][indexPath.item];
+    return emoticonCell;
 }
 #pragma mark collectionView - delegate
 - (void)ldgContentCollectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-   
-    
+    LDGGiftEmoticonModel *model = self.dataArray[indexPath.section][indexPath.item];
+    if (self.sendGift) {
+        self.sendGift(model);
+    }
 }
 
 @end

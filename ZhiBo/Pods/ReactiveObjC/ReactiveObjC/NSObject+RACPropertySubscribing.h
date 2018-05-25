@@ -65,6 +65,7 @@
 #endif
 
 @class RACDisposable;
+@class RACTwoTuple<__covariant First, __covariant Second>;
 @class RACSignal<__covariant ValueType>;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -80,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Returns a signal that immediately sends the receiver's current value at the
 /// given keypath, then any changes thereafter.
 #if OS_OBJECT_HAVE_OBJC_SUPPORT
-- (RACSignal *)rac_valuesForKeyPath:(NSString *)keyPath observer:(__weak NSObject *)observer;
+- (RACSignal *)rac_valuesForKeyPath:(NSString *)keyPath observer:(NSObject *)observer;
 #else
 // Swift builds with OS_OBJECT_HAVE_OBJC_SUPPORT=0 for Playgrounds and LLDB :(
 - (RACSignal *)rac_valuesForKeyPath:(NSString *)keyPath observer:(NSObject *)observer;
@@ -95,9 +96,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Returns a signal that sends tuples containing the current value at the key
 /// path and the change dictionary for each KVO callback.
 #if OS_OBJECT_HAVE_OBJC_SUPPORT
-- (RACSignal *)rac_valuesAndChangesForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options observer:(__weak NSObject *)observer;
+- (RACSignal<RACTwoTuple<id, NSDictionary *> *> *)rac_valuesAndChangesForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options observer:(NSObject *)observer;
 #else
-- (RACSignal *)rac_valuesAndChangesForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options observer:(NSObject *)observer;
+- (RACSignal<RACTwoTuple<id, NSDictionary *> *> *)rac_valuesAndChangesForKeyPath:(NSString *)keyPath options:(NSKeyValueObservingOptions)options observer:(NSObject *)observer;
 #endif
 
 @end

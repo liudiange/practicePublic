@@ -51,13 +51,12 @@
 }
 -(instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
-        
+       // [self setUp];
     }
     return self;
 }
 -(void)awakeFromNib {
     [super awakeFromNib];
-    [self setUp];
 }
 /**
  初始化
@@ -211,11 +210,9 @@
     pageControl.currentPageIndicatorTintColor = self.commonModel.pageControllSelectColor ? (self.commonModel.pageControllSelectColor) : ([UIColor greenColor]);
     pageControl.currentPage = 0;
     pageControl.defersCurrentPageDisplay = YES;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.pageControll.numberOfPages = ([self.contentCollectionView numberOfItemsInSection:0] - 1)/(self.collectionLayout.layoutColumns * self.collectionLayout.layoutCows) + 1;
-    });
     [self addSubview:pageControl];
     self.pageControll = pageControl;
+    self.pageControll.numberOfPages = 0;
 
 }
 /**
@@ -240,9 +237,22 @@
  刷新数据
  */
 - (void)ldgContentReloadData{
+    if (!self.contentCollectionView) {
+        [self setUp];
+    }
     [self.contentCollectionView reloadData];
+    if (self.pageControll.numberOfPages == 0 && [self.contentViewDataSource respondsToSelector:@selector(numberOfSectionsInldgContentCollectionView:)] && [self.contentViewDataSource respondsToSelector:@selector(ldgContentCollectionView:numberOfItemsInSection:)]) {
+        NSInteger numberCount = [self.contentViewDataSource ldgContentCollectionView:self.contentCollectionView numberOfItemsInSection:0];
+        numberCount == 0 ? (self.pageControll.numberOfPages = 0):(self.pageControll.numberOfPages = (numberCount - 1)/(self.collectionLayout.layoutColumns * self.collectionLayout.layoutCows) + 1);
+    }
 }
 
+/**
+ 传递必须的参数过后开始创建
+ */
+-(void)startSetUp{
+    [self setUp];
+}
 #pragma mark - collection的datasource
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     if ([self.contentViewDataSource respondsToSelector:@selector(numberOfSectionsInldgContentCollectionView:)]) {

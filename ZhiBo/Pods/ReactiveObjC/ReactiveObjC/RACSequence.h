@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RACStream.h"
 
+@class RACTuple;
 @class RACScheduler;
 @class RACSignal<__covariant ValueType>;
 
@@ -190,7 +191,7 @@ typedef RACSequence * _Nullable (^RACSequenceBindBlock)(ValueType _Nullable valu
 /// Returns a new sequence of RACTuples, representing the combined values of the
 /// two sequences. Any error from one of the original sequence will be forwarded
 /// on the returned sequence.
-- (RACSequence *)zipWith:(RACSequence *)sequence;
+- (RACSequence<RACTuple *> *)zipWith:(RACSequence *)sequence;
 
 @end
 
@@ -258,7 +259,7 @@ typedef RACSequence * _Nullable (^RACSequenceBindBlock)(ValueType _Nullable valu
 ///               return value must be an object. This argument cannot be nil.
 ///
 /// Returns a new sequence of reduced tuple values.
-- (RACSequence *)reduceEach:(id _Nullable (^)())reduceBlock;
+- (RACSequence *)reduceEach:(RACReduceBlock)reduceBlock;
 
 /// Returns a sequence consisting of `value`, followed by the values in the
 /// receiver.
@@ -286,7 +287,7 @@ typedef RACSequence * _Nullable (^RACSequenceBindBlock)(ValueType _Nullable valu
 ///
 /// Returns a new sequence containing RACTuples of the zipped values from the
 /// sequences.
-+ (RACSequence<ValueType> *)zip:(id<NSFastEnumeration>)sequence;
++ (RACSequence<RACTuple *> *)zip:(id<NSFastEnumeration>)sequence;
 
 /// Zips sequences using +zip:, then reduces the resulting tuples into a single
 /// value using -reduceEach:
@@ -308,7 +309,7 @@ typedef RACSequence * _Nullable (^RACSequenceBindBlock)(ValueType _Nullable valu
 ///
 /// Returns a new sequence containing the results from each invocation of
 /// `reduceBlock`.
-+ (RACSequence<ValueType> *)zip:(id<NSFastEnumeration>)sequences reduce:(id _Nullable (^)())reduceBlock;
++ (RACSequence<ValueType> *)zip:(id<NSFastEnumeration>)sequences reduce:(RACReduceBlock)reduceBlock;
 
 /// Returns a sequence obtained by concatenating `sequences` in order.
 + (RACSequence<ValueType> *)concat:(id<NSFastEnumeration>)sequences;

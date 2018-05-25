@@ -88,6 +88,12 @@
  刷新数据
  */
 - (void)ldgContentReloadData;
+/**
+ 传递必须的参数过后开始创建试图
+ */
+- (void)startSetUp;
+
+
 
 
 @end

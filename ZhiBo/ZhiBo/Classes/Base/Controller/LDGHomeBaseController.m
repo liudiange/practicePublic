@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) UICollectionView *collectionView;
-
+@property (strong, nonatomic) LDGHomeServer *homeServer;
 
 @end
 
@@ -69,14 +69,14 @@ static NSString * const ID = @"cellID";
 -(void)loadServerData {
 
     LDGHomeServer *homeServer = [[LDGHomeServer alloc] initWithModel:self.model];
+    @weakify(homeServer);
     @weakify(self);
     [homeServer startRequest:^(NSError * _Null_unspecified error) {
-        @strongify(self);
-        __weak typeof(homeServer)weakHomeServer = homeServer;
+        @strongify(homeServer);
+         @strongify(self);
         if (!error) {
-            LDGLog(@"加载成功");
             [self.dataArray removeAllObjects];
-            self.dataArray = weakHomeServer.dataArray;
+            self.dataArray = homeServer.dataArray;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.collectionView reloadData];
             });
@@ -84,6 +84,7 @@ static NSString * const ID = @"cellID";
             LDGLog(@"加载失败");
         }
     }];
+    self.homeServer = homeServer;
 }
 #pragma mark - collection 的 delegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

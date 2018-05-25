@@ -13,8 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (strong, nonatomic) LDGEmoticonView *emoticomView;
-@property (copy, nonatomic) NSString *messageStr;
-
 
 @end
 
@@ -72,8 +70,9 @@
  @param sender 按钮
  */
 - (IBAction)sendButtonAction:(UIButton *)sender {
-    
-    self.messageStr = self.messsageTextField.text;
+    if (self.sendTextBlock) {
+        self.sendTextBlock(self.messsageTextField.text);
+    }
     self.messsageTextField.text = nil;
 }
 #pragma mark - delegate

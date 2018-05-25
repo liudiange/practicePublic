@@ -14,7 +14,7 @@
 
 
 #define MESSAGEBAR 50
-#define GIFT_VIEW_HEIGHT 400
+#define GIFT_VIEW_HEIGHT 330
 @interface LDGZhiBoViewController : UIViewController
 
 

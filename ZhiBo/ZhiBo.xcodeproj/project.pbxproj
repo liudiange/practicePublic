@@ -19,6 +19,17 @@
 		183C0B0920AE7F90000C4BBD /* LDGGiftEmoticonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0B0820AE7F90000C4BBD /* LDGGiftEmoticonModel.m */; };
 		183C0B0B20AEA7C3000C4BBD /* LDGGiftEmoticonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 183C0B0A20AEA7C3000C4BBD /* LDGGiftEmoticonView.xib */; };
 		183C0B0F20AEB6D3000C4BBD /* LDGGiftEmoticonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 183C0B0E20AEB6D3000C4BBD /* LDGGiftEmoticonManager.m */; };
+		1844727120B4F9B6006100CE /* zhibo.proto in Resources */ = {isa = PBXBuildFile; fileRef = 1844727020B4F9B6006100CE /* zhibo.proto */; };
+		1844727A20B51809006100CE /* Zhibo.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844727920B51809006100CE /* Zhibo.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		1844728220B535F7006100CE /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 1844727D20B535F6006100CE /* Documentation.html */; };
+		1844728320B535F7006100CE /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844727E20B535F6006100CE /* GCDAsyncUdpSocket.m */; };
+		1844728420B535F7006100CE /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844727F20B535F6006100CE /* GCDAsyncSocket.m */; };
+		1844728720B54063006100CE /* LDGMessageTransformTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1844728620B54063006100CE /* LDGMessageTransformTool.m */; };
+		1845967120B7A2A5000C517B /* LDGInterActiveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845967020B7A2A5000C517B /* LDGInterActiveView.m */; };
+		1845967320B7A2DF000C517B /* LDGInterActiveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1845967220B7A2DF000C517B /* LDGInterActiveView.xib */; };
+		1845967720B7A72A000C517B /* LDGInteractiveTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845967520B7A72A000C517B /* LDGInteractiveTextCell.m */; };
+		1845967820B7A72A000C517B /* LDGInteractiveTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1845967620B7A72A000C517B /* LDGInteractiveTextCell.xib */; };
+		1845967B20B7ABAE000C517B /* LDGInterActiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1845967A20B7ABAE000C517B /* LDGInterActiveModel.m */; };
 		184924D02089E64000CEA031 /* LDGHomeBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924CF2089E64000CEA031 /* LDGHomeBaseController.m */; };
 		184924D32089E7CE00CEA031 /* LDGPullViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 184924D12089E7CD00CEA031 /* LDGPullViewLayout.m */; };
 		184924DB2089E86800CEA031 /* LDGItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184924D82089E86800CEA031 /* LDGItemCell.xib */; };
@@ -74,6 +85,24 @@
 		183C0B0A20AEA7C3000C4BBD /* LDGGiftEmoticonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LDGGiftEmoticonView.xib; sourceTree = "<group>"; };
 		183C0B0D20AEB6D3000C4BBD /* LDGGiftEmoticonManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGGiftEmoticonManager.h; sourceTree = "<group>"; };
 		183C0B0E20AEB6D3000C4BBD /* LDGGiftEmoticonManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGGiftEmoticonManager.m; sourceTree = "<group>"; };
+		1844727020B4F9B6006100CE /* zhibo.proto */ = {isa = PBXFileReference; lastKnownFileType = text; path = zhibo.proto; sourceTree = "<group>"; };
+		1844727820B51808006100CE /* Zhibo.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zhibo.pbobjc.h; sourceTree = "<group>"; };
+		1844727920B51809006100CE /* Zhibo.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Zhibo.pbobjc.m; sourceTree = "<group>"; };
+		1844727D20B535F6006100CE /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
+		1844727E20B535F6006100CE /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		1844727F20B535F6006100CE /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		1844728020B535F6006100CE /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		1844728120B535F6006100CE /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		1844728520B54063006100CE /* LDGMessageTransformTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGMessageTransformTool.h; sourceTree = "<group>"; };
+		1844728620B54063006100CE /* LDGMessageTransformTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGMessageTransformTool.m; sourceTree = "<group>"; };
+		1845966F20B7A2A5000C517B /* LDGInterActiveView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGInterActiveView.h; sourceTree = "<group>"; };
+		1845967020B7A2A5000C517B /* LDGInterActiveView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGInterActiveView.m; sourceTree = "<group>"; };
+		1845967220B7A2DF000C517B /* LDGInterActiveView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LDGInterActiveView.xib; sourceTree = "<group>"; };
+		1845967420B7A72A000C517B /* LDGInteractiveTextCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGInteractiveTextCell.h; sourceTree = "<group>"; };
+		1845967520B7A72A000C517B /* LDGInteractiveTextCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGInteractiveTextCell.m; sourceTree = "<group>"; };
+		1845967620B7A72A000C517B /* LDGInteractiveTextCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LDGInteractiveTextCell.xib; sourceTree = "<group>"; };
+		1845967920B7ABAE000C517B /* LDGInterActiveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGInterActiveModel.h; sourceTree = "<group>"; };
+		1845967A20B7ABAE000C517B /* LDGInterActiveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGInterActiveModel.m; sourceTree = "<group>"; };
 		184924CE2089E64000CEA031 /* LDGHomeBaseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGHomeBaseController.h; sourceTree = "<group>"; };
 		184924CF2089E64000CEA031 /* LDGHomeBaseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGHomeBaseController.m; sourceTree = "<group>"; };
 		184924D12089E7CD00CEA031 /* LDGPullViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDGPullViewLayout.m; sourceTree = "<group>"; };
@@ -215,6 +244,49 @@
 			path = Server;
 			sourceTree = "<group>";
 		};
+		1844726F20B4F8F5006100CE /* Proto */ = {
+			isa = PBXGroup;
+			children = (
+				1844727820B51808006100CE /* Zhibo.pbobjc.h */,
+				1844727920B51809006100CE /* Zhibo.pbobjc.m */,
+				1844727020B4F9B6006100CE /* zhibo.proto */,
+			);
+			path = Proto;
+			sourceTree = "<group>";
+		};
+		1844727B20B53555006100CE /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				1844727C20B535F6006100CE /* GCD */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		1844727C20B535F6006100CE /* GCD */ = {
+			isa = PBXGroup;
+			children = (
+				1844727D20B535F6006100CE /* Documentation.html */,
+				1844727E20B535F6006100CE /* GCDAsyncUdpSocket.m */,
+				1844727F20B535F6006100CE /* GCDAsyncSocket.m */,
+				1844728020B535F6006100CE /* GCDAsyncUdpSocket.h */,
+				1844728120B535F6006100CE /* GCDAsyncSocket.h */,
+			);
+			path = GCD;
+			sourceTree = "<group>";
+		};
+		1845966E20B7A0F2000C517B /* InterActiveView */ = {
+			isa = PBXGroup;
+			children = (
+				1845966F20B7A2A5000C517B /* LDGInterActiveView.h */,
+				1845967020B7A2A5000C517B /* LDGInterActiveView.m */,
+				1845967220B7A2DF000C517B /* LDGInterActiveView.xib */,
+				1845967420B7A72A000C517B /* LDGInteractiveTextCell.h */,
+				1845967520B7A72A000C517B /* LDGInteractiveTextCell.m */,
+				1845967620B7A72A000C517B /* LDGInteractiveTextCell.xib */,
+			);
+			path = InterActiveView;
+			sourceTree = "<group>";
+		};
 		184924D42089E83500CEA031 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,20 +333,13 @@
 		187418842061FBB80030C6EA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1844727B20B53555006100CE /* Lib */,
 				1874188A2061FBB80030C6EA /* Main */,
-				187418852061FBB80030C6EA /* EXtension */,
 				187418862061FBB80030C6EA /* Other */,
 				1874189B2061FBB80030C6EA /* Base */,
 				1874189C2061FBB80030C6EA /* Tool */,
 			);
 			path = Classes;
-			sourceTree = "<group>";
-		};
-		187418852061FBB80030C6EA /* EXtension */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = EXtension;
 			sourceTree = "<group>";
 		};
 		187418862061FBB80030C6EA /* Other */ = {
@@ -391,6 +456,8 @@
 				186BCC9920AA755100DA34B5 /* LDGEmoticonModel.m */,
 				183C0B0720AE7F90000C4BBD /* LDGGiftEmoticonModel.h */,
 				183C0B0820AE7F90000C4BBD /* LDGGiftEmoticonModel.m */,
+				1845967920B7ABAE000C517B /* LDGInterActiveModel.h */,
+				1845967A20B7ABAE000C517B /* LDGInterActiveModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -398,6 +465,7 @@
 		187418962061FBB80030C6EA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1845966E20B7A0F2000C517B /* InterActiveView */,
 				183C0AFE20AE7CE0000C4BBD /* GiftView */,
 				183C0AF020AE7CB8000C4BBD /* chatView */,
 				185965DE20A027BD00BEDE77 /* LDGAuthorView.h */,
@@ -442,6 +510,7 @@
 		1874189B2061FBB80030C6EA /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				1844726F20B4F8F5006100CE /* Proto */,
 				1875782F208EC71100327800 /* Server */,
 				184924D42089E83500CEA031 /* Model */,
 				187F1CA12064AB4B000671A4 /* Category */,
@@ -458,6 +527,8 @@
 				1875781E208EC43600327800 /* HttpManager */,
 				185965E720A037D200BEDE77 /* LDGCommonTool.h */,
 				185965E820A037D200BEDE77 /* LDGCommonTool.m */,
+				1844728520B54063006100CE /* LDGMessageTransformTool.h */,
+				1844728620B54063006100CE /* LDGMessageTransformTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -604,8 +675,12 @@
 				184A3C862061F115002932D5 /* Assets.xcassets in Resources */,
 				2CDF0BE620A85524007F9C13 /* QHSohuGifSort.plist in Resources */,
 				183C0AFC20AE7CB9000C4BBD /* LDGEmoticonCell.xib in Resources */,
+				1845967820B7A72A000C517B /* LDGInteractiveTextCell.xib in Resources */,
+				1844728220B535F7006100CE /* Documentation.html in Resources */,
 				183C0AFA20AE7CB9000C4BBD /* LDGMessageView.xib in Resources */,
 				183C0B0B20AEA7C3000C4BBD /* LDGGiftEmoticonView.xib in Resources */,
+				1845967320B7A2DF000C517B /* LDGInterActiveView.xib in Resources */,
+				1844727120B4F9B6006100CE /* zhibo.proto in Resources */,
 				2C66442D20981F52007EAE0D /* types.plist in Resources */,
 				184924DB2089E86800CEA031 /* LDGItemCell.xib in Resources */,
 				185965DD209FF1B300BEDE77 /* FirstPart.storyboard in Resources */,
@@ -658,9 +733,11 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ZhiBo/Pods-ZhiBo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -668,9 +745,11 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveObjC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
@@ -687,7 +766,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1845967120B7A2A5000C517B /* LDGInterActiveView.m in Sources */,
 				185965E020A027BD00BEDE77 /* LDGAuthorView.m in Sources */,
+				1845967B20B7ABAE000C517B /* LDGInterActiveModel.m in Sources */,
 				2CDF0BDC20A85007007F9C13 /* LDGTitleView.m in Sources */,
 				183C0B0520AE7F46000C4BBD /* LDGGiftEmoticonViewCell.m in Sources */,
 				183C0AFD20AE7CB9000C4BBD /* LDGEmoticonView.m in Sources */,
@@ -697,9 +778,12 @@
 				18757832208EC8A700327800 /* LDGHomeServer.m in Sources */,
 				2CDF0BE920A85687007F9C13 /* UIView+LDGXIBCategory.m in Sources */,
 				184924DC2089E86800CEA031 /* LDGItemCell.m in Sources */,
+				1844728720B54063006100CE /* LDGMessageTransformTool.m in Sources */,
 				1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */,
 				2CDF0BDD20A85007007F9C13 /* LDGContentFlowLayout.m in Sources */,
 				185965E920A037D200BEDE77 /* LDGCommonTool.m in Sources */,
+				1845967720B7A72A000C517B /* LDGInteractiveTextCell.m in Sources */,
+				1844727A20B51809006100CE /* Zhibo.pbobjc.m in Sources */,
 				183C0B0F20AEB6D3000C4BBD /* LDGGiftEmoticonManager.m in Sources */,
 				183C0AFB20AE7CB9000C4BBD /* LDGEmoticonCell.m in Sources */,
 				186BCC9A20AA755100DA34B5 /* LDGEmoticonModel.m in Sources */,
@@ -708,9 +792,11 @@
 				18D181C22099523900ED2358 /* LDGAuthorModel.m in Sources */,
 				187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */,
 				185965E620A0300F00BEDE77 /* LDGZhiBoBottomView.m in Sources */,
+				1844728320B535F7006100CE /* GCDAsyncUdpSocket.m in Sources */,
 				185965DB209FF06C00BEDE77 /* LDGZhiBoViewController.m in Sources */,
 				2CDF0BDB20A85007007F9C13 /* LDGCommonModel.m in Sources */,
 				187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */,
+				1844728420B535F7006100CE /* GCDAsyncSocket.m in Sources */,
 				2C66442B209817AC007EAE0D /* LDGHomeModel.m in Sources */,
 				1875782C208EC43600327800 /* XMGHttpBaseManager.m in Sources */,
 				183C0AF920AE7CB9000C4BBD /* LDGMessageView.m in Sources */,
@@ -867,6 +953,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.my.computer.ABC.ZhiBo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -885,6 +972,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.my.computer.ABC.ZhiBo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

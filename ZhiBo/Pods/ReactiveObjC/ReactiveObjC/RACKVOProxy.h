@@ -21,7 +21,7 @@
 /// observer - True observer of the KVO change. Must not be nil.
 /// context  - Arbitrary context object used to differentiate multiple
 ///            observations of the same keypath. Must be unique, cannot be nil.
-- (void)addObserver:(__weak NSObject *)observer forContext:(void *)context;
+- (void)addObserver:(NSObject *)observer forContext:(void *)context;
 
 /// Removes an observer from the proxy. Parameters must match those passed to
 /// addObserver:forContext:.

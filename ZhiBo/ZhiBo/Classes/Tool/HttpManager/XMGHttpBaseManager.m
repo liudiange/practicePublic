@@ -9,15 +9,19 @@
 #import "XMGHttpBaseManager.h"
 #import "XMGHttpConfig.h"
 
+@interface XMGHttpBaseManager ()
+
+@end
+
+
 @implementation XMGHttpBaseManager
 #pragma mark - lazy
 - (AFHTTPSessionManager *)manager {
     if (!_manager) {
-        __weak typeof(self)weakSelf = self;
         _manager = [AFHTTPSessionManager manager];
         _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        _manager.requestSerializer.timeoutInterval = weakSelf.timeout;
-        if (weakSelf.timeout == 0) {
+        _manager.requestSerializer.timeoutInterval = self.timeout;
+        if (self.timeout == 0) {
            _manager.requestSerializer.timeoutInterval = XMG_TimeOut;
         }
         _manager.responseSerializer.stringEncoding = NSUTF8StringEncoding;
@@ -31,50 +35,50 @@
  @param complete 成功或者失败的block
  */
 - (void)startRequest:(void (^)(NSError * _Null_unspecified error))complete {
-     __weak typeof(self)weakSelf = self;
+    
+    __weak typeof(self)weakSelf = self;
     if (self.requestUrl.length == 0 || self.requestMethod.length == 0) return;
     // 请求开始需要做一些操作
     [self startOption];
     if(self.fileData.length > 0){ // 上传的文件不为空，
-        [weakSelf.manager POST:[self configUrl:self.requestUrl] parameters:self.paramDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-            __strong typeof(weakSelf)strongSelf = weakSelf;
-            [formData appendPartWithFileData:strongSelf.fileData name:strongSelf.name fileName:strongSelf.fileName mimeType:strongSelf.mimeType];
+        [self.manager POST:[self configUrl:self.requestUrl] parameters:self.paramDic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    
+            [formData appendPartWithFileData:weakSelf.fileData name:weakSelf.name fileName:weakSelf.fileName mimeType:weakSelf.mimeType];
         } progress:^(NSProgress * _Nonnull uploadProgress) {
-            __strong typeof(weakSelf)strongSelf = weakSelf;
+            
             CGFloat progress = 1.0 * uploadProgress.completedUnitCount/uploadProgress.totalUnitCount;
-            strongSelf.progress = progress;
+            weakSelf.progress = progress;
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             __strong typeof(weakSelf)strongSelf = weakSelf;
-            [strongSelf detailSuccess:responseObject complete:complete];
+            
+            [weakSelf detailSuccess:responseObject complete:complete];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-             __strong typeof(weakSelf)strongSelf = weakSelf;
-            [strongSelf detailError:error complete:complete];
+            
+            [weakSelf detailError:error complete:complete];
         }];
     }else if ([[self.requestMethod uppercaseString] isEqualToString:@"GET"]) { // GET 请求
-        
-       self.task = [weakSelf.manager GET:[self configUrl:self.requestUrl] parameters:self.paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
-            __strong typeof(weakSelf)strongSelf = weakSelf;
+       self.task = [self.manager GET:[self configUrl:self.requestUrl] parameters:self.paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
+           
             CGFloat progress = 1.0 * uploadProgress.completedUnitCount/uploadProgress.totalUnitCount;
-            strongSelf.progress = progress;
+            weakSelf.progress = progress;
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            __strong typeof(weakSelf)strongSelf = weakSelf;
-            [strongSelf detailSuccess:responseObject complete:complete];
+            
+            [weakSelf detailSuccess:responseObject complete:complete];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-             __strong typeof(weakSelf)strongSelf = weakSelf;
-            [strongSelf detailError:error complete:complete];
+            
+            [weakSelf detailError:error complete:complete];
         }];
     }else if ([[self.requestMethod uppercaseString] isEqualToString:@"POST"]){// POST 请求
         
-        self.task = [weakSelf.manager POST:[self configUrl:self.requestUrl] parameters:self.paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
-             __strong typeof(weakSelf)strongSelf = weakSelf;
+        self.task = [self.manager POST:[self configUrl:self.requestUrl] parameters:self.paramDic progress:^(NSProgress * _Nonnull uploadProgress) {
+            
             CGFloat progress = 1.0 * uploadProgress.completedUnitCount/uploadProgress.totalUnitCount;
-            strongSelf.progress = progress;
+            weakSelf.progress = progress;
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            __strong typeof(weakSelf)strongSelf = weakSelf;
-            [strongSelf detailSuccess:responseObject complete:complete];
+            
+            [weakSelf detailSuccess:responseObject complete:complete];
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            __strong typeof(weakSelf)strongSelf = weakSelf;
-            [strongSelf detailError:error complete:complete];
+            
+            [weakSelf detailError:error complete:complete];
         }];
     }
     [self.task resume];
