@@ -140,6 +140,8 @@ static NSString *emoticon_ID = @"emoticonID";
 }
 #pragma mark collectionView - delegate
 - (void)ldgContentCollectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     LDGGiftEmoticonModel *model = self.dataArray[indexPath.section][indexPath.item];
     if (self.sendGift) {
         self.sendGift(model);

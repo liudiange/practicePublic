@@ -52,6 +52,7 @@
 		187F1C9D2064AAFF000671A4 /* LDGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F1C992064AAFE000671A4 /* LDGNavigationController.m */; };
 		187F1C9E2064AAFF000671A4 /* LDGTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F1C9A2064AAFE000671A4 /* LDGTabBarController.m */; };
 		187F1CA72064D2CE000671A4 /* UIColor+LDGColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 187F1CA62064D2CE000671A4 /* UIColor+LDGColor.m */; };
+		188775A720BBD766001AC90B /* LDGInterActiveTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188775A620BBD766001AC90B /* LDGInterActiveTableView.m */; };
 		18D181C22099523900ED2358 /* LDGAuthorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D181C12099523900ED2358 /* LDGAuthorModel.m */; };
 		2C66442B209817AC007EAE0D /* LDGHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C66442A209817AC007EAE0D /* LDGHomeModel.m */; };
 		2C66442D20981F52007EAE0D /* types.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C66442C20981F52007EAE0D /* types.plist */; };
@@ -147,6 +148,8 @@
 		187F1CA42064CF13000671A4 /* LDGCommonHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGCommonHeader.h; sourceTree = "<group>"; };
 		187F1CA52064D2CE000671A4 /* UIColor+LDGColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+LDGColor.h"; sourceTree = "<group>"; };
 		187F1CA62064D2CE000671A4 /* UIColor+LDGColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LDGColor.m"; sourceTree = "<group>"; };
+		188775A520BBD766001AC90B /* LDGInterActiveTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGInterActiveTableView.h; sourceTree = "<group>"; };
+		188775A620BBD766001AC90B /* LDGInterActiveTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGInterActiveTableView.m; sourceTree = "<group>"; };
 		18D181C02099523900ED2358 /* LDGAuthorModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGAuthorModel.h; sourceTree = "<group>"; };
 		18D181C12099523900ED2358 /* LDGAuthorModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGAuthorModel.m; sourceTree = "<group>"; };
 		2C664429209817AC007EAE0D /* LDGHomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGHomeModel.h; sourceTree = "<group>"; };
@@ -283,6 +286,8 @@
 				1845967420B7A72A000C517B /* LDGInteractiveTextCell.h */,
 				1845967520B7A72A000C517B /* LDGInteractiveTextCell.m */,
 				1845967620B7A72A000C517B /* LDGInteractiveTextCell.xib */,
+				188775A520BBD766001AC90B /* LDGInterActiveTableView.h */,
+				188775A620BBD766001AC90B /* LDGInterActiveTableView.m */,
 			);
 			path = InterActiveView;
 			sourceTree = "<group>";
@@ -802,6 +807,7 @@
 				183C0AF920AE7CB9000C4BBD /* LDGMessageView.m in Sources */,
 				184924D02089E64000CEA031 /* LDGHomeBaseController.m in Sources */,
 				187F1C9D2064AAFF000671A4 /* LDGNavigationController.m in Sources */,
+				188775A720BBD766001AC90B /* LDGInterActiveTableView.m in Sources */,
 				2CDF0BD920A85007007F9C13 /* LDGContentCollectionView.m in Sources */,
 				184924D32089E7CE00CEA031 /* LDGPullViewLayout.m in Sources */,
 				1875782A208EC43600327800 /* XMGHttpConfig.m in Sources */,

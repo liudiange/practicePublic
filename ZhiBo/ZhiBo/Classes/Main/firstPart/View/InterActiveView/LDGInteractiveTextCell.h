@@ -10,6 +10,6 @@
 
 @interface LDGInteractiveTextCell : UITableViewCell
 
-@property (copy, nonatomic) NSString *textStr;
+@property (copy, nonatomic) NSAttributedString *textStr;
 
 @end

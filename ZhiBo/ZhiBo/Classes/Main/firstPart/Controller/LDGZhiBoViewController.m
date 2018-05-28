@@ -34,7 +34,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //初始化以及其他的相关的操作
+    
     [self setUp];
     [self addNotification];
     [self setUpSocket];
@@ -125,11 +125,14 @@
         @strongify(self);
         [self.messageTool sendGiftMessage:model.img2 giftName:model.subject giftCount:[NSString stringWithFormat:@"%d",model.coin]];
     };
-    // 点击了cell
-    self.interActiveView.selectTable = ^{
+    // 点击了tableview
+    self.interActiveView.tableView.selectTable = ^{
         @strongify(self);
-    };
-    
+        [self.view endEditing:YES];
+        [UIView animateWithDuration:0.25 animations:^{
+            self.giftEmoticomView.xmg_top = ScreenHeight;
+        }];
+    };  
 }
 #pragma mark - 一些常规的按钮的点击事件
 /**
@@ -174,8 +177,26 @@
  @param giftM giftM
  */
 - (void)haveAcceptGiftMessage:(GiftMessage *)giftM{
-    NSString *textStr = [NSString stringWithFormat:@"%@ - %@ -%@",giftM.giftname,giftM.giftURL,giftM.giftCount];
-    [self.interActiveView interReloadData:textStr];
+    NSString *textStr = [NSString stringWithFormat:@"%@ 赠送给主播 %@",giftM.user.name,giftM.giftURL];
+    NSRange userNameRange = [textStr rangeOfString:giftM.user.name];
+    NSRange giftNameRange = [textStr rangeOfString:giftM.giftURL];
+    UIFont *font = [UIFont systemFontOfSize:14.0];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:textStr];
+    [attrStr addAttributes:@{
+                             NSForegroundColorAttributeName : [UIColor greenColor]
+                             } range: userNameRange];
+    NSString *imageName = [[SDImageCache sharedImageCache] defaultCachePathForKey:giftM.giftURL];
+    UIImage *image = [UIImage imageNamed:imageName];
+    if (image) {
+        NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+        attachment.image = image;
+        attachment.bounds = CGRectMake(0, -3, font.lineHeight, font.lineHeight);
+        NSAttributedString *imageAttrStr = [NSAttributedString attributedStringWithAttachment:attachment];
+        [attrStr replaceCharactersInRange:giftNameRange withAttributedString:imageAttrStr];
+    }else{
+        [attrStr replaceCharactersInRange:giftNameRange withString:@""];
+    }
+    [self.interActiveView interReloadData:[attrStr copy]];
 }
 
 /**
@@ -184,7 +205,34 @@
  @param textM 文本消息的model
  */
 - (void)haveAcceptTextMessage:(TextMessage *)textM{
-    [self.interActiveView interReloadData:textM.text];
+    
+    NSString *str = [NSString stringWithFormat:@"%@ : %@",textM.user.name,textM.text];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
+    NSRange range = [str rangeOfString:textM.user.name];
+    [attrStr addAttributes:@{
+                             NSForegroundColorAttributeName : [UIColor greenColor]
+                             } range: range];
+    // 正则表达式
+    NSString *pattern = @"\\[.*?\\]";
+    NSRegularExpression *expression = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionAllowCommentsAndWhitespace error:nil];
+    NSArray *regexArray = [expression matchesInString:str options:1 range:NSMakeRange(0, attrStr.string.length)];
+    UIFont *font = [UIFont systemFontOfSize:14.0];
+    // 图文混排
+    for (NSInteger index = regexArray.count -1; index >= 0; index --) {
+        NSTextCheckingResult *checkResult = regexArray[index];
+        NSString *imageName = [attrStr.string substringWithRange:checkResult.range];
+        UIImage *image = [UIImage imageNamed:imageName];
+        if (!image) {
+            continue;
+        }else{
+            NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+            attachment.image = image;
+            attachment.bounds = CGRectMake(0, -3, font.lineHeight, font.lineHeight);
+            NSAttributedString *imageAttrStr = [NSAttributedString attributedStringWithAttachment:attachment];
+            [attrStr replaceCharactersInRange:checkResult.range withAttributedString:imageAttrStr];
+        }
+    }
+    [self.interActiveView interReloadData:[attrStr copy]];
     
 }
 

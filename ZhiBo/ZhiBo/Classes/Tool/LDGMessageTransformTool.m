@@ -81,9 +81,9 @@
     NSMutableData *needSendData = [self calculatorData:MessageTypeText bodyData:textM.data maxM:2];
     [self.socket writeData:needSendData withTimeout:TIME_OUT tag:MessageTypeText];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self parseData:needSendData socket:self.socket];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self parseData:needSendData socket:self.socket];
+//    });
 }
 
 /**
@@ -102,9 +102,6 @@
     giftM.giftCount = giftCount;
     NSMutableData *needSendData = [self calculatorData:MessageTypeGift bodyData:giftM.data maxM:2];
     [self.socket writeData:needSendData withTimeout:TIME_OUT tag:MessageTypeGift];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self parseData:needSendData socket:self.socket];
-    });
 
 }
 
@@ -119,15 +116,15 @@
 - (NSMutableData *)calculatorData:(MessageType)type bodyData:(NSData *)bodyData maxM:(int)maxM{
     // 需要返回的data
     NSMutableData *needSendData = [[NSMutableData alloc] init];
-    // 类型的data 固定4个字节
+    // 类型的data 固定2个字节
     int typeInt = (int)type;
     NSMutableData *typeData = [NSMutableData dataWithBytes:&typeInt length:2];
     // 发送数据的长度data 也是固定4个字节
     int lenth = (int)bodyData.length;
     NSMutableData *legthData = [NSMutableData dataWithBytes:&lenth length:4];
     // 进行拼接,注意顺序不能错
-    [needSendData appendData:typeData];
     [needSendData appendData:legthData];
+    [needSendData appendData:typeData];
     [needSendData appendData:bodyData];
     return needSendData;
 }
@@ -135,9 +132,9 @@
  心跳包的事件  为了保持客户端和服务端长期的链接
  */
 -(void)heartAction{
-    
-//    NSMutableData *needSendData = [self calculatorData:MessageTypeHeart bodyData:nil maxM:2];
-//    [self.socket writeData:needSendData withTimeout:TIME_OUT tag:MessageTypeHeart];
+    NSData *heartData = [@"my heart is very bad" dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableData *needSendData = [self calculatorData:MessageTypeHeart bodyData:heartData maxM:2];
+    [self.socket writeData:needSendData withTimeout:TIME_OUT tag:MessageTypeHeart];
 }
 #pragma mark - 接受到消息的方法
 /**
@@ -156,8 +153,8 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (!self.heartTimer) {
             self.heartTimer = [NSTimer timerWithTimeInterval:HEART_TIME target:self selector:@selector(heartAction) userInfo:nil repeats:YES];
-            [[NSRunLoop currentRunLoop] run];
             [[NSRunLoop currentRunLoop] addTimer:self.heartTimer forMode:NSDefaultRunLoopMode];
+            [[NSRunLoop currentRunLoop] run];
         }
     });
     [sock readDataWithTimeout:TIME_OUT tag:0];
@@ -170,6 +167,19 @@
     
     [self parseData:data socket:sock];
 }
+
+/**
+ 已经断开链接了 被动断开链接
+
+ @param sock socket
+ @param err 错误信息
+ */
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(nullable NSError *)err{
+    if (self.heartTimer) {
+        [self.heartTimer invalidate];
+        self.heartTimer = nil;
+    }
+}
 /**
  拆除包  防止沾包
 
@@ -180,7 +190,7 @@
     // 首先付给要处理的data
     [self.cacheParseData appendData:data];
     // 找到我们当初存储的长度
-    NSData *lengthData = [self.cacheParseData subdataWithRange:NSMakeRange(2, 4)];
+    NSData *lengthData = [self.cacheParseData subdataWithRange:NSMakeRange(0, 4)];
     int shouldLength = 0;
     [lengthData getBytes:&shouldLength length:4];
     shouldLength += 6;
@@ -207,7 +217,7 @@
 - (void)parseData:(NSData *)data dataLength:(int)shouldHaveLength{
     
     // 类型
-    NSData *typeData = [data subdataWithRange:NSMakeRange(0, 2)];
+    NSData *typeData = [data subdataWithRange:NSMakeRange(4, 2)];
     int type = 0;
     [typeData getBytes:&type length:2];
     // 消息体

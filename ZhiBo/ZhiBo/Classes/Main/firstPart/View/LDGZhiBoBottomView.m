@@ -66,7 +66,6 @@
  @param sender 按钮
  */
 - (IBAction)qfstarButtonAction:(UIButton *)sender {
-    LDGLog(@"点击了动画按钮");
     sender.selected = !sender.isSelected;
     sender.selected == YES ? ([LDGCommonTool startEmitterAnimation:CGPointMake(sender.xmg_centerX,self.zhiboVc.view.xmg_height - 0.5 *sender.xmg_centerY) withController:self.zhiboVc]) : ([LDGCommonTool stopEmitterAnimationWithController:self.zhiboVc]);
 }

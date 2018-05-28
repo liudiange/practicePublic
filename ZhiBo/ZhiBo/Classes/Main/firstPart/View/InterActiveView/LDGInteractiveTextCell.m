@@ -18,10 +18,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-
+    self.textLabel.textColor = [UIColor whiteColor];
 }
--(void)setTextStr:(NSString *)textStr {
+-(void)setTextStr:(NSAttributedString *)textStr {
     _textStr = textStr;
-    self.textLabel.text = textStr;
+    self.textLabel.attributedText = textStr;
 }
 @end

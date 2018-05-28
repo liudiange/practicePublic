@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LDGInterActiveTableView.h"
 @interface LDGInterActiveView : UIView
-@property (strong, nonatomic) void (^selectTable)();
+
+@property (weak, nonatomic) IBOutlet LDGInterActiveTableView *tableView;
 
 /**
  进行刷新表格

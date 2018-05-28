@@ -8,9 +8,10 @@
 
 #import "LDGInterActiveView.h"
 #import "LDGInteractiveTextCell.h"
+
+
 @interface LDGInterActiveView ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
 @end
@@ -29,7 +30,7 @@ static NSString *text_id = @"textID";
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:@"LDGInteractiveTextCell" bundle:nil] forCellReuseIdentifier:text_id];
-    self.tableView.userInteractionEnabled = YES;
+    self.userInteractionEnabled = YES;
 }
 
 /**
@@ -61,9 +62,7 @@ static NSString *text_id = @"textID";
 }
 #pragma mark - tableview - delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.selectTable) {
-        self.selectTable();
-    }
+    
 }
 
 @end
