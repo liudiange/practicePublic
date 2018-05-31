@@ -13,6 +13,9 @@
 		18408D3220B3C43A005F4F6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18408D3120B3C43A005F4F6E /* Assets.xcassets */; };
 		18408D3520B3C43A005F4F6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18408D3320B3C43A005F4F6E /* LaunchScreen.storyboard */; };
 		18408D3820B3C43A005F4F6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18408D3720B3C43A005F4F6E /* main.m */; };
+		18408D4420B3C5AC005F4F6E /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 18408D3F20B3C5AB005F4F6E /* Documentation.html */; };
+		18408D4520B3C5AC005F4F6E /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 18408D4020B3C5AB005F4F6E /* GCDAsyncUdpSocket.m */; };
+		18408D4620B3C5AC005F4F6E /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 18408D4120B3C5AB005F4F6E /* GCDAsyncSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,11 @@
 		18408D3420B3C43A005F4F6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18408D3620B3C43A005F4F6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18408D3720B3C43A005F4F6E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		18408D3F20B3C5AB005F4F6E /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
+		18408D4020B3C5AB005F4F6E /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		18408D4120B3C5AB005F4F6E /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		18408D4220B3C5AB005F4F6E /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		18408D4320B3C5AB005F4F6E /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,7 @@
 		18408D2720B3C437005F4F6E /* socket 发送消息 */ = {
 			isa = PBXGroup;
 			children = (
+				18408D3E20B3C5AB005F4F6E /* GCD */,
 				18408D2820B3C437005F4F6E /* AppDelegate.h */,
 				18408D2920B3C437005F4F6E /* AppDelegate.m */,
 				18408D2B20B3C438005F4F6E /* ViewController.h */,
@@ -69,6 +78,18 @@
 				18408D3720B3C43A005F4F6E /* main.m */,
 			);
 			path = "socket 发送消息";
+			sourceTree = "<group>";
+		};
+		18408D3E20B3C5AB005F4F6E /* GCD */ = {
+			isa = PBXGroup;
+			children = (
+				18408D3F20B3C5AB005F4F6E /* Documentation.html */,
+				18408D4220B3C5AB005F4F6E /* GCDAsyncUdpSocket.h */,
+				18408D4020B3C5AB005F4F6E /* GCDAsyncUdpSocket.m */,
+				18408D4320B3C5AB005F4F6E /* GCDAsyncSocket.h */,
+				18408D4120B3C5AB005F4F6E /* GCDAsyncSocket.m */,
+			);
+			path = GCD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +152,7 @@
 				18408D3520B3C43A005F4F6E /* LaunchScreen.storyboard in Resources */,
 				18408D3220B3C43A005F4F6E /* Assets.xcassets in Resources */,
 				18408D3020B3C438005F4F6E /* Main.storyboard in Resources */,
+				18408D4420B3C5AC005F4F6E /* Documentation.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +163,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18408D4520B3C5AC005F4F6E /* GCDAsyncUdpSocket.m in Sources */,
+				18408D4620B3C5AC005F4F6E /* GCDAsyncSocket.m in Sources */,
 				18408D2D20B3C438005F4F6E /* ViewController.m in Sources */,
 				18408D3820B3C43A005F4F6E /* main.m in Sources */,
 				18408D2A20B3C438005F4F6E /* AppDelegate.m in Sources */,

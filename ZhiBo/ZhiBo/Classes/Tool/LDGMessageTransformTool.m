@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSMutableData *cacheParseData;
 
 
+
 @end
 
 @implementation LDGMessageTransformTool
