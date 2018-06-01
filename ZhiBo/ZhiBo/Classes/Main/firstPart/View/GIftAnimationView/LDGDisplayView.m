@@ -52,28 +52,29 @@
  @param giftModel 礼物的模型
  */
 - (void)showGift:(LDGGiftModel *)giftModel{
-    
-    // 判断是否有闲置的
-    NSInteger indexNumber = -1;
-    for (NSInteger index = 0; index < self.subviews.count; index ++) {
-        LDGChannelView *channelView = self.subviews[index];
-        if ([channelView.model isEqualsModel:giftModel] && (channelView.currentState != CurrentStateHaveEndAnimation)){// 同一个人送的同一个礼物
-            // 添加缓存
-            [channelView addCacheNumber];
-            indexNumber = index;
-            break;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // 判断是否有闲置的
+        NSInteger indexNumber = -1;
+        for (NSInteger index = 0; index < self.subviews.count; index ++) {
+            LDGChannelView *channelView = self.subviews[index];
+            if ([channelView.model isEqualsModel:giftModel] && (channelView.currentState != CurrentStateHaveEndAnimation)){// 同一个人送的同一个礼物
+                // 添加缓存
+                [channelView addCacheNumber];
+                indexNumber = index;
+                break;
+            }
+            
+            if (channelView.currentState == CurrentStateIdle) { // 闲置的
+                [channelView showChannelModel:giftModel];
+                indexNumber = index;
+                break;
+            }
         }
-        
-        if (channelView.currentState == CurrentStateIdle) { // 闲置的
-           [channelView showChannelModel:giftModel];
-            indexNumber = index;
-            break;
+        // 说明 没有闲置的 也不是同一个人送的同一个礼物
+        if (indexNumber == -1) {
+            [self.cacheModelArray addObject:giftModel];
         }
-    }
-    // 说明 没有闲置的 也不是同一个人送的同一个礼物
-    if (indexNumber == -1) {
-        [self.cacheModelArray addObject:giftModel];
-    }
+    });
 }
 #pragma mark - delegate 回调用
 /**

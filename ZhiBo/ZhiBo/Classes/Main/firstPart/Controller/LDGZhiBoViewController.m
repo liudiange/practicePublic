@@ -13,7 +13,7 @@
 #import "LDGHomeServer.h"
 #import "LDGInterActiveView.h"
 #import "LDGMessageTransformTool.h"
-
+#import "LDGDisplayView.h"
 
 
 @interface LDGZhiBoViewController ()<LDGMessageTransformToolDelegate>
@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet LDGZhiBoBottomView *bottomView;
 @property (strong, nonatomic) LDGMessageTransformTool *messageTool;
 @property (strong, nonatomic) LDGInterActiveView *interActiveView;
+@property (strong, nonatomic) LDGDisplayView *displayView;
 
 @end
 @implementation LDGZhiBoViewController
@@ -68,6 +69,11 @@
     self.giftEmoticomView = [LDGGiftEmoticonView loadViewXib];
     self.giftEmoticomView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, GIFT_VIEW_HEIGHT);
     [self.view addSubview:self.giftEmoticomView];
+    // 创建送礼物动画的view
+    LDGDisplayView *displayView = [[LDGDisplayView alloc] initWithFrame:CGRectMake(0, 100, self.view.frame.size.width, 110) withChannnelCount:2];
+    displayView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:displayView];
+    self.displayView = displayView;
 }
 /**
  监听键盘的点击
@@ -141,6 +147,8 @@
  @param sender 按钮
  */
 - (IBAction)backAction:(UIButton *)sender {
+    [self.displayView removeFromSuperview];
+    self.displayView = nil;
     [self.navigationController popViewControllerAnimated:YES];
 }
 /**
@@ -197,6 +205,15 @@
         [attrStr replaceCharactersInRange:giftNameRange withString:@""];
     }
     [self.interActiveView interReloadData:[attrStr copy]];
+    // 开始礼物动画
+    LDGGiftModel *giftModel = [[LDGGiftModel alloc] init];
+    giftModel.senderName = giftM.user.name;
+    giftModel.senderIconUrl = @"https://file.qf.56.com/f/upload/photo/giftNew/app/201711011114591509506099523.png";
+    giftModel.giftName = giftM.giftname;
+    giftModel.giftUrl = giftM.giftURL;
+    [self.displayView showGift:giftModel];
+    
+    
 }
 
 /**
