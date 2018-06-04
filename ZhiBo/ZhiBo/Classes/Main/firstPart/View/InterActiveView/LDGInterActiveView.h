@@ -17,6 +17,6 @@
 
  @param str str
  */
-- (void)interReloadData:(NSString *)str;
+- (void)interReloadData:(NSAttributedString *)str;
 
 @end

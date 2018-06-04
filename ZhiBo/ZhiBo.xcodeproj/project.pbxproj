@@ -37,6 +37,7 @@
 		184A3C842061F115002932D5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C822061F115002932D5 /* Main.storyboard */; };
 		184A3C862061F115002932D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C852061F115002932D5 /* Assets.xcassets */; };
 		184A3C892061F115002932D5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 184A3C872061F115002932D5 /* LaunchScreen.storyboard */; };
+		18507CE220C4D22700600BE1 /* LDGDetailMessageTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 18507CE120C4D22700600BE1 /* LDGDetailMessageTool.m */; };
 		185965DB209FF06C00BEDE77 /* LDGZhiBoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 185965DA209FF06C00BEDE77 /* LDGZhiBoViewController.m */; };
 		185965DD209FF1B300BEDE77 /* FirstPart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185965DC209FF1B300BEDE77 /* FirstPart.storyboard */; };
 		185965E020A027BD00BEDE77 /* LDGAuthorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 185965DF20A027BD00BEDE77 /* LDGAuthorView.m */; };
@@ -121,6 +122,8 @@
 		184A3C852061F115002932D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		184A3C882061F115002932D5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		184A3C8A2061F115002932D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18507CE020C4D22700600BE1 /* LDGDetailMessageTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGDetailMessageTool.h; sourceTree = "<group>"; };
+		18507CE120C4D22700600BE1 /* LDGDetailMessageTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGDetailMessageTool.m; sourceTree = "<group>"; };
 		185965D9209FF06C00BEDE77 /* LDGZhiBoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDGZhiBoViewController.h; sourceTree = "<group>"; };
 		185965DA209FF06C00BEDE77 /* LDGZhiBoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDGZhiBoViewController.m; sourceTree = "<group>"; };
 		185965DC209FF1B300BEDE77 /* FirstPart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FirstPart.storyboard; sourceTree = "<group>"; };
@@ -349,6 +352,15 @@
 			path = ZhiBo;
 			sourceTree = "<group>";
 		};
+		18507CDF20C4D1F400600BE1 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				18507CE020C4D22700600BE1 /* LDGDetailMessageTool.h */,
+				18507CE120C4D22700600BE1 /* LDGDetailMessageTool.m */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		185D783720C0F10800EA1702 /* GIftAnimationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -461,6 +473,7 @@
 		187418932061FBB80030C6EA /* firstPart */ = {
 			isa = PBXGroup;
 			children = (
+				18507CDF20C4D1F400600BE1 /* Other */,
 				183C0B0C20AEB67B000C4BBD /* Server */,
 				187418942061FBB80030C6EA /* Controller */,
 				187418952061FBB80030C6EA /* Model */,
@@ -820,6 +833,7 @@
 				1844728720B54063006100CE /* LDGMessageTransformTool.m in Sources */,
 				1874189E2061FBB80030C6EA /* AppDelegate.m in Sources */,
 				2CDF0BDD20A85007007F9C13 /* LDGContentFlowLayout.m in Sources */,
+				18507CE220C4D22700600BE1 /* LDGDetailMessageTool.m in Sources */,
 				185D784420C0F10900EA1702 /* LDGAnimationLable.m in Sources */,
 				185965E920A037D200BEDE77 /* LDGCommonTool.m in Sources */,
 				1845967720B7A72A000C517B /* LDGInteractiveTextCell.m in Sources */,

@@ -38,7 +38,7 @@ static NSString *text_id = @"textID";
  
  @param str str
  */
-- (void)interReloadData:(NSString *)str{
+- (void)interReloadData:(NSAttributedString *)str{
     [self.dataArray addObject:str];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
