@@ -1,0 +1,6 @@
+framework module Pods_______ {
+  umbrella header "Pods-美颜相机拍照-umbrella.h"
+
+  export *
+  module * { export * }
+}

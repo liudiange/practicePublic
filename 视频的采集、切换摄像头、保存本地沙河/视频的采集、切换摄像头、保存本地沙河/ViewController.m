@@ -28,8 +28,6 @@
  视频的文件的写入
  */
 @property (strong, nonatomic) AVCaptureMovieFileOutput *movieFileOut;
-
-
 /**
  预览涂层
  */
@@ -96,6 +94,8 @@
     [self setUpVideoInputOutput];
     // 初始化音频的输入和输出
     [self setUpAudioInputOutput];
+    // 设置previewlayer
+    [self setUpPreviewLayer];
     
     [self.session commitConfiguration];
 }
@@ -156,14 +156,19 @@
     AVCaptureConnection *connection = [self.movieFileOut connectionWithMediaType:AVMediaTypeVideo];
     connection.automaticallyAdjustsVideoMirroring = YES;
     
+    
     if ([self.session canAddOutput:self.movieFileOut]) {
         [self.session addOutput:self.movieFileOut];
+        // 视频稳定设置
+        if ([connection isVideoStabilizationSupported]) {
+            connection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
+        }
+        connection.videoScaleAndCropFactor = connection.videoMaxScaleAndCropFactor;
     }
     // 开始录制设置delegate
     NSString *pathStr = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"123.mp4"];
     NSURL *pathUrl = [NSURL fileURLWithPath:pathStr];
     [self.movieFileOut startRecordingToOutputFileURL:pathUrl recordingDelegate:self];
-    
     
 }
 /**
@@ -197,8 +202,6 @@
     }
     return captureDevice;
 }
-
-
 #pragma mark - 一些其他方法的响应 主要是点击事件的响应
 /**
  开始采集
@@ -206,7 +209,6 @@
 - (IBAction)startCollection {
     // 开始采集
     [self.session startRunning];
-    [self setUpPreviewLayer];
     // 开始录制
     [self startRecordVideo];
 }
@@ -216,9 +218,6 @@
 - (IBAction)stopCollection {
     
     [self.session stopRunning];
-    if (self.previewLayer) {
-     [self.previewLayer removeFromSuperlayer];
-    }
 }
 /**
  保存到沙河

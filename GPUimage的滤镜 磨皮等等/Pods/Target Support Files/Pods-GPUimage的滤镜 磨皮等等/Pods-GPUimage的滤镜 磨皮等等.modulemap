@@ -1,0 +1,6 @@
+framework module Pods_GPUimage________ {
+  umbrella header "Pods-GPUimage的滤镜 磨皮等等-umbrella.h"
+
+  export *
+  module * { export * }
+}
