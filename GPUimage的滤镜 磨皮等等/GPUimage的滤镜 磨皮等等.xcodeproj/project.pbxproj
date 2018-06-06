@@ -13,6 +13,12 @@
 		1835C18220C77C6600805458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1835C18120C77C6600805458 /* Assets.xcassets */; };
 		1835C18520C77C6600805458 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1835C18320C77C6600805458 /* LaunchScreen.storyboard */; };
 		1835C18820C77C6600805458 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1835C18720C77C6600805458 /* main.m */; };
+		1835C19420C7B4B100805458 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1835C19320C7B4B100805458 /* AppDelegate.m */; };
+		1835C19720C7B4B100805458 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1835C19620C7B4B100805458 /* ViewController.m */; };
+		1835C19A20C7B4B100805458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1835C19820C7B4B100805458 /* Main.storyboard */; };
+		1835C19C20C7B4B200805458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1835C19B20C7B4B200805458 /* Assets.xcassets */; };
+		1835C19F20C7B4B200805458 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1835C19D20C7B4B200805458 /* LaunchScreen.storyboard */; };
+		1835C1A220C7B4B200805458 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1835C1A120C7B4B200805458 /* main.m */; };
 		186708D720C6640F00DF8081 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 186708D620C6640F00DF8081 /* AppDelegate.m */; };
 		186708DA20C6640F00DF8081 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 186708D920C6640F00DF8081 /* ViewController.m */; };
 		186708DD20C6640F00DF8081 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 186708DB20C6640F00DF8081 /* Main.storyboard */; };
@@ -28,6 +34,7 @@
 		4C5EEB5A8925218994C63946 /* Pods_______.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BE3BDD392C8E064068DB3E /* Pods_______.framework */; };
 		4FA5467F4F6FB5DEE4639BCE /* Pods_GPUimage________.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A312A61B6E0807452DC6AA7A /* Pods_GPUimage________.framework */; };
 		FBC71E365B960589CDDA561B /* Pods_GPUImage_____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAA0C530269B6F9CD7B3AFC4 /* Pods_GPUImage_____.framework */; };
+		FF2396A0A4B4EB66E5F60899 /* Pods_________.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F2BEB37176101AAD556BE9 /* Pods_________.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +48,16 @@
 		1835C18420C77C6600805458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1835C18620C77C6600805458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1835C18720C77C6600805458 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1835C19020C7B4B100805458 /* 美颜相机实时画面.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "美颜相机实时画面.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1835C19220C7B4B100805458 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1835C19320C7B4B100805458 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1835C19520C7B4B100805458 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1835C19620C7B4B100805458 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1835C19920C7B4B100805458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1835C19B20C7B4B200805458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1835C19E20C7B4B200805458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1835C1A020C7B4B200805458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1835C1A120C7B4B200805458 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		186708D220C6640F00DF8081 /* GPUimage的滤镜 磨皮等等.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GPUimage的滤镜 磨皮等等.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		186708D520C6640F00DF8081 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		186708D620C6640F00DF8081 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -61,8 +78,10 @@
 		186708FD20C68C8300DF8081 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		186708FF20C68C8300DF8081 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1867090020C68C8300DF8081 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		261E816C4FD99A641AE7A4F2 /* Pods-美颜相机实时画面.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-美颜相机实时画面.release.xcconfig"; path = "Pods/Target Support Files/Pods-美颜相机实时画面/Pods-美颜相机实时画面.release.xcconfig"; sourceTree = "<group>"; };
 		27F67BFDAB2C7F3254A018A0 /* Pods-GPUimage的滤镜 磨皮等等.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPUimage的滤镜 磨皮等等.release.xcconfig"; path = "Pods/Target Support Files/Pods-GPUimage的滤镜 磨皮等等/Pods-GPUimage的滤镜 磨皮等等.release.xcconfig"; sourceTree = "<group>"; };
 		2F7932C103F63902C566ADD0 /* Pods-GPUImage的其他应用.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPUImage的其他应用.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GPUImage的其他应用/Pods-GPUImage的其他应用.debug.xcconfig"; sourceTree = "<group>"; };
+		3F269A168E702729FAC06A3A /* Pods-美颜相机实时画面.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-美颜相机实时画面.debug.xcconfig"; path = "Pods/Target Support Files/Pods-美颜相机实时画面/Pods-美颜相机实时画面.debug.xcconfig"; sourceTree = "<group>"; };
 		409A9B5386E1F4143E68D7E1 /* Pods-GPUImage的其他应用.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPUImage的其他应用.release.xcconfig"; path = "Pods/Target Support Files/Pods-GPUImage的其他应用/Pods-GPUImage的其他应用.release.xcconfig"; sourceTree = "<group>"; };
 		45BE3BDD392C8E064068DB3E /* Pods_______.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_______.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A312A61B6E0807452DC6AA7A /* Pods_GPUimage________.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_GPUimage________.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +89,7 @@
 		BAA0C530269B6F9CD7B3AFC4 /* Pods_GPUImage_____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_GPUImage_____.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7C5071EF40D1CE2993BDF77 /* Pods-GPUimage的滤镜 磨皮等等.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPUimage的滤镜 磨皮等等.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GPUimage的滤镜 磨皮等等/Pods-GPUimage的滤镜 磨皮等等.debug.xcconfig"; sourceTree = "<group>"; };
 		DE7C046BF9429FC3019ED8E3 /* Pods-美颜相机拍照.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-美颜相机拍照.debug.xcconfig"; path = "Pods/Target Support Files/Pods-美颜相机拍照/Pods-美颜相机拍照.debug.xcconfig"; sourceTree = "<group>"; };
+		F7F2BEB37176101AAD556BE9 /* Pods_________.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_________.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +98,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C5EEB5A8925218994C63946 /* Pods_______.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1835C18D20C7B4B100805458 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF2396A0A4B4EB66E5F60899 /* Pods_________.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +137,8 @@
 				409A9B5386E1F4143E68D7E1 /* Pods-GPUImage的其他应用.release.xcconfig */,
 				DE7C046BF9429FC3019ED8E3 /* Pods-美颜相机拍照.debug.xcconfig */,
 				AF163512E526F6AF1FF71F16 /* Pods-美颜相机拍照.release.xcconfig */,
+				3F269A168E702729FAC06A3A /* Pods-美颜相机实时画面.debug.xcconfig */,
+				261E816C4FD99A641AE7A4F2 /* Pods-美颜相机实时画面.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -129,12 +159,29 @@
 			path = "美颜相机拍照";
 			sourceTree = "<group>";
 		};
+		1835C19120C7B4B100805458 /* 美颜相机实时画面 */ = {
+			isa = PBXGroup;
+			children = (
+				1835C19220C7B4B100805458 /* AppDelegate.h */,
+				1835C19320C7B4B100805458 /* AppDelegate.m */,
+				1835C19520C7B4B100805458 /* ViewController.h */,
+				1835C19620C7B4B100805458 /* ViewController.m */,
+				1835C19820C7B4B100805458 /* Main.storyboard */,
+				1835C19B20C7B4B200805458 /* Assets.xcassets */,
+				1835C19D20C7B4B200805458 /* LaunchScreen.storyboard */,
+				1835C1A020C7B4B200805458 /* Info.plist */,
+				1835C1A120C7B4B200805458 /* main.m */,
+			);
+			path = "美颜相机实时画面";
+			sourceTree = "<group>";
+		};
 		186708C920C6640F00DF8081 = {
 			isa = PBXGroup;
 			children = (
 				186708D420C6640F00DF8081 /* GPUimage的滤镜 磨皮等等 */,
 				186708F020C68C8100DF8081 /* GPUImage的其他应用 */,
 				1835C17720C77C6400805458 /* 美颜相机拍照 */,
+				1835C19120C7B4B100805458 /* 美颜相机实时画面 */,
 				186708D320C6640F00DF8081 /* Products */,
 				05B7D0758899D8574FBC312B /* Pods */,
 				716D50088B457A2800887E99 /* Frameworks */,
@@ -147,6 +194,7 @@
 				186708D220C6640F00DF8081 /* GPUimage的滤镜 磨皮等等.app */,
 				186708EF20C68C8100DF8081 /* GPUImage的其他应用.app */,
 				1835C17620C77C6400805458 /* 美颜相机拍照.app */,
+				1835C19020C7B4B100805458 /* 美颜相机实时画面.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -189,6 +237,7 @@
 				A312A61B6E0807452DC6AA7A /* Pods_GPUimage________.framework */,
 				BAA0C530269B6F9CD7B3AFC4 /* Pods_GPUImage_____.framework */,
 				45BE3BDD392C8E064068DB3E /* Pods_______.framework */,
+				F7F2BEB37176101AAD556BE9 /* Pods_________.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -214,6 +263,26 @@
 			name = "美颜相机拍照";
 			productName = "美颜相机拍照";
 			productReference = 1835C17620C77C6400805458 /* 美颜相机拍照.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1835C18F20C7B4B100805458 /* 美颜相机实时画面 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1835C1A320C7B4B200805458 /* Build configuration list for PBXNativeTarget "美颜相机实时画面" */;
+			buildPhases = (
+				CE76A80252F088933198A4F3 /* [CP] Check Pods Manifest.lock */,
+				1835C18C20C7B4B100805458 /* Sources */,
+				1835C18D20C7B4B100805458 /* Frameworks */,
+				1835C18E20C7B4B100805458 /* Resources */,
+				6C8D3FA4B38219B1732CE9AD /* [CP] Embed Pods Frameworks */,
+				084C3D27EA586D91AF16BCFD /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "美颜相机实时画面";
+			productName = "美颜相机实时画面";
+			productReference = 1835C19020C7B4B100805458 /* 美颜相机实时画面.app */;
 			productType = "com.apple.product-type.application";
 		};
 		186708D120C6640F00DF8081 /* GPUimage的滤镜 磨皮等等 */ = {
@@ -268,6 +337,9 @@
 					1835C17520C77C6400805458 = {
 						CreatedOnToolsVersion = 9.3;
 					};
+					1835C18F20C7B4B100805458 = {
+						CreatedOnToolsVersion = 9.3;
+					};
 					186708D120C6640F00DF8081 = {
 						CreatedOnToolsVersion = 9.3;
 					};
@@ -292,6 +364,7 @@
 				186708D120C6640F00DF8081 /* GPUimage的滤镜 磨皮等等 */,
 				186708EE20C68C8100DF8081 /* GPUImage的其他应用 */,
 				1835C17520C77C6400805458 /* 美颜相机拍照 */,
+				1835C18F20C7B4B100805458 /* 美颜相机实时画面 */,
 			);
 		};
 /* End PBXProject section */
@@ -304,6 +377,16 @@
 				1835C18520C77C6600805458 /* LaunchScreen.storyboard in Resources */,
 				1835C18220C77C6600805458 /* Assets.xcassets in Resources */,
 				1835C18020C77C6500805458 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1835C18E20C7B4B100805458 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1835C19F20C7B4B200805458 /* LaunchScreen.storyboard in Resources */,
+				1835C19C20C7B4B200805458 /* Assets.xcassets in Resources */,
+				1835C19A20C7B4B100805458 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +413,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		084C3D27EA586D91AF16BCFD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-美颜相机实时画面/Pods-美颜相机实时画面-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		0C01950DD1E3E7AB0E9D6189 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -417,6 +515,24 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GPUimage的滤镜 磨皮等等/Pods-GPUimage的滤镜 磨皮等等-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6C8D3FA4B38219B1732CE9AD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-美颜相机实时画面/Pods-美颜相机实时画面-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-美颜相机实时画面/Pods-美颜相机实时画面-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7B56853721C8872FBCA39A5A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -465,6 +581,24 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GPUimage的滤镜 磨皮等等/Pods-GPUimage的滤镜 磨皮等等-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CE76A80252F088933198A4F3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-美颜相机实时画面-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D0CAD1E5BC50653A38F1FB6A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -493,6 +627,16 @@
 				1835C17D20C77C6500805458 /* ViewController.m in Sources */,
 				1835C18820C77C6600805458 /* main.m in Sources */,
 				1835C17A20C77C6400805458 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1835C18C20C7B4B100805458 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1835C19720C7B4B100805458 /* ViewController.m in Sources */,
+				1835C1A220C7B4B200805458 /* main.m in Sources */,
+				1835C19420C7B4B100805458 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +675,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				1835C18420C77C6600805458 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		1835C19820C7B4B100805458 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1835C19920C7B4B100805458 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1835C19D20C7B4B200805458 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1835C19E20C7B4B200805458 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -603,6 +763,44 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.my.computer.ABC.------";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1835C1A420C7B4B200805458 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F269A168E702729FAC06A3A /* Pods-美颜相机实时画面.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 328H572F92;
+				INFOPLIST_FILE = "美颜相机实时画面/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.my.computer.ABC.--------";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1835C1A520C7B4B200805458 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 261E816C4FD99A641AE7A4F2 /* Pods-美颜相机实时画面.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 328H572F92;
+				INFOPLIST_FILE = "美颜相机实时画面/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.my.computer.ABC.--------";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -798,6 +996,15 @@
 			buildConfigurations = (
 				1835C18920C77C6600805458 /* Debug */,
 				1835C18A20C77C6600805458 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1835C1A320C7B4B200805458 /* Build configuration list for PBXNativeTarget "美颜相机实时画面" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1835C1A420C7B4B200805458 /* Debug */,
+				1835C1A520C7B4B200805458 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

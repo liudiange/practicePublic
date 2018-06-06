@@ -1,7 +1,7 @@
 
 use_frameworks!
 platform :ios, '9.0'
-targetsArray = ['GPUimage的滤镜 磨皮等等', 'GPUImage的其他应用','美颜相机拍照']
+targetsArray = ['GPUimage的滤镜 磨皮等等', 'GPUImage的其他应用','美颜相机拍照','美颜相机实时画面']
 targetsArray.each do |t|
     target t do
         pod 'GPUImage'
