@@ -1,0 +1,9 @@
+
+
+use_frameworks!
+platform :ios, '9.0'
+target '美颜相机' do
+  
+  pod 'GPUImage'
+
+end

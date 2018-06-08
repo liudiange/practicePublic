@@ -163,6 +163,9 @@
         if ([connection isVideoStabilizationSupported]) {
             connection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
         }
+//        if ([connection isVideoMirroringSupported]) {
+//            connection.videoMirrored = YES;
+//        }
         connection.videoScaleAndCropFactor = connection.videoMaxScaleAndCropFactor;
     }
     // 开始录制设置delegate
@@ -210,7 +213,7 @@
     // 开始采集
     [self.session startRunning];
     // 开始录制
-    [self startRecordVideo];
+  //  [self startRecordVideo];
 }
 /**
  停止采集
