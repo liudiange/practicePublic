@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import <GPUImage/GPUImage.h>
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface ViewController ()<GPUImageVideoCameraDelegate>
 
@@ -39,6 +41,9 @@
 // 底部的view
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewBottomConstaton;
+@property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
+@property (copy, nonatomic) NSString *moviePath;
+
 
 
 
@@ -93,7 +98,6 @@
     // 开始录制
     [self.movieWriter startRecording];
 }
-
 /**
  获取缓存的路径
 
@@ -101,7 +105,12 @@
  */
 - (NSURL *)obtainUrl{
   
-    NSString *pathStr = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"123.mp4"];
+    NSString *pathStr = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"456.mp4"];
+    self.moviePath = pathStr;
+    // 判断路径是否存在
+    if ([[NSFileManager defaultManager] fileExistsAtPath:pathStr]) {
+        [[NSFileManager defaultManager] removeItemAtPath:pathStr error:nil];
+    }
     NSURL *url = [NSURL fileURLWithPath:pathStr];
     return url;
 }
@@ -129,9 +138,10 @@
  @param sender 按钮
  */
 - (IBAction)endLiveAction:(UIButton *)sender {
-    
-    
-    
+   
+    [self.camera stopCameraCapture];
+    [self.previewLayer removeFromSuperview];
+    [self.movieWriter finishRecording];
 }
 /**
  开始播放视频
@@ -140,6 +150,12 @@
  */
 - (IBAction)startPlayAction:(UIButton *)sender {
     
+    MPMoviePlayerController *moviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:[NSURL fileURLWithPath:self.moviePath]];
+    moviePlayer.view.frame = self.view.bounds;
+    moviePlayer.fullscreen = YES;
+    [self.view addSubview:moviePlayer.view];
+    [moviePlayer play];
+    self.moviePlayer = moviePlayer;
     
 }
 
@@ -228,7 +244,11 @@
     self.saturationFilter.saturation = sender.value;
     
 }
+#pragma mark - camera 的 delegate
 
+- (void)willOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer{
+    NSLog(@"+++++++++++++++++");
+}
 
 
 
