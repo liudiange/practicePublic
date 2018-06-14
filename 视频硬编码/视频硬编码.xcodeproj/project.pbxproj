@@ -1,0 +1,431 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1840A99B20D0A5DF001B713F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840A99A20D0A5DF001B713F /* AppDelegate.m */; };
+		1840A99E20D0A5DF001B713F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840A99D20D0A5DF001B713F /* ViewController.m */; };
+		1840A9A120D0A5DF001B713F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1840A99F20D0A5DF001B713F /* Main.storyboard */; };
+		1840A9A320D0A5E1001B713F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1840A9A220D0A5E1001B713F /* Assets.xcassets */; };
+		1840A9A620D0A5E1001B713F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1840A9A420D0A5E1001B713F /* LaunchScreen.storyboard */; };
+		1840A9A920D0A5E1001B713F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1840A9A820D0A5E1001B713F /* main.m */; };
+		1848BA4A20D21298004F12FD /* VideoEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1848BA4820D21297004F12FD /* VideoEncoder.m */; };
+		57E57E5EEDFE6ACA0A921101 /* Pods______.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA5A4313E61CE5F9BF06BBF5 /* Pods______.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1840A99620D0A5DF001B713F /* 视频硬编码.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "视频硬编码.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1840A99920D0A5DF001B713F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1840A99A20D0A5DF001B713F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1840A99C20D0A5DF001B713F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1840A99D20D0A5DF001B713F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1840A9A020D0A5DF001B713F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1840A9A220D0A5E1001B713F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1840A9A520D0A5E1001B713F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1840A9A720D0A5E1001B713F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1840A9A820D0A5E1001B713F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1848BA4820D21297004F12FD /* VideoEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoEncoder.m; sourceTree = "<group>"; };
+		1848BA4920D21298004F12FD /* VideoEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoEncoder.h; sourceTree = "<group>"; };
+		4581266324611346929E0CE6 /* Pods-视频硬编码.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-视频硬编码.debug.xcconfig"; path = "Pods/Target Support Files/Pods-视频硬编码/Pods-视频硬编码.debug.xcconfig"; sourceTree = "<group>"; };
+		B0DD08CA72B19202D5232755 /* Pods-视频硬编码.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-视频硬编码.release.xcconfig"; path = "Pods/Target Support Files/Pods-视频硬编码/Pods-视频硬编码.release.xcconfig"; sourceTree = "<group>"; };
+		EA5A4313E61CE5F9BF06BBF5 /* Pods______.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods______.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1840A99320D0A5DF001B713F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57E57E5EEDFE6ACA0A921101 /* Pods______.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01E26307CE14E46B0946933F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4581266324611346929E0CE6 /* Pods-视频硬编码.debug.xcconfig */,
+				B0DD08CA72B19202D5232755 /* Pods-视频硬编码.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		1840A98D20D0A5DF001B713F = {
+			isa = PBXGroup;
+			children = (
+				1840A99820D0A5DF001B713F /* 视频硬编码 */,
+				1840A99720D0A5DF001B713F /* Products */,
+				01E26307CE14E46B0946933F /* Pods */,
+				AE84DD87732FA6CBC106CA2D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1840A99720D0A5DF001B713F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1840A99620D0A5DF001B713F /* 视频硬编码.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1840A99820D0A5DF001B713F /* 视频硬编码 */ = {
+			isa = PBXGroup;
+			children = (
+				1840A99920D0A5DF001B713F /* AppDelegate.h */,
+				1840A99A20D0A5DF001B713F /* AppDelegate.m */,
+				1840A99C20D0A5DF001B713F /* ViewController.h */,
+				1840A99D20D0A5DF001B713F /* ViewController.m */,
+				1848BA4920D21298004F12FD /* VideoEncoder.h */,
+				1848BA4820D21297004F12FD /* VideoEncoder.m */,
+				1840A99F20D0A5DF001B713F /* Main.storyboard */,
+				1840A9A220D0A5E1001B713F /* Assets.xcassets */,
+				1840A9A420D0A5E1001B713F /* LaunchScreen.storyboard */,
+				1840A9A720D0A5E1001B713F /* Info.plist */,
+				1840A9A820D0A5E1001B713F /* main.m */,
+			);
+			path = "视频硬编码";
+			sourceTree = "<group>";
+		};
+		AE84DD87732FA6CBC106CA2D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA5A4313E61CE5F9BF06BBF5 /* Pods______.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1840A99520D0A5DF001B713F /* 视频硬编码 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1840A9AC20D0A5E1001B713F /* Build configuration list for PBXNativeTarget "视频硬编码" */;
+			buildPhases = (
+				9BAEBBDBF75C10E4A8ADC68E /* [CP] Check Pods Manifest.lock */,
+				1840A99220D0A5DF001B713F /* Sources */,
+				1840A99320D0A5DF001B713F /* Frameworks */,
+				1840A99420D0A5DF001B713F /* Resources */,
+				A4DA4B928CD379B6858FD115 /* [CP] Embed Pods Frameworks */,
+				15969DF823C182544415D57E /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "视频硬编码";
+			productName = "视频硬编码";
+			productReference = 1840A99620D0A5DF001B713F /* 视频硬编码.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1840A98E20D0A5DF001B713F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = apple;
+				TargetAttributes = {
+					1840A99520D0A5DF001B713F = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = 1840A99120D0A5DF001B713F /* Build configuration list for PBXProject "视频硬编码" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1840A98D20D0A5DF001B713F;
+			productRefGroup = 1840A99720D0A5DF001B713F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1840A99520D0A5DF001B713F /* 视频硬编码 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1840A99420D0A5DF001B713F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1840A9A620D0A5E1001B713F /* LaunchScreen.storyboard in Resources */,
+				1840A9A320D0A5E1001B713F /* Assets.xcassets in Resources */,
+				1840A9A120D0A5DF001B713F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		15969DF823C182544415D57E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-视频硬编码/Pods-视频硬编码-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BAEBBDBF75C10E4A8ADC68E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-视频硬编码-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A4DA4B928CD379B6858FD115 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-视频硬编码/Pods-视频硬编码-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GPUImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-视频硬编码/Pods-视频硬编码-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1840A99220D0A5DF001B713F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1848BA4A20D21298004F12FD /* VideoEncoder.m in Sources */,
+				1840A99E20D0A5DF001B713F /* ViewController.m in Sources */,
+				1840A9A920D0A5E1001B713F /* main.m in Sources */,
+				1840A99B20D0A5DF001B713F /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1840A99F20D0A5DF001B713F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1840A9A020D0A5DF001B713F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1840A9A420D0A5E1001B713F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1840A9A520D0A5E1001B713F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1840A9AA20D0A5E1001B713F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1840A9AB20D0A5E1001B713F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1840A9AD20D0A5E1001B713F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4581266324611346929E0CE6 /* Pods-视频硬编码.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 328H572F92;
+				INFOPLIST_FILE = "视频硬编码/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.my.computer.ABC.-----";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1840A9AE20D0A5E1001B713F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B0DD08CA72B19202D5232755 /* Pods-视频硬编码.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 328H572F92;
+				INFOPLIST_FILE = "视频硬编码/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.my.computer.ABC.-----";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1840A99120D0A5DF001B713F /* Build configuration list for PBXProject "视频硬编码" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1840A9AA20D0A5E1001B713F /* Debug */,
+				1840A9AB20D0A5E1001B713F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1840A9AC20D0A5E1001B713F /* Build configuration list for PBXNativeTarget "视频硬编码" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1840A9AD20D0A5E1001B713F /* Debug */,
+				1840A9AE20D0A5E1001B713F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1840A98E20D0A5DF001B713F /* Project object */;
+}
