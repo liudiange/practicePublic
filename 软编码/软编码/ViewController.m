@@ -60,10 +60,10 @@
     // 2.开始编码
     [self.encoder setFileSavedPath:file];
     // 特别注意: 宽度&高度
-    [self.encoder setX264ResourceWithVideoWidth:480 height:640 bitrate:1500000];
+    [self.encoder setX264ResourceWithVideoWidth:720 height:1280 bitrate:1024*800];
     
     
-    //初始化一些滤镜
+    // 初始化一些滤镜
     self.bilaterFilter = [[GPUImageBilateralFilter alloc] init];
     self.exposureFilter = [[GPUImageExposureFilter alloc] init];
     self.brigtnessFilter = [[GPUImageBrightnessFilter alloc] init];
@@ -74,6 +74,7 @@
     self.camera.videoCaptureConnection.videoOrientation = AVCaptureVideoOrientationPortrait;
     // 调整摄像头的镜像 自己动的方向和镜子中的方向一致
     self.camera.videoCaptureConnection.videoMirrored = YES;
+    self.camera.captureSession.sessionPreset = AVCaptureSessionPresetHigh;
     //    self.camera.horizontallyMirrorFrontFacingCamera = YES;
     // 创建过滤层
     GPUImageFilterGroup *filterGroup = [self obtainFilterGroup];
