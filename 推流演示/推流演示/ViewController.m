@@ -36,7 +36,9 @@
 }
 - (IBAction)startLive {
     LFLiveStreamInfo *streamInfo = [LFLiveStreamInfo new];
-    streamInfo.url = @"rtmp://59.100.27.24/live/demo";
+    //streamInfo.url = @"rtmp://59.100.27.24/live/demo";
+    //rtmp://localhost:1935/rtmplive/home
+    streamInfo.url = @"rtmp://localhost:1935/rtmplive/home";
     [self.session startLive:streamInfo];
     self.session.running = YES;
 }
