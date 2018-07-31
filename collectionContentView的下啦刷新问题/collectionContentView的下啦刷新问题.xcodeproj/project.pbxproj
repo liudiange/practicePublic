@@ -18,6 +18,8 @@
 		184F4823210EFA3B00772F46 /* MRMHeaderCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 184F4821210EFA3B00772F46 /* MRMHeaderCollectionCell.m */; };
 		184F4824210EFA3B00772F46 /* MRMHeaderCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184F4822210EFA3B00772F46 /* MRMHeaderCollectionCell.xib */; };
 		184F4827210F038F00772F46 /* JHHeaderFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 184F4826210F038F00772F46 /* JHHeaderFlowLayout.m */; };
+		184F482A210F0F6D00772F46 /* MRMCollectionViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184F4829210F0F6D00772F46 /* MRMCollectionViewModel.m */; };
+		184F482D210F123100772F46 /* MRMHttpViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 184F482C210F123100772F46 /* MRMHttpViewModel.m */; };
 		97EA0F37B834E65A36571AEA /* Pods_collectionContentView_______.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF3DE50EAD408CC3D16EB939 /* Pods_collectionContentView_______.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +42,10 @@
 		184F4822210EFA3B00772F46 /* MRMHeaderCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MRMHeaderCollectionCell.xib; sourceTree = "<group>"; };
 		184F4825210F038E00772F46 /* JHHeaderFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHHeaderFlowLayout.h; sourceTree = "<group>"; };
 		184F4826210F038F00772F46 /* JHHeaderFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHHeaderFlowLayout.m; sourceTree = "<group>"; };
+		184F4828210F0F6D00772F46 /* MRMCollectionViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRMCollectionViewModel.h; sourceTree = "<group>"; };
+		184F4829210F0F6D00772F46 /* MRMCollectionViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MRMCollectionViewModel.m; sourceTree = "<group>"; };
+		184F482B210F123000772F46 /* MRMHttpViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MRMHttpViewModel.h; sourceTree = "<group>"; };
+		184F482C210F123100772F46 /* MRMHttpViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MRMHttpViewModel.m; sourceTree = "<group>"; };
 		406A15D27267E338F91D4B69 /* Pods-collectionContentView的下啦刷新问题.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionContentView的下啦刷新问题.debug.xcconfig"; path = "Pods/Target Support Files/Pods-collectionContentView的下啦刷新问题/Pods-collectionContentView的下啦刷新问题.debug.xcconfig"; sourceTree = "<group>"; };
 		B252590D0727A800F6731FD7 /* Pods-collectionContentView的下啦刷新问题.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionContentView的下啦刷新问题.release.xcconfig"; path = "Pods/Target Support Files/Pods-collectionContentView的下啦刷新问题/Pods-collectionContentView的下啦刷新问题.release.xcconfig"; sourceTree = "<group>"; };
 		CF3DE50EAD408CC3D16EB939 /* Pods_collectionContentView_______.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_collectionContentView_______.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +96,10 @@
 				181AA813210AB29D002FADA9 /* AppDelegate.m */,
 				181AA815210AB29D002FADA9 /* ViewController.h */,
 				181AA816210AB29D002FADA9 /* ViewController.m */,
+				184F4828210F0F6D00772F46 /* MRMCollectionViewModel.h */,
+				184F4829210F0F6D00772F46 /* MRMCollectionViewModel.m */,
+				184F482B210F123000772F46 /* MRMHttpViewModel.h */,
+				184F482C210F123100772F46 /* MRMHttpViewModel.m */,
 				181AA818210AB29D002FADA9 /* Main.storyboard */,
 				181AA81B210AB29F002FADA9 /* Assets.xcassets */,
 				181AA81D210AB29F002FADA9 /* LaunchScreen.storyboard */,
@@ -246,9 +256,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				184F4827210F038F00772F46 /* JHHeaderFlowLayout.m in Sources */,
+				184F482A210F0F6D00772F46 /* MRMCollectionViewModel.m in Sources */,
 				181AA817210AB29D002FADA9 /* ViewController.m in Sources */,
 				181AA822210AB29F002FADA9 /* main.m in Sources */,
 				181AA814210AB29D002FADA9 /* AppDelegate.m in Sources */,
+				184F482D210F123100772F46 /* MRMHttpViewModel.m in Sources */,
 				181AA82C210AB435002FADA9 /* MRMSongListCell.m in Sources */,
 				184F4823210EFA3B00772F46 /* MRMHeaderCollectionCell.m in Sources */,
 			);
