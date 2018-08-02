@@ -1,0 +1,16 @@
+//
+//  PrefixHeader.pch
+//  应用内切换语言
+//
+//  Created by apple on 2018/8/2.
+//  Copyright © 2018年 apple. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define AppKey @"appLanguage"
+#define DGLocaLized(key)  [[NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"appLanguage"]] ofType:@"lproj"]] localizedStringForKey:(key) value:nil table:@"Language"]
+
+
+#endif

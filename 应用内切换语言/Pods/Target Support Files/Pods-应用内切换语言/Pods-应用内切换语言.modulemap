@@ -1,0 +1,6 @@
+framework module Pods________ {
+  umbrella header "Pods-应用内切换语言-umbrella.h"
+
+  export *
+  module * { export * }
+}
