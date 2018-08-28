@@ -1,0 +1,8 @@
+use_frameworks!
+platform :ios, '9.0'
+
+target 'rac的简单使用' do
+
+	pod 'ReactiveObjC', '~> 2.1.2'
+
+end
