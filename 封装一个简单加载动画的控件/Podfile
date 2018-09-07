@@ -1,0 +1,8 @@
+use_frameworks!
+platform :ios, '9.0'
+
+target '封装一个简单加载动画的控件' do
+
+   pod 'AFNetworking' 
+
+end

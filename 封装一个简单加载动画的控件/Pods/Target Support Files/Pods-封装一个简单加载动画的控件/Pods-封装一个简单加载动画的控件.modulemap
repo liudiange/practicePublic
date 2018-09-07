@@ -1,0 +1,6 @@
+framework module Pods______________ {
+  umbrella header "Pods-封装一个简单加载动画的控件-umbrella.h"
+
+  export *
+  module * { export * }
+}
