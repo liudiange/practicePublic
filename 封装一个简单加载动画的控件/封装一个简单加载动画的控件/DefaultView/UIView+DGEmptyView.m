@@ -82,6 +82,7 @@
 - (void)creatDefaultView{
     
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        
         DGDefaultView *defaultView = [[[NSBundle mainBundle]loadNibNamed:@"DGDefaultView" owner:nil options:nil] lastObject];
         CGRect frame = self.frame;
         frame.origin.y = self.defaultY;

@@ -65,7 +65,9 @@
     
     [self addDefaultView];
     
-    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(10, 200, 200, 100)];
+    view.backgroundColor = [UIColor redColor];
+    [self.view addSubview:view];
     
 }
 -(void)addDefaultView{
@@ -83,7 +85,7 @@
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
-    
+    [self.dataArray removeAllObjects];
     [self.view DG_eddEmptyView:YES];
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
