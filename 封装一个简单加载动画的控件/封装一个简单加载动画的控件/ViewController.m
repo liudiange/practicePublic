@@ -72,7 +72,7 @@
 }
 -(void)addDefaultView{
     
-    [self.view DG_addEmptyViewWithType:DGEmptyViewTypeNoData withDefaultY:200 checkBlock:^BOOL{
+    [self.view DG_addEmptyViewWithType:DGEmptyViewTypeNoData withDefaultY:30 checkBlock:^BOOL{
         
         return self.dataArray.count;
         
