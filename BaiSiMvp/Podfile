@@ -1,0 +1,20 @@
+use_frameworks!
+platform :ios, '9.0'
+
+target 'BaiSiMvp' do
+    pod 'AFNetworking', '~> 3.1.0'
+    pod 'ReactiveObjC', '~> 2.1.2'
+    pod 'Realm'
+    pod 'Masonry'
+    pod 'Bugly'
+    pod 'PLeakSniffer'
+    pod 'SDWebImage', '~> 4.0'
+    pod 'MJExtension'
+    pod 'MJRefresh'
+    pod 'SVProgressHUD'
+    pod 'FMDBMigrationManager'
+    pod 'FMDB/SQLCipher',:git => 'https://github.com/liudiange/fmdb.git'
+    pod 'MagicalRecord'
+    pod "DACircularProgress"
+
+end

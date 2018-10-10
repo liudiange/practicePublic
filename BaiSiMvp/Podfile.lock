@@ -1,0 +1,91 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - Bugly (2.5.0)
+  - DACircularProgress (2.3.1)
+  - FMDB/SQLCipher (2.7.5):
+    - SQLCipher
+  - FMDB/standard (2.7.5)
+  - FMDBMigrationManager (1.4.1):
+    - FMDBMigrationManager/System (= 1.4.1)
+  - FMDBMigrationManager/System (1.4.1):
+    - FMDB/standard (>= 2.3)
+  - MagicalRecord (2.3.2):
+    - MagicalRecord/Core (= 2.3.2)
+  - MagicalRecord/Core (2.3.2)
+  - Masonry (1.1.0)
+  - MJExtension (3.0.13)
+  - MJRefresh (3.1.15.3)
+  - PLeakSniffer (0.1.0)
+  - ReactiveObjC (2.1.2)
+  - Realm (3.1.1):
+    - Realm/Headers (= 3.1.1)
+  - Realm/Headers (3.1.1)
+  - SDWebImage (4.3.0):
+    - SDWebImage/Core (= 4.3.0)
+  - SDWebImage/Core (4.3.0)
+  - SQLCipher (3.4.2):
+    - SQLCipher/standard (= 3.4.2)
+  - SQLCipher/common (3.4.2)
+  - SQLCipher/standard (3.4.2):
+    - SQLCipher/common
+  - SVProgressHUD (2.2.2)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.1.0)
+  - Bugly
+  - DACircularProgress
+  - FMDB/SQLCipher (from `https://github.com/liudiange/fmdb.git`)
+  - FMDBMigrationManager
+  - MagicalRecord
+  - Masonry
+  - MJExtension
+  - MJRefresh
+  - PLeakSniffer
+  - ReactiveObjC (~> 2.1.2)
+  - Realm
+  - SDWebImage (~> 4.0)
+  - SVProgressHUD
+
+EXTERNAL SOURCES:
+  FMDB:
+    :git: https://github.com/liudiange/fmdb.git
+
+CHECKOUT OPTIONS:
+  FMDB:
+    :commit: 7c8f571fb2eac289653f21abad657e31e40fd1c5
+    :git: https://github.com/liudiange/fmdb.git
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  FMDBMigrationManager: d52007f328ea0665e8985ca8a33500707aef084f
+  MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
+  PLeakSniffer: f7eb13cd3a36150e0a2fd5fe8a33ca83bd2646d4
+  ReactiveObjC: 7b6782ae39f9ac0f57205c3b0c0b69b9dd7048c0
+  Realm: 42d1c38a5b1bbcc828b48a7ce702cb86fc68adf4
+  SDWebImage: 6da6c8bca115addc4de8613362e1b15f66333825
+  SQLCipher: f9fcf29b2e59ced7defc2a2bdd0ebe79b40d4990
+  SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
+
+PODFILE CHECKSUM: f1421b3e329694b17717606268dd93d1086f7979
+
+COCOAPODS: 1.4.0

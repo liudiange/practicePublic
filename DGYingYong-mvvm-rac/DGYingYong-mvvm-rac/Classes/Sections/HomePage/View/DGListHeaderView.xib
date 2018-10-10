@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DGListHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="358" height="78"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已经加入的圈子" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y25-99-3I5">
+                    <rect key="frame" x="0.0" y="0.0" width="358" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="azO-BA-Iwc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="jdl-Nv-qy5">
+                    <rect key="frame" x="0.0" y="20" width="358" height="58"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wDt-kR-fQv">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="0IY-DW-e68"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="ut9-5D-nZh"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="y25-99-3I5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0lB-6k-lMq"/>
+                <constraint firstAttribute="trailing" secondItem="y25-99-3I5" secondAttribute="trailing" id="95w-gU-WAE"/>
+                <constraint firstAttribute="trailing" secondItem="jdl-Nv-qy5" secondAttribute="trailing" id="NKf-TZ-doD"/>
+                <constraint firstItem="y25-99-3I5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Wwz-RH-Xa7"/>
+                <constraint firstItem="jdl-Nv-qy5" firstAttribute="top" secondItem="y25-99-3I5" secondAttribute="bottom" id="mtK-66-ZPR"/>
+                <constraint firstItem="jdl-Nv-qy5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="thE-OE-FBm"/>
+                <constraint firstAttribute="bottom" secondItem="jdl-Nv-qy5" secondAttribute="bottom" id="wZX-KG-Jud"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="collectionView" destination="jdl-Nv-qy5" id="caV-VN-2Ab"/>
+                <outlet property="tipLable" destination="y25-99-3I5" id="WKc-B7-YFO"/>
+            </connections>
+            <point key="canvasLocation" x="-25" y="-147"/>
+        </view>
+    </objects>
+</document>

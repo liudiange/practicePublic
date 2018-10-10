@@ -1,0 +1,14 @@
+use_frameworks!
+platform :ios, '9.0'
+
+target 'DGYingYong-mvvm-rac' do
+
+  	pod 'AFNetworking'
+	pod 'MJRefresh'
+	pod 'SDWebImage'
+	pod 'Masonry'
+	pod 'MJExtension'
+	pod 'ReactiveObjC', '~> 2.1.2'
+	pod 'SVProgressHUD'
+
+end

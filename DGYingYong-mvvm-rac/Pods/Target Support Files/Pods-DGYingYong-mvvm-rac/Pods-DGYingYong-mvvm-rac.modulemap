@@ -1,0 +1,6 @@
+framework module Pods_DGYingYong_mvvm_rac {
+  umbrella header "Pods-DGYingYong-mvvm-rac-umbrella.h"
+
+  export *
+  module * { export * }
+}
