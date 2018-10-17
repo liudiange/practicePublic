@@ -1,0 +1,43 @@
+//
+//  PrefixHeader.pch
+//  BaiSiMvp
+//
+//  Created by apple on 2018/10/17.
+//  Copyright © 2018年 apple. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __OBJC__
+//颜色
+#define  DG_RANDM_COLOR  [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1.0]
+#define  DG_RGB_COLOR(r,g,b)  [UIColor colorWithRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:1.0]
+#define  DG_RGBA_COLOR(r,g,b,a)  [UIColor colorWithRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:a/255.0]
+#define  DG_BACKGROUND_COLOR  [UIColor colorWithRed:(211/255.0) green:(211/255.0) blue:(211/255.0) alpha:1.0]
+// 屏幕大小
+#define DGScreenWidth   [UIScreen mainScreen].bounds.size.width
+#define DGScreenHeight  [UIScreen mainScreen].bounds.size.height
+// 打印输出log
+#ifdef DEBUG
+#define DGLOG(...) NSLog(__VA_ARGS__)
+#else
+#define DGLOG(...)
+#endif
+//  其他的宏
+#define DGLOGINFUNCTION DGLOG(@"%s",__func__);
+
+// 导入的类
+#import "UIView+XMGVIew.h"
+#import "ReactiveObjC.h"
+#import <MJExtension/MJExtension.h>
+#import <MJRefresh/MJRefresh.h>
+#import <MagicalRecord/MagicalRecord.h>
+#import "UIImageView+WebCache.h"
+
+
+#endif
+
+
+
+#endif
