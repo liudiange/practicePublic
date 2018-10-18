@@ -24,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // 初始化相关事宜
     self.presenter = [[DGEssencePresenter alloc] init];
     [self.presenter attchView:self];
@@ -45,6 +44,13 @@
     DGEssenceAudioTableViewController *audioVc = [[DGEssenceAudioTableViewController alloc] init];
     DGEssencePictureTableViewController *pictureVc = [[DGEssencePictureTableViewController alloc] init];
     DGEssenceWordTableViewController *wordVc = [[DGEssenceWordTableViewController alloc] init];
+    
+    [self addChildViewController:allVC];
+    [self addChildViewController:videoVc];
+    [self addChildViewController:audioVc];
+    [self addChildViewController:pictureVc];
+    [self addChildViewController:wordVc];
+    
     NSMutableArray *vcArray = [NSMutableArray array];
     [vcArray addObject:allVC];
     [vcArray addObject:videoVc];

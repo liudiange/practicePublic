@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
+    self.view.backgroundColor = DG_RANDM_COLOR;
 }
 
 #pragma mark - Table view data source
