@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1822370921773943008C36E5 /* DGEssenceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1822370821773943008C36E5 /* DGEssenceButton.m */; };
+		185D48352179D58B003382D3 /* DGEssenceTopicPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 185D48342179D58B003382D3 /* DGEssenceTopicPresenter.m */; };
 		18668F50216DE91100E0127E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18668F4E216DE91100E0127E /* Main.storyboard */; };
 		18668F52216DE91500E0127E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18668F51216DE91500E0127E /* Assets.xcassets */; };
 		18668F55216DE91500E0127E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18668F53216DE91500E0127E /* LaunchScreen.storyboard */; };
@@ -20,6 +21,8 @@
 		1895D18321748F0B0021B88D /* DGFellowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1895D18121748F0B0021B88D /* DGFellowViewController.xib */; };
 		1895D18721748F1F0021B88D /* DGMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1895D18521748F1F0021B88D /* DGMeViewController.m */; };
 		1895D18821748F1F0021B88D /* DGMeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1895D18621748F1F0021B88D /* DGMeViewController.xib */; };
+		1897768D2181B88C00199C94 /* DGCommonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1897768C2181B88C00199C94 /* DGCommonModel.m */; };
+		189776902181B8F000199C94 /* DGUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1897768F2181B8F000199C94 /* DGUserModel.m */; };
 		189D489E2175D67B008F6A67 /* DGBaseHttpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D489B2175D67B008F6A67 /* DGBaseHttpModel.m */; };
 		189D489F2175D67B008F6A67 /* DGBaseHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D489D2175D67B008F6A67 /* DGBaseHttpManager.m */; };
 		189D48A22175DBBE008F6A67 /* DGEssencePresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D48A12175DBBE008F6A67 /* DGEssencePresenter.m */; };
@@ -32,6 +35,8 @@
 		18D7098D216F568D00FD166D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D7096E216F568D00FD166D /* main.m */; };
 		18D7098E216F568D00FD166D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D7096F216F568D00FD166D /* AppDelegate.m */; };
 		18D70992216F580800FD166D /* DGTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D70990216F580800FD166D /* DGTabBarController.m */; };
+		18EFB0FA217F1EAC009829B5 /* DGTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EFB0F9217F1EAC009829B5 /* DGTopicModel.m */; };
+		18EFB0FD217F1EC8009829B5 /* DGEssenceTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EFB0FC217F1EC8009829B5 /* DGEssenceTopicModel.m */; };
 		4614C31456BE443AB810D46D /* Pods_BaiSiMvp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1336E9C38C1578CF05F42130 /* Pods_BaiSiMvp.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +44,9 @@
 		1336E9C38C1578CF05F42130 /* Pods_BaiSiMvp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BaiSiMvp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1822370721773943008C36E5 /* DGEssenceButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGEssenceButton.h; sourceTree = "<group>"; };
 		1822370821773943008C36E5 /* DGEssenceButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGEssenceButton.m; sourceTree = "<group>"; };
+		185D48332179D58B003382D3 /* DGEssenceTopicPresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGEssenceTopicPresenter.h; sourceTree = "<group>"; };
+		185D48342179D58B003382D3 /* DGEssenceTopicPresenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGEssenceTopicPresenter.m; sourceTree = "<group>"; };
+		185D48362179D5CD003382D3 /* DGEssenceTopicProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGEssenceTopicProtocol.h; sourceTree = "<group>"; };
 		18668F45216DE91100E0127E /* BaiSiMvp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaiSiMvp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18668F4F216DE91100E0127E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18668F51216DE91500E0127E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,6 +68,11 @@
 		1895D18421748F1F0021B88D /* DGMeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGMeViewController.h; sourceTree = "<group>"; };
 		1895D18521748F1F0021B88D /* DGMeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGMeViewController.m; sourceTree = "<group>"; };
 		1895D18621748F1F0021B88D /* DGMeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DGMeViewController.xib; sourceTree = "<group>"; };
+		1897768B2181B88C00199C94 /* DGCommonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGCommonModel.h; sourceTree = "<group>"; };
+		1897768C2181B88C00199C94 /* DGCommonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGCommonModel.m; sourceTree = "<group>"; };
+		1897768E2181B8F000199C94 /* DGUserModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGUserModel.h; sourceTree = "<group>"; };
+		1897768F2181B8F000199C94 /* DGUserModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGUserModel.m; sourceTree = "<group>"; };
+		189776932181B9E000199C94 /* DGEssenceHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGEssenceHeader.h; sourceTree = "<group>"; };
 		189D489A2175D67B008F6A67 /* DGBaseHttpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGBaseHttpModel.h; sourceTree = "<group>"; };
 		189D489B2175D67B008F6A67 /* DGBaseHttpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DGBaseHttpModel.m; sourceTree = "<group>"; };
 		189D489C2175D67B008F6A67 /* DGBaseHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DGBaseHttpManager.h; sourceTree = "<group>"; };
@@ -84,6 +97,10 @@
 		18D7096F216F568D00FD166D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		18D7098F216F580800FD166D /* DGTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGTabBarController.h; sourceTree = "<group>"; };
 		18D70990216F580800FD166D /* DGTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGTabBarController.m; sourceTree = "<group>"; };
+		18EFB0F8217F1EAC009829B5 /* DGTopicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGTopicModel.h; sourceTree = "<group>"; };
+		18EFB0F9217F1EAC009829B5 /* DGTopicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGTopicModel.m; sourceTree = "<group>"; };
+		18EFB0FB217F1EC8009829B5 /* DGEssenceTopicModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGEssenceTopicModel.h; sourceTree = "<group>"; };
+		18EFB0FC217F1EC8009829B5 /* DGEssenceTopicModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGEssenceTopicModel.m; sourceTree = "<group>"; };
 		2C25FB4E38ED3D65B1D5A4B0 /* Pods-BaiSiMvp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaiSiMvp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BaiSiMvp/Pods-BaiSiMvp.release.xcconfig"; sourceTree = "<group>"; };
 		F8FA75810C7235CE8B375B54 /* Pods-BaiSiMvp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BaiSiMvp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BaiSiMvp/Pods-BaiSiMvp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,10 +156,19 @@
 			path = BaiSiMvp;
 			sourceTree = "<group>";
 		};
+		189776912181B95100199C94 /* ConfigHeader */ = {
+			isa = PBXGroup;
+			children = (
+				189776932181B9E000199C94 /* DGEssenceHeader.h */,
+			);
+			path = ConfigHeader;
+			sourceTree = "<group>";
+		};
 		189D48A32175DBE5008F6A67 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
 				189D48A42175DC7A008F6A67 /* DGEssenceProtocol.h */,
+				185D48362179D5CD003382D3 /* DGEssenceTopicProtocol.h */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -249,6 +275,7 @@
 		18D70975216F568D00FD166D /* Essence */ = {
 			isa = PBXGroup;
 			children = (
+				189776912181B95100199C94 /* ConfigHeader */,
 				189D48A32175DBE5008F6A67 /* Protocol */,
 				18D70976216F568D00FD166D /* Presenter */,
 				18D70977216F568D00FD166D /* Model */,
@@ -261,6 +288,8 @@
 		18D70976216F568D00FD166D /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				185D48332179D58B003382D3 /* DGEssenceTopicPresenter.h */,
+				185D48342179D58B003382D3 /* DGEssenceTopicPresenter.m */,
 				189D48A02175DBBE008F6A67 /* DGEssencePresenter.h */,
 				189D48A12175DBBE008F6A67 /* DGEssencePresenter.m */,
 			);
@@ -270,6 +299,14 @@
 		18D70977216F568D00FD166D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				18EFB0F8217F1EAC009829B5 /* DGTopicModel.h */,
+				18EFB0F9217F1EAC009829B5 /* DGTopicModel.m */,
+				18EFB0FB217F1EC8009829B5 /* DGEssenceTopicModel.h */,
+				18EFB0FC217F1EC8009829B5 /* DGEssenceTopicModel.m */,
+				1897768B2181B88C00199C94 /* DGCommonModel.h */,
+				1897768C2181B88C00199C94 /* DGCommonModel.m */,
+				1897768E2181B8F000199C94 /* DGUserModel.h */,
+				1897768F2181B8F000199C94 /* DGUserModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -633,6 +670,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185D48352179D58B003382D3 /* DGEssenceTopicPresenter.m in Sources */,
+				18EFB0FA217F1EAC009829B5 /* DGTopicModel.m in Sources */,
 				189D489E2175D67B008F6A67 /* DGBaseHttpModel.m in Sources */,
 				1888BCB221773DDD008B7D02 /* UIView+XMGVIew.m in Sources */,
 				18D7098E216F568D00FD166D /* AppDelegate.m in Sources */,
@@ -644,10 +683,13 @@
 				189D48B62175E003008F6A67 /* DGEssenceWordTableViewController.m in Sources */,
 				18D7098D216F568D00FD166D /* main.m in Sources */,
 				1895D18721748F1F0021B88D /* DGMeViewController.m in Sources */,
+				1897768D2181B88C00199C94 /* DGCommonModel.m in Sources */,
 				1895D17D21748EF20021B88D /* DGNewPostViewController.m in Sources */,
 				1895D17421748B4E0021B88D /* DGNavigationController.m in Sources */,
 				189D48AA2175DF5E008F6A67 /* DGEssenceAllTableViewController.m in Sources */,
 				18D70992216F580800FD166D /* DGTabBarController.m in Sources */,
+				18EFB0FD217F1EC8009829B5 /* DGEssenceTopicModel.m in Sources */,
+				189776902181B8F000199C94 /* DGUserModel.m in Sources */,
 				189D48A72175DEA3008F6A67 /* DGEssenceTopicTableViewController.m in Sources */,
 				189D48AD2175DF90008F6A67 /* DGEssenceVideoTableViewController.m in Sources */,
 				1895D17821748B970021B88D /* DGEssenceController.m in Sources */,

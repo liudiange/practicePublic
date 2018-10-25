@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#define DG_Success_Code @"000000"
 typedef NS_ENUM(NSUInteger,DGBaseErrorType) {
     
     DGBaseErrorType_unknown = 0,

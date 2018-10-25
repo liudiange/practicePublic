@@ -76,9 +76,4 @@
     return titleArray;
     
 }
-
-
-
-
-
 @end

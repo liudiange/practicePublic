@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DGEssenceTopicProtocol.h"
+#import "DGEssenceTopicPresenter.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
 @interface DGEssenceTopicTableViewController : UITableViewController
 
-@end
 
+
+
+@end
 NS_ASSUME_NONNULL_END

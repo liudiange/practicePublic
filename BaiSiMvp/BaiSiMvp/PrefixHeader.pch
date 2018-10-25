@@ -30,6 +30,7 @@
 
 // 导入的类
 #import "UIView+XMGVIew.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import "ReactiveObjC.h"
 #import <MJExtension/MJExtension.h>
 #import <MJRefresh/MJRefresh.h>
