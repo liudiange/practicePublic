@@ -32,6 +32,8 @@
 		189D48B02175DFAF008F6A67 /* DGEssenceAudioTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D48AF2175DFAF008F6A67 /* DGEssenceAudioTableViewController.m */; };
 		189D48B32175DFE7008F6A67 /* DGEssencePictureTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D48B22175DFE7008F6A67 /* DGEssencePictureTableViewController.m */; };
 		189D48B62175E003008F6A67 /* DGEssenceWordTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189D48B52175E003008F6A67 /* DGEssenceWordTableViewController.m */; };
+		18ADE18B218C3ADB00576E0E /* DGEssenceTopicViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ADE189218C3ADB00576E0E /* DGEssenceTopicViewCell.m */; };
+		18ADE18C218C3ADB00576E0E /* DGEssenceTopicViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18ADE18A218C3ADB00576E0E /* DGEssenceTopicViewCell.xib */; };
 		18D7098D216F568D00FD166D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D7096E216F568D00FD166D /* main.m */; };
 		18D7098E216F568D00FD166D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D7096F216F568D00FD166D /* AppDelegate.m */; };
 		18D70992216F580800FD166D /* DGTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D70990216F580800FD166D /* DGTabBarController.m */; };
@@ -92,6 +94,9 @@
 		189D48B22175DFE7008F6A67 /* DGEssencePictureTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGEssencePictureTableViewController.m; sourceTree = "<group>"; };
 		189D48B42175E003008F6A67 /* DGEssenceWordTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGEssenceWordTableViewController.h; sourceTree = "<group>"; };
 		189D48B52175E003008F6A67 /* DGEssenceWordTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGEssenceWordTableViewController.m; sourceTree = "<group>"; };
+		18ADE188218C3ADB00576E0E /* DGEssenceTopicViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DGEssenceTopicViewCell.h; sourceTree = "<group>"; };
+		18ADE189218C3ADB00576E0E /* DGEssenceTopicViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DGEssenceTopicViewCell.m; sourceTree = "<group>"; };
+		18ADE18A218C3ADB00576E0E /* DGEssenceTopicViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DGEssenceTopicViewCell.xib; sourceTree = "<group>"; };
 		18D7096D216F568D00FD166D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		18D7096E216F568D00FD166D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		18D7096F216F568D00FD166D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -316,6 +321,9 @@
 			children = (
 				1822370721773943008C36E5 /* DGEssenceButton.h */,
 				1822370821773943008C36E5 /* DGEssenceButton.m */,
+				18ADE188218C3ADB00576E0E /* DGEssenceTopicViewCell.h */,
+				18ADE189218C3ADB00576E0E /* DGEssenceTopicViewCell.m */,
+				18ADE18A218C3ADB00576E0E /* DGEssenceTopicViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -574,6 +582,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18ADE18C218C3ADB00576E0E /* DGEssenceTopicViewCell.xib in Resources */,
 				1895D18821748F1F0021B88D /* DGMeViewController.xib in Resources */,
 				18668F55216DE91500E0127E /* LaunchScreen.storyboard in Resources */,
 				1895D18321748F0B0021B88D /* DGFellowViewController.xib in Resources */,
@@ -684,6 +693,7 @@
 				18D7098D216F568D00FD166D /* main.m in Sources */,
 				1895D18721748F1F0021B88D /* DGMeViewController.m in Sources */,
 				1897768D2181B88C00199C94 /* DGCommonModel.m in Sources */,
+				18ADE18B218C3ADB00576E0E /* DGEssenceTopicViewCell.m in Sources */,
 				1895D17D21748EF20021B88D /* DGNewPostViewController.m in Sources */,
 				1895D17421748B4E0021B88D /* DGNavigationController.m in Sources */,
 				189D48AA2175DF5E008F6A67 /* DGEssenceAllTableViewController.m in Sources */,
