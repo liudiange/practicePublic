@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *profile_image;
 /** 标题*/
 @property (copy, nonatomic) NSString *name;
-/**  创建时间*/
+/** 创建时间*/
 @property (copy, nonatomic) NSString *created_at;
 /** 内容*/
 @property (copy, nonatomic) NSString *text;

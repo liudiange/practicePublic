@@ -19,6 +19,7 @@
 // 屏幕大小
 #define DGScreenWidth   [UIScreen mainScreen].bounds.size.width
 #define DGScreenHeight  [UIScreen mainScreen].bounds.size.height
+#define DGMargon 10
 // 打印输出log
 #ifdef DEBUG
 #define DGLOG(...) NSLog(__VA_ARGS__)
