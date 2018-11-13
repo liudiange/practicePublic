@@ -55,18 +55,29 @@ NS_ASSUME_NONNULL_BEGIN
  @param status 播放的状态
  */
 - (void)DGPlayerChangeStatus:(DGPlayerStatus)status;
-
 /**
  一首歌曲播放完成的delegate，自动会播放下一首，不要再这里边播放下一首歌曲
 
  @param nextInfo 下一首的musicInfo
  */
 - (void)DGPlayerFinished:(DGMusicInfo *)nextInfo;
+/**
+ 代理回调当前的时间、总时间、播放进度
+
+ @param currentTime 当前的时间
+ @param durationTime 总的时间
+ @param progress 播放进度
+ */
+- (void)DGPlayerCurrentTime:(CGFloat)currentTime
+                   duration:(CGFloat)durationTime
+               playProgress:(CGFloat)progress;
+
 @end
+
+
 @interface DGMusicManager : NSObject
 
 @property (weak, nonatomic) id <DGMusicManagerDelegate> DGDelegate;
-
 #pragma mark - 初始化的方法，以及相关的设置等等
 +(instancetype)shareInstance;
 #pragma mark 可以直接获得的
@@ -154,6 +165,12 @@ NS_ASSUME_NONNULL_BEGIN
  @param addList 新的歌曲的数组
  */
 - (void)addPlayList:(NSArray<DGMusicInfo *>*)addList;
+/**
+ 快进或者快退
+
+ @param time 要播放的那个时间点
+ */
+- (void)seekTime:(NSUInteger)time;
 
 
 @end
