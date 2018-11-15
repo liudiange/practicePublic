@@ -397,6 +397,7 @@
         self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:info.listenUrl]];
         [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         [self.player play];
+        self.innerCurrentMusicInfo = info;
         [self addMyObserver];
         
         self.innerCurrentPlayStatus = DGPlayerStatusPlay;
@@ -413,6 +414,7 @@
     self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:nextMusicInfo.listenUrl]];
     [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
     [self.player play];
+    self.innerCurrentMusicInfo = nextMusicInfo;
     [self addMyObserver];
     
     self.innerCurrentPlayStatus = DGPlayerStatusPlay;
@@ -464,6 +466,7 @@
         self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:info.listenUrl]];
         [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         [self.player play];
+        self.innerCurrentMusicInfo = info;
         [self addMyObserver];
         
         self.innerCurrentPlayStatus = DGPlayerStatusPlay;
@@ -480,6 +483,7 @@
     self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:previousMusicInfo.listenUrl]];
     [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
     [self.player play];
+    self.innerCurrentMusicInfo = previousMusicInfo;
     [self addMyObserver];
     
     self.innerCurrentPlayStatus = DGPlayerStatusPlay;
