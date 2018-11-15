@@ -145,7 +145,11 @@
         CGFloat durationSeconds = CMTimeGetSeconds(timeRange.duration);
         CGFloat totalBuffer = startSeconds + durationSeconds;
         CGFloat durationTime = CMTimeGetSeconds(self.playerItem.duration);
+        
         CGFloat bufferProgress = totalBuffer/durationTime;
+        if (isnan(bufferProgress)) {
+            bufferProgress = 0;
+        }
         if ([self.DGDelegate respondsToSelector:@selector(DGPlayerBufferProgress:)]) {
             [self.DGDelegate DGPlayerBufferProgress:bufferProgress];
         }
