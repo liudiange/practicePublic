@@ -76,8 +76,8 @@
     
     NSAssert(!(offset < 0 || offset > self.playList.count - 1), @"歌曲播放位置不合法");
     NSAssert(!(self.playList.count <= 0), @"播放数组不能为空");
-    
     if ((offset < 0 || offset > self.playList.count - 1) || self.playList.count == 0){ return;}
+    
     DGMusicInfo *musicInfo = self.playList[offset];
     self.innerCurrentMusicInfo = musicInfo;
     if (musicInfo.listenUrl.length == 0) {return;}
@@ -88,50 +88,24 @@
         AVPlayer *player = [[AVPlayer alloc] initWithPlayerItem:item];
         self.playerItem = item;
         self.player = player;
-        // 添加开始播放前的通知监听
-        if (self.playerItem) {
-            [self.playerItem addObserver:self forKeyPath:DGPlayerStatusKey options:NSKeyValueObservingOptionNew context:nil];
-        }
         [self.player play];
-        // 添加在播放器开始播放后的通知
-        if (self.playerItem) {
-            [self.playerItem addObserver:self forKeyPath:DGPlayerLoadTimeKey options:NSKeyValueObservingOptionNew context:nil];
-            [self.playerItem addObserver:self forKeyPath:DGPlayerBufferEmty options:NSKeyValueObservingOptionNew context:nil];
-            [self.playerItem addObserver:self forKeyPath:DGPlayerLikelyToKeepUp options:NSKeyValueObservingOptionNew context:nil];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishAction:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-        }
-        // 监听当前的播放进度
-        __block CGFloat duationTime = CMTimeGetSeconds(self.playerItem.duration);
-        __weak typeof(self)weakSelf = self;
-        self.progressObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
-            
-            CGFloat currentTime = CMTimeGetSeconds(time);
-            if (currentTime < 0 ) {
-                currentTime = 0;
-            }else if (duationTime < 0){
-                duationTime = 0;
-            }
-            CGFloat progress = currentTime/duationTime * 1.0;
-            
-            if ([weakSelf.DGDelegate respondsToSelector:@selector(DGPlayerCurrentTime:duration:playProgress:)]) {
-                [weakSelf.DGDelegate DGPlayerCurrentTime:currentTime duration:duationTime playProgress:progress];
-            }
-        }];
-        // 监听播放速度
-        if (self.player) {
-            [self.player addObserver:self forKeyPath:DGPlayerRate options:NSKeyValueObservingOptionNew context:nil];
-        }
+        [self addMyObserver];
     }else{
+        [self removeMyObserver];
         NSURL *url = [NSURL URLWithString:musicInfo.listenUrl];
         self.playerItem = [AVPlayerItem playerItemWithURL:url];
         [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         [self.player play];
+        [self addMyObserver];
         
     }
 }
 #pragma mark - 观察者的监听、代理的返回等等
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:DGPlayerStatusKey]) { // 监听播放器的状态
+        
+        NSLog(@"当前的播放状态 %zd",self.playerItem.status);
+        
         switch (self.playerItem.status) {
             case AVPlayerStatusReadyToPlay:
             {
@@ -175,7 +149,23 @@
         if ([self.DGDelegate respondsToSelector:@selector(DGPlayerBufferProgress:)]) {
             [self.DGDelegate DGPlayerBufferProgress:bufferProgress];
         }
+       
+        if (bufferProgress < 1.0) {
+            self.innerCurrentPlayStatus = DGPlayerStatusBuffer;
+            if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
+                [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusBuffer];
+            }
+        }else{
+            self.innerCurrentPlayStatus = DGPlayerStatusPlay;
+            if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
+                [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
+            }
+        }
+        NSLog(@"bufferProgress :%f",bufferProgress);
     }else if ([keyPath isEqualToString:DGPlayerRate]){ // 播放速度 0 就是暂停了
+        
+        NSLog(@"self.player.rate :%f",self.player.rate);
+        
         if (self.player.rate == 0) {
             self.innerCurrentPlayStatus = DGPlayerStatusPause;
             if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
@@ -187,8 +177,8 @@
                 [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
             }
         }
-        
     }else if([keyPath isEqualToString:DGPlayerBufferEmty]){ //没有足够的缓冲区了，监听播放播放器在缓冲区的状态
+        NSLog(@"没有足够的缓冲区了，监听播放播放器在缓冲区的状态");
         self.innerCurrentPlayStatus = DGPlayerStatusBuffer;
         if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
             [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusBuffer];
@@ -219,6 +209,8 @@
  */
 -(NSUInteger)nextIndex{
     
+    if (self.innerCurrentMusicInfo == nil) return 0;
+    
     NSUInteger index = [self.playList indexOfObject:self.currentMusicInfo];
     NSUInteger nextIndex = index + 1;
     if (nextIndex == self.playList.count) {
@@ -232,6 +224,9 @@
  @return 上一首歌曲的下标签
  */
 -(NSUInteger)previousIndex{
+    
+    if (self.innerCurrentMusicInfo == nil) return 0;
+
     NSUInteger index = [self.playList indexOfObject:self.currentMusicInfo];
     NSUInteger previousIndex = index - 1;
     if (previousIndex == -1) {
@@ -246,17 +241,61 @@
 -(void)removeMyObserver{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self.playerItem removeObserver:self forKeyPath:DGPlayerStatusKey];
-    [self.playerItem removeObserver:self forKeyPath:DGPlayerLoadTimeKey];
-    [self.playerItem removeObserver:self forKeyPath:DGPlayerLikelyToKeepUp];
-    [self.playerItem removeObserver:self forKeyPath:DGPlayerBufferEmty];
-    [self.player removeObserver:self forKeyPath:DGPlayerRate];
-    
-    if (self.progressObserver) {
+    if (self.playerItem) {
+        [self.playerItem removeObserver:self forKeyPath:DGPlayerStatusKey];
+        [self.playerItem removeObserver:self forKeyPath:DGPlayerLoadTimeKey];
+        [self.playerItem removeObserver:self forKeyPath:DGPlayerLikelyToKeepUp];
+        [self.playerItem removeObserver:self forKeyPath:DGPlayerBufferEmty];
+    }
+    if (self.player) {
+        [self.player removeObserver:self forKeyPath:DGPlayerRate];
+    }
+    if (self.progressObserver && self.player) {
         [self.player removeTimeObserver:self.progressObserver];
+        self.progressObserver = nil;
     }
 }
-#pragma Mark - 需要返回和设置的方法
+
+/**
+ 添加我的观察者
+ */
+- (void)addMyObserver{
+    
+    // 添加在播放器开始播放后的通知
+    if (self.playerItem) {
+        [self.playerItem addObserver:self forKeyPath:DGPlayerStatusKey options:NSKeyValueObservingOptionNew context:nil];
+        [self.playerItem addObserver:self forKeyPath:DGPlayerLoadTimeKey options:NSKeyValueObservingOptionNew context:nil];
+        [self.playerItem addObserver:self forKeyPath:DGPlayerBufferEmty options:NSKeyValueObservingOptionNew context:nil];
+        [self.playerItem addObserver:self forKeyPath:DGPlayerLikelyToKeepUp options:NSKeyValueObservingOptionNew context:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishAction:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    }
+    // 监听播放速度
+    if (self.player) {
+        // 监听当前的播放进度
+        __weak typeof(self)weakSelf = self;
+        self.progressObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+            CGFloat duationTime = CMTimeGetSeconds(weakSelf.playerItem.duration);
+           
+            CGFloat currentTime = CMTimeGetSeconds(time);
+            if (currentTime < 0 ) {
+                currentTime = 0;
+            }else if (duationTime < 0){
+                duationTime = 0;
+            }else if (isnan(duationTime)){
+                duationTime = 0;
+            }
+            NSLog(@"总的时间 :%f",duationTime);
+            CGFloat progress = currentTime/duationTime * 1.0;
+            if ([weakSelf.DGDelegate respondsToSelector:@selector(DGPlayerCurrentTime:duration:playProgress:)]) {
+                [weakSelf.DGDelegate DGPlayerCurrentTime:currentTime duration:duationTime playProgress:progress];
+            }
+        }];
+        // 添加观察者
+        [self.player addObserver:self forKeyPath:DGPlayerRate options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    }
+}
+
+#pragma mark - 需要返回和设置的方法
 /**
  当前的播放状态，方便用户随时拿到
  
@@ -294,6 +333,17 @@
     
 }
 /**
+ 获得当前播放器的总时间
+ 
+ @return 时间
+ */
+- (CGFloat )durationTime{
+    if (self.player == nil) {
+        return 0;
+    }
+   return CMTimeGetSeconds(self.playerItem.duration);
+}
+/**
  获得播放列表
  
  @return 播放列表
@@ -322,9 +372,11 @@
     }
     // 播放当前单曲循环的歌曲
     if (self.innerCurrentPlayMode == DGPlayModeSingleRoop && isNeedSingRoopJump == NO) {
+        [self removeMyObserver];
         self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:self.innerCurrentMusicInfo.listenUrl]];
         self.player = [[AVPlayer alloc] initWithPlayerItem:self.playerItem];
         [self.player play];
+        [self addMyObserver];
         self.innerCurrentPlayStatus = DGPlayerStatusPlay;
         if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
             [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
@@ -335,9 +387,14 @@
     if (self.innerCurrentPlayMode == DGPlayModeRandPlay) {
         NSUInteger randIndex = arc4random_uniform((int32_t)self.playList.count - 1);
         DGMusicInfo *info = self.playList[randIndex];
+        if (info.listenUrl.length == 0) {return;}
+        
+        [self removeMyObserver];
         self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:info.listenUrl]];
         [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         [self.player play];
+        [self addMyObserver];
+        
         self.innerCurrentPlayStatus = DGPlayerStatusPlay;
         if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
             [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
@@ -346,9 +403,14 @@
     }
     NSUInteger nextIndex = [self nextIndex];
     DGMusicInfo *nextMusicInfo = self.playList[nextIndex];
+    if (nextMusicInfo.listenUrl.length == 0) {return;}
+    
+    [self removeMyObserver];
     self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:nextMusicInfo.listenUrl]];
     [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
     [self.player play];
+    [self addMyObserver];
+    
     self.innerCurrentPlayStatus = DGPlayerStatusPlay;
     if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
         [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
@@ -361,6 +423,7 @@
  如果传递是yes的情况下，那么单曲循环就会跳转到下一首循环播放
  */
 - (void)playPreviousSong:(BOOL)isNeedSingRoopJump{
+    
     NSAssert(self.playList.count != 0, @"你还没有设置播放列表");
     if (self.playList.count == 0) {
         self.innerCurrentPlayStatus = DGPlayerStatusStop;
@@ -374,9 +437,13 @@
     }
     // 播放当前单曲循环的歌曲
     if (self.innerCurrentPlayMode == DGPlayModeSingleRoop && isNeedSingRoopJump == NO) {
+        
+        [self removeMyObserver];
         self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:self.innerCurrentMusicInfo.listenUrl]];
         self.player = [[AVPlayer alloc] initWithPlayerItem:self.playerItem];
         [self.player play];
+        [self addMyObserver];
+        
         self.innerCurrentPlayStatus = DGPlayerStatusPlay;
         if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
             [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
@@ -387,9 +454,14 @@
     if (self.innerCurrentPlayMode == DGPlayModeRandPlay) {
         NSUInteger randIndex = arc4random_uniform((int32_t)self.playList.count - 1);
         DGMusicInfo *info = self.playList[randIndex];
+        if (info.listenUrl.length == 0) return;
+        
+        [self removeMyObserver];
         self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:info.listenUrl]];
         [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
         [self.player play];
+        [self addMyObserver];
+        
         self.innerCurrentPlayStatus = DGPlayerStatusPlay;
         if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
             [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
@@ -398,9 +470,14 @@
     }
     NSUInteger previousIndex = [self previousIndex];
     DGMusicInfo *previousMusicInfo = self.playList[previousIndex];
+    if (previousMusicInfo.listenUrl.length == 0) return;
+    
+    [self removeMyObserver];
     self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:previousMusicInfo.listenUrl]];
     [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
     [self.player play];
+    [self addMyObserver];
+    
     self.innerCurrentPlayStatus = DGPlayerStatusPlay;
     if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
         [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
@@ -413,6 +490,7 @@
  停止：清空播放列表，如果在要播放需要重新设置播放列表
  */
 - (void)playOperate:(DGPlayerPlayOperate)Operate{
+    
     switch (Operate) {
         
         case DGPlayerPlayOperatePlay:
@@ -464,6 +542,7 @@
  @param mode 自己要设置的模式
  */
 - (void)updateCurrentPlayMode:(DGPlayMode)mode{
+    
     self.innerCurrentPlayMode = mode;
     if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeMode:)]) {
         [self.DGDelegate DGPlayerChangeMode:mode];
@@ -496,17 +575,28 @@
  */
 - (void)deletePlayList:(NSArray<DGMusicInfo *>*)deleteList{
     
+    NSAssert(deleteList.count != 0, @"对不起，删除的数组不能为空");
     if (deleteList.count == 0) {return;}
+    
     NSMutableArray *temAttay = [NSMutableArray array];
+    __block BOOL isContainCurrentInfo = NO;
     for (NSInteger index = 0; index < deleteList.count; index ++) {
         DGMusicInfo *info = deleteList[index];
-        if ([self.playList containsObject:info]) {
-            [temAttay addObject:info];
+        if (info.musicId.length && [info isMemberOfClass:[DGMusicInfo class]]) {
+            [self.playList enumerateObjectsUsingBlock:^(DGMusicInfo * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj.musicId isEqualToString:info.musicId]) {
+                    [temAttay addObject:obj];
+                    if ([info.musicId isEqualToString:self.innerCurrentMusicInfo.musicId]) {
+                        isContainCurrentInfo = YES;
+                    }
+                    *stop = YES;
+                }
+            }];
         }
     }
-    
+    NSLog(@"清除的数组个数：%zd",temAttay.count);
     if (temAttay.count == 0) {return;}
-    if ([temAttay containsObject:self.innerCurrentMusicInfo]) {
+    if (isContainCurrentInfo) {
         [self.player pause];
     }
     // 删除数组
@@ -519,7 +609,29 @@
  */
 - (void)addPlayList:(NSArray<DGMusicInfo *>*)addList{
     
-    [self.playList addObjectsFromArray:addList];
+    NSAssert(addList.count != 0, @"添加的数组不能为空");
+    if (addList.count == 0) {return;}
+    
+    NSMutableArray *temArray = [NSMutableArray array];
+    for (NSInteger index = 0; index < addList.count; index ++) {
+       DGMusicInfo *info = addList[index];
+        if ([info isMemberOfClass:[DGMusicInfo class]]) {
+            __block BOOL isFlag = NO;
+            [self.playList enumerateObjectsUsingBlock:^(DGMusicInfo  *_Nonnull obj, NSUInteger idx, BOOL * stop) {
+                if ([obj.musicId isEqualToString:info.musicId]) {
+                    isFlag = YES;
+                    *stop = YES;
+                }
+                
+            }];
+            if (isFlag == NO) {
+             [temArray addObject:info];
+            }
+        }
+    }
+    NSLog(@"temArray.count : %zd",temArray.count);
+    if (temArray.count == 0) return;
+    [self.playList addObjectsFromArray:temArray];
 }
 /**
  快进或者快退

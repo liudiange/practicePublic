@@ -71,10 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)DGPlayerCurrentTime:(CGFloat)currentTime
                    duration:(CGFloat)durationTime
                playProgress:(CGFloat)progress;
-
 @end
-
-
 @interface DGMusicManager : NSObject
 
 @property (weak, nonatomic) id <DGMusicManagerDelegate> DGDelegate;
@@ -111,6 +108,12 @@ NS_ASSUME_NONNULL_BEGIN
  @return 播放列表
  */
 - (NSArray<DGMusicInfo *> *)getPlayList;
+/**
+ 获得当前播放器的总时间
+
+ @return 时间
+ */
+- (CGFloat )durationTime;
 #pragma mark 需要自己实现的
 /**
  设置播放列表并且开始播放，此时的播放模式为列表循环
