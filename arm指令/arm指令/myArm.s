@@ -7,11 +7,39 @@
 // 自己练习的
 _test:
 
-// b指令
-b testCode
-mov x0, #0x6
+
+// bl指令(函数调用)
 testCode:
-mov x1, #0x7
+mov x3, #0x2
+ret
+
+mov x1, #0x6
+mov x2, #0x7
+cmp x1, x2
+bl testCode
+mov x4, #0x4
+mov x5, #0x2
+
+
+
+//// b指令加条件
+//testCode:
+//mov x3, #0x2
+//ret
+//
+//mov x1, #0x6
+//mov x2, #0x7
+//cmp x1, x2
+//bgt testCode
+//mov x4, #0x8
+
+
+
+//// b指令
+//b testCode
+//mov x0, #0x6
+//testCode:
+//mov x1, #0x7
 
 
 
