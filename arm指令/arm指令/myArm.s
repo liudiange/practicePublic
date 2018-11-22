@@ -7,18 +7,26 @@
 // 自己练习的
 _test:
 
+// ldp 指令
 
-// bl指令(函数调用)
-testCode:
-mov x3, #0x2
-ret
+ldp w1, w2 [x1, #0x4]
 
-mov x1, #0x6
-mov x2, #0x7
-cmp x1, x2
-bl testCode
-mov x4, #0x4
-mov x5, #0x2
+
+// ldr 、ldur指令
+//;ldr x1, [x0,#0x4]
+//ldur x1, [x0,-#0x4]
+
+//// bl指令(函数调用)
+//testCode:
+//mov x3, #0x2
+//ret
+//
+//mov x1, #0x6
+//mov x2, #0x7
+//cmp x1, x2
+//bl testCode
+//mov x4, #0x4
+//mov x5, #0x2
 
 
 
