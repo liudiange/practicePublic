@@ -27,54 +27,6 @@
             endingLineNumber = "366"
             landmarkName = "-playNextSong:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[DGMusicManager playNextSong:]"
-                  moduleName = "&#x64ad;&#x653e;&#x5668;sdk"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/practicePublic/%E6%92%AD%E6%94%BE%E5%99%A8sdk/%E6%92%AD%E6%94%BE%E5%99%A8sdk/DGMusicManager.m"
-                  timestampString = "563968586.495355"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "366"
-                  endingLineNumber = "366"
-                  offsetFromSymbolStart = "29">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[DGMusicManager playNextSong:]"
-                  moduleName = "&#x64ad;&#x653e;&#x5668;sdk"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/practicePublic/%E6%92%AD%E6%94%BE%E5%99%A8sdk/%E6%92%AD%E6%94%BE%E5%99%A8sdk/DGMusicManager.m"
-                  timestampString = "563968586.5017101"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "366"
-                  endingLineNumber = "366"
-                  offsetFromSymbolStart = "134">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x64ad;&#x653e;&#x5668;sdk/ViewController.m"
-            timestampString = "563968816.812219"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
-            landmarkName = "-nextButtonAction:"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -90,6 +42,22 @@
             startingLineNumber = "216"
             endingLineNumber = "216"
             landmarkName = "-nextIndex"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x64ad;&#x653e;&#x5668;sdk/cacheMusic/DGCacheMusicPlayer.m"
+            timestampString = "564570560.300948"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "-init"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

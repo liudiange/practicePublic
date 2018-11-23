@@ -8,6 +8,10 @@
 
 #import "ViewController.h"
 #import "DGMusicManager.h"
+#import "DGCacheMusicController.h"
+#import "DGCacheVideoController.h"
+#import "DGVideoPlayerController.h"
+
 
 @interface ViewController ()<DGMusicManagerDelegate>
 
@@ -26,6 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"无缓存的音频播放器";
     
     // http://218.200.160.29/rdp2/test/mac/listen.do?contentid=60078701841&ua=Mac_sst&version=1.0
     // http://218.200.160.29/rdp2/test/mac/listen.do?contentid=60070101405&ua=Mac_sst&version=1.0
@@ -51,7 +57,7 @@
     }
     
     [DGMusicManager shareInstance].DGDelegate = self;
-    [[DGMusicManager shareInstance] setPlayList:infoArray offset:0];
+   // [[DGMusicManager shareInstance] setPlayList:infoArray offset:0];
     
 }
 #pragma mark - delegate 回调
@@ -303,6 +309,42 @@
     CGFloat needTime = sender.value * [[DGMusicManager shareInstance] durationTime];
     [[DGMusicManager shareInstance] seekTime:(NSUInteger)needTime];
 }
+#pragma mark - 点击进入下一页的事件
+/**
+ 点击进入有缓存的音频控制器
+
+ @param sender 按钮
+ */
+- (IBAction)clickCacheMusic:(UIButton *)sender {
+    
+    DGCacheMusicController *cacheMusicVc = [[DGCacheMusicController alloc] init];
+    [self.navigationController pushViewController:cacheMusicVc animated:YES];
+    
+}
+/**
+ 点击进入有缓存的视频播放器
+
+ @param sender 按钮
+ */
+- (IBAction)clickCacheVideo:(UIButton *)sender {
+    DGCacheVideoController *cacheVideoVc = [[DGCacheVideoController alloc] init];
+    [self.navigationController pushViewController:cacheVideoVc animated:YES];
+    
+}
+
+/**
+ 点击无缓存的video
+
+ @param sender 按钮
+ */
+- (IBAction)clickNoCacheVideo:(UIButton *)sender {
+    
+    DGVideoPlayerController *VideoVc = [[DGVideoPlayerController alloc] init];
+    [self.navigationController pushViewController:VideoVc animated:YES];
+}
+
+
+
 
 
 

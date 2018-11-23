@@ -7,9 +7,10 @@
 // 自己练习的
 _test:
 
-// ldp 指令
+str x0, [x1]
 
-ldp w1, w2 [x1, #0x4]
+// ldp 指令
+//ldp w1, w2 [x1, #0x4]
 
 
 // ldr 、ldur指令
