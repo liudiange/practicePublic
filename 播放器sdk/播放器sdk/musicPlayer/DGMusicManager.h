@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DGMusicInfo.h"
 #import <AVFoundation/AVFoundation.h>
+#import "DGMusicInfo.h"
 
 typedef NS_ENUM(NSUInteger,DGPlayerPlayOperate) {
     DGPlayerPlayOperateStop   = 1,     // 开始的状态
