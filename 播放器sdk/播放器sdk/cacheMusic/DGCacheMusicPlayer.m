@@ -60,7 +60,13 @@
     if (self) {
         
         self.innerPlayState = DGCacheMusicStateStop;
+        if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+            [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+        }
         self.innerCurrentMode = DGCacheMusicModeListRoop;
+        if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayModeChanged:)]) {
+            [self.DGCacheMusicDelegate DGCacheMusicPlayModeChanged:DGCacheMusicModeListRoop];
+        }
         self.currentModel = nil;
 
     }
@@ -128,6 +134,9 @@
             [self.player play];
             [self addMyObserver];
             self.innerPlayState = DGCacheMusicStatePlay;
+            if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+            }
             return;
         }
         // 随机播放的情况
@@ -142,6 +151,10 @@
                 [self addMyObserver];
                 self.currentModel = randNextModel;
                 self.innerPlayState = DGCacheMusicStatePlay;
+                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                }
+                
                 return;
             }
          // 其他情况直接下一首
@@ -154,6 +167,9 @@
                 [self addMyObserver];
                 self.currentModel = nextModel;
                 self.innerPlayState = DGCacheMusicStatePlay;
+                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                }
                 return;
             }
         }
@@ -189,6 +205,9 @@
             [self.player play];
             [self addMyObserver];
             self.innerPlayState = DGCacheMusicStatePlay;
+            if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+            }
             return;
         }
         // 随机播放的情况
@@ -203,6 +222,9 @@
                 [self addMyObserver];
                 self.currentModel = randNextModel;
                 self.innerPlayState = DGCacheMusicStatePlay;
+                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                }
                 return;
             }
             // 其他情况直接上一首
@@ -215,6 +237,9 @@
                 [self addMyObserver];
                 self.currentModel = previousModel;
                 self.innerPlayState = DGCacheMusicStatePlay;
+                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                }
                 return;
             }
         }
@@ -239,6 +264,9 @@
     NSAssert(self.currentModel.listenUrl.length != 0, @"对不起当前歌曲没有链接");
     if (self.currentModel.listenUrl.length == 0) {
         self.innerPlayState = DGCacheMusicStateStop;
+        if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+            [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+        }
         return;
     }
     switch (operate) {
@@ -247,6 +275,9 @@
             if (self.player) {
                 [self.player play];
                 self.innerPlayState = DGCacheMusicStatePlay;
+                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                }
             }
         }
             break;
@@ -255,6 +286,9 @@
             if (self.player) {
                 [self.player pause];
                 self.innerPlayState = DGCacheMusicStatePause;
+                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                }
             }
         }
             break;
@@ -267,6 +301,9 @@
                     self.player = nil;
                     self.playerItem = nil;
                     self.innerPlayState = DGCacheMusicStateStop;
+                    if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                        [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                    }
                     self.currentModel = nil;
                 }
             }else{ // 需要缓存的 取消下载
@@ -286,6 +323,9 @@
 - (void)updateCurrentPlayMode:(DGCacheMusicMode)mode{
     
     self.innerCurrentMode = mode;
+    if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayModeChanged:)]) {
+        [self.DGCacheMusicDelegate DGCacheMusicPlayModeChanged:mode];
+    }
 }
 /**
  清空播放列表
@@ -301,6 +341,9 @@
         self.playerItem = nil;
         self.player = nil;
         self.innerPlayState = DGCacheMusicStateStop;
+        if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+            [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+        }
     }
 }
 /**
@@ -330,6 +373,9 @@
     if ([needDeleteArray containsObject:self.currentModel]) {
         [self.player pause];
         self.innerPlayState = DGCacheMusicStatePause;
+        if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+            [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+        }
         [self removeMyObserver];
         self.currentModel = nil;
     }
@@ -342,6 +388,30 @@
  */
 - (void)addPlayList:(NSArray<DGCacheMusicModel *>*)addList{
     
+    NSAssert(addList.count != 0, @"添加到播放列表不能为空");
+    if (addList.count == 0) {
+        
+        return;
+    }
+    // 去重
+    NSMutableArray *needAddArray = [NSMutableArray array];
+    NSMutableArray *temArray = [NSMutableArray array];
+    [addList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[DGCacheMusicModel class]]) {
+            DGCacheMusicModel *model = (DGCacheMusicModel *)obj;
+            [self.playList enumerateObjectsUsingBlock:^(DGCacheMusicModel *  _Nonnull innerModel, NSUInteger idx, BOOL * _Nonnull innerStop) {
+                if ([model.musicId isEqualToString:innerModel.musicId]) {
+                    [temArray addObject:obj];
+                    *innerStop = YES;
+                }
+            }];
+        }
+    }];
+    if (temArray.count > 0) {
+        [needAddArray removeObjectsInArray:temArray];
+    }
+    // 进行添加
+    [self.playList addObjectsFromArray:needAddArray];
 }
 /**
  快进或者快退
@@ -349,10 +419,153 @@
  @param time 要播放的那个时间点
  */
 - (void)seekTime:(NSUInteger)time{
-    
+    if (self.player) {
+        CGFloat duration = CMTimeGetSeconds(self.playerItem.duration);
+        NSAssert(time < duration, @"对不起 你的播放时间大于总时长了");
+        if (time > duration) {
+            return;
+        }
+        [self.player seekToTime:CMTimeMake(time, 1.0)];
+        [self.player play];
+        self.innerPlayState = DGCacheMusicStatePlay;
+        if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+            [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+        }
+    }
 }
-
+#pragma mark - 可以获得的方法
+/**
+ 当前的播放状态，方便用户随时拿到
+ 
+ @return 对应的播放状态
+ */
+- (DGCacheMusicState)currentPlayeStatus{
+    return self.innerPlayState;
+}
+/**
+ 获取到当前的播放模式
+ 
+ @return 对应的播放模式
+ */
+- (DGCacheMusicMode)currentPlayMode{
+    return self.innerCurrentMode;
+}
+/**
+ 当前的播放的模型
+ 
+ @return 当前的播放模型
+ */
+- (DGCacheMusicModel *)currentMusicModel{
+    return self.currentModel;
+}
+/**
+ 当前播放e歌曲的下标
+ 
+ @return 为了你更加省心 我给你提供出来
+ */
+- (NSUInteger)currentIndex{
+    if (self.currentModel && self.playList.count > 0) {
+        return [self.playList indexOfObject:self.currentModel];
+    }
+    return 0;
+}
+/**
+ 获得播放列表
+ 
+ @return 播放列表
+ */
+- (NSArray<DGCacheMusicModel *> *)getPlayList{
+    return self.playList;
+}
+/**
+ 获得当前播放器的总时间
+ 
+ @return 时间
+ */
+- (CGFloat )durationTime{
+    if (self.playerItem) {
+        CGFloat duration = CMTimeGetSeconds(self.playerItem.duration);
+        if (isnan(duration)) {
+            return 0;
+        }
+        return duration;
+    }
+    return 0;
+}
 #pragma mark - 自己方法的实现
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+
+    if ([keyPath isEqualToString:DGPlayerStatusKey]) {
+        switch (self.player.status) {
+            case AVPlayerStatusReadyToPlay:
+            {
+                self.innerPlayState = DGCacheMusicStateWaitting;
+                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                }
+            }
+                break;
+            case AVPlayerStatusFailed:
+            {
+                self.innerPlayState = DGCacheMusicStateError;
+                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                }
+            }
+                break;
+                
+            default:
+                break;
+        }
+        
+    }else if([keyPath isEqualToString:DGPlayerRateKey]) {
+        if (self.player.rate > 0) {
+            self.innerPlayState = DGCacheMusicStatePlay;
+            if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+            }
+        }else{
+            self.innerPlayState = DGCacheMusicStatePause;
+            if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+            }
+        }
+    }else if([keyPath isEqualToString:DGPlayerLoadTimeKey]) {
+        NSArray *array = self.playerItem.loadedTimeRanges;
+        CMTimeRange timeRange = [array.firstObject CMTimeRangeValue];
+        CGFloat startSeconds = CMTimeGetSeconds(timeRange.start);
+        CGFloat durationSeconds = CMTimeGetSeconds(timeRange.duration);
+        CGFloat totalBuffer = startSeconds + durationSeconds;
+        CGFloat durationTime = CMTimeGetSeconds(self.playerItem.duration);
+        CGFloat bufferProgress = totalBuffer/durationTime;
+        if (isnan(bufferProgress) || bufferProgress < 0) {
+            bufferProgress = 0;
+        }
+        if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicCacheProgress:)]) {
+            [self.DGCacheMusicDelegate DGCacheMusicCacheProgress:bufferProgress];
+        }
+        
+        if (bufferProgress < 1.0 && self.isNeedCache == NO) {
+            self.innerPlayState = DGCacheMusicStateBuffer;
+            if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:DGCacheMusicStateBuffer];
+            }
+        }else if(bufferProgress == 1.0){
+            self.innerPlayState = DGCacheMusicStatePlay;
+            if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:DGCacheMusicStatePlay];
+            }
+        }
+    }else if([keyPath isEqualToString:DGPlayerBufferEmty]) { //没有足够的缓冲器了 说明正在缓冲中
+        self.innerPlayState = DGCacheMusicStateBuffer;
+        if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+            [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:DGCacheMusicStateBuffer];
+        }
+    }else if([keyPath isEqualToString:DGPlayerLikelyToKeepUp]) { // 说明缓冲器区域有足够的数据在播放，一般这种情况我们什么都不干
+        
+        
+    }
+}
 /**
  获取下一首歌曲的坐标model
 
@@ -404,7 +617,6 @@
         [self.playerObserver removeObserver:self];
         self.playerObserver = nil;
     }
-    
 }
 /**
  添加我的观察者
@@ -421,8 +633,21 @@
     }
     if (self.player) {
         // 监听播放进度等等
+        __weak typeof(self)weakSelf = self;
       self.playerObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1.0, 1.0) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
-            
+          
+          CGFloat durationTime = CMTimeGetSeconds(weakSelf.playerItem.duration);
+          if (isnan(durationTime) || durationTime < 0) {
+              durationTime = 0;
+          }
+          CGFloat currentTime = CMTimeGetSeconds(time);
+          if (isnan(currentTime) || currentTime < 0) {
+              currentTime = 0;
+          }
+          CGFloat progress = currentTime/durationTime * 1.0;
+          if ([weakSelf.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayerCurrentTime:duration:playProgress:)]) {
+              [weakSelf.DGCacheMusicDelegate DGCacheMusicPlayerCurrentTime:currentTime duration:durationTime playProgress:progress];
+          }
       }];
         // 播放速度
         [self.player addObserver:self forKeyPath:DGPlayerRateKey options:NSKeyValueObservingOptionNew context:nil];
@@ -434,9 +659,10 @@
  @param info 信息
  */
 - (void)didFinishAction:(NSNotification *)info{
-    
+    if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayFinish:)]) {
+        [self.DGCacheMusicDelegate DGCacheMusicPlayFinish:[self getNextModel]];
+    }
     [self playNextSong:NO];
 }
-
 
 @end

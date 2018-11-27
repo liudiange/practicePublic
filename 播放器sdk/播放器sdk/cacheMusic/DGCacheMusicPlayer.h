@@ -34,6 +34,42 @@ typedef NS_ENUM(NSUInteger, DGCacheMusicOperate){
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol DGCacheMusicPlayerDelegate <NSObject>
+/**
+ 一首歌曲播放完成了，会把下一首需要播放的歌曲返回来 会自动播放下一首，不要再这里播放下一首
+
+ @param nextModel 下一首歌曲的模型
+ */
+- (void)DGCacheMusicPlayFinish:(DGCacheMusicModel *)nextModel;
+/**
+ 播放模式发生了改变了
+
+ @param mode 返回来的mode
+ */
+- (void)DGCacheMusicPlayModeChanged:(DGCacheMusicMode )mode;
+/**
+ 播放状态发生了改变
+
+ @param status 改变后的状态
+ */
+- (void)DGCacheMusicPlayStatusChanged:(DGCacheMusicState)status;
+/**
+ 缓存的进度
+
+ @param cacheProgress 播放的缓存的进度
+ */
+- (void)DGCacheMusicCacheProgress:(CGFloat )cacheProgress;
+
+/**
+ 当前时间 总的时间 缓冲的进度的播放代理回调
+
+ @param currentTime 当前的时间
+ @param durationTime 总的时间
+ @param playProgress 播放的进度 （0-1）之间
+ */
+- (void)DGCacheMusicPlayerCurrentTime:(CGFloat)currentTime
+                             duration:(CGFloat)durationTime
+                         playProgress:(CGFloat)playProgress;
+
 
 
 @end
@@ -105,12 +141,43 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)seekTime:(NSUInteger)time;
 
-
-
-
-
-
-
+#pragma mark - 可以获得的方法
+/**
+ 当前的播放状态，方便用户随时拿到
+ 
+ @return 对应的播放状态
+ */
+- (DGCacheMusicState)currentPlayeStatus;
+/**
+ 获取到当前的播放模式
+ 
+ @return 对应的播放模式
+ */
+- (DGCacheMusicMode)currentPlayMode;
+/**
+ 当前的播放的模型
+ 
+ @return 当前的播放模型
+ */
+- (DGCacheMusicModel *)currentMusicModel;
+/**
+ 当前播放e歌曲的下标
+ 
+ @return 为了你更加省心 我给你提供出来
+ */
+- (NSUInteger)currentIndex;
+/**
+ 获得播放列表
+ 
+ @return 播放列表
+ */
+- (NSArray<DGCacheMusicModel *> *)getPlayList;
+/**
+ 获得当前播放器的总时间
+ 
+ @return 时间
+ */
+- (CGFloat )durationTime;
 
 @end
 NS_ASSUME_NONNULL_END
