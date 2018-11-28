@@ -154,24 +154,23 @@
                 if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
                     [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
                 }
-                
                 return;
             }
-         // 其他情况直接下一首
-            DGCacheMusicModel *nextModel = [self getNextModel];
-            if (nextModel.listenUrl.length > 0) {
-                [self removeMyObserver];
-                self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:nextModel.listenUrl]];
-                [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
-                [self.player play];
-                [self addMyObserver];
-                self.currentModel = nextModel;
-                self.innerPlayState = DGCacheMusicStatePlay;
-                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
-                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
-                }
-                return;
+        }
+        // 其他情况直接下一首
+        DGCacheMusicModel *nextModel = [self getNextModel];
+        if (nextModel.listenUrl.length > 0) {
+            [self removeMyObserver];
+            self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:nextModel.listenUrl]];
+            [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+            [self.player play];
+            [self addMyObserver];
+            self.currentModel = nextModel;
+            self.innerPlayState = DGCacheMusicStatePlay;
+            if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
             }
+            return;
         }
     }else{ // 需要缓存的
         
@@ -227,21 +226,21 @@
                 }
                 return;
             }
-            // 其他情况直接上一首
-            DGCacheMusicModel *previousModel = [self getPreviousModel];
-            if (previousModel.listenUrl.length > 0) {
-                [self removeMyObserver];
-                self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:previousModel.listenUrl]];
-                [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
-                [self.player play];
-                [self addMyObserver];
-                self.currentModel = previousModel;
-                self.innerPlayState = DGCacheMusicStatePlay;
-                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
-                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
-                }
-                return;
+        }
+        // 其他情况直接上一首
+        DGCacheMusicModel *previousModel = [self getPreviousModel];
+        if (previousModel.listenUrl.length > 0) {
+            [self removeMyObserver];
+            self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:previousModel.listenUrl]];
+            [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
+            [self.player play];
+            [self addMyObserver];
+            self.currentModel = previousModel;
+            self.innerPlayState = DGCacheMusicStatePlay;
+            if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
             }
+            return;
         }
     }else{ // 需要缓存的
         
@@ -507,10 +506,18 @@
                 break;
             case AVPlayerStatusFailed:
             {
+                NSDictionary *errorDic = @{
+                                           NSLocalizedFailureReasonErrorKey :@"不缓存播放错误"
+                                           };
+                NSError * error = [NSError errorWithDomain:@"com.my.error.domaion" code:101 userInfo:errorDic];
                 self.innerPlayState = DGCacheMusicStateError;
                 if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
                     [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
                 }
+                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayFailed:)]) {
+                    [self.DGCacheMusicDelegate DGCacheMusicPlayFailed:error];
+                }
+                
             }
                 break;
                 
@@ -614,7 +621,7 @@
         [self.player removeObserver:self forKeyPath:DGPlayerRateKey];
     }
     if (self.playerObserver && self.player) {
-        [self.playerObserver removeObserver:self];
+        [self.player removeTimeObserver:self.playerObserver];
         self.playerObserver = nil;
     }
 }

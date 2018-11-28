@@ -10,8 +10,12 @@
 #import <UIKit/UIKit.h>
 #import "DGCacheMusicModel.h"
 
-typedef NS_ENUM(NSUInteger,DGCacheMusicState) {
+typedef  NS_ENUM(NSUInteger,DGCacheMusicErrorCode) {
     
+    DGCacheMusicErrorCode101     = 101, // 非缓存播放出错的错误码
+    
+};
+typedef NS_ENUM(NSUInteger,DGCacheMusicState) {
     DGCacheMusicStatePlay        = 1, // 播放
     DGCacheMusicStatePause       = 2, // 暂停
     DGCacheMusicStateBuffer      = 3, // 缓冲
@@ -34,6 +38,13 @@ typedef NS_ENUM(NSUInteger, DGCacheMusicOperate){
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol DGCacheMusicPlayerDelegate <NSObject>
+/**
+ 播放失败了
+
+ @param error error
+ */
+- (void)DGCacheMusicPlayFailed:(NSError *)error;
+
 /**
  一首歌曲播放完成了，会把下一首需要播放的歌曲返回来 会自动播放下一首，不要再这里播放下一首
 
