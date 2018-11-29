@@ -45,53 +45,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "&#x64ad;&#x653e;&#x5668;sdk/cacheMusic/DGCacheMusicPlayer.m"
-            timestampString = "565091958.363239"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
-            landmarkName = "-playPreviousSong:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[DGCacheMusicPlayer playPreviousSong:]"
-                  moduleName = "&#x64ad;&#x653e;&#x5668;sdk"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/practicePublic/%E6%92%AD%E6%94%BE%E5%99%A8sdk/%E6%92%AD%E6%94%BE%E5%99%A8sdk/cacheMusic/DGCacheMusicPlayer.m"
-                  timestampString = "565091867.787269"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "189"
-                  endingLineNumber = "189"
-                  offsetFromSymbolStart = "29">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[DGCacheMusicPlayer playPreviousSong:]"
-                  moduleName = "&#x64ad;&#x653e;&#x5668;sdk"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Desktop/practicePublic/%E6%92%AD%E6%94%BE%E5%99%A8sdk/%E6%92%AD%E6%94%BE%E5%99%A8sdk/cacheMusic/DGCacheMusicPlayer.m"
-                  timestampString = "565091867.792676"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "189"
-                  endingLineNumber = "189"
-                  offsetFromSymbolStart = "134">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

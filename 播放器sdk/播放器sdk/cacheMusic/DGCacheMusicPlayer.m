@@ -260,12 +260,12 @@
  */
 - (void)playOperate:(DGCacheMusicOperate)operate{
     
-    NSAssert(self.currentModel.listenUrl.length != 0, @"对不起当前歌曲没有链接");
     if (self.currentModel.listenUrl.length == 0) {
         self.innerPlayState = DGCacheMusicStateStop;
         if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
             [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
         }
+        NSAssert(self.currentModel.listenUrl.length != 0, @"对不起当前歌曲没有链接");
         return;
     }
     switch (operate) {
@@ -379,6 +379,7 @@
         self.currentModel = nil;
     }
     [self.playList removeObjectsInArray:needDeleteArray];
+    NSLog(@"播放列表的个数 : %zd -- 删除数组的个数: %zd",self.playList.count,needDeleteArray.count);
 }
 /**
  添加一个新的歌单到播放列表
@@ -394,6 +395,7 @@
     }
     // 去重
     NSMutableArray *needAddArray = [NSMutableArray array];
+    [needAddArray addObjectsFromArray:addList];
     NSMutableArray *temArray = [NSMutableArray array];
     [addList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[DGCacheMusicModel class]]) {
@@ -411,6 +413,7 @@
     }
     // 进行添加
     [self.playList addObjectsFromArray:needAddArray];
+    NSLog(@"播放列表的个数 : %zd -- 需要添加的数组的个数: %zd",self.playList.count,needAddArray.count);
 }
 /**
  快进或者快退

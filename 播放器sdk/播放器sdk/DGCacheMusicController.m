@@ -73,7 +73,7 @@
  */
 - (IBAction)clearPlayList:(UIButton *)sender {
     
-    [[DGCacheMusicPlayer shareInstance] clearPlayList:YES];
+    [[DGCacheMusicPlayer shareInstance] clearPlayList:NO];
     
 }
 /**
@@ -185,10 +185,10 @@
             break;
         case DGCacheMusicStatePause:
         {
-            [[DGCacheMusicPlayer shareInstance] playOperate:DGCacheMusicOperatePlay];
+            [[DGCacheMusicPlayer shareInstance] playOperate:DGCacheMusicOperateStop];
         }
             break;
-        case DGCacheMusicStateBuffer:
+        case DGCacheMusicStateStop:
         {
            [[DGCacheMusicPlayer shareInstance] playOperate:DGCacheMusicOperatePlay];
         }
@@ -326,10 +326,5 @@
     self.progressSlider.value = playProgress;
     
 }
-
-
-
-
-
 
 @end
