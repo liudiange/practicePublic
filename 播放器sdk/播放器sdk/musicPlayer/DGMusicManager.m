@@ -648,18 +648,26 @@
  */
 - (void)seekTime:(NSUInteger)time{
     
+    NSAssert(self.player != nil, @"q对不起你的播放器已经不存在了");
+    if (!self.player) return;
+    
     NSAssert(self.playList.count != 0, @"对不起你的当前播放列表为空或者你还没有设置播放列表");
-    NSAssert(self.innerCurrentMusicInfo.listenUrl.length != 0, @"当前播放歌曲的地址为l空");
+    NSAssert(self.innerCurrentMusicInfo.listenUrl.length != 0, @"当前播放歌曲的地址为空");
     
-    if (self.playList.count == 0 || self.innerCurrentMusicInfo.listenUrl.length == 0) {return;}
+    if (self.playList.count == 0 || self.innerCurrentMusicInfo.listenUrl.length == 0) return;
+    CGFloat duration = CMTimeGetSeconds(self.playerItem.duration);
+    NSAssert(time < duration, @"对不起 你的播放时间大于总时长了");
+    if (time > duration) return;
+    if (!(self.innerCurrentPlayStatus == DGPlayerStatusPlay || self.innerCurrentPlayStatus == DGPlayerStatusPause)) return;
     
-    [self.player seekToTime:CMTimeMake(time, 1.0)];
-    [self.player play];
-    
-    self.innerCurrentPlayStatus = DGPlayerStatusPlay;
-    if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
-        [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
-    }
+    [self.player seekToTime:CMTimeMake(time, 1.0) completionHandler:^(BOOL finished) {
+        if (finished) {
+            self.innerCurrentPlayStatus = DGPlayerStatusPlay;
+            if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
+                [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
+            }
+        }
+    }];
 }
 
 @end

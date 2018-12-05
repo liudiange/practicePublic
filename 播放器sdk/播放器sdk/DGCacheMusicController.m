@@ -63,7 +63,7 @@
         [infoArray addObject:musicInfo];
     }
     // 设置播放列表 开始播放
-    [[DGCacheMusicPlayer shareInstance] setPlayList:infoArray offset:0 isCache:NO];
+    [[DGCacheMusicPlayer shareInstance] setPlayList:infoArray offset:1 isCache:YES];
 }
 #pragma mark - 点击方法的实现
 /**
@@ -157,7 +157,7 @@
  @param sender 按钮
  */
 - (IBAction)slidAction:(UISlider *)sender {
-    
+    NSLog(@"111111111");
     CGFloat needTime = sender.value * [[DGCacheMusicPlayer shareInstance] durationTime];
     [[DGCacheMusicPlayer shareInstance] seekTime:(NSUInteger)needTime];
     
@@ -185,14 +185,14 @@
             break;
         case DGCacheMusicStatePause:
         {
-            [[DGCacheMusicPlayer shareInstance] playOperate:DGCacheMusicOperateStop];
+            [[DGCacheMusicPlayer shareInstance] playOperate:DGCacheMusicOperatePlay];
         }
             break;
-        case DGCacheMusicStateStop:
-        {
-           [[DGCacheMusicPlayer shareInstance] playOperate:DGCacheMusicOperatePlay];
-        }
-            break;
+//        case DGCacheMusicStateStop:
+//        {
+//           [[DGCacheMusicPlayer shareInstance] playOperate:DGCacheMusicOperatePlay];
+//        }
+//            break;
         default:
             break;
     }
