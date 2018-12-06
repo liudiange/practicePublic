@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)DGCacheMusicPlayStatusChanged:(DGCacheMusicState)status;
 /**
- 缓存的进度
+ 缓存的进度 注意：当需要缓存的时候是下载的进度 不需要缓存的时候是监听player loadedTimeRanges的进度
 
  @param cacheProgress 播放的缓存的进度
  */
