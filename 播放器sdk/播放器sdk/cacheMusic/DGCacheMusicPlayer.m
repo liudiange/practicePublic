@@ -36,6 +36,7 @@
 @property (strong, nonatomic) NSMutableArray *playList;
 /** 播放进度的观察者*/
 @property (strong, nonatomic) id playerObserver;
+/** resourceLoader*/
 @property (strong, nonatomic) DGResourceLoader *resourceLoader;
 
 
@@ -205,7 +206,8 @@
     }
     // 随机播放的情况
     if (self.innerCurrentMode == DGCacheMusicModeRandom) {
-        NSUInteger nextIndex = arc4random_uniform((int32_t)self.playList.count -1);
+        NSUInteger nextIndex = arc4random_uniform((int32_t)self.playList.count);
+        NSLog(@"随机数:%zd",nextIndex);
         DGCacheMusicModel *randNextModel = self.playList[nextIndex];
         if (randNextModel.listenUrl.length > 0) {
             [self removeMyObserver];
@@ -371,7 +373,7 @@
     }
     // 随机播放的情况
     if (self.innerCurrentMode == DGCacheMusicModeRandom) {
-        NSUInteger nextIndex = arc4random_uniform((int32_t)self.playList.count -1);
+        NSUInteger nextIndex = arc4random_uniform((int32_t)self.playList.count);
         DGCacheMusicModel *randNextModel = self.playList[nextIndex];
         if (randNextModel.listenUrl.length > 0) {
             [self removeMyObserver];
@@ -508,20 +510,19 @@
             break;
         case DGCacheMusicOperateStop:
         {
-            if (self.isNeedCache == NO) { // 不需要缓存的
-                if (self.player) {
-                    [self.player pause];
-                    [self removeMyObserver];
-                    self.player = nil;
-                    self.playerItem = nil;
-                    self.innerPlayState = DGCacheMusicStateStop;
-                    if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
-                        [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
-                    }
-                    self.currentModel = nil;
+            if (self.player) {
+                [self.player pause];
+                [self removeMyObserver];
+                self.player = nil;
+                self.playerItem = nil;
+                self.innerPlayState = DGCacheMusicStateStop;
+                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
                 }
-            }else{ // 需要缓存的 取消下载
-                
+                self.currentModel = nil;
+            }
+            if (self.isNeedCache) {
+                self.resourceLoader.isSeek = YES;
             }
         }
             break;
@@ -605,10 +606,7 @@
 - (void)addPlayList:(NSArray<DGCacheMusicModel *>*)addList{
     
     NSAssert(addList.count != 0, @"添加到播放列表不能为空");
-    if (addList.count == 0) {
-        
-        return;
-    }
+    if (addList.count == 0) return;
     // 去重
     NSMutableArray *needAddArray = [NSMutableArray array];
     [needAddArray addObjectsFromArray:addList];

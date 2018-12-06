@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSURLSession *session;
 @property (strong, nonatomic) NSURLSessionDataTask *task;
+@property (copy, nonatomic) NSString *innerMyMimeType;
 
 @end
 
@@ -27,7 +28,7 @@
     
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[DGStrFileHandle originalUrl:self.requestURL] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:DGTimeInterval];
     if (self.requestOffset > 0) {
-        // 断点续传
+        // 从那块请求到那块
         [request addValue:[NSString stringWithFormat:@"bytes=%ld-%ld",self.requestOffset,self.fileLenth - 1] forHTTPHeaderField:@"Range"];
     }
     self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:self delegateQueue:[NSOperationQueue mainQueue]];
@@ -42,6 +43,14 @@
         self.session = nil;
         self.task = nil;
     }
+}
+/**
+ 获取mimetype
+
+ @returnmimetype
+ */
+-(NSString *)getMyMimeType{
+    return self.innerMyMimeType;
 }
 #pragma mark - delegate
 /**
@@ -80,6 +89,7 @@
 didReceiveResponse:(NSURLResponse *)response
  completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler{
     
+    self.innerMyMimeType = response.MIMEType;
     if (self.cancel) return;
     completionHandler(NSURLSessionResponseAllow);
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;

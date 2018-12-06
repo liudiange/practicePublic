@@ -389,7 +389,7 @@
     }
     // 随机播放
     if (self.innerCurrentPlayMode == DGPlayModeRandPlay) {
-        NSUInteger randIndex = arc4random_uniform((int32_t)self.playList.count - 1);
+        NSUInteger randIndex = arc4random_uniform((int32_t)self.playList.count);
         DGMusicInfo *info = self.playList[randIndex];
         if (info.listenUrl.length == 0) {return;}
         
@@ -458,7 +458,7 @@
     }
     // 随机播放
     if (self.innerCurrentPlayMode == DGPlayModeRandPlay) {
-        NSUInteger randIndex = arc4random_uniform((int32_t)self.playList.count - 1);
+        NSUInteger randIndex = arc4random_uniform((int32_t)self.playList.count);
         DGMusicInfo *info = self.playList[randIndex];
         if (info.listenUrl.length == 0) return;
         

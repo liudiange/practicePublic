@@ -82,12 +82,6 @@
     if (directory == NO) {
        [manager createDirectoryAtPath:DGMyCacheFile withIntermediateDirectories:YES attributes:nil error:nil];
     }
-    if ([str containsString:@"."]) {
-       str = [str stringByReplacingOccurrencesOfString:@"." withString:@""];
-    }
-    if ([str hasSuffix:@".mp3"]) {
-       str = [str stringByReplacingOccurrencesOfString:@".mp3" withString:@""];
-    }
     str = [DGStrFileHandle changeStrToMd5:str];
     str = [NSString stringWithFormat:@"%@.mp3",str];
     NSString *cacheFileName = [NSString stringWithFormat:@"%@/%@",DGMyCacheFile,str];
@@ -116,12 +110,6 @@
     NSURL *customUrl = [self customSchemeUrl:linkStr];
     NSString *str = customUrl.absoluteString;
     NSFileManager *manager = [NSFileManager defaultManager];
-    if ([str containsString:@"."]) {
-        str = [str stringByReplacingOccurrencesOfString:@"." withString:@""];
-    }
-    if ([str hasSuffix:@".mp3"]) {
-        str = [str stringByReplacingOccurrencesOfString:@".mp3" withString:@""];
-    }
     str = [DGStrFileHandle changeStrToMd5:str];
     str = [NSString stringWithFormat:@"%@.mp3",str];
     NSString *cacheFileName = [NSString stringWithFormat:@"%@/%@",DGMyCacheFile,str];
@@ -139,12 +127,6 @@
 + (NSString *)getMyCacheFile:(NSString *)linkStr{
     NSURL *customUrl = [self customSchemeUrl:linkStr];
     NSString *str = customUrl.absoluteString;
-    if ([str containsString:@"."]) {
-        str = [str stringByReplacingOccurrencesOfString:@"." withString:@""];
-    }
-    if ([str hasSuffix:@".mp3"]) {
-        str = [str stringByReplacingOccurrencesOfString:@".mp3" withString:@""];
-    }
     str = [DGStrFileHandle changeStrToMd5:str];
     str = [NSString stringWithFormat:@"%@.mp3",str];
     NSString *cacheFileName = [NSString stringWithFormat:@"%@/%@",DGMyCacheFile,str];

@@ -12,9 +12,6 @@
 #import "DGDownloadManager.h"
 #import "DGStrFileHandle.h"
 
-
-#define MIMEType @"audio/mp3"
-
 @interface DGResourceLoader ()<DGDownloadManagerDelegate>
 
 /** 存放请求的数组*/
@@ -108,9 +105,12 @@
  @return 是否完成了
  */
 - (BOOL)configFinishLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest{
-    
+    NSString *mimeType = [self.downloadManager getMyMimeType];
+    if (mimeType.length == 0) {
+        mimeType = @"audio/mpeg";
+    }
     // 填充信息
-    CFStringRef contentType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (__bridge CFStringRef)MIMEType, NULL);
+    CFStringRef contentType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (__bridge CFStringRef)mimeType, NULL);
     loadingRequest.contentInformationRequest.contentType = CFBridgingRelease(contentType);
     loadingRequest.contentInformationRequest.byteRangeAccessSupported = YES;
     loadingRequest.contentInformationRequest.contentLength = self.downloadManager.fileLenth;

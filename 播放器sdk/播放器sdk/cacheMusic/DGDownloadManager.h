@@ -49,7 +49,12 @@ NS_ASSUME_NONNULL_BEGIN
  开始发送请求
  */
 - (void)startRequest;
+/**
+ 获得mimetype
 
+ @return mimetype信息
+ */
+- (NSString *)getMyMimeType;
 
 @end
 
