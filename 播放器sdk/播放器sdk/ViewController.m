@@ -57,7 +57,7 @@
     }
     
     [DGMusicManager shareInstance].DGDelegate = self;
-   // [[DGMusicManager shareInstance] setPlayList:infoArray offset:0];
+//    [[DGMusicManager shareInstance] setPlayList:infoArray offset:0];
     
 }
 #pragma mark - delegate 回调

@@ -175,6 +175,11 @@
     if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoCacheProgress:)]) {
         [self.DGCacheVideoDelegate DGCacheVideoCacheProgress:0.0];
     }
+    // 状态也得改了
+    self.innerPlayState = DGCacheVideoStateStop;
+    if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
+        [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
+    }
     DGCacheVideoModel *nextModel = [self getNextModel];
     if (nextModel.playUrl.length > 0) {
         [self removeMyObserver];
@@ -252,6 +257,11 @@
     // 缓存的进度也要回调回去
     if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoCacheProgress:)]) {
         [self.DGCacheVideoDelegate DGCacheVideoCacheProgress:0.0];
+    }
+    // 状态也得改了
+    self.innerPlayState = DGCacheVideoStateStop;
+    if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
+        [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
     }
     DGCacheVideoModel *previousModel = [self getPreviousModel];
     if (previousModel.playUrl.length > 0) {
@@ -356,13 +366,17 @@
             if (self.player) {
                 [self.player pause];
                 [self removeMyObserver];
+                [self.playList removeAllObjects];
                 self.player = nil;
                 self.playerItem = nil;
+                self.needAddLayer = nil;
+                self.videoFrame = CGRectZero;
+                self.currentModel = nil;
+                
                 self.innerPlayState = DGCacheVideoStateStop;
                 if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
                     [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
                 }
-                self.currentModel = nil;
             }
             if (self.isNeedCache) {
                 self.resourceLoader.isSeek = YES;
@@ -493,6 +507,21 @@
     }];
     
 }
+/**
+ 设置播放器的音量 非系统也就是不是点击手机音量加减的音量
+ 
+ @param value 【0-10】大于10 等于10  下于0 等于0
+ */
+- (void)setVolumeValue:(CGFloat)value{
+    if(value > 10 )  {
+        value = 10;
+    }else if (value < 0){
+        value = 0;
+    }
+    if (self.player) {
+        self.player.volume = value;
+    }
+}
 #pragma mark - 可以获得的方法
 /**
  当前的播放状态，方便用户随时拿到
@@ -543,6 +572,12 @@
         return duration;
     }
     return 0;
+}
+/**
+ 获得播放器的音量
+ */
+- (CGFloat)getVolueValue{
+    return self.player.volume;
 }
 #pragma mark - 自己方法的实现
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{

@@ -38,7 +38,8 @@
 @property (strong, nonatomic) id playerObserver;
 /** resourceLoader*/
 @property (strong, nonatomic) DGResourceLoader *resourceLoader;
-
+/** 是否可以真正的播放*/
+@property (assign, nonatomic) BOOL isTurePlay;
 
 
 @end
@@ -158,6 +159,11 @@
     // 缓存的进度也要回调回去
     if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicCacheProgress:)]) {
         [self.DGCacheMusicDelegate DGCacheMusicCacheProgress:0.0];
+    }
+    // 状态也得改了
+    self.innerPlayState = DGCacheMusicStateStop;
+    if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+        [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
     }
     // 单曲循环不需要跳转的
     if (self.innerCurrentMode == DGCacheMusicModeSingleRoop && isNeedSingRoopJump == NO) {
@@ -326,6 +332,12 @@
     if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicCacheProgress:)]) {
         [self.DGCacheMusicDelegate DGCacheMusicCacheProgress:0.0];
     }
+    // 状态也得改了
+    self.innerPlayState = DGCacheMusicStateStop;
+    if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+        [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+    }
+    
     // 单曲循环不需要跳转的
     if (self.innerCurrentMode == DGCacheMusicModeSingleRoop && isNeedSingRoopJump == NO) {
        
@@ -515,6 +527,7 @@
                 [self removeMyObserver];
                 self.player = nil;
                 self.playerItem = nil;
+                [self.playList removeAllObjects];
                 self.innerPlayState = DGCacheMusicStateStop;
                 if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
                     [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
@@ -660,6 +673,21 @@
     }];
     
 }
+/**
+ 设置播放器的音量 非系统也就是不是点击手机音量加减的音量
+ 
+ @param value 【0-10】大于10 等于10  下于0 等于0
+ */
+- (void)setVolumeValue:(CGFloat)value{
+    if(value > 10 )  {
+        value = 10;
+    }else if (value < 0){
+        value = 0;
+    }
+    if (self.player) {
+        self.player.volume = value;
+    }
+}
 #pragma mark - 可以获得的方法
 /**
  当前的播放状态，方便用户随时拿到
@@ -718,6 +746,12 @@
         return duration;
     }
     return 0;
+}
+/**
+ 获得播放器的音量
+ */
+- (CGFloat)getVolueValue{
+    return self.player.volume;
 }
 #pragma mark - 自己方法的实现
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
@@ -783,15 +817,22 @@
             [self.DGCacheMusicDelegate DGCacheMusicCacheProgress:bufferProgress];
         }
         
-        if (bufferProgress < 1.0 && self.isNeedCache == NO) {
-            self.innerPlayState = DGCacheMusicStateBuffer;
-            if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
-                [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:DGCacheMusicStateBuffer];
-            }
-        }else if(bufferProgress == 1.0){
+        if (self.isTurePlay && self.player.rate == 1.0) {
             self.innerPlayState = DGCacheMusicStatePlay;
             if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
-                [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:DGCacheMusicStatePlay];
+                [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+            }
+        }else {
+            if (self.player.rate == 0) {
+                self.innerPlayState = DGCacheMusicStatePause;
+                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                }
+            }else{
+                self.innerPlayState = DGCacheMusicStateBuffer;
+                if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                    [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                }
             }
         }
     }else if([keyPath isEqualToString:DGPlayerBufferEmty]) { //没有足够的缓冲器了 说明正在缓冲中
@@ -851,6 +892,8 @@
  移除观察者
  */
 - (void)removeMyObserver{
+    
+    self.isTurePlay = NO;
     if (self.playerItem) {
         
         [self.playerItem removeObserver:self forKeyPath:DGPlayerStatusKey];
@@ -872,6 +915,7 @@
  */
 - (void)addMyObserver{
     
+    self.isTurePlay = NO;
     // 添加在播放器开始播放后的通知
     if (self.playerItem) {
         [self.playerItem addObserver:self forKeyPath:DGPlayerStatusKey options:NSKeyValueObservingOptionNew context:nil];
@@ -893,6 +937,7 @@
           if (isnan(currentTime) || currentTime < 0) {
               currentTime = 0;
           }
+          weakSelf.isTurePlay = YES;
           CGFloat progress = currentTime/durationTime * 1.0;
           if ([weakSelf.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayerCurrentTime:duration:playProgress:)]) {
               [weakSelf.DGCacheMusicDelegate DGCacheMusicPlayerCurrentTime:currentTime duration:durationTime playProgress:progress];

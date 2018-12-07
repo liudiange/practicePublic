@@ -151,7 +151,12 @@ NS_ASSUME_NONNULL_BEGIN
  @param time 要播放的那个时间点
  */
 - (void)seekTime:(NSUInteger)time;
-
+/**
+ 设置播放器的音量 非系统也就是不是点击手机音量加减的音量
+ 
+ @param value 【0-10】大于10 等于10  下于0 等于0
+ */
+- (void)setVolumeValue:(CGFloat)value;
 #pragma mark - 可以获得的方法
 /**
  当前的播放状态，方便用户随时拿到
@@ -189,6 +194,10 @@ NS_ASSUME_NONNULL_BEGIN
  @return 时间
  */
 - (CGFloat )durationTime;
+/**
+ 获得播放器的音量
+ */
+- (CGFloat)getVolueValue;
 
 @end
 NS_ASSUME_NONNULL_END

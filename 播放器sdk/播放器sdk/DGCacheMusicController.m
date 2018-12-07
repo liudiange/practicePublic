@@ -185,12 +185,7 @@
             break;
         case DGCacheMusicStatePause:
         {
-            [[DGCacheMusicPlayer shareInstance] playOperate:DGCacheMusicOperateStop];
-        }
-            break;
-        case DGCacheMusicStateStop:
-        {
-           [[DGCacheMusicPlayer shareInstance] playOperate:DGCacheMusicOperatePlay];
+            [[DGCacheMusicPlayer shareInstance] playOperate:DGCacheMusicOperatePlay];
         }
             break;
         default:

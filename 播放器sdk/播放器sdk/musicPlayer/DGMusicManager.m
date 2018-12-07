@@ -16,22 +16,22 @@
 
 @interface DGMusicManager ()
 
-/**播放器*/
+/** 播放器*/
 @property (strong, nonatomic)  AVPlayer *player;
-/**当前的播放模式*/
+/** 当前的播放模式*/
 @property (assign, nonatomic) DGPlayMode innerCurrentPlayMode;
-/**当前的播放状态 */
+/** 当前的播放状态 */
 @property (assign, nonatomic) DGPlayerStatus innerCurrentPlayStatus;
-/**当前的音乐的播放信息*/
+/** 当前的音乐的播放信息*/
 @property (strong, nonatomic) DGMusicInfo *innerCurrentMusicInfo;
-/**AVPlayerItem*/
+/** AVPlayerItem*/
 @property (strong, nonatomic) AVPlayerItem *playerItem;
-/**当前的播放列表*/
+/** 当前的播放列表*/
 @property (strong, nonatomic) NSMutableArray *playList;
-/**进度观察的返回者*/
+/** 进度观察的返回者*/
 @property (strong, nonatomic) id progressObserver;
-
-
+/** 是否可以真正的播放*/
+@property (assign, nonatomic) BOOL isTurePlay;
 
 @end
 
@@ -153,19 +153,25 @@
         if ([self.DGDelegate respondsToSelector:@selector(DGPlayerBufferProgress:)]) {
             [self.DGDelegate DGPlayerBufferProgress:bufferProgress];
         }
-       
-        if (bufferProgress < 1.0) {
-            self.innerCurrentPlayStatus = DGPlayerStatusBuffer;
-            if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
-                [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusBuffer];
-            }
-        }else{
+        
+        if (self.isTurePlay && self.player.rate == 1) {
             self.innerCurrentPlayStatus = DGPlayerStatusPlay;
             if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
-                [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
+                [self.DGDelegate DGPlayerChangeStatus:self.innerCurrentPlayStatus];
+            }
+        }else{
+            if (self.player.rate == 0) {
+                self.innerCurrentPlayStatus = DGPlayerStatusPause;
+                if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
+                    [self.DGDelegate DGPlayerChangeStatus:self.innerCurrentPlayStatus];
+                }
+            }else{
+                self.innerCurrentPlayStatus = DGPlayerStatusBuffer;
+                if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
+                    [self.DGDelegate DGPlayerChangeStatus:self.innerCurrentPlayStatus];
+                }
             }
         }
-        NSLog(@"bufferProgress :%f",bufferProgress);
     }else if ([keyPath isEqualToString:DGPlayerRate]){ // 播放速度 0 就是暂停了
         
         NSLog(@"self.player.rate :%f",self.player.rate);
@@ -244,6 +250,8 @@
  */
 -(void)removeMyObserver{
     
+    self.isTurePlay = NO;
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     if (self.playerItem) {
         [self.playerItem removeObserver:self forKeyPath:DGPlayerStatusKey];
@@ -265,6 +273,7 @@
  */
 - (void)addMyObserver{
     
+    self.isTurePlay = NO;
     // 添加在播放器开始播放后的通知
     if (self.playerItem) {
         [self.playerItem addObserver:self forKeyPath:DGPlayerStatusKey options:NSKeyValueObservingOptionNew context:nil];
@@ -278,8 +287,8 @@
         // 监听当前的播放进度
         __weak typeof(self)weakSelf = self;
         self.progressObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
+            
             CGFloat duationTime = CMTimeGetSeconds(weakSelf.playerItem.duration);
-           
             CGFloat currentTime = CMTimeGetSeconds(time);
             if (currentTime < 0 ) {
                 currentTime = 0;
@@ -288,7 +297,7 @@
             }else if (isnan(duationTime)){
                 duationTime = 0;
             }
-            NSLog(@"总的时间 :%f",duationTime);
+            weakSelf.isTurePlay = YES;
             CGFloat progress = currentTime/duationTime * 1.0;
             if ([weakSelf.DGDelegate respondsToSelector:@selector(DGPlayerCurrentTime:duration:playProgress:)]) {
                 [weakSelf.DGDelegate DGPlayerCurrentTime:currentTime duration:duationTime playProgress:progress];
@@ -348,6 +357,12 @@
    return CMTimeGetSeconds(self.playerItem.duration);
 }
 /**
+ 获得播放器的音量
+ */
+- (CGFloat)getVolueValue{
+    return self.player.volume;
+}
+/**
  获得播放列表
  
  @return 播放列表
@@ -355,6 +370,7 @@
 - (NSArray<DGMusicInfo *> *)getPlayList{
     return self.playList;
 }
+#pragma mark - 自己实现的方法
 /**
  点击下一首播放
  
@@ -377,6 +393,13 @@
     }
     if ([self.DGDelegate respondsToSelector:@selector(DGPlayerBufferProgress:)]) {
         [self.DGDelegate DGPlayerBufferProgress:0.0];
+    }
+    if ([self.DGDelegate respondsToSelector:@selector(DGPlayerCurrentTime:duration:playProgress:)]) {
+        [self.DGDelegate DGPlayerCurrentTime:0.0 duration:0.0 playProgress:0.0];
+    }
+    self.innerCurrentPlayStatus = DGPlayerPlayOperateStop;
+    if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
+        [self.DGDelegate DGPlayerChangeStatus:self.innerCurrentPlayStatus];
     }
     
     // 播放当前单曲循环的歌曲
@@ -449,6 +472,14 @@
     if ([self.DGDelegate respondsToSelector:@selector(DGPlayerBufferProgress:)]) {
         [self.DGDelegate DGPlayerBufferProgress:0.0];
     }
+    if ([self.DGDelegate respondsToSelector:@selector(DGPlayerCurrentTime:duration:playProgress:)]) {
+        [self.DGDelegate DGPlayerCurrentTime:0.0 duration:0.0 playProgress:0.0];
+    }
+    self.innerCurrentPlayStatus = DGPlayerPlayOperateStop;
+    if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
+        [self.DGDelegate DGPlayerChangeStatus:self.innerCurrentPlayStatus];
+    }
+    
     // 播放当前单曲循环的歌曲
     if (self.innerCurrentPlayMode == DGPlayModeSingleRoop && isNeedSingRoopJump == NO) {
         
@@ -506,6 +537,9 @@
  停止：清空播放列表，如果在要播放需要重新设置播放列表
  */
 - (void)playOperate:(DGPlayerPlayOperate)Operate{
+    
+    NSAssert(!(self.innerCurrentMusicInfo.listenUrl.length == 0 || self.playList.count == 0), @"播放列表为空 或者没有播放链接");
+    if (self.innerCurrentMusicInfo.listenUrl.length == 0 || self.playList.count == 0) return;
     
     switch (Operate) {
         
@@ -676,6 +710,21 @@
             }
         }
     }];
+}
+/**
+ 设置播放器的音量 非系统也就是不是点击手机音量加减的音量
+ 
+ @param value 【0-10】大于10 等于10  下于0 等于0
+ */
+- (void)setVolumeValue:(CGFloat)value{
+    if(value > 10 )  {
+        value = 10;
+    }else if (value < 0){
+        value = 0;
+    }
+    if (self.player) {
+        self.player.volume = value;
+    }
 }
 
 @end

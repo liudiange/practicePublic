@@ -97,6 +97,10 @@ NS_ASSUME_NONNULL_BEGIN
  @return 时间
  */
 - (CGFloat )durationTime;
+/**
+ 获得播放器的音量
+ */
+- (CGFloat)getVolueValue;
 #pragma mark 需要自己实现的
 /**
  设置播放列表没有设置播放列表播放器没有播放地址
@@ -151,6 +155,12 @@ NS_ASSUME_NONNULL_BEGIN
  @param time 要播放的那个时间点
  */
 - (void)seekTime:(NSUInteger)time;
+/**
+ 设置播放器的音量 非系统也就是不是点击手机音量加减的音量
+ 
+ @param value 【0-10】大于10 等于10  下于0 等于0
+ */
+- (void)setVolumeValue:(CGFloat)value;
 
 
 @end
