@@ -21,6 +21,7 @@
 @property (strong, nonatomic) DGVideoDownloadManager *downloadManager;
 /** 信号量，加锁保护资源用的*/
 @property (strong, nonatomic) dispatch_semaphore_t semaphore;
+
 @end
 @implementation DGVideoResourceLoader
 

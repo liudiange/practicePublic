@@ -18,6 +18,8 @@
 @property (strong, nonatomic) NSMutableArray *requestList;
 /** 下载任务的管理器*/
 @property (strong, nonatomic) DGDownloadManager *downloadManager;
+/** 信号量，加锁保护资源用的*/
+@property (strong, nonatomic) dispatch_semaphore_t semaphore;
 
 @end
 @implementation DGResourceLoader
@@ -29,6 +31,12 @@
     }
     return self;
 }
+-(dispatch_semaphore_t)semaphore {
+    if (!_semaphore) {
+        _semaphore = dispatch_semaphore_create(1);
+    }
+    return _semaphore;
+}
 #pragma mark - avassetResourceLoaderDelegate
 /**
  avasert 每次都会进这个方法，他会返回每次的loadingRequest
@@ -38,6 +46,7 @@
  @return 如果为YES：继续返回 NO:终止返回不在返回loadingRequest
  */
 - (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest{
+    dispatch_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     [self handleLoadingRequest:loadingRequest];
     return YES;
 }
@@ -66,7 +75,7 @@
     NSLog(@"loadingRequest.dataRequest.requestedOffset :%lld ------ loadingRequest.dataRequest.currentOffset: %lld ---  self.downloadManager.requestOffset :%zd",loadingRequest.dataRequest.requestedOffset,loadingRequest.dataRequest.currentOffset,self.downloadManager.requestOffset);
     // 进行判断
     if (self.downloadManager) {
-        if (loadingRequest.dataRequest.requestedOffset > self.downloadManager.requestOffset && loadingRequest.dataRequest.requestedOffset < self.downloadManager.requestOffset + self.downloadManager.cacheLength) {
+        if (loadingRequest.dataRequest.requestedOffset >= self.downloadManager.requestOffset && loadingRequest.dataRequest.requestedOffset < self.downloadManager.requestOffset + self.downloadManager.cacheLength) {
             NSLog(@"能进入这个判断 说明当前loadingrequest 是缓存好了的");
             // 能进入这个判断 说明当前loadingrequest 是缓存好了的
             [self haveCacheProcessRequestList];
@@ -81,6 +90,7 @@
         // 开始重新请求
         [self startNewLoadrequest:loadingRequest cache:YES];
     }
+    dispatch_semaphore_signal(self.semaphore);
 }
 /**
  处理缓存好的的请求
