@@ -816,7 +816,7 @@
         if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicCacheProgress:)]) {
             [self.DGCacheMusicDelegate DGCacheMusicCacheProgress:bufferProgress];
         }
-        
+        NSLog(@"-------------");
         if (self.isTurePlay && self.player.rate == 1.0) {
             self.innerPlayState = DGCacheMusicStatePlay;
             if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
@@ -848,6 +848,18 @@
                 self.innerPlayState = DGCacheMusicStateBuffer;
                 if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
                     [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:DGCacheMusicStateBuffer];
+                }
+            }else{// 存在 判断播放还是暂停
+                if (self.player.rate > 0) {
+                    self.innerPlayState = DGCacheMusicStatePlay;
+                    if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                        [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                    }
+                }else{
+                    self.innerPlayState = DGCacheMusicStatePause;
+                    if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                        [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+                    }
                 }
             }
         }

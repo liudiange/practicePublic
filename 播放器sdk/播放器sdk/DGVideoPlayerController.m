@@ -17,8 +17,6 @@
 @property (weak, nonatomic) IBOutlet UISlider *cacheProgressSlider;
 @property (weak, nonatomic) IBOutlet UILabel *playStateLable;
 
-
-
 @end
 @implementation DGVideoPlayerController
 
@@ -92,6 +90,9 @@
         }
             break;
         default:
+        {
+            [[DGVideoManager shareInstance] playOperate:DGPlayerPlayOperatePause];
+        }
             break;
     }
     

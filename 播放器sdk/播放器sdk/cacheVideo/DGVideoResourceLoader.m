@@ -19,7 +19,8 @@
 @property (strong, nonatomic) NSMutableArray *requestList;
 /** 下载任务的管理器*/
 @property (strong, nonatomic) DGVideoDownloadManager *downloadManager;
-
+/** 信号量，加锁保护资源用的*/
+@property (strong, nonatomic) dispatch_semaphore_t semaphore;
 @end
 @implementation DGVideoResourceLoader
 
@@ -30,6 +31,12 @@
     }
     return self;
 }
+-(dispatch_semaphore_t)semaphore {
+    if (!_semaphore) {
+        _semaphore = dispatch_semaphore_create(1);
+    }
+    return _semaphore;
+}
 #pragma mark - avassetResourceLoaderDelegate
 /**
  avasert 每次都会进这个方法，他会返回每次的loadingRequest
@@ -39,6 +46,7 @@
  @return 如果为YES：继续返回 NO:终止返回不在返回loadingRequest
  */
 - (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest{
+    dispatch_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     [self handleLoadingRequest:loadingRequest];
     return YES;
 }
@@ -82,6 +90,8 @@
         // 开始重新请求
         [self startNewLoadrequest:loadingRequest cache:YES];
     }
+    dispatch_semaphore_signal(self.semaphore);
+    
 }
 /**
  处理缓存好的的请求

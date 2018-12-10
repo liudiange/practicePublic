@@ -203,6 +203,25 @@
     [[DGCacheMusicPlayer shareInstance] playNextSong:NO];
     
 }
+/**
+ 添加到8
+
+ @param sender sender
+ */
+- (IBAction)addVolumeTo8:(UIButton *)sender {
+    
+    [[DGCacheMusicPlayer shareInstance] setVolumeValue:8];
+    
+}
+/**
+ 减去到1
+
+ @param sender sender
+ */
+- (IBAction)reduceVolumeTo1:(UIButton *)sender {
+    
+    [[DGCacheMusicPlayer shareInstance] setVolumeValue:1];
+}
 #pragma mark - delegate 回调
 /**
  播放失败了

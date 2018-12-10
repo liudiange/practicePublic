@@ -668,6 +668,18 @@
                 if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
                     [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:DGCacheVideoStateBuffer];
                 }
+            }else{// 存在 判断播放还是暂停
+                if (self.player.rate > 0) {
+                    self.innerPlayState = DGCacheVideoStatePlay;
+                    if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
+                        [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
+                    }
+                }else{
+                    self.innerPlayState = DGCacheVideoStatePause;
+                    if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
+                        [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
+                    }
+                }
             }
         }
     }else if([keyPath isEqualToString:DGPlayerLikelyToKeepUp]) { // 说明缓冲器区域有足够的数据在播放，一般这种情况我们什么都不干
