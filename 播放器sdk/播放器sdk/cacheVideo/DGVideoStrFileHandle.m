@@ -21,9 +21,9 @@
  */
 + (NSURL *)customSchemeUrl:(NSString *)str{
     
-    NSURLComponents *component = [NSURLComponents componentsWithURL:[NSURL URLWithString:str] resolvingAgainstBaseURL:NO];
-    component.scheme = @"customSchemeUrl";
-    return [component URL];
+    NSURLComponents * components = [[NSURLComponents alloc] initWithURL:[NSURL URLWithString:str] resolvingAgainstBaseURL:NO];
+    components.scheme = @"streaming";
+    return [components URL];
 }
 /**
  返回我们原始的url的scheme
@@ -33,9 +33,9 @@
  */
 + (NSURL *)originalUrl:(NSURL *)url{
     
-    NSURLComponents *component = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
-    component.scheme = @"http";
-    return [component URL];
+    NSURLComponents * components = [[NSURLComponents alloc] initWithURL:url resolvingAgainstBaseURL:NO];
+    components.scheme = @"http";
+    return [components URL];
     
 }
 #pragma mark - 文件相关
@@ -53,7 +53,9 @@
         return nil;
     }
     [fileHandle seekToFileOffset:offset];
-    return [fileHandle readDataOfLength:length];
+    NSData *data = [fileHandle readDataOfLength:length];
+    NSLog(@"读到的数据是什么？%@",data);
+    return data;
 }
 /**
  往临时文件中写入数据

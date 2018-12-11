@@ -46,8 +46,7 @@
  @param loadingRequest loadingRequest
  @return 如果为YES：继续返回 NO:终止返回不在返回loadingRequest
  */
-- (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest{
-    dispatch_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+- (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest {
     [self handleLoadingRequest:loadingRequest];
     return YES;
 }
@@ -70,43 +69,41 @@
  @param loadingRequest loadingRequest
  */
 - (void)handleLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest{
-    
-    // 将loadingRequest 添加进数组
     [self.requestList addObject:loadingRequest];
-    NSLog(@"loadingRequest.dataRequest.requestedOffset :%lld ------ loadingRequest.dataRequest.currentOffset: %lld ---  self.downloadManager.requestOffset :%zd",loadingRequest.dataRequest.requestedOffset,loadingRequest.dataRequest.currentOffset,self.downloadManager.requestOffset);
-    // 进行判断
-    if (self.downloadManager) {
-        if (loadingRequest.dataRequest.requestedOffset > self.downloadManager.requestOffset && loadingRequest.dataRequest.requestedOffset < self.downloadManager.requestOffset + self.downloadManager.cacheLength) {
-            NSLog(@"能进入这个判断 说明当前loadingrequest 是缓存好了的");
-            // 能进入这个判断 说明当前loadingrequest 是缓存好了的
-            [self haveCacheProcessRequestList];
-        }else{
-            // 不符合缓存规定了 不再缓存了
-            if (self.isSeek) {
-                NSLog(@"不符合缓存规定了 不再缓存了");
-                [self startNewLoadrequest:loadingRequest cache:NO];
+    @synchronized(self) {
+        if (self.downloadManager) {
+            NSLog(@"loadingRequest.dataRequest.requestedOffset : %lld -------- ,self.requestTask.requestOffset: %ld ,------------- self.requestTask.cacheLength :  %ld",loadingRequest.dataRequest.requestedOffset,self.downloadManager.requestOffset,self.downloadManager.cacheLength + 300 * 1024);
+            
+            if (loadingRequest.dataRequest.requestedOffset >= self.downloadManager.requestOffset &&
+                loadingRequest.dataRequest.requestedOffset <= self.downloadManager.requestOffset + self.downloadManager.cacheLength + 300 * 1024) {
+                //数据已经缓存，则直接完成
+                NSLog(@"数据已经缓存，则直接完成");
+                [self haveCacheProcessRequestList];
+            }else {
+                //数据还没缓存，则等待数据下载；如果是Seek操作，则重新请求
+                if (self.isSeek) {
+                    NSLog(@"Seek操作，则重新请求");
+                    [self startNewLoadrequest:loadingRequest cache:NO];
+                }
             }
+        }else {
+            [self startNewLoadrequest:loadingRequest cache:YES];
         }
-    }else{
-        // 开始重新请求
-        [self startNewLoadrequest:loadingRequest cache:YES];
     }
-    dispatch_semaphore_signal(self.semaphore);
-    
 }
 /**
  处理缓存好的的请求
  */
 - (void)haveCacheProcessRequestList{
     
-    NSMutableArray *haveFinishRequest = [NSMutableArray array];
-    for (AVAssetResourceLoadingRequest *loadingRequest in self.requestList) {
+    NSMutableArray * finishRequestList = [NSMutableArray array];
+    for (AVAssetResourceLoadingRequest * loadingRequest in self.requestList) {
         if ([self configFinishLoadingRequest:loadingRequest]) {
-            [haveFinishRequest addObject:loadingRequest];
+            [finishRequestList addObject:loadingRequest];
         }
     }
-    if (haveFinishRequest.count) {
-        [self.requestList removeObjectsInArray:haveFinishRequest];
+    if (finishRequestList.count) {
+      [self.requestList removeObjectsInArray:finishRequestList];
     }
 }
 
@@ -117,29 +114,25 @@
  @return 是否完成了
  */
 - (BOOL)configFinishLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest{
-    NSString *mimeType = [self.downloadManager getMyMimeType];
-    if (mimeType.length == 0) {
-        mimeType = @"video/mp4";
-    }
-    // 填充信息
-    CFStringRef contentType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (__bridge CFStringRef)mimeType, NULL);
+    //填充信息
+    CFStringRef contentType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (__bridge CFStringRef)(@"video/mp4"), NULL);
     loadingRequest.contentInformationRequest.contentType = CFBridgingRelease(contentType);
     loadingRequest.contentInformationRequest.byteRangeAccessSupported = YES;
     loadingRequest.contentInformationRequest.contentLength = self.downloadManager.fileLenth;
-    // 读文件 进行填充数据
-    NSUInteger cacheLength = self.downloadManager.cacheLength;
-    NSUInteger requestOffset = loadingRequest.dataRequest.currentOffset;
-    if (loadingRequest.dataRequest.currentOffset != 0) {
-        requestOffset = loadingRequest.dataRequest.currentOffset;
-    }
-    NSUInteger canReadLength = cacheLength - (requestOffset - self.downloadManager.requestOffset);
-    NSUInteger respondLendth = MIN(canReadLength, loadingRequest.dataRequest.requestedLength);
     
-    [loadingRequest.dataRequest respondWithData:[DGVideoStrFileHandle readTempFileDataWithOffset:requestOffset - self.downloadManager.requestOffset length:respondLendth]];
-    // 判断是否真正的完成了
-    NSUInteger nowEndOffset = requestOffset + canReadLength;
+    //读文件，填充数据
+    NSUInteger cacheLength = self.downloadManager.cacheLength;
+    NSUInteger requestedOffset = loadingRequest.dataRequest.requestedOffset;
+    if (loadingRequest.dataRequest.currentOffset != 0) {
+        requestedOffset = loadingRequest.dataRequest.currentOffset;
+    }
+    NSUInteger canReadLength = cacheLength - (requestedOffset - self.downloadManager.requestOffset);
+    NSUInteger respondLength = MIN(canReadLength, loadingRequest.dataRequest.requestedLength);
+    [loadingRequest.dataRequest respondWithData:[DGVideoStrFileHandle readTempFileDataWithOffset:requestedOffset - self.downloadManager.requestOffset length:respondLength]];
+    //如果完全响应了所需要的数据，则完成
+    NSUInteger nowendOffset = requestedOffset + canReadLength;
     NSUInteger reqEndOffset = loadingRequest.dataRequest.requestedOffset + loadingRequest.dataRequest.requestedLength;
-    if (nowEndOffset > reqEndOffset) {
+    if (nowendOffset >= reqEndOffset) {
         [loadingRequest finishLoading];
         return YES;
     }
@@ -158,9 +151,9 @@
         fileLength = self.downloadManager.fileLenth;
         self.downloadManager.cancel = YES;
     }
-    self.downloadManager = [[DGVideoDownloadManager alloc] init];
-    self.downloadManager.requestOffset = loadingRequest.dataRequest.requestedOffset;
+    self.downloadManager = [[DGVideoDownloadManager alloc]init];
     self.downloadManager.requestURL = loadingRequest.request.URL;
+    self.downloadManager.requestOffset = loadingRequest.dataRequest.requestedOffset;
     self.downloadManager.isCache = isCache;
     if (fileLength > 0) {
         self.downloadManager.fileLenth = fileLength;

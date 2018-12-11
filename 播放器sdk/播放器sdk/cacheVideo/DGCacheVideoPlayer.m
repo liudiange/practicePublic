@@ -23,10 +23,7 @@
 @property (strong, nonatomic) DGCacheVideoModel *currentModel;
 /** 当前的播放器状态*/
 @property (assign, nonatomic) DGCacheVideoState innerPlayState;
-/** 是否需要缓存*/
-@property (assign, nonatomic) BOOL isNeedCache;
-/** 播放器*/
-@property (strong, nonatomic) AVPlayer *player;
+
 /** 播放的item*/
 @property (strong, nonatomic) AVPlayerItem *playerItem;
 /** 播放的数组*/
@@ -140,23 +137,39 @@
             }
             return;
         }
+        self.needAddLayer = addViewLayer;
+        self.videoFrame = frame;
+        self.currentVideoGravity = videoGravity;
+        
         self.resourceLoader = [[DGVideoResourceLoader alloc] init];
         self.resourceLoader.loaderDelegate = self;
         AVURLAsset *urlAset = [AVURLAsset URLAssetWithURL:[DGVideoStrFileHandle customSchemeUrl:self.currentModel.playUrl] options:nil];
         [urlAset.resourceLoader setDelegate:self.resourceLoader queue:dispatch_get_main_queue()];
         self.playerItem = [AVPlayerItem playerItemWithAsset:urlAset];
         self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-        AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-        layer.frame = frame;
-        layer.videoGravity = videoGravity;
-        [addViewLayer addSublayer:layer];
+        self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+        self.playerLayer.frame = frame;
+        self.playerLayer.videoGravity = videoGravity;
+        [self.needAddLayer addSublayer:self.playerLayer];
         [self.player play];
         [self addMyObserver];
-        self.needAddLayer = addViewLayer;
-        self.videoFrame = frame;
-        self.currentVideoGravity = videoGravity;
+        
     }
 }
+-(void)initWithStr:(NSString *)str{
+    //没有缓存播放网络文件
+    self.resourceLoader = [[DGVideoResourceLoader alloc] init];
+    self.resourceLoader.loaderDelegate = self;
+    
+    AVURLAsset * asset = [AVURLAsset URLAssetWithURL:[DGVideoStrFileHandle customSchemeUrl:str] options:nil];
+    [asset.resourceLoader setDelegate:self.resourceLoader queue:dispatch_get_main_queue()];
+    self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
+    self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+    self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    [self addMyObserver];
+    
+}
+
 /**
  点击下一个播放
  */

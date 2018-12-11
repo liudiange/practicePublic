@@ -78,6 +78,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) id <DGCacheVideoPlayerDelegate> DGCacheVideoDelegate;
 +(instancetype)shareInstance;
 
+-(void)initWithStr:(NSString *)str;
+/** 是否需要缓存*/
+@property (assign, nonatomic) BOOL isNeedCache;
+/** 播放器*/
+@property (strong, nonatomic) AVPlayer *player;
+/** 图层预览*/
+@property (nonatomic, strong) AVPlayerLayer *playerLayer;
+
 #pragma mark - 设置相关的方法
 
 /**
