@@ -21,6 +21,7 @@
 /** 信号量，加锁保护资源用的*/
 @property (strong, nonatomic) dispatch_semaphore_t semaphore;
 
+
 @end
 @implementation DGResourceLoader
 
@@ -46,7 +47,7 @@
  @return 如果为YES：继续返回 NO:终止返回不在返回loadingRequest
  */
 - (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest{
-    dispatch_wait(self.semaphore, DISPATCH_TIME_FOREVER);
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     [self handleLoadingRequest:loadingRequest];
     return YES;
 }
@@ -133,7 +134,11 @@
     NSUInteger canReadLength = cacheLength - (requestOffset - self.downloadManager.requestOffset);
     NSUInteger respondLendth = MIN(canReadLength, loadingRequest.dataRequest.requestedLength);
     
-    [loadingRequest.dataRequest respondWithData:[DGStrFileHandle readTempFileDataWithOffset:requestOffset - self.downloadManager.requestOffset length:respondLendth]];
+    NSUInteger offset = requestOffset - self.downloadManager.requestOffset;
+    if (requestOffset < self.downloadManager.requestOffset) {
+        offset = requestOffset;
+    }
+    [loadingRequest.dataRequest respondWithData:[DGStrFileHandle readTempFileDataWithOffset:offset length:respondLendth]];
     // 判断是否真正的完成了
     NSUInteger nowEndOffset = requestOffset + canReadLength;
     NSUInteger reqEndOffset = loadingRequest.dataRequest.requestedOffset + loadingRequest.dataRequest.requestedLength;

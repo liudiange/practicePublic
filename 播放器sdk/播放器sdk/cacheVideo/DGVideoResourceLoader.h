@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
+#import "DGVideoDownloadManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @class DGVideoResourceLoader;

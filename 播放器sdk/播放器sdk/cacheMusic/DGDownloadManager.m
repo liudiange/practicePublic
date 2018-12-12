@@ -9,7 +9,7 @@
 #import "DGDownloadManager.h"
 #import "DGStrFileHandle.h"
 
-#define DGTimeInterval 30
+#define DGTimeInterval 10
 
 @interface DGDownloadManager ()<NSURLSessionDataDelegate>
 
@@ -20,7 +20,12 @@
 @end
 
 @implementation DGDownloadManager
-
+- (instancetype)init{
+    if (self = [super init]) {
+        [DGStrFileHandle creatTempFile];
+    }
+    return self;
+}
 /**
  开始发送请求
  */

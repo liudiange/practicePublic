@@ -10,17 +10,16 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreServices/CoreServices.h>
 #import "DGVideoResourceLoader.h"
-#import "DGVideoDownloadManager.h"
 #import "DGVideoStrFileHandle.h"
 
 @interface DGVideoResourceLoader ()<DGVideoDownloadManagerDelegate>
 
 /** 存放请求的数组*/
 @property (strong, nonatomic) NSMutableArray *requestList;
-/** 下载任务的管理器*/
-@property (strong, nonatomic) DGVideoDownloadManager *downloadManager;
 /** 信号量，加锁保护资源用的*/
 @property (strong, nonatomic) dispatch_semaphore_t semaphore;
+/** 下载任务的管理器 */
+@property (strong, nonatomic) DGVideoDownloadManager *downloadManager;
 
 @end
 @implementation DGVideoResourceLoader
@@ -47,6 +46,7 @@
  @return 如果为YES：继续返回 NO:终止返回不在返回loadingRequest
  */
 - (BOOL)resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest {
+    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     [self handleLoadingRequest:loadingRequest];
     return YES;
 }
@@ -58,7 +58,6 @@
  @param loadingRequest loadingRequest
  */
 - (void)resourceLoader:(AVAssetResourceLoader *)resourceLoader didCancelLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest{
-    
     // 已经取消的 从数组中移除
     [self.requestList removeObject:loadingRequest];
 }
@@ -70,26 +69,24 @@
  */
 - (void)handleLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest{
     [self.requestList addObject:loadingRequest];
-    @synchronized(self) {
-        if (self.downloadManager) {
-            NSLog(@"loadingRequest.dataRequest.requestedOffset : %lld -------- ,self.requestTask.requestOffset: %ld ,------------- self.requestTask.cacheLength :  %ld",loadingRequest.dataRequest.requestedOffset,self.downloadManager.requestOffset,self.downloadManager.cacheLength + 300 * 1024);
-            
-            if (loadingRequest.dataRequest.requestedOffset >= self.downloadManager.requestOffset &&
-                loadingRequest.dataRequest.requestedOffset <= self.downloadManager.requestOffset + self.downloadManager.cacheLength + 300 * 1024) {
-                //数据已经缓存，则直接完成
-                NSLog(@"数据已经缓存，则直接完成");
-                [self haveCacheProcessRequestList];
-            }else {
-                //数据还没缓存，则等待数据下载；如果是Seek操作，则重新请求
-                if (self.isSeek) {
-                    NSLog(@"Seek操作，则重新请求");
-                    [self startNewLoadrequest:loadingRequest cache:NO];
-                }
-            }
+    if (self.downloadManager) {
+        if (loadingRequest.dataRequest.requestedOffset >= self.downloadManager.requestOffset &&
+            loadingRequest.dataRequest.requestedOffset <= self.downloadManager.requestOffset + self.downloadManager.cacheLength) {
+            //数据已经缓存，则直接完成
+            NSLog(@"数据已经缓存，则直接完成");
+            [self haveCacheProcessRequestList];
         }else {
-            [self startNewLoadrequest:loadingRequest cache:YES];
+            //数据还没缓存，则等待数据下载；如果是Seek操作，则重新请求
+            if (self.isSeek) {
+                NSLog(@"Seek操作，则重新请求");
+                [self startNewLoadrequest:loadingRequest cache:NO];
+            }
         }
+    }else {
+        [self startNewLoadrequest:loadingRequest cache:YES];
     }
+    // 完事就要发送信号
+    dispatch_semaphore_signal(self.semaphore);
 }
 /**
  处理缓存好的的请求
@@ -114,8 +111,13 @@
  @return 是否完成了
  */
 - (BOOL)configFinishLoadingRequest:(AVAssetResourceLoadingRequest *)loadingRequest{
+    
+    NSString *mineType = [self.downloadManager getMyMimeType];
+    if (mineType.length == 0) {
+        mineType = @"video/mp4";
+    }
     //填充信息
-    CFStringRef contentType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (__bridge CFStringRef)(@"video/mp4"), NULL);
+    CFStringRef contentType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (__bridge CFStringRef)(mineType), NULL);
     loadingRequest.contentInformationRequest.contentType = CFBridgingRelease(contentType);
     loadingRequest.contentInformationRequest.byteRangeAccessSupported = YES;
     loadingRequest.contentInformationRequest.contentLength = self.downloadManager.fileLenth;
@@ -128,7 +130,11 @@
     }
     NSUInteger canReadLength = cacheLength - (requestedOffset - self.downloadManager.requestOffset);
     NSUInteger respondLength = MIN(canReadLength, loadingRequest.dataRequest.requestedLength);
-    [loadingRequest.dataRequest respondWithData:[DGVideoStrFileHandle readTempFileDataWithOffset:requestedOffset - self.downloadManager.requestOffset length:respondLength]];
+    NSUInteger offset = requestedOffset - self.downloadManager.requestOffset;
+    if (requestedOffset < self.downloadManager.requestOffset) {
+        offset = 0;
+    }
+    [loadingRequest.dataRequest respondWithData:[DGVideoStrFileHandle readTempFileDataWithOffset:offset length:respondLength]];
     //如果完全响应了所需要的数据，则完成
     NSUInteger nowendOffset = requestedOffset + canReadLength;
     NSUInteger reqEndOffset = loadingRequest.dataRequest.requestedOffset + loadingRequest.dataRequest.requestedLength;
@@ -173,14 +179,17 @@
     
     [self haveCacheProcessRequestList];
     if (need) {
+        NSLog(@"需要");
         CGFloat cacheProgrss = 1.0 * self.downloadManager.cacheLength /(self.downloadManager.fileLenth - self.downloadManager.requestOffset);
         if ([self.loaderDelegate respondsToSelector:@selector(loader:resourceLoaderCacheProgress:)]) {
             [self.loaderDelegate loader:self resourceLoaderCacheProgress:cacheProgrss];
         }
     }else{
+        NSLog(@"不需要");
         if ([self.loaderDelegate respondsToSelector:@selector(loader:resourceLoaderCacheProgress:)]) {
             [self.loaderDelegate loader:self resourceLoaderCacheProgress:0];
         }
+        
     }
 }
 /**

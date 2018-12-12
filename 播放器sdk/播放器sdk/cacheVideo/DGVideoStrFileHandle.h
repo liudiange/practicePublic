@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param str 传递的字符串
  @return 我们想要的scheme
  */
-+ (NSURL *)customSchemeUrl:(NSString *)str;
++ (NSURL *)customSchemeStr:(NSString *)str;
 /**
  返回我们原始的url的scheme
  
@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSURL *)originalUrl:(NSURL *)url;
 
 #pragma mark - 文件相关
+/**
+ *  创建临时文件
+ */
++ (void)createTempFile;
 /**
  通过一个偏移量来读取临时文件的数据
  

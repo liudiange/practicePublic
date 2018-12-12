@@ -648,6 +648,11 @@
     if (temAttay.count == 0) {return;}
     if (isContainCurrentInfo) {
         [self.player pause];
+        [self removeMyObserver];
+        
+        self.playerItem = nil;
+        self.progressObserver = nil;
+        self.player = nil;
     }
     // 删除数组
     [self.playList removeObjectsInArray:temAttay];

@@ -607,6 +607,9 @@
         }
         [self removeMyObserver];
         self.currentModel = nil;
+        self.playerItem = nil;
+        self.playerObserver = nil;
+        self.player = nil;
     }
     [self.playList removeObjectsInArray:needDeleteArray];
     NSLog(@"播放列表的个数 : %zd -- 删除数组的个数: %zd",self.playList.count,needDeleteArray.count);
@@ -663,6 +666,10 @@
     if (!(self.innerPlayState == DGCacheMusicStatePlay || self.innerPlayState == DGCacheMusicStatePause)) return;
     
     self.resourceLoader.isSeek = YES;
+    self.innerPlayState = DGCacheMusicStateBuffer;
+    if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+        [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
+    }
     [self.player seekToTime:CMTimeMake(time, 1.0) completionHandler:^(BOOL finished) {
         if (finished) {
             self.innerPlayState = DGCacheMusicStatePlay;
@@ -803,20 +810,21 @@
         }
     }else if([keyPath isEqualToString:DGPlayerLoadTimeKey]) {
         
-        NSArray *array = self.playerItem.loadedTimeRanges;
-        CMTimeRange timeRange = [array.firstObject CMTimeRangeValue];
-        CGFloat startSeconds = CMTimeGetSeconds(timeRange.start);
-        CGFloat durationSeconds = CMTimeGetSeconds(timeRange.duration);
-        CGFloat totalBuffer = startSeconds + durationSeconds;
-        CGFloat durationTime = CMTimeGetSeconds(self.playerItem.duration);
-        CGFloat bufferProgress = totalBuffer/durationTime;
-        if (isnan(bufferProgress) || bufferProgress < 0) {
-            bufferProgress = 0;
+        if (!self.isNeedCache) {
+            NSArray *array = self.playerItem.loadedTimeRanges;
+            CMTimeRange timeRange = [array.firstObject CMTimeRangeValue];
+            CGFloat startSeconds = CMTimeGetSeconds(timeRange.start);
+            CGFloat durationSeconds = CMTimeGetSeconds(timeRange.duration);
+            CGFloat totalBuffer = startSeconds + durationSeconds;
+            CGFloat durationTime = CMTimeGetSeconds(self.playerItem.duration);
+            CGFloat bufferProgress = totalBuffer/durationTime;
+            if (isnan(bufferProgress) || bufferProgress < 0) {
+                bufferProgress = 0;
+            }
+            if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicCacheProgress:)]) {
+                [self.DGCacheMusicDelegate DGCacheMusicCacheProgress:bufferProgress];
+            }
         }
-        if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicCacheProgress:)]) {
-            [self.DGCacheMusicDelegate DGCacheMusicCacheProgress:bufferProgress];
-        }
-        NSLog(@"-------------");
         if (self.isTurePlay && self.player.rate == 1.0) {
             self.innerPlayState = DGCacheMusicStatePlay;
             if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {

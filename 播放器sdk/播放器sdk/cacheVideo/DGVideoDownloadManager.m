@@ -19,7 +19,13 @@
 
 @end
 @implementation DGVideoDownloadManager
-
+-(instancetype)init{
+    self = [super init];
+    if (self) {
+        [DGVideoStrFileHandle createTempFile];
+    }
+    return self;
+}
 /**
  开始发送请求
  */

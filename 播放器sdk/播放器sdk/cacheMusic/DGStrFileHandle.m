@@ -9,7 +9,8 @@
 #import "DGStrFileHandle.h"
 #import <CommonCrypto/CommonDigest.h>
 
-#define DGMyTempPath [[NSHomeDirectory() stringByAppendingPathComponent:@"tmp/MediaCache"] stringByAppendingPathComponent:@"musicTemp.mp3"]
+#define DGMusicSchemeKey @"dgMusicSchemeKey"
+#define DGMyTempPath [[NSHomeDirectory() stringByAppendingPathComponent:@"tmp"] stringByAppendingPathComponent:@"musicTemp.mp3"]
 #define DGMyCacheFile [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"musicCache"]
 
 @implementation DGStrFileHandle
@@ -20,10 +21,15 @@
  @return 我们想要的scheme
  */
 + (NSURL *)customSchemeUrl:(NSString *)str{
+    NSURL *myUrl = [NSURL URLWithString:str];
     
-    NSURLComponents *component = [NSURLComponents componentsWithURL:[NSURL URLWithString:str] resolvingAgainstBaseURL:NO];
-    component.scheme = @"customSchemeUrl";
-    return [component URL];
+    NSString *schemeName = myUrl.scheme;
+    [[NSUserDefaults standardUserDefaults] setObject:schemeName forKey:DGMusicSchemeKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSURLComponents * components = [[NSURLComponents alloc] initWithURL:myUrl resolvingAgainstBaseURL:NO];
+    components.scheme = @"streaming";
+    return [components URL];
 }
 /**
  返回我们原始的url的scheme
@@ -33,12 +39,24 @@
  */
 + (NSURL *)originalUrl:(NSURL *)url{
     
-    NSURLComponents *component = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
-    component.scheme = @"http";
-    return [component URL];
+    NSString *schemeName = [[NSUserDefaults standardUserDefaults] objectForKey:DGMusicSchemeKey];
+    NSURLComponents * components = [[NSURLComponents alloc] initWithURL:url resolvingAgainstBaseURL:NO];
+    components.scheme = schemeName.length > 0 ? schemeName: @"http";
+    return [components URL];
     
 }
 #pragma mark - 文件相关
+/**
+ 创建临时的文件
+ */
++(void)creatTempFile{
+    BOOL exist = [[NSFileManager defaultManager] fileExistsAtPath:DGMyTempPath];
+    if (exist) {
+        [[NSFileManager defaultManager] removeItemAtPath:DGMyTempPath error:nil];
+    }
+    [[NSFileManager defaultManager] createFileAtPath:DGMyTempPath contents:nil attributes:nil];
+    
+}
 /**
  通过一个偏移量来读取临时文件的数据
  
@@ -49,9 +67,6 @@
 + (NSData *)readTempFileDataWithOffset:(NSUInteger )offset length:(NSUInteger)length{
     
     NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:DGMyTempPath];
-    if (fileHandle == nil) {
-        return nil;
-    }
     [fileHandle seekToFileOffset:offset];
     return [fileHandle readDataOfLength:length];
 }
@@ -62,9 +77,6 @@
  */
 + (void)writeTempFileData:(NSData *)data{
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:DGMyTempPath]) {
-        [[NSFileManager defaultManager] createFileAtPath:DGMyTempPath contents:data attributes:nil];
-    }
     NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:DGMyTempPath];
     [fileHandle seekToEndOfFile];
     [fileHandle writeData:data];
@@ -86,9 +98,7 @@
     str = [NSString stringWithFormat:@"%@.mp3",str];
     NSString *cacheFileName = [NSString stringWithFormat:@"%@/%@",DGMyCacheFile,str];
     [manager copyItemAtPath:DGMyTempPath toPath:cacheFileName error:nil];
-    if ([manager fileExistsAtPath:DGMyTempPath]) {
-        [manager removeItemAtPath:DGMyTempPath error:nil];
-    }
+
 }
 /**
  删除临时文件

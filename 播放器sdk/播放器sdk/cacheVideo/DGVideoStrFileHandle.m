@@ -8,8 +8,8 @@
 
 #import "DGVideoStrFileHandle.h"
 #import <CommonCrypto/CommonDigest.h>
-
-#define DGMyTempPath [[NSHomeDirectory() stringByAppendingPathComponent:@"tmp/MediaCache"] stringByAppendingPathComponent:@"videoTemp.mp4"]
+#define DGVideoSchemeKey @"dgVideoSchemeKey"
+#define DGMyTempPath [[NSHomeDirectory() stringByAppendingPathComponent:@"tmp"] stringByAppendingPathComponent:@"videoTemp.mp4"]
 #define DGMyCacheFile [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"videoCache"]
 
 @implementation DGVideoStrFileHandle
@@ -19,9 +19,14 @@
  @param str 传递的字符串
  @return 我们想要的scheme
  */
-+ (NSURL *)customSchemeUrl:(NSString *)str{
++ (NSURL *)customSchemeStr:(NSString *)str{
+    NSURL *myUrl = [NSURL URLWithString:str];
     
-    NSURLComponents * components = [[NSURLComponents alloc] initWithURL:[NSURL URLWithString:str] resolvingAgainstBaseURL:NO];
+    NSString *schemeName = myUrl.scheme;
+    [[NSUserDefaults standardUserDefaults] setObject:schemeName forKey:DGVideoSchemeKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSURLComponents * components = [[NSURLComponents alloc] initWithURL:myUrl resolvingAgainstBaseURL:NO];
     components.scheme = @"streaming";
     return [components URL];
 }
@@ -32,13 +37,24 @@
  @return 我们原始的url
  */
 + (NSURL *)originalUrl:(NSURL *)url{
-    
+    NSString *schemeName = [[NSUserDefaults standardUserDefaults] objectForKey:DGVideoSchemeKey];
     NSURLComponents * components = [[NSURLComponents alloc] initWithURL:url resolvingAgainstBaseURL:NO];
-    components.scheme = @"http";
+    components.scheme = schemeName.length > 0 ? schemeName: @"http";
     return [components URL];
     
 }
 #pragma mark - 文件相关
+/**
+ *  创建临时文件
+ */
++ (void)createTempFile{
+    NSFileManager * manager = [NSFileManager defaultManager];
+    NSString * path = DGMyTempPath;
+    if ([manager fileExistsAtPath:path]) {
+        [manager removeItemAtPath:path error:nil];
+    }
+    [manager createFileAtPath:path contents:nil attributes:nil];
+}
 /**
  通过一个偏移量来读取临时文件的数据
  
@@ -48,14 +64,12 @@
  */
 + (NSData *)readTempFileDataWithOffset:(NSUInteger )offset length:(NSUInteger)length{
     
-    NSFileHandle *fileHandle = [NSFileHandle fileHandleForReadingAtPath:DGMyTempPath];
-    if (fileHandle == nil) {
-        return nil;
+    NSFileHandle * handle = [NSFileHandle fileHandleForReadingAtPath:DGMyTempPath];
+    if(isnan(offset)) {
+        offset = 0;
     }
-    [fileHandle seekToFileOffset:offset];
-    NSData *data = [fileHandle readDataOfLength:length];
-    NSLog(@"读到的数据是什么？%@",data);
-    return data;
+    [handle seekToFileOffset:offset];
+    return [handle readDataOfLength:length];
 }
 /**
  往临时文件中写入数据
@@ -64,12 +78,9 @@
  */
 + (void)writeTempFileData:(NSData *)data{
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:DGMyTempPath]) {
-        [[NSFileManager defaultManager] createFileAtPath:DGMyTempPath contents:data attributes:nil];
-    }
-    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:DGMyTempPath];
-    [fileHandle seekToEndOfFile];
-    [fileHandle writeData:data];
+    NSFileHandle * handle = [NSFileHandle fileHandleForWritingAtPath:DGMyTempPath];
+    [handle seekToEndOfFile];
+    [handle writeData:data];
 }
 /**
  存储缓存文件的数据
@@ -88,9 +99,6 @@
     str = [NSString stringWithFormat:@"%@.mp4",str];
     NSString *cacheFileName = [NSString stringWithFormat:@"%@/%@",DGMyCacheFile,str];
     [manager copyItemAtPath:DGMyTempPath toPath:cacheFileName error:nil];
-    if ([manager fileExistsAtPath:DGMyTempPath]) {
-        [manager removeItemAtPath:DGMyTempPath error:nil];
-    }
 }
 /**
  删除临时文件
@@ -109,7 +117,7 @@
  */
 + (BOOL)myCacheFileIsExist:(NSString *)linkStr{
     
-    NSURL *customUrl = [self customSchemeUrl:linkStr];
+    NSURL *customUrl = [self customSchemeStr:linkStr];
     NSString *str = customUrl.absoluteString;
     NSFileManager *manager = [NSFileManager defaultManager];
     str = [DGVideoStrFileHandle changeStrToMd5:str];
@@ -127,7 +135,7 @@
  @return 文件的位置
  */
 + (NSString *)getMyCacheFile:(NSString *)linkStr{
-    NSURL *customUrl = [self customSchemeUrl:linkStr];
+    NSURL *customUrl = [self customSchemeStr:linkStr];
     NSString *str = customUrl.absoluteString;
     str = [DGVideoStrFileHandle changeStrToMd5:str];
     str = [NSString stringWithFormat:@"%@.mp4",str];

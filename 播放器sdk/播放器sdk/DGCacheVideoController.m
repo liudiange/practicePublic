@@ -8,6 +8,7 @@
 #import "DGCacheVideoController.h"
 #import "DGCacheVideoPlayer.h"
 
+
 @interface DGCacheVideoController ()<DGCacheVideoPlayerDelegate>
 
 @property (weak, nonatomic) IBOutlet UISlider *progressSlider;
@@ -15,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *playStatusLable;
 @property (weak, nonatomic) IBOutlet UILabel *currentTimeLable;
 @property (weak, nonatomic) IBOutlet UILabel *durationTimeLable;
-
 
 
 @end
@@ -38,7 +38,7 @@
 //    NSArray *temArray = @[@"https://weiboshipin.cmvideo.cn/depository_sp/fsv/trans/2018/11/25/649656072/25/5bfaa1eb6633d9b67e3369fe.mp4"];
 //    NSArray *temArray = @[@"http://wvideo.spriteapp.cn/video/2018/1210/89d510bc-fc6f-11e8-a53c-0026b938a8ac_wpd.mp4"];
     
-    NSArray *temArray = @[@"http://wvideo.spriteapp.cn/video/2018/1210/7205526c-fc6f-11e8-a53c-0026b938a8ac_wpd.mp4"];
+    NSArray *temArray = @[@"https://weiboshipin.cmvideo.cn/depository_sp/fsv/trans/2018/11/25/649656072/25/5bfaa1eb6633d9b67e3369fe.mp4"];
     NSMutableArray *infoArray = [NSMutableArray array];
     for (NSInteger index = 0; index < temArray.count; index ++) {
         DGCacheVideoModel *videoInfo = [[DGCacheVideoModel alloc] init];
@@ -47,13 +47,7 @@
         [infoArray addObject:videoInfo];
     }
     [DGCacheVideoPlayer shareInstance].DGCacheVideoDelegate = self;
-//    [[DGCacheVideoPlayer shareInstance] setPlayList:infoArray offset:0 videoGravity:AVLayerVideoGravityResizeAspect addViewLayer:self.view.layer isCache:YES layerFrame:CGRectMake(0, 64, 375, 300)];
-    [[DGCacheVideoPlayer shareInstance] initWithStr:@"http://wvideo.spriteapp.cn/video/2018/1210/7205526c-fc6f-11e8-a53c-0026b938a8ac_wpd.mp4"];
-    [DGCacheVideoPlayer shareInstance].isNeedCache = YES;
-    [DGCacheVideoPlayer shareInstance].playerLayer.frame = self.view.frame;
-    [self.view.layer addSublayer:[DGCacheVideoPlayer shareInstance].playerLayer];
-    [[DGCacheVideoPlayer shareInstance].player play];
-    
+    [[DGCacheVideoPlayer shareInstance] setPlayList:infoArray offset:0 videoGravity:AVLayerVideoGravityResizeAspect addViewLayer:self.view.layer isCache:NO layerFrame:CGRectMake(0, 64, self.view.frame.size.width, 300)];
 }
 #pragma mark - 方法的实现
 /**

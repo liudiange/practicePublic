@@ -18,6 +18,8 @@
 
 /**播放器*/
 @property (strong, nonatomic)  AVPlayer *player;
+/**播放器*/
+@property (strong, nonatomic)  AVPlayerLayer *layer;
 /**当前的播放状态 */
 @property (assign, nonatomic) DGPlayerStatus innerCurrentPlayStatus;
 /**当前的音乐的播放信息*/
@@ -91,35 +93,45 @@
     if (VideoInfo.playUrl.length == 0) {return;}
     
     if (!self.player) {
+        self.currentVideoGravity = videoGravity;
+        self.needAddLayer = addViewLayer;
+        self.videoFrame = frame;
+        
         NSURL *url = [NSURL URLWithString:VideoInfo.playUrl];
         AVPlayerItem *item = [AVPlayerItem playerItemWithURL:url];
         AVPlayer *player = [[AVPlayer alloc] initWithPlayerItem:item];
         self.playerItem = item;
         self.player = player;
-        AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-        playerLayer.frame = frame;
-        playerLayer.videoGravity = videoGravity;
-        [addViewLayer addSublayer:playerLayer];
+        
+        [self.layer removeFromSuperlayer];
+        self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+        self.layer.frame = self.videoFrame;
+        self.layer.videoGravity = self.currentVideoGravity;
+        [self.needAddLayer addSublayer:self.layer];
+        
         [self.player play];
         [self addMyObserver];
+        
+        
+    }else{
         self.currentVideoGravity = videoGravity;
         self.needAddLayer = addViewLayer;
         self.videoFrame = frame;
         
-    }else{
         [self removeMyObserver];
         NSURL *url = [NSURL URLWithString:VideoInfo.playUrl];
         self.playerItem = [AVPlayerItem playerItemWithURL:url];
         [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
-        AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-        playerLayer.frame = frame;
-        playerLayer.videoGravity = videoGravity;
-        [addViewLayer addSublayer:playerLayer];
+        
+        [self.layer removeFromSuperlayer];
+        self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+        self.layer.frame = self.videoFrame;
+        self.layer.videoGravity = self.currentVideoGravity;
+        [self.needAddLayer addSublayer:self.layer];
+        
         [self.player play];
         [self addMyObserver];
-        self.currentVideoGravity = videoGravity;
-        self.needAddLayer = addViewLayer;
-        self.videoFrame = frame;
+        
     }
 }
 #pragma mark - 观察者的监听、代理的返回等等
@@ -415,10 +427,13 @@
     [self removeMyObserver];
     self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:nextVideoInfo.playUrl]];
     [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
-    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-    playerLayer.frame = self.videoFrame;
-    playerLayer.videoGravity = self.currentVideoGravity;
-    [self.needAddLayer addSublayer:playerLayer];
+    
+    [self.layer removeFromSuperlayer];
+    self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    self.layer.frame = self.videoFrame;
+    self.layer.videoGravity = self.currentVideoGravity;
+    [self.needAddLayer addSublayer:self.layer];
+    
     [self.player play];
     self.innerCurrentVideoInfo = nextVideoInfo;
     [self addMyObserver];
@@ -465,10 +480,13 @@
     [self removeMyObserver];
     self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:previousVideoInfo.playUrl]];
     [self.player replaceCurrentItemWithPlayerItem:self.playerItem];
-    AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-    playerLayer.frame = self.videoFrame;
-    playerLayer.videoGravity = self.currentVideoGravity;
-    [self.needAddLayer addSublayer:playerLayer];
+    
+    [self.layer removeFromSuperlayer];
+    self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    self.layer.frame = self.videoFrame;
+    self.layer.videoGravity = self.currentVideoGravity;
+    [self.needAddLayer addSublayer:self.layer];
+    
     [self.player play];
     self.innerCurrentVideoInfo = previousVideoInfo;
     [self addMyObserver];
@@ -588,6 +606,11 @@
     if (temAttay.count == 0) {return;}
     if (isContainCurrentInfo) {
         [self.player pause];
+        [self removeMyObserver];
+        
+        self.playerItem = nil;
+        self.progressObserver = nil;
+        self.player = nil;
     }
     // 删除数组
     [self.playList removeObjectsInArray:temAttay];

@@ -32,6 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 文件相关
 /**
+ 创建临时的文件
+ */
++(void)creatTempFile;
+/**
  通过一个偏移量来读取临时文件的数据
  
  @param offset offset

@@ -23,7 +23,12 @@
 @property (strong, nonatomic) DGCacheVideoModel *currentModel;
 /** 当前的播放器状态*/
 @property (assign, nonatomic) DGCacheVideoState innerPlayState;
-
+/** 是否需要缓存*/
+@property (assign, nonatomic) BOOL isNeedCache;
+/** 播放器*/
+@property (strong, nonatomic) AVPlayer *player;
+/** 预览图层*/
+@property (strong, nonatomic) AVPlayerLayer *layer;
 /** 播放的item*/
 @property (strong, nonatomic) AVPlayerItem *playerItem;
 /** 播放的数组*/
@@ -38,6 +43,9 @@
 @property (assign, nonatomic) CGRect videoFrame;
 /** currentVideoGravity*/
 @property (assign, nonatomic) AVLayerVideoGravity currentVideoGravity;
+/** 是否可以真正的播放*/
+@property (assign, nonatomic) BOOL isTurePlay;
+
 
 @end
 @implementation DGCacheVideoPlayer
@@ -100,33 +108,43 @@
     self.isNeedCache = cache;
     [self removeMyObserver];
     if (self.isNeedCache == NO) { // 不需要缓存的情况
-        
-        self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:self.currentModel.playUrl]];
-        self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-        AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-        layer.frame = frame;
-        layer.videoGravity = videoGravity;
-        [addViewLayer addSublayer:layer];
-        [self.player play];
-        [self addMyObserver];
         self.needAddLayer = addViewLayer;
         self.videoFrame = frame;
         self.currentVideoGravity = videoGravity;
+        
+        self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL URLWithString:self.currentModel.playUrl]];
+        self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+        
+        [self.layer removeFromSuperlayer];
+        self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+        self.layer.frame = self.videoFrame;
+        self.layer.videoGravity = self.currentVideoGravity;
+        [self.needAddLayer addSublayer:self.layer];
+        
+        [self.player play];
+        [self addMyObserver];
+        
     }else{ // 需要缓存的情况
         
         // 先判断此视频缓存了没
         if ([DGVideoStrFileHandle myCacheFileIsExist:self.currentModel.playUrl]) {
-            self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:[DGVideoStrFileHandle getMyCacheFile:self.currentModel.playUrl]]];
-            self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-            AVPlayerLayer *layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-            layer.frame = frame;
-            layer.videoGravity = videoGravity;
-            [addViewLayer addSublayer:layer];
-            [self.player play];
-            [self addMyObserver];
+            
             self.needAddLayer = addViewLayer;
             self.videoFrame = frame;
             self.currentVideoGravity = videoGravity;
+            
+            self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:[DGVideoStrFileHandle getMyCacheFile:self.currentModel.playUrl]]];
+            self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+            
+            [self.layer removeFromSuperlayer];
+            self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+            self.layer.frame = self.videoFrame;
+            self.layer.videoGravity = self.currentVideoGravity;
+            [self.needAddLayer addSublayer:self.layer];
+            
+            [self.player play];
+            [self addMyObserver];
+            
             
             if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoCacheProgress:)]) {
                 [self.DGCacheVideoDelegate DGCacheVideoCacheProgress:1.0];
@@ -143,33 +161,22 @@
         
         self.resourceLoader = [[DGVideoResourceLoader alloc] init];
         self.resourceLoader.loaderDelegate = self;
-        AVURLAsset *urlAset = [AVURLAsset URLAssetWithURL:[DGVideoStrFileHandle customSchemeUrl:self.currentModel.playUrl] options:nil];
+        AVURLAsset *urlAset = [AVURLAsset URLAssetWithURL:[DGVideoStrFileHandle customSchemeStr:self.currentModel.playUrl] options:nil];
         [urlAset.resourceLoader setDelegate:self.resourceLoader queue:dispatch_get_main_queue()];
         self.playerItem = [AVPlayerItem playerItemWithAsset:urlAset];
         self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-        self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-        self.playerLayer.frame = frame;
-        self.playerLayer.videoGravity = videoGravity;
-        [self.needAddLayer addSublayer:self.playerLayer];
+        
+        [self.layer removeFromSuperlayer];
+        self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+        self.layer.frame = self.videoFrame;
+        self.layer.videoGravity = self.currentVideoGravity;
+        [self.needAddLayer addSublayer:self.layer];
+        
         [self.player play];
         [self addMyObserver];
         
     }
 }
--(void)initWithStr:(NSString *)str{
-    //没有缓存播放网络文件
-    self.resourceLoader = [[DGVideoResourceLoader alloc] init];
-    self.resourceLoader.loaderDelegate = self;
-    
-    AVURLAsset * asset = [AVURLAsset URLAssetWithURL:[DGVideoStrFileHandle customSchemeUrl:str] options:nil];
-    [asset.resourceLoader setDelegate:self.resourceLoader queue:dispatch_get_main_queue()];
-    self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-    self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-    self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-    [self addMyObserver];
-    
-}
-
 /**
  点击下一个播放
  */
@@ -201,10 +208,13 @@
             if ([DGVideoStrFileHandle myCacheFileIsExist:nextModel.playUrl]) {
                 self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:[DGVideoStrFileHandle getMyCacheFile:nextModel.playUrl]]];
                 self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-                AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-                playerLayer.frame = self.videoFrame;
-                playerLayer.videoGravity = self.currentVideoGravity;
-                [self.needAddLayer addSublayer:playerLayer];
+                
+                [self.layer removeFromSuperlayer];
+                self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+                self.layer.frame = self.videoFrame;
+                self.layer.videoGravity = self.currentVideoGravity;
+                [self.needAddLayer addSublayer:self.layer];
+                
                 [self.player play];
                 [self addMyObserver];
                 self.currentModel = nextModel;
@@ -219,37 +229,36 @@
             }
             self.resourceLoader = [[DGVideoResourceLoader alloc] init];
             self.resourceLoader.loaderDelegate = self;
-            AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:[DGVideoStrFileHandle customSchemeUrl:nextModel.playUrl] options:nil];
+            AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:[DGVideoStrFileHandle customSchemeStr:nextModel.playUrl] options:nil];
             [urlAsset.resourceLoader setDelegate:self.resourceLoader queue:dispatch_get_main_queue()];
             self.playerItem = [AVPlayerItem playerItemWithAsset:urlAsset];
             self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-            AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-            playerLayer.frame = self.videoFrame;
-            playerLayer.videoGravity = self.currentVideoGravity;
-            [self.needAddLayer addSublayer:playerLayer];
+            
+            [self.layer removeFromSuperlayer];
+            self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+            self.layer.frame = self.videoFrame;
+            self.layer.videoGravity = self.currentVideoGravity;
+            [self.needAddLayer addSublayer:self.layer];
+            
             [self.player play];
             [self addMyObserver];
             self.currentModel = nextModel;
-            self.innerPlayState = DGCacheVideoStatePlay;
-            if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
-                [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
-            }
             return;
         }
         
         self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:nextModel.playUrl]];
         self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-        AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-        playerLayer.frame = self.videoFrame;
-        playerLayer.videoGravity = self.currentVideoGravity;
-        [self.needAddLayer addSublayer:playerLayer];
+        
+        [self.layer removeFromSuperlayer];
+        self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+        self.layer.frame = self.videoFrame;
+        self.layer.videoGravity = self.currentVideoGravity;
+        [self.needAddLayer addSublayer:self.layer];
+        
         [self.player play];
         [self addMyObserver];
         self.currentModel = nextModel;
         self.innerPlayState = DGCacheVideoStatePlay;
-        if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
-            [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
-        }
         return;
     }
 }
@@ -284,10 +293,13 @@
             if ([DGVideoStrFileHandle myCacheFileIsExist:previousModel.playUrl]) {
                 self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:[DGVideoStrFileHandle getMyCacheFile:previousModel.playUrl]]];
                 self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-                AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-                playerLayer.frame = self.videoFrame;
-                playerLayer.videoGravity = self.currentVideoGravity;
-                [self.needAddLayer addSublayer:playerLayer];
+                
+                [self.layer removeFromSuperlayer];
+                self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+                self.layer.frame = self.videoFrame;
+                self.layer.videoGravity = self.currentVideoGravity;
+                [self.needAddLayer addSublayer:self.layer];
+                
                 [self.player play];
                 [self addMyObserver];
                 self.currentModel = previousModel;
@@ -302,14 +314,17 @@
             }
             self.resourceLoader = [[DGVideoResourceLoader alloc] init];
             self.resourceLoader.loaderDelegate = self;
-            AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:[DGVideoStrFileHandle customSchemeUrl:previousModel.playUrl] options:nil];
+            AVURLAsset *urlAsset = [AVURLAsset URLAssetWithURL:[DGVideoStrFileHandle customSchemeStr:previousModel.playUrl] options:nil];
             [urlAsset.resourceLoader setDelegate:self.resourceLoader queue:dispatch_get_main_queue()];
             self.playerItem = [AVPlayerItem playerItemWithAsset:urlAsset];
             self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-            AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-            playerLayer.frame = self.videoFrame;
-            playerLayer.videoGravity = self.currentVideoGravity;
-            [self.needAddLayer addSublayer:playerLayer];
+            
+            [self.layer removeFromSuperlayer];
+            self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+            self.layer.frame = self.videoFrame;
+            self.layer.videoGravity = self.currentVideoGravity;
+            [self.needAddLayer addSublayer:self.layer];
+            
             [self.player play];
             [self addMyObserver];
             self.currentModel = previousModel;
@@ -321,10 +336,13 @@
         }
         self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:previousModel.playUrl]];
         self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-        AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-        playerLayer.frame = self.videoFrame;
-        playerLayer.videoGravity = self.currentVideoGravity;
-        [self.needAddLayer addSublayer:playerLayer];
+        
+        [self.layer removeFromSuperlayer];
+        self.layer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+        self.layer.frame = self.videoFrame;
+        self.layer.videoGravity = self.currentVideoGravity;
+        [self.needAddLayer addSublayer:self.layer];
+        
         [self.player play];
         [self addMyObserver];
         self.currentModel = previousModel;
@@ -453,6 +471,9 @@
             [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
         }
         [self removeMyObserver];
+        self.player = nil;
+        self.playerItem = nil;
+        self.playerObserver = nil;
         self.currentModel = nil;
     }
     [self.playList removeObjectsInArray:needDeleteArray];
@@ -510,6 +531,10 @@
     if (!(self.innerPlayState == DGCacheVideoStatePlay || self.innerPlayState == DGCacheVideoStatePause)) return;
     
     self.resourceLoader.isSeek = YES;
+    self.innerPlayState = DGCacheVideoStateBuffer;
+    if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
+        [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
+    }
     [self.player seekToTime:CMTimeMake(time, 1.0) completionHandler:^(BOOL finished) {
         if (finished) {
             self.innerPlayState = DGCacheVideoStatePlay;
@@ -599,7 +624,7 @@
         switch (self.player.status) {
             case AVPlayerStatusReadyToPlay:
             {
-                self.innerPlayState = DGCacheVideoStateWaitting;
+                self.innerPlayState = DGCacheVideoStatePlay;
                 if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
                     [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
                 }
@@ -642,29 +667,38 @@
         }
     }else if([keyPath isEqualToString:DGPlayerLoadTimeKey]) {
         
-        NSArray *array = self.playerItem.loadedTimeRanges;
-        CMTimeRange timeRange = [array.firstObject CMTimeRangeValue];
-        CGFloat startSeconds = CMTimeGetSeconds(timeRange.start);
-        CGFloat durationSeconds = CMTimeGetSeconds(timeRange.duration);
-        CGFloat totalBuffer = startSeconds + durationSeconds;
-        CGFloat durationTime = CMTimeGetSeconds(self.playerItem.duration);
-        CGFloat bufferProgress = totalBuffer/durationTime;
-        if (isnan(bufferProgress) || bufferProgress < 0) {
-            bufferProgress = 0;
-        }
-        if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoCacheProgress:)]) {
-            [self.DGCacheVideoDelegate DGCacheVideoCacheProgress:bufferProgress];
-        }
-        
-        if (bufferProgress < 1.0 && self.isNeedCache == NO) {
-            self.innerPlayState = DGCacheVideoStateBuffer;
-            if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
-                [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:DGCacheVideoStateBuffer];
+        if (!self.isNeedCache) {
+            NSLog(@"DGPlayerLoadTimeKey");
+            NSArray *array = self.playerItem.loadedTimeRanges;
+            CMTimeRange timeRange = [array.firstObject CMTimeRangeValue];
+            CGFloat startSeconds = CMTimeGetSeconds(timeRange.start);
+            CGFloat durationSeconds = CMTimeGetSeconds(timeRange.duration);
+            CGFloat totalBuffer = startSeconds + durationSeconds;
+            CGFloat durationTime = CMTimeGetSeconds(self.playerItem.duration);
+            CGFloat bufferProgress = totalBuffer/durationTime;
+            if (isnan(bufferProgress) || bufferProgress < 0) {
+                bufferProgress = 0;
             }
-        }else if(bufferProgress == 1.0){
+            if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoCacheProgress:)]) {
+                [self.DGCacheVideoDelegate DGCacheVideoCacheProgress:bufferProgress];
+            }
+        }
+        if (self.isTurePlay && self.player.rate == 1.0) {
             self.innerPlayState = DGCacheVideoStatePlay;
             if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
-                [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:DGCacheVideoStatePlay];
+                [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
+            }
+        }else {
+            if (self.player.rate == 0) {
+                self.innerPlayState = DGCacheVideoStatePause;
+                if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
+                    [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
+                }
+            }else{
+                self.innerPlayState = DGCacheVideoStateBuffer;
+                if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
+                    [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
+                }
             }
         }
     }else if([keyPath isEqualToString:DGPlayerBufferEmty]) { //没有足够的缓冲器了 说明正在缓冲中
@@ -736,8 +770,9 @@
  移除观察者
  */
 - (void)removeMyObserver{
+    
+    self.isTurePlay = NO;
     if (self.playerItem) {
-        
         [self.playerItem removeObserver:self forKeyPath:DGPlayerStatusKey];
         [self.playerItem removeObserver:self forKeyPath:DGPlayerLoadTimeKey];
         [self.playerItem removeObserver:self forKeyPath:DGPlayerBufferEmty];
@@ -756,7 +791,7 @@
  添加我的观察者
  */
 - (void)addMyObserver{
-    
+    self.isTurePlay = NO;
     // 添加在播放器开始播放后的通知
     if (self.playerItem) {
         [self.playerItem addObserver:self forKeyPath:DGPlayerStatusKey options:NSKeyValueObservingOptionNew context:nil];
@@ -778,6 +813,7 @@
             if (isnan(currentTime) || currentTime < 0) {
                 currentTime = 0;
             }
+            weakSelf.isTurePlay = YES;
             CGFloat progress = currentTime/durationTime * 1.0;
             if ([weakSelf.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayerCurrentTime:duration:playProgress:)]) {
                 [weakSelf.DGCacheVideoDelegate DGCacheVideoPlayerCurrentTime:currentTime duration:durationTime playProgress:progress];
