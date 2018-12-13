@@ -16,10 +16,10 @@
 
 @interface DGVideoManager ()
 
-/**播放器*/
-@property (strong, nonatomic)  AVPlayer *player;
-/**播放器*/
-@property (strong, nonatomic)  AVPlayerLayer *layer;
+/**播放器 */
+@property (strong, nonatomic) AVPlayer *player;
+/** 播放器的图层 */
+@property (strong, nonatomic) AVPlayerLayer *layer;
 /**当前的播放状态 */
 @property (assign, nonatomic) DGPlayerStatus innerCurrentPlayStatus;
 /**当前的音乐的播放信息*/
@@ -328,8 +328,14 @@
             }else if (isnan(duationTime)){
                 duationTime = 0;
             }
-            weakSelf.isTurePlay = YES;
             CGFloat progress = currentTime/duationTime * 1.0;
+            weakSelf.isTurePlay = currentTime > 0;
+            if (currentTime > 0 && weakSelf.player.rate == 1) {
+                weakSelf.innerCurrentPlayStatus = DGPlayerPlayOperatePlay;
+                if ([weakSelf.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
+                    [weakSelf.DGDelegate DGPlayerChangeStatus:weakSelf.innerCurrentPlayStatus];
+                }
+            }
             if ([weakSelf.DGDelegate respondsToSelector:@selector(DGPlayerCurrentTime:duration:playProgress:)]) {
                 [weakSelf.DGDelegate DGPlayerCurrentTime:currentTime duration:duationTime playProgress:progress];
             }
@@ -415,7 +421,7 @@
     if ([self.DGDelegate respondsToSelector:@selector(DGPlayerCurrentTime:duration:playProgress:)]) {
         [self.DGDelegate DGPlayerCurrentTime:0.0 duration:0.0 playProgress:0.0];
     }
-    self.innerCurrentPlayStatus = DGPlayerPlayOperateStop;
+    self.innerCurrentPlayStatus = DGPlayerPlayOperatePause;
     if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
         [self.DGDelegate DGPlayerChangeStatus:self.innerCurrentPlayStatus];
     }
@@ -437,11 +443,6 @@
     [self.player play];
     self.innerCurrentVideoInfo = nextVideoInfo;
     [self addMyObserver];
-    
-    self.innerCurrentPlayStatus = DGPlayerStatusPlay;
-    if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
-        [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
-    }
 }
 /**
  播放上一个视频

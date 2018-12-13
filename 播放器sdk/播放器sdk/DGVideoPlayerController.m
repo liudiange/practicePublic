@@ -125,7 +125,7 @@
  */
 - (IBAction)addPlayList:(UIButton *)sender {
     
-    NSArray *temArray = @[@"http://v4ttyey-10001453.video.myqcloud.com/Microblog/288-4-1452304375video1466172731.mp4"];
+    NSArray *temArray = @[@"http://wvideo.spriteapp.cn/video/2018/1210/89d510bc-fc6f-11e8-a53c-0026b938a8ac_wpd.mp4"];
     NSMutableArray *infoArray = [NSMutableArray array];
     for (NSInteger index = 10; index < temArray.count+10; index ++) {
         DGVideoInfo *videoInfo = [[DGVideoInfo alloc] init];
@@ -143,7 +143,7 @@
  */
 - (IBAction)clearSectionPlayList:(UIButton *)sender {
     
-    NSArray *temArray = @[@"http://v4ttyey-10001453.video.myqcloud.com/Microblog/288-4-1452304375video1466172731.mp4"];
+    NSArray *temArray = @[@"http://wvideo.spriteapp.cn/video/2018/1210/89d510bc-fc6f-11e8-a53c-0026b938a8ac_wpd.mp4"];
     NSMutableArray *infoArray = [NSMutableArray array];
     for (NSInteger index = 10; index < temArray.count+10; index ++) {
         DGVideoInfo *videoInfo = [[DGVideoInfo alloc] init];
@@ -183,7 +183,7 @@
  */
 - (void)DGPlayerPlayFailure:(AVPlayerStatus)status{
     
-    NSLog(@"播放出错了");
+    NSLog(@"播放出错了 %zd",status);
 }
 /**
  播放器播放的缓冲的进度
