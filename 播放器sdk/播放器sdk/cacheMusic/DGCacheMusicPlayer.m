@@ -767,7 +767,7 @@
         switch (self.player.status) {
             case AVPlayerStatusReadyToPlay:
             {
-                self.innerPlayState = DGCacheMusicStateWaitting;
+                self.innerPlayState = DGCacheMusicStateBuffer;
                 if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
                     [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];
                 }
@@ -1002,7 +1002,6 @@
     if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayFailed:)]) {
         [self.DGCacheMusicDelegate DGCacheMusicPlayFailed:error];
     }
-    
 }
 
 

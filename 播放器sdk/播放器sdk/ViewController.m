@@ -57,7 +57,7 @@
     }
     
     [DGMusicManager shareInstance].DGDelegate = self;
-//    [[DGMusicManager shareInstance] setPlayList:infoArray offset:0];
+    [[DGMusicManager shareInstance] setPlayList:infoArray offset:0];
     
 }
 #pragma mark - delegate 回调
@@ -297,7 +297,7 @@
  */
 - (IBAction)nextButtonAction:(UIButton *)sender {
     
-    [[DGMusicManager shareInstance] playNextSong:YES];
+    [[DGMusicManager shareInstance] playNextSong:NO];
 }
 /**
  滑动进度调播放到摸个时间段

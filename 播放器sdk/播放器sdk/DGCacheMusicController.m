@@ -298,11 +298,6 @@
             self.playStatusLable.text = @"停止了";
         }
             break;
-        case DGCacheMusicStateWaitting:
-        {
-            self.playStatusLable.text = @"等待中。。。。。。";
-        }
-            break;
         case DGCacheMusicStateError:
         {
             self.playStatusLable.text = @"播放出错了";

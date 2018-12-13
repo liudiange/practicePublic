@@ -21,7 +21,6 @@ typedef NS_ENUM(NSUInteger,DGCacheMusicState) {
     DGCacheMusicStateBuffer      = 3, // 缓冲
     DGCacheMusicStateStop        = 4, // 停止
     DGCacheMusicStateError       = 5, // 错误
-    DGCacheMusicStateWaitting    = 6  // 等待中的状态
 };
 typedef NS_ENUM(NSUInteger, DGCacheMusicMode){
     

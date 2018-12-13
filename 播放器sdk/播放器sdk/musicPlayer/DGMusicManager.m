@@ -109,9 +109,9 @@
         switch (self.playerItem.status) {
             case AVPlayerStatusReadyToPlay:
             {
-                self.innerCurrentPlayStatus = DGPlayerStatusPlay;
+                self.innerCurrentPlayStatus = DGPlayerStatusBuffer;
                 if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
-                    [self.DGDelegate DGPlayerChangeStatus:DGPlayerStatusPlay];
+                    [self.DGDelegate DGPlayerChangeStatus:self.innerCurrentPlayStatus];
                 }
             }
                 break;
@@ -155,6 +155,7 @@
         }
         
         if (self.isTurePlay && self.player.rate == 1) {
+            NSLog(@"进入了 ---------");
             self.innerCurrentPlayStatus = DGPlayerStatusPlay;
             if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
                 [self.DGDelegate DGPlayerChangeStatus:self.innerCurrentPlayStatus];
@@ -173,9 +174,6 @@
             }
         }
     }else if ([keyPath isEqualToString:DGPlayerRate]){ // 播放速度 0 就是暂停了
-        
-        NSLog(@"self.player.rate :%f",self.player.rate);
-        
         if (self.player.rate == 0) {
             self.innerCurrentPlayStatus = DGPlayerStatusPause;
             if ([self.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
@@ -297,8 +295,14 @@
             }else if (isnan(duationTime)){
                 duationTime = 0;
             }
-            weakSelf.isTurePlay = YES;
             CGFloat progress = currentTime/duationTime * 1.0;
+            weakSelf.isTurePlay = progress > 0;
+            if (weakSelf.player.rate == 1.0 && progress > 0) {
+                weakSelf.innerCurrentPlayStatus = DGPlayerStatusPlay;
+                if ([weakSelf.DGDelegate respondsToSelector:@selector(DGPlayerChangeStatus:)]) {
+                    [weakSelf.DGDelegate DGPlayerChangeStatus:weakSelf.innerCurrentPlayStatus];
+                }
+            }
             if ([weakSelf.DGDelegate respondsToSelector:@selector(DGPlayerCurrentTime:duration:playProgress:)]) {
                 [weakSelf.DGDelegate DGPlayerCurrentTime:currentTime duration:duationTime playProgress:progress];
             }
