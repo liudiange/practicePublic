@@ -72,8 +72,10 @@
  @param offset 从第几个开始
  */
 - (void)setPlayList:(NSArray<DGMusicInfo *> *)listArray offset:(NSUInteger)offset{
-    [self.playList addObjectsFromArray:listArray];
     
+    [self.playList removeAllObjects];
+    [self.playList addObjectsFromArray:listArray];
+
     NSAssert(!(offset < 0 || offset > self.playList.count - 1), @"歌曲播放位置不合法");
     NSAssert(!(self.playList.count <= 0), @"播放数组不能为空");
     if ((offset < 0 || offset > self.playList.count - 1) || self.playList.count == 0){ return;}

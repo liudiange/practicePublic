@@ -91,6 +91,7 @@
              offset:(NSUInteger)offset
             isCache:(BOOL)cache{
     
+    [self.playList removeAllObjects];
     NSAssert(playList.count != 0, @"对不起播放数组不能为空");
     NSAssert(!(offset > playList.count - 1 || offset < 0), @"offset不合法，大于播放列表的个数或者小于0了");
     if (offset > playList.count - 1 || offset < 0 || playList.count == 0) return;
@@ -957,8 +958,15 @@
           if (isnan(currentTime) || currentTime < 0) {
               currentTime = 0;
           }
-          weakSelf.isTurePlay = YES;
           CGFloat progress = currentTime/durationTime * 1.0;
+          weakSelf.isTurePlay = progress > 0;
+          
+          if (weakSelf.player.rate == 1.0 && currentTime > 0) {
+              weakSelf.innerPlayState = DGCacheMusicStatePlay;
+              if ([weakSelf.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
+                  [weakSelf.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:weakSelf.innerPlayState];
+              }
+          }
           if ([weakSelf.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayerCurrentTime:duration:playProgress:)]) {
               [weakSelf.DGCacheMusicDelegate DGCacheMusicPlayerCurrentTime:currentTime duration:durationTime playProgress:progress];
           }

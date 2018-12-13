@@ -82,6 +82,7 @@
        addViewLayer:(CALayer *)addViewLayer
          layerFrame:(CGRect)frame{
     
+    [self.playList removeAllObjects];
     [self.playList addObjectsFromArray:playList];
     
     NSAssert(!(offset < 0 || offset > self.playList.count - 1), @"歌曲播放位置不合法");

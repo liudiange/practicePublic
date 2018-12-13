@@ -98,6 +98,7 @@
             isCache:(BOOL)cache
          layerFrame:(CGRect)frame{
     
+    [self.playList removeAllObjects];
     NSAssert(playList.count != 0, @"对不起播放数组不能为空");
     NSAssert(!(offset > playList.count - 1 || offset < 0), @"offset不合法，大于播放列表的个数或者小于0了");
     if (offset > playList.count - 1 || offset < 0 || playList.count == 0) return;
