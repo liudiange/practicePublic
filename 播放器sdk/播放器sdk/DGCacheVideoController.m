@@ -47,7 +47,7 @@
         [infoArray addObject:videoInfo];
     }
     [DGCacheVideoPlayer shareInstance].DGCacheVideoDelegate = self;
-    [[DGCacheVideoPlayer shareInstance] setPlayList:infoArray offset:0 videoGravity:AVLayerVideoGravityResizeAspect addViewLayer:self.view.layer isCache:NO layerFrame:CGRectMake(0, 64, self.view.frame.size.width, 300)];
+    [[DGCacheVideoPlayer shareInstance] setPlayList:infoArray offset:0 videoGravity:AVLayerVideoGravityResizeAspect addViewLayer:self.view.layer isCache:YES layerFrame:CGRectMake(0, 64, self.view.frame.size.width, 300)];
 }
 #pragma mark - 方法的实现
 /**
@@ -67,7 +67,7 @@
  */
 - (IBAction)clearSectionPlayList:(id)sender {
     
-    NSArray *temArray = @[@"http://v4ttyey-10001453.video.myqcloud.com/Microblog/288-4-1452304375video1466172731.mp4"];
+    NSArray *temArray = @[@"http://wvideo.spriteapp.cn/video/2018/1210/89d510bc-fc6f-11e8-a53c-0026b938a8ac_wpd.mp4"];
     NSMutableArray *infoArray = [NSMutableArray array];
     for (NSInteger index = 10; index < temArray.count+10; index ++) {
         DGCacheVideoModel *videoInfo = [[DGCacheVideoModel alloc] init];
@@ -84,7 +84,7 @@
  */
 - (IBAction)addPlayList:(id)sender {
     
-    NSArray *temArray = @[@"http://v4ttyey-10001453.video.myqcloud.com/Microblog/288-4-1452304375video1466172731.mp4"];
+    NSArray *temArray = @[@"http://wvideo.spriteapp.cn/video/2018/1210/89d510bc-fc6f-11e8-a53c-0026b938a8ac_wpd.mp4"];
     NSMutableArray *infoArray = [NSMutableArray array];
     for (NSInteger index = 10; index < temArray.count+10; index ++) {
         DGCacheVideoModel *videoInfo = [[DGCacheVideoModel alloc] init];

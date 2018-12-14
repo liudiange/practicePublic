@@ -428,6 +428,8 @@
     
     [self.playList removeAllObjects];
     if (isStopPlay) {
+        
+        [self.player pause];
         [self removeMyObserver];
         self.currentModel = nil;
         self.playerItem = nil;
@@ -449,7 +451,7 @@
 - (void)deletePlayList:(NSArray<DGCacheVideoModel *>*)deleteList{
     
     NSAssert(deleteList.count != 0, @"要删除的数组不能为空");
-    NSAssert(deleteList.count < self.playList.count, @"要删除的数组不能大于播放列表");
+    NSAssert(deleteList.count <= self.playList.count, @"要删除的数组不能大于播放列表");
     if (deleteList.count == 0 || deleteList.count > self.playList.count ) return;
     
     NSMutableArray *needDeleteArray = [NSMutableArray array];

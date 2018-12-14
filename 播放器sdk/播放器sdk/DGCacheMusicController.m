@@ -63,7 +63,7 @@
         [infoArray addObject:musicInfo];
     }
     // 设置播放列表 开始播放
-    [[DGCacheMusicPlayer shareInstance] setPlayList:infoArray offset:1 isCache:NO];
+    [[DGCacheMusicPlayer shareInstance] setPlayList:infoArray offset:1 isCache:YES];
 }
 #pragma mark - 点击方法的实现
 /**
