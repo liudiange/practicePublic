@@ -42,8 +42,8 @@
 -(void)setCancel:(BOOL)cancel {
     _cancel = cancel;
     if (self.session) {
-        [self.task cancel];
         [self.session invalidateAndCancel];
+        [self.task cancel];
         self.session = nil;
         self.task = nil;
     }

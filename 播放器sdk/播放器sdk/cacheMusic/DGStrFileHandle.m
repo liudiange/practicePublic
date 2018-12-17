@@ -47,6 +47,15 @@
 }
 #pragma mark - 文件相关
 /**
+ 删除临时文件
+ */
++ (void)deleteTempFile{
+    BOOL exist = [[NSFileManager defaultManager] fileExistsAtPath:DGMyTempPath];
+    if (exist) {
+        [[NSFileManager defaultManager] removeItemAtPath:DGMyTempPath error:nil];
+    }
+}
+/**
  创建临时的文件
  */
 +(void)creatTempFile{
@@ -99,15 +108,6 @@
     NSString *cacheFileName = [NSString stringWithFormat:@"%@/%@",DGMyCacheFile,str];
     [manager copyItemAtPath:DGMyTempPath toPath:cacheFileName error:nil];
 
-}
-/**
- 删除临时文件
- */
-+ (void)deleteTempFile{
-    
-    if ([[NSFileManager defaultManager] fileExistsAtPath:DGMyTempPath]) {
-        [[NSFileManager defaultManager] removeItemAtPath:DGMyTempPath error:nil];
-    }
 }
 /**
  判断缓存文件是否存在

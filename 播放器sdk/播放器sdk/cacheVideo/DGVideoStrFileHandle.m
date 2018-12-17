@@ -45,15 +45,23 @@
 }
 #pragma mark - 文件相关
 /**
+ 删除临时文件
+ */
++ (void)deleleTempFile{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:DGMyTempPath]) {
+        [manager removeItemAtPath:DGMyTempPath error:nil];
+    }
+}
+/**
  *  创建临时文件
  */
 + (void)createTempFile{
-    NSFileManager * manager = [NSFileManager defaultManager];
-    NSString * path = DGMyTempPath;
-    if ([manager fileExistsAtPath:path]) {
-        [manager removeItemAtPath:path error:nil];
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:DGMyTempPath]) {
+        [manager removeItemAtPath:DGMyTempPath error:nil];
     }
-    [manager createFileAtPath:path contents:nil attributes:nil];
+    [manager createFileAtPath:DGMyTempPath contents:nil attributes:nil];
 }
 /**
  通过一个偏移量来读取临时文件的数据

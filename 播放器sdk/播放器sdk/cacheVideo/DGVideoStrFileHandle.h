@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface DGVideoStrFileHandle : NSObject
 #pragma mark - 字符串相关的处理
-
 /**
  传递一个字符串转换为一个不是我们的Schemeurl
  
@@ -31,6 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSURL *)originalUrl:(NSURL *)url;
 
 #pragma mark - 文件相关
+/**
+ 删除临时文件
+ */
++ (void)deleleTempFile;
 /**
  *  创建临时文件
  */

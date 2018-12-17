@@ -32,6 +32,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - 文件相关
 /**
+ 删除临时文件
+ */
++ (void)deleteTempFile;
+/**
  创建临时的文件
  */
 +(void)creatTempFile;

@@ -9,15 +9,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreServices/CoreServices.h>
 #import "DGResourceLoader.h"
-#import "DGDownloadManager.h"
 #import "DGStrFileHandle.h"
 
 @interface DGResourceLoader ()<DGDownloadManagerDelegate>
 
 /** 存放请求的数组*/
 @property (strong, nonatomic) NSMutableArray *requestList;
-/** 下载任务的管理器*/
-@property (strong, nonatomic) DGDownloadManager *downloadManager;
 /** 信号量，加锁保护资源用的*/
 @property (strong, nonatomic) dispatch_semaphore_t semaphore;
 

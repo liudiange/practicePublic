@@ -125,11 +125,12 @@
         [self.player play];
         [self addMyObserver];
         
-    }else{ // 需要缓存的情况
-        
+    }else{ // 需要缓存的情况 
+        self.resourceLoader.downloadManager.cancel = YES;
+        self.resourceLoader = nil;
+        [DGVideoStrFileHandle deleleTempFile];
         // 先判断此视频缓存了没
         if ([DGVideoStrFileHandle myCacheFileIsExist:self.currentModel.playUrl]) {
-            
             self.needAddLayer = addViewLayer;
             self.videoFrame = frame;
             self.currentVideoGravity = videoGravity;
@@ -205,6 +206,9 @@
     if (nextModel.playUrl.length > 0) {
         [self removeMyObserver];
         if (self.isNeedCache) { // 需要缓存的走这里
+            self.resourceLoader.downloadManager.cancel = YES;
+            self.resourceLoader = nil;
+            [DGVideoStrFileHandle deleleTempFile];
             // 先判断此视频缓存了没
             if ([DGVideoStrFileHandle myCacheFileIsExist:nextModel.playUrl]) {
                 self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:[DGVideoStrFileHandle getMyCacheFile:nextModel.playUrl]]];
@@ -290,6 +294,9 @@
     if (previousModel.playUrl.length > 0) {
         [self removeMyObserver];
         if (self.isNeedCache) { // 需要缓存的走这里
+            self.resourceLoader.downloadManager.cancel = YES;
+            self.resourceLoader = nil;
+            [DGVideoStrFileHandle deleleTempFile];
             // 先判断此视频缓存了没
             if ([DGVideoStrFileHandle myCacheFileIsExist:previousModel.playUrl]) {
                 self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:[DGVideoStrFileHandle getMyCacheFile:previousModel.playUrl]]];
@@ -404,6 +411,8 @@
                 self.needAddLayer = nil;
                 self.videoFrame = CGRectZero;
                 self.currentModel = nil;
+                self.resourceLoader.downloadManager.cancel = YES;
+                self.resourceLoader = nil;
                 
                 self.innerPlayState = DGCacheVideoStateStop;
                 if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
@@ -627,7 +636,7 @@
         switch (self.player.status) {
             case AVPlayerStatusReadyToPlay:
             {
-                self.innerPlayState = DGCacheVideoStatePlay;
+                self.innerPlayState = DGCacheVideoStateBuffer;
                 if ([self.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
                     [self.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:self.innerPlayState];
                 }
@@ -816,8 +825,14 @@
             if (isnan(currentTime) || currentTime < 0) {
                 currentTime = 0;
             }
-            weakSelf.isTurePlay = YES;
             CGFloat progress = currentTime/durationTime * 1.0;
+            weakSelf.isTurePlay = progress > 0;
+            if (progress > 0 && weakSelf.player.rate == 1.0) {
+                weakSelf.innerPlayState = DGCacheVideoStatePlay;
+                if ([weakSelf.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayStatusChanged:)]) {
+                    [weakSelf.DGCacheVideoDelegate DGCacheVideoPlayStatusChanged:weakSelf.innerPlayState];
+                }
+            }
             if ([weakSelf.DGCacheVideoDelegate respondsToSelector:@selector(DGCacheVideoPlayerCurrentTime:duration:playProgress:)]) {
                 [weakSelf.DGCacheVideoDelegate DGCacheVideoPlayerCurrentTime:currentTime duration:durationTime playProgress:progress];
             }

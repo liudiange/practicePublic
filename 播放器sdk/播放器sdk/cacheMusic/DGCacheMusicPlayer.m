@@ -113,7 +113,9 @@
             [self addMyObserver];
         }
     }else{ // 需要缓存的情况
-        
+        self.resourceLoader.downloadManager.cancel = YES;
+        self.resourceLoader = nil;
+        [DGStrFileHandle deleteTempFile];
         [self removeMyObserver];
         // 先判断此歌曲缓存了没
         if ([DGStrFileHandle myCacheFileIsExist:self.currentModel.listenUrl]) {
@@ -171,6 +173,9 @@
         
         [self removeMyObserver];
         if (self.isNeedCache) { // 需要缓存的走这里
+            self.resourceLoader.downloadManager.cancel = YES;
+            self.resourceLoader = nil;
+            [DGStrFileHandle deleteTempFile];
             // 先判断此歌曲缓存了没
             if ([DGStrFileHandle myCacheFileIsExist:self.currentModel.listenUrl]) {
                 self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:[DGStrFileHandle getMyCacheFile:self.currentModel.listenUrl]]];
@@ -219,6 +224,9 @@
         if (randNextModel.listenUrl.length > 0) {
             [self removeMyObserver];
             if (self.isNeedCache) { // 需要缓存的走这里
+                self.resourceLoader.downloadManager.cancel = YES;
+                self.resourceLoader = nil;
+                [DGStrFileHandle deleteTempFile];
                 // 先判断此歌曲缓存了没
                 if ([DGStrFileHandle myCacheFileIsExist:randNextModel.listenUrl]) {
                     self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:[DGStrFileHandle getMyCacheFile:randNextModel.listenUrl]]];
@@ -268,6 +276,9 @@
     if (nextModel.listenUrl.length > 0) {
         [self removeMyObserver];
         if (self.isNeedCache) { // 需要缓存的走这里
+            self.resourceLoader.downloadManager.cancel = YES;
+            self.resourceLoader = nil;
+            [DGStrFileHandle deleteTempFile];
             // 先判断此歌曲缓存了没
             if ([DGStrFileHandle myCacheFileIsExist:nextModel.listenUrl]) {
                 self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:[DGStrFileHandle getMyCacheFile:nextModel.listenUrl]]];
@@ -344,6 +355,9 @@
        
         [self removeMyObserver];
         if (self.isNeedCache) { // 需要缓存的走这里
+            self.resourceLoader.downloadManager.cancel = YES;
+            self.resourceLoader = nil;
+            [DGStrFileHandle deleteTempFile];
             // 先判断此歌曲缓存了没
             if ([DGStrFileHandle myCacheFileIsExist:self.currentModel.listenUrl]) {
                 self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:[DGStrFileHandle getMyCacheFile:self.currentModel.listenUrl]]];
@@ -391,6 +405,9 @@
         if (randNextModel.listenUrl.length > 0) {
             [self removeMyObserver];
             if (self.isNeedCache) { // 需要缓存的走这里
+                self.resourceLoader.downloadManager.cancel = YES;
+                self.resourceLoader = nil;
+                [DGStrFileHandle deleteTempFile];
                 // 先判断此歌曲缓存了没
                 if ([DGStrFileHandle myCacheFileIsExist:randNextModel.listenUrl]) {
                     self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:[DGStrFileHandle getMyCacheFile:randNextModel.listenUrl]]];
@@ -439,6 +456,9 @@
     if (previousModel.listenUrl.length > 0) {
         [self removeMyObserver];
         if (self.isNeedCache) { // 需要缓存的走这里
+            self.resourceLoader.downloadManager.cancel = YES;
+            self.resourceLoader = nil;
+            [DGStrFileHandle deleteTempFile];
             // 先判断此歌曲缓存了没
             if ([DGStrFileHandle myCacheFileIsExist:previousModel.listenUrl]) {
                 self.playerItem = [[AVPlayerItem alloc] initWithURL:[NSURL fileURLWithPath:[DGStrFileHandle getMyCacheFile:previousModel.listenUrl]]];
@@ -529,6 +549,10 @@
                 self.player = nil;
                 self.playerItem = nil;
                 [self.playList removeAllObjects];
+                
+                self.resourceLoader.downloadManager.cancel = YES;
+                self.resourceLoader = nil;
+                
                 self.innerPlayState = DGCacheMusicStateStop;
                 if ([self.DGCacheMusicDelegate respondsToSelector:@selector(DGCacheMusicPlayStatusChanged:)]) {
                     [self.DGCacheMusicDelegate DGCacheMusicPlayStatusChanged:self.innerPlayState];

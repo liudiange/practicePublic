@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) id<DGVideoResourceLoaderDelegate> loaderDelegate;
 /** 是否向前拖动了，等等大于缓存区域了*/
 @property (assign, nonatomic) BOOL isSeek;
+/** 下载任务的管理器 */
+@property (strong, nonatomic) DGVideoDownloadManager *downloadManager;
 
 @end
 

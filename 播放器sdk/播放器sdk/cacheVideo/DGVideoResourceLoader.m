@@ -18,8 +18,6 @@
 @property (strong, nonatomic) NSMutableArray *requestList;
 /** 信号量，加锁保护资源用的*/
 @property (strong, nonatomic) dispatch_semaphore_t semaphore;
-/** 下载任务的管理器 */
-@property (strong, nonatomic) DGVideoDownloadManager *downloadManager;
 
 @end
 @implementation DGVideoResourceLoader
@@ -157,7 +155,7 @@
         fileLength = self.downloadManager.fileLenth;
         self.downloadManager.cancel = YES;
     }
-    self.downloadManager = [[DGVideoDownloadManager alloc]init];
+    self.downloadManager = [[DGVideoDownloadManager alloc] init];
     self.downloadManager.requestURL = loadingRequest.request.URL;
     self.downloadManager.requestOffset = loadingRequest.dataRequest.requestedOffset;
     self.downloadManager.isCache = isCache;
